@@ -11,7 +11,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 function logout() {
     firebase.auth().signOut().then(function () {
         // Sign-out successful.
-        window.location .assign('index.html'); //After successful sign out, user will be redirected to sing in page.
+        window.location .assign('index.html'); //After successful sign out, user will be redirected to sign in page.
     }).catch(function (error) {
         // An error happened.
     });
