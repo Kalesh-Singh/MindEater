@@ -1,4 +1,5 @@
 // FirebaseUI config.
+
 var uiConfig = {
     signInFlow: 'popup',
     signInSuccessUrl: 'dashboard.html', // url-to-redirect-to-on-success
