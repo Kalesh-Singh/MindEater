@@ -77,5 +77,5 @@ var signUpButton = document.getElementById('sign-up-button');
 signInButton.addEventListener('click', signIn);
 signUpButton.addEventListener('click', signUp);
 
-// Initialize firebase
+// Initialize firebase auth
 initFirebaseAuth();
