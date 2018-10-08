@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:300,400,700');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: grey;
+  height: 200vh;
+  font-family: 'Muli', sans-serif;
+}
+
+.header {
+    padding: 100px;
+    text-align: center;
+    background: #acc1ed;
+    color: white;
+}
+
+/*Mind Eater Logo
+.text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  list-style: none;
+  border-bottom: 0;
+}
+
+.text.hidden {
+  border-bottom: 1px solid #fff;
+}
+
+.text lim {
+  display: inline-block;
+  float: left;
+  font-weight: 700;
+  font-size: 2em;
+  color: #fff;
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
+  max-width: 2em;
+}
+.text.hidden lim.spaced {
+  padding-left: 0;
+}
+.text lim.spaced {
+  padding-left: 0.5em;
+}
+
+.text.hidden lim.ghost {
+  opacity: 0;
+  max-width: 0;
+}
+*/
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+}
+
+/*The Line bar on Dashboard*/
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: #111;
+}
+
+.active {
+    background-color: #5983da;
+}
+
+li.dropdown {
+    display: inline-block;
+ }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/*Sign-out button*/
+liT {
+    float: right;
+}
+
+.SignOut-button:hover {
+    background-color: black;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.SignOut-button {
+    width: 100%;
+    height: 48px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    background: #5983da;
+    padding: 15px;
+    cursor: pointer;
+    outline:0;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.SignOut-button:after {
+    content: "";
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 320%;
+    margin-left: -15px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.SignOut-button:active:after {
+    padding: 5;
+    margin: 6;
+    opacity: 1;
+    transition: 0s
+}
+/* Column container */
+.row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+    -ms-flex: 50%; /* IE10 */
+    flex: 30%;
+    background-color: #f1f1f1;
+}
+
+/* Main column */
+.main {
+    -ms-flex: 70%; /* IE10 */
+    flex: 70%;
+    background-color: #d6e0f6;
+
+}
+
+/* Fake image, just for this example */
+.fakeimg {
+    background-color: #aaa;
+    width: 50%;
+
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+    .row {
+        flex-direction: column;
+    }
+}

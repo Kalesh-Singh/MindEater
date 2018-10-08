@@ -3,11 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+
+    <!--Styles-->
+    <link type="text/css" rel="stylesheet" href="resources/css/dashboard.css"/>
+    <!--<script>-->
+        <!--$(function(){-->
+        <!--var text = $(".text");-->
+        <!--$(window).scroll = $(window).scrollTop();-->
+
+        <!--if(scroll >= 50){-->
+        <!--text.removeClass("hidden");-->
+        <!--}else{-->
+        <!--text.addClass("hidden");-->
+        <!--}-->
+        <!--});-->
+        <!--});-->
+    <!--</script>-->
 </head>
 <body>
-<h1>MindEater - Dashboard</h1>
+
+<div class="header">
+    <h1>Welcome to Mind Eater</h1>
+</div>
+
+<!--<ul class="text hidden">-->
+    <!--<lim>M</lim>-->
+    <!--<lim class="ghost">i</lim>-->
+    <!--<lim class="ghost">n</lim>-->
+    <!--<lim class="ghost">d</lim>-->
+    <!--<lim>E</lim>-->
+    <!--<lim class="ghost">a</lim>-->
+    <!--<lim class="ghost">t</lim>-->
+    <!--<lim class="ghost">e</lim>-->
+    <!--<lim class="ghost">r</lim>-->
+<!--</ul>-->
+
+<ul>
+    <li><a class="active" href="#home">Home</a></li>
+    <li><a href="#Create a Challenge">Create a Challenge</a></li>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Share</a>
+    <div class="dropdown-content">
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Link 3</a>
+    </div>
+    </li>
+
+
+    <liT style="float:right">
+        <button id="sign-out-button" class="SignOut-button">Sign Out</button>
+        <!--<button id="sign-out-button">Sign Out</button>-->
+    </liT>
+</ul>
+
+<div class="row">
+    <div class="side">
+        <h2>About Me</h2>
+        <h5>Photo of me:</h5>
+        <div class="fakeimg" style="height:200px;">Image</div>
+        <p>User bio.</p>
+    </div>
+    <div class="main">
+        <h2>Top Challenge</h2>
+        <h5>Created: <script>
+var d = new Date();
+document.getElementById("demo").innerHTML = d.toDateString();
+</script></h5>
+        <div class="fakeimg" style="height:200px;">Image</div>
+        <p>Challenge description</p>
+        <p>This is the challenge description</p>
+        <br>
+        <h2>New</h2>
+    </div>
+</div>
+
 <p>This is your mind eater dashboard.</p>
-<button id="sign-out-button">Sign Out</button>
+
 
 <script src="/__/firebase/5.5.2/firebase-app.js"></script>
 <script src="/__/firebase/5.5.2/firebase-auth.js"></script>
