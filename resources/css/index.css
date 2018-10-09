@@ -41,12 +41,12 @@ a {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(brain.png) center;
     background-size: 200% 150%;
     box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+    transform-style: preserve-3d;
 }
 
 .firebase-login {
     min-height: 345px;
     perspective: 1000px;
-    transform-style: preserve-3d;
     padding: 25px;
     color: #fff;
 }
