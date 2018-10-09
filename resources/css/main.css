@@ -1,0 +1,18 @@
+/* Reusable classes */
+@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+html, body, .container-table {
+    height: 100%;
+}
+
+.container-table {
+    display: table;
+}
+
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.col-centered {
+    margin: 0 auto;
+}
