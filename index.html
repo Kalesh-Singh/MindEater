@@ -1,76 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--Required Meta Tags-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <meta charset="UTF-8">
     <title>MindEater - Sign In</title>
 
     <!--Firebase UI Setup-->
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.css"/>
 
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
     <!--Styles-->
     <link type="text/css" rel="stylesheet" href="resources/css/index.css"/>
-
+    <link type="text/css" rel="stylesheet" href="resources/css/main.css"/>
 </head>
 <body>
-<div class="login">
-
-    <div class="login-wrap">
-        <div class="login-html">
-            <h1 class="login-title">Mind Eater</h1>
-            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign
-            In</label>
-            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
-            <div class="login-form">
-                <!--____________________________________________________________________________________-->
-                <!-- The surrounding HTML is left untouched by Firebase UI.
-                         We can use this space for branding, controls and other customizations.-->
-                <div id="firebaseui-auth-container" class="login-fb"></div>
-                <!--____________________________________________________________________________________-->
-                <div class="sign-in-htm">
-                    <div class="group">
-                        <label class="label">Email</label>
-                        <input id="sign-in-email" type="email" placeholder="Email" class="input">
-                    </div>
-                    <div class="group">
-                        <label class="label">Password</label>
-                        <input id="sign-in-password" type="password" placeholder="Password" class="input" data-type="password">
-                    </div>
-                    <div class="group">
-                        <input id="check" type="checkbox" class="check" checked>
-                        <label for="check"><span class="icon"></span> Keep me Signed in</label>
-                    </div>
-                    <div class="group">
-                        <input id="sign-in-button" type="button" class="button" value="Sign In">
-                    </div>
-                    <div class="hr"></div>
-                    <div class="foot-lnk">
-                        <a href="#forgot">Forgot Password?</a>
-                    </div>
+<div class="container-fluid container-table">
+    <div class="container container-table">
+        <div class="row vertical-center-row">
+            <div class="row login-wrap">
+                <div class="row">
+                    <h1 class="sign-in-title">MIND EATER</h1>
                 </div>
-                <div class="sign-up-htm">
-                    <div class="group">
-                        <label class="label">Email Address</label>
-                        <input id="sign-up-email" type="email" placeholder="Email Address" class="input">
+                <div class="row">
+                    <div class="col-sm-6 col-centered mind-eater-login">
+
+                        <div class="login-form">
+                            <input id="tab-1" type="radio" name="tab" class="sign-in" checked>
+                            <label for="tab-1" class="tab">Sign In</label>
+                            <input id="tab-2" type="radio" name="tab" class="sign-up">
+                            <label for="tab-2" class="tab">Sign Up</label>
+                            <div class="sign-in-htm">
+                                <div class="group">
+                                    <label class="label">Email</label>
+                                    <input id="sign-in-email" type="email" placeholder="Email" class="input">
+                                </div>
+                                <div class="group">
+                                    <label class="label">Password</label>
+                                    <input id="sign-in-password" type="password" placeholder="Password" class="input"
+                                           data-type="password">
+                                </div>
+                                <div class="group">
+                                    <input id="check" type="checkbox" class="check" checked>
+                                    <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                                </div>
+                                <div class="group">
+                                    <input id="sign-in-button" type="button" class="button" value="Sign In">
+                                </div>
+                                <div class="hr"></div>
+                                <div class="foot-lnk">
+                                    <a href="#forgot">Forgot Password?</a>
+                                </div>
+                            </div>
+                            <div class="sign-up-htm">
+                                <div class="group">
+                                    <label class="label">Email Address</label>
+                                    <input id="sign-up-email" type="email" placeholder="Email Address" class="input">
+                                </div>
+                                <div class="group">
+                                    <label class="label">Password</label>
+                                    <input id="sign-up-password" type="password" placeholder="Password" class="input"
+                                           data-type="password">
+                                </div>
+                                <div class="group">
+                                    <label class="label">Repeat Password</label>
+                                    <input id="sign-up-password-repeat" type="password" placeholder="Password"
+                                           class="input" data-type="password">
+                                </div>
+                                <div class="group">
+                                    <label class="label">Username</label>
+                                    <input id="sign-up-username" type="text" placeholder="Username" class="input">
+                                </div>
+                                <div class="group">
+                                    <input id="sign-up-button" type="button" class="button" value="Sign Up">
+                                </div>
+                                <div class="hr"></div>
+                                <div class="foot-lnk">
+                                    <label for="tab-1">Already a Member?</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="group">
-                        <label class="label">Password</label>
-                        <input id="sign-up-password" type="password" placeholder="Password" class="input" data-type="password">
-                    </div>
-                    <div class="group">
-                        <label class="label">Repeat Password</label>
-                        <input id="sign-up-password-repeat" type="password" placeholder="Password" class="input" data-type="password">
-                    </div>
-                    <div class="group">
-                        <label class="label">Username</label>
-                        <input id="sign-up-username" type="text" placeholder="Username" class="input">
-                    </div>
-                    <div class="group">
-                        <input id="sign-up-button" type="button" class="button" value="Sign Up">
-                    </div>
-                    <div class="hr"></div>
-                    <div class="foot-lnk">
-                        <label for="tab-1">Already a Member?</label>
+                    <div class="col-sm-6 col-centered">
+                        <!--____________________________________________________________________________________-->
+                        <!-- The surrounding HTML is left untouched by Firebase UI.
+                                 We can use this space for branding, controls and other customizations.-->
+                        <div id="firebaseui-auth-container" class="firebase-login"></div>
+                        <!--____________________________________________________________________________________-->
                     </div>
                 </div>
             </div>
@@ -89,5 +112,10 @@
 
 <script src="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.js"></script>
 <script src="resources/js/firebase-ui-config.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </body>
 </html>
