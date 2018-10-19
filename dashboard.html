@@ -2,12 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
+
+    <!--Styles-->
+    <link type="text/css" rel="stylesheet" href="resources/css/dashboard.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 </head>
 <body>
-<h1>MindEater - Dashboard</h1>
-<p>This is your mind eater dashboard.</p>
-<button id="sign-out-button">Sign Out</button>
+<header>
+    <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+    <div class="menu-icon">
+        <span class="menu-icon__line menu-icon__line-left"></span>
+        <span class="menu-icon__line"></span>
+        <span class="menu-icon__line menu-icon__line-right"></span>
+    </div>
+
+    <div class="nav">
+        <div class="nav__content">
+            <!--<h1 class="nav__list-item">Challenges</h1>-->
+            <ula class="nav__list">
+                <lic class="nav__list-item">Created</lic>
+                <lic class="nav__list-item">Solved</lic>
+                <lic class="nav__list-item">Settings</lic>
+            </ula>
+        </div>
+    </div>
+    <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+    <!--User Profile Picture-->
+        <img src="resources/css/user_profile.png/" class="user">
+
+    <div class="header">
+        <img class="logo" src = "resources/css/logo_transparent.png"/>
+        <div class="letters">
+            <span class="letter">M</span>
+            <span class="letter">i</span>
+            <span class="letter">n</span>
+            <span class="letter">d</span>
+            <span class="letter"> </span>
+            <span class="letter">E</span>
+            <span class="letter">a</span>
+            <span class="letter">t</span>
+            <span class="letter">e</span>
+            <span class="letter">r</span>
+        </div>
+    </div>
+</header>
+
+<ul>
+    <li><a class="active" href="#home">Home</a></li>
+    <li><a href="#Create a Challenge">Create a Challenge</a></li>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Share</a>
+    <div class="dropdown-content">
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Link 3</a>
+    </div>
+    </li>
+
+    <lit>
+        <button id="sign-out-button" class="SignOut-button">Sign Out</button>
+        <!--<button id="sign-out-button">Sign Out</button>-->
+    </lit>
+</ul>
+
+<div class="Main">
+    <div class="userBK">
+        <div class="content-box">
+            <h1>Points: #### </h1>
+        </div>
+        <div class="card">
+            <img src="resources/css/user_profile.png/" class="user" alt="user">
+            <h1>User Name</h1>
+            <p class="title">User title</p>
+            <p>Description</p>
+            <p><button>Contact</button></p>
+        </div>
+    </div>
+</div>
+
+<div class="top-challenge">
+    <h1>Top Challenge</h1>
+    <div class="inside">
+        <div id="ex1">the users challenge that is the most rated will go here</div>
+    </div>
+</div>
+
+<div class="solve-challenge">
+    <h1>Solve Challenge</h1>
+    <div class="flex">
+        <c class="bttn">Start</c>
+    </div>
+</div>
+
 
 <script src="/__/firebase/5.5.2/firebase-app.js"></script>
 <script src="/__/firebase/5.5.2/firebase-auth.js"></script>
@@ -16,5 +105,7 @@
 <script src="/__/firebase/init.js"></script>
 
 <script src="resources/js/dashboard.js"></script>
+<script src="resources/js/effects.js"></script>
+
 </body>
 </html>

@@ -29,3 +29,7 @@ signOutButton.addEventListener('click', signOut);
 
 // Initialize firebase auth
 initFirebaseAuth();
+
+
+
+
