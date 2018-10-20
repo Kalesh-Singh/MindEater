@@ -7,7 +7,7 @@ import classes from './SignIn.module.css';
 class SignIn extends Component {
     render() {
         return (
-            <form className={classes.SignUp}>
+            <form className={classes.SignIn}>
                 <TextField
                     id='email'
                     label='Email'
