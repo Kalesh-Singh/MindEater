@@ -1,3 +1,13 @@
+.Authentication {
+    width: 100vw;
+}
+
+@media (min-width: 500px) {
+    .Authentication {
+        width: 500px;
+    }
+}
+
 .Radio {
     justify-content: space-around;
 }

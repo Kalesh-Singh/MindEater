@@ -24,7 +24,7 @@ class SignUp extends Component {
                     label='Repeat Password'
                     margin='normal'
                 />
-                <Button variant='contained'>Sign In</Button>
+                <Button variant='contained'>Sign Up</Button>
             </form>
         );
     }
