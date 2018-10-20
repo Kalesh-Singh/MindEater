@@ -50,7 +50,7 @@ class SignUp extends Component {
             case 'repeatPassword':
                 break;
             case 'email':
-                break;
+                return this.checkEmail(element);
             case 'username':
                 break;
             default:
@@ -70,7 +70,18 @@ class SignUp extends Component {
         } else if (password.value.search(/[a-z]/) === -1) {
             return 'Must contain an lowercase character';
         } else if (password.value.search(/\d/) === -1) {
-            return'Must contain at least 1 digit';
+            return 'Must contain at least 1 digit';
+        } else {
+            return '';
+        }
+    };
+
+    checkEmail = (email) => {
+        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (email.value.length === 0 && email.focused) {
+            return '* Required';
+        } else if (!pattern.test(String(email.value).toLowerCase())) {
+            return 'Invalid email format';
         } else {
             return '';
         }
@@ -91,10 +102,11 @@ class SignUp extends Component {
                     label='Email'
                     type='email'
                     margin='normal'
+                    error={this.state.email.error.length > 0}
                     helperText={this.state.email.error}
                     value={this.state.email.value}
                     onChange={this.handleChange('email')}
-
+                    onFocus={this.handleFocus('email')}
                 />
                 <TextField
                     name='password'
