@@ -30,7 +30,7 @@ class SignUp extends Component {
 
     handleChange = name => event => {
         const updatedField = {...this.state[name]};
-        updatedField.value = event.target.value;
+        updatedField.value = event.target.value.trim();
         updatedField.error = this.checkValidity(name, updatedField);
 
         this.setState({[name]: updatedField});
@@ -56,9 +56,9 @@ class SignUp extends Component {
             case 'email':
                 return this.checkEmail(element);
             case 'username':
-                break;
+               return this.checkUserName(element);
             default:
-                return '';
+                return '';      // No error
         }
     };
 
@@ -76,7 +76,7 @@ class SignUp extends Component {
         } else if (password.value.search(/\d/) === -1) {
             return 'Must contain at least 1 digit';
         } else {
-            return '';
+            return '';      // No error
         }
     };
 
@@ -86,7 +86,7 @@ class SignUp extends Component {
         } else if (repeatPassword.value !== this.state.password.value) {
             return 'Passwords don\'t match';
         } else {
-            return '';
+            return '';      // No error
         }
     };
 
@@ -97,12 +97,21 @@ class SignUp extends Component {
         } else if (!pattern.test(String(email.value).toLowerCase())) {
             return 'Invalid email format';
         } else {
-            return '';
+            return '';     // No error
         }
     };
 
     checkUserName = (username) => {
-
+        const pattern = /^[a-zA-Z0-9-_]+$/; // Alphanumeric dashes and underscores.
+        if (username.value.length === 0 && username.focused) {
+            return '* Required';
+        } else if (username.value.length > 15) {
+            return 'Cannot be longer than 15 characters';
+        } else if (!pattern.test(username.value)) {
+            return 'Only characters A-Z, a-z, -, and _ allowed';
+        } else {
+            return '';      // No error
+        }
     };
 
     render() {
@@ -112,8 +121,11 @@ class SignUp extends Component {
                     name='username'
                     label='Username'
                     margin='normal'
+                    error={this.state.username.error.length > 0}
+                    helperText={this.state.username.error}
                     value={this.state.username.value}
                     onChange={this.handleChange('username')}
+                    onFocus={this.handleFocus('username')}
                 />
                 <TextField
                     name='email'
