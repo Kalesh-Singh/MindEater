@@ -1,0 +1,7 @@
+.Radio {
+    justify-content: space-around;
+}
+
+.Radio svg {
+    display: none;
+}

@@ -13,7 +13,7 @@ class SignUp extends Component {
                     margin='normal'
                 />
                 <TextField
-                    label='Email Address'
+                    label='Email'
                     margin='normal'
                 />
                 <TextField
