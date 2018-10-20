@@ -31,6 +31,7 @@ class Authentication extends Component {
             >
                 <Grid item xs={12}>
                     <div className={classes.Authentication}>
+                        <h1>Mind Eater</h1>
                         <RadioGroup
                             value={this.state.value}
                             onChange={this.handleChange}
