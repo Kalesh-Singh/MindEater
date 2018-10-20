@@ -29,6 +29,7 @@ class SignUp extends Component {
                 <TextField
                     name='email'
                     label='Email'
+                    type='email'
                     margin='normal'
                     value={this.state.email}
                     onChange={this.handleChange('email')}
