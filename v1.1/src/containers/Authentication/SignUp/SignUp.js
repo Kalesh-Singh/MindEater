@@ -41,6 +41,10 @@ class SignUp extends Component {
         updatedField.focused = true;
         updatedField.error = this.checkValidity(name, updatedField);
         this.setState({[name]: updatedField});
+
+        if (name === 'password') {
+            this.handleFocus('repeatPassword')();
+        }
     };
 
     checkValidity = (name, element) => {
@@ -48,7 +52,7 @@ class SignUp extends Component {
             case 'password':
                 return this.checkPassword(element);
             case 'repeatPassword':
-                break;
+                return this.checkRepeatPassword(element);
             case 'email':
                 return this.checkEmail(element);
             case 'username':
@@ -71,6 +75,16 @@ class SignUp extends Component {
             return 'Must contain an lowercase character';
         } else if (password.value.search(/\d/) === -1) {
             return 'Must contain at least 1 digit';
+        } else {
+            return '';
+        }
+    };
+
+    checkRepeatPassword = (repeatPassword) => {
+        if (repeatPassword.value.length === 0 && repeatPassword.focused) {
+            return '* Required';
+        } else if (repeatPassword.value !== this.state.password.value) {
+            return 'Passwords do not match';
         } else {
             return '';
         }
@@ -124,8 +138,11 @@ class SignUp extends Component {
                     label='Repeat Password'
                     type='password'
                     margin='normal'
+                    error={this.state.repeatPassword.error.length > 0}
+                    helperText={this.state.repeatPassword.error}
                     value={this.state.repeatPassword.value}
                     onChange={this.handleChange('repeatPassword')}
+                    onFocus={this.handleFocus('repeatPassword')}
                 />
                 <Button variant='contained'>Sign Up</Button>
             </form>
