@@ -84,7 +84,7 @@ class SignUp extends Component {
         if (repeatPassword.value.length === 0 && repeatPassword.focused) {
             return '* Required';
         } else if (repeatPassword.value !== this.state.password.value) {
-            return 'Passwords do not match';
+            return 'Passwords don\'t match';
         } else {
             return '';
         }
@@ -99,6 +99,10 @@ class SignUp extends Component {
         } else {
             return '';
         }
+    };
+
+    checkUserName = (username) => {
+
     };
 
     render() {
