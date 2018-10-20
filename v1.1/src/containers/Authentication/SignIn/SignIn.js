@@ -5,18 +5,34 @@ import TextField from '@material-ui/core/TextField';
 import classes from './SignIn.module.css';
 
 class SignIn extends Component {
+    state = {
+            email: '',
+            password: ''
+    };
+
+    handleChange = name =>  event => {
+        console.log(event.target.value);
+        this.setState({[name]: event.target.value})
+    };
+
     render() {
         return (
             <form className={classes.SignIn}>
                 <TextField
-                    id='email'
+                    name='email'
                     label='Email'
                     margin='normal'
+                    value={this.state.email}
+                    onChange={this.handleChange('email')}
                 />
                 <TextField
-                    id='password'
+                    name='password'
                     label='Password'
+                    type='password'
+                    autoComplete='current-password'
                     margin='normal'
+                    value={this.state.password}
+                    onChange={this.handleChange('password')}
                 />
                 <Button variant='contained'>Sign In</Button>
             </form>
