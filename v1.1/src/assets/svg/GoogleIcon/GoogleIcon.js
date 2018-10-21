@@ -2,7 +2,7 @@ import React from 'react';
 
 function GoogleIcon() {
     return (
-        <svg width="80%" height="80%" viewBox="0 0 118 120" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        <svg width="65%" height="65%" viewBox="0 0 118 120" version="1.1" xmlns="http://www.w3.org/2000/svg"
              xmlnsXlink="http://www.w3.org/1999/xlink">
             <title>google_button</title>
             <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
