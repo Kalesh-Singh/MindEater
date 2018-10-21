@@ -9,6 +9,8 @@ function OAuthProviders() {
         <div className={classes.Providers}>
             <Google/>
             <Facebook/>
+            <Google/>
+            <Facebook/>
         </div>
     );
 }
