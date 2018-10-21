@@ -7,6 +7,7 @@ import classes from './Authentication.module.css'
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
 import Grid from "@material-ui/core/Grid/Grid";
+import OAuthProviders from "./OAuthProviders/OAuthProviders";
 
 class Authentication extends Component {
 
@@ -19,7 +20,8 @@ class Authentication extends Component {
     };
 
     render() {
-        const form = (this.state.value === 'sign-in') ? <SignIn/> : <SignUp/>;
+        const form = (this.state.value === 'sign-in')
+            ? <><SignIn/><hr/><OAuthProviders/></> : <SignUp/>;
         return (
             <Grid
                 container

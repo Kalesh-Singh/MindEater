@@ -209,7 +209,7 @@ class SignUp extends Component {
                     onFocus={this.handleFocus('repeatPassword')}
                 />
                 <Button
-                    variant='contained'
+                    variant='extendedFab'
                     type='submit'
                     disabled={!validForm}
                 >

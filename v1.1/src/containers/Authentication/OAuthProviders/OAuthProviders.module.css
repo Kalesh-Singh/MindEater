@@ -1,0 +1,5 @@
+.Providers {
+    display: flex;
+    flex-flow: column;
+    margin-top: 25px;
+}

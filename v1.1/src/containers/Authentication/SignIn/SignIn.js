@@ -123,7 +123,7 @@ class SignIn extends Component {
                     onFocus={this.handleFocus('password')}
                 />
                 <Button
-                    variant='contained'
+                    variant='extendedFab'
                     type='submit'
                     disabled={!validForm}
                 >
