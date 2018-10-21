@@ -30,21 +30,17 @@ class SignUp extends Component {
             error: '',
             focused: false,
             valid: false
-        },
-        validForm: false
+        }
     };
 
     checkFormValidity = () => {
         let validForm = true;
         const form = {...this.state};
         for (let element in form) {
-            if (element !== 'validForm') {
-                console.log(element + ' : ' + form[element].valid);
-                validForm = validForm && form[element].valid;
-            }
+            console.log(element + ' : ' + form[element].valid);
+            validForm = validForm && form[element].valid;
         }
-        console.log('Form validity : ' + validForm);
-        this.setState({validForm: validForm});
+        return validForm;
     };
 
     signUp = (event) => {
@@ -65,7 +61,6 @@ class SignUp extends Component {
         updatedField.error = this.checkValidity(name, updatedField);
         updatedField.valid = updatedField.error.length === 0;
         this.setState({[name]: updatedField});
-        this.checkFormValidity();
     };
 
     handleFocus = name => () => {
@@ -162,6 +157,9 @@ class SignUp extends Component {
     };
 
     render() {
+
+        const validForm = this.checkFormValidity();
+
         return (
             <form
                 className={classes.SignUp}
@@ -213,7 +211,7 @@ class SignUp extends Component {
                 <Button
                     variant='contained'
                     type='submit'
-                    disabled={!this.state.validForm}
+                    disabled={!validForm}
                 >
                     Sign Up
                 </Button>
