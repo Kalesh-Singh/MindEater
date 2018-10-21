@@ -13,7 +13,7 @@ class Google extends Component {
             .then(() => {
                 alert('Successfully signed in with Google');
             }).catch(function (error) {
-            alert(error.message);
+                alert(error.message);
         });
     };
 
