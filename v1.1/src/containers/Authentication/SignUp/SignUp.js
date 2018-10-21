@@ -43,6 +43,7 @@ class SignUp extends Component {
                 validForm = validForm && form[element].valid;
             }
         }
+        console.log('Form validity : ' + validForm);
         this.setState({validForm: validForm});
     };
 
@@ -65,7 +66,6 @@ class SignUp extends Component {
         updatedField.valid = updatedField.error.length === 0;
         this.setState({[name]: updatedField});
         this.checkFormValidity();
-        console.log(this.state.validForm);
     };
 
     handleFocus = name => () => {
