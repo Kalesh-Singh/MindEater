@@ -10,23 +10,40 @@ class SignUp extends Component {
         username: {
             value: '',
             error: '',
-            focused: false
+            focused: false,
+            valid: false
         },
         email: {
             value: '',
             error: '',
-            focused: false
+            focused: false,
+            valid: false
         },
         password: {
             value: '',
             error: '',
-            focused: false
+            focused: false,
+            valid: false
         },
         repeatPassword: {
             value: '',
             error: '',
-            focused: false
+            focused: false,
+            valid: false
+        },
+        validForm: false
+    };
+
+    checkFormValidity = () => {
+        let validForm = true;
+        const form = {...this.state};
+        for (let element in form) {
+            if (element !== 'validForm') {
+                console.log(element + ' : ' + form[element].valid);
+                validForm = validForm && form[element].valid;
+            }
         }
+        this.setState({validForm: validForm});
     };
 
     signUp = (event) => {
@@ -45,8 +62,10 @@ class SignUp extends Component {
         const updatedField = {...this.state[name]};
         updatedField.value = event.target.value.trim();
         updatedField.error = this.checkValidity(name, updatedField);
-
+        updatedField.valid = updatedField.error.length === 0;
         this.setState({[name]: updatedField});
+        this.checkFormValidity();
+        console.log(this.state.validForm);
     };
 
     handleFocus = name => () => {
@@ -123,6 +142,7 @@ class SignUp extends Component {
                 if (signInMethods.length > 0) {
                     const updatedEmail = {...email};
                     updatedEmail.error = 'There is already an account with this email';
+                    updatedEmail.valid = false;
                     this.setState({email: updatedEmail});
                 }
             })
@@ -190,7 +210,13 @@ class SignUp extends Component {
                     onChange={this.handleChange('repeatPassword')}
                     onFocus={this.handleFocus('repeatPassword')}
                 />
-                <Button variant='contained' type='submit'>Sign Up</Button>
+                <Button
+                    variant='contained'
+                    type='submit'
+                    disabled={!this.state.validForm}
+                >
+                    Sign Up
+                </Button>
             </form>
         );
     }
