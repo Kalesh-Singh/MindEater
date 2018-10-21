@@ -3,6 +3,7 @@ import {Button} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 
 import classes from './SignIn.module.css';
+import fire from '../../../fire';
 
 class SignIn extends Component {
     state = {
@@ -18,6 +19,18 @@ class SignIn extends Component {
             focused: false,
             valid: false
         }
+    };
+
+    signIn = (event) => {
+        event.preventDefault();
+        fire.auth().signInWithEmailAndPassword(
+            this.state.email.value, this.state.password.value)
+            .then(() => {
+                alert('Sign In successful :)');
+            })
+            .catch(function (error) {
+                alert(error.message);
+            });
     };
 
     checkFormValidity = () => {
