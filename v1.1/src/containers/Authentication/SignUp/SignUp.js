@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField/TextField";
 import {Button} from "@material-ui/core";
 
 import classes from './SignUp.module.css';
+import fire from '../../../fire';
 
 class SignUp extends Component {
     state = {
@@ -28,6 +29,18 @@ class SignUp extends Component {
         }
     };
 
+    signUp = (event) => {
+        event.preventDefault();
+        fire.auth().createUserWithEmailAndPassword(
+            this.state.email.value, this.state.password.value)
+            .then(() => {
+                alert('Sign up successful!');
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
+    };
+
     handleChange = name => event => {
         const updatedField = {...this.state[name]};
         updatedField.value = event.target.value.trim();
@@ -38,12 +51,14 @@ class SignUp extends Component {
 
     handleFocus = name => () => {
         const updatedField = {...this.state[name]};
-        updatedField.focused = true;
-        updatedField.error = this.checkValidity(name, updatedField);
-        this.setState({[name]: updatedField});
+        if (!updatedField.focused) {
+            updatedField.focused = true;
+            updatedField.error = this.checkValidity(name, updatedField);
+            this.setState({[name]: updatedField});
 
-        if (name === 'password') {
-            this.handleFocus('repeatPassword')();
+            if (name === 'password') {
+                this.handleFocus('repeatPassword')();
+            }
         }
     };
 
@@ -56,7 +71,7 @@ class SignUp extends Component {
             case 'email':
                 return this.checkEmail(element);
             case 'username':
-               return this.checkUserName(element);
+                return this.checkUserName(element);
             default:
                 return '';      // No error
         }
@@ -97,8 +112,20 @@ class SignUp extends Component {
         } else if (!pattern.test(String(email.value).toLowerCase())) {
             return 'Invalid email format';
         } else {
+            this.checkEmailReuse(email);
             return '';     // No error
         }
+    };
+
+    checkEmailReuse = (email) => {
+        fire.auth().fetchSignInMethodsForEmail(email.value)
+            .then((signInMethods) => {
+                if (signInMethods.length > 0) {
+                    const updatedEmail = {...email};
+                    updatedEmail.error = 'There is already an account with this email';
+                    this.setState({email: updatedEmail});
+                }
+            })
     };
 
     checkUserName = (username) => {
@@ -116,7 +143,10 @@ class SignUp extends Component {
 
     render() {
         return (
-            <form className={classes.SignUp}>
+            <form
+                className={classes.SignUp}
+                onSubmit={this.signUp}
+            >
                 <TextField
                     name='username'
                     label='Username'
@@ -160,7 +190,7 @@ class SignUp extends Component {
                     onChange={this.handleChange('repeatPassword')}
                     onFocus={this.handleFocus('repeatPassword')}
                 />
-                <Button variant='contained'>Sign Up</Button>
+                <Button variant='contained' type='submit'>Sign Up</Button>
             </form>
         );
     }
