@@ -5,10 +5,10 @@ import List from "@material-ui/core/List/List";
 import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
-import SolveChallengesIcon from '@material-ui/icons/Extension';
-import CreateChallengeIcon from '@material-ui/icons/NoteAdd';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import MyChallengesIcon from '@material-ui/icons/LibraryBooks';
+import SolveChallengesIcon from '@material-ui/icons/ExtensionOutlined';
+import CreateChallengeIcon from '@material-ui/icons/NoteAddOutlined';
+import DashboardIcon from '@material-ui/icons/DashboardOutlined';
+import MyChallengesIcon from '@material-ui/icons/LibraryBooksOutlined';
 import Divider from "@material-ui/core/Divider/Divider";
 
 import classes from "./SideDrawerButtons.module.css";
