@@ -1,4 +1,6 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom'
+
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
@@ -16,39 +18,66 @@ function NavigationItems(props) {
 
     return (
         <div className={listStyle}>
-            <List style={{display: props.display, width: '100%'}}>
-                <ListItem button>
-                    {props.display === 'block' ? (
-                        <ListItemIcon>
-                            <DashboardIcon/>
-                        </ListItemIcon>
-                    ) : null}
-                    <ListItemText primary='Dashboard'/>
-                </ListItem>
-                <ListItem button>
-                    {props.display === 'block' ? (
-                        <ListItemIcon>
-                            <MyChallengesIcon/>
-                        </ListItemIcon>
-                    ) : null}
-                    <ListItemText primary='My Challenges'/>
-                </ListItem>
-                <ListItem button>
-                    {props.display === 'block' ? (
-                        <ListItemIcon>
-                            <CreateChallengeIcon/>
-                        </ListItemIcon>
-                    ) : null}
-                    <ListItemText primary='Create Challenge'/>
-                </ListItem>
-                <ListItem button>
-                    {props.display === 'block' ? (
-                        <ListItemIcon>
-                            <SolveChallengesIcon/>
-                        </ListItemIcon>
-                    ) : null}
-                    <ListItemText primary='Solve Challenges'/>
-                </ListItem>
+            <List
+                className={classes.NavigationItems}
+                style={{display: props.display, width: '100%'}}
+            >
+                <NavLink
+                    activeClassName={classes.active}
+                    to='/dashboard'
+                    onClick={props.toggleDrawer}
+                >
+                    <ListItem button>
+                        {props.display === 'block' ? (
+                            <ListItemIcon>
+                                <DashboardIcon/>
+                            </ListItemIcon>
+                        ) : null}
+                        <ListItemText primary='Dashboard'/>
+                    </ListItem>
+                </NavLink>
+                <NavLink
+                    activeClassName={classes.active}
+                    to='/my-challenges'
+                    onClick={props.toggleDrawer}
+                >
+                    <ListItem button>
+                        {props.display === 'block' ? (
+                            <ListItemIcon>
+                                <MyChallengesIcon/>
+                            </ListItemIcon>
+                        ) : null}
+                        <ListItemText primary='My Challenges'/>
+                    </ListItem>
+                </NavLink>
+                <NavLink
+                    activeClassName={classes.active}
+                    to='/create-challenge'
+                    onClick={props.toggleDrawer}
+                >
+                    <ListItem button>
+                        {props.display === 'block' ? (
+                            <ListItemIcon>
+                                <CreateChallengeIcon/>
+                            </ListItemIcon>
+                        ) : null}
+                        <ListItemText primary='Create Challenge'/>
+                    </ListItem>
+                </NavLink>
+                <NavLink
+                    activeClassName={classes.active}
+                    to='/solve-challenges'
+                    onClick={props.toggleDrawer}
+                >
+                    <ListItem button>
+                        {props.display === 'block' ? (
+                            <ListItemIcon>
+                                <SolveChallengesIcon/>
+                            </ListItemIcon>
+                        ) : null}
+                        <ListItemText primary='Solve Challenges'/>
+                    </ListItem>
+                </NavLink>
             </List>
         </div>
     );

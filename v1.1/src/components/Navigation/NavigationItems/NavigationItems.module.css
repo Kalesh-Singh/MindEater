@@ -8,3 +8,15 @@
         display: flex;
     }
 }
+
+.NavigationItems a {
+    text-decoration: none;
+    width: 100%;
+}
+
+.NavigationItems a:hover,
+.NavigationItems a:active,
+.NavigationItems a.active {
+    color: #40a4c8;
+    text-decoration: underline;
+}
