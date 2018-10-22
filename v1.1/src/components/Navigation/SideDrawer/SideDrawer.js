@@ -1,13 +1,14 @@
 import React from 'react';
-import Drawer from "@material-ui/core/Drawer/Drawer";
 import NavigationItems from "../NavigationItems/NavigationItems";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer/SwipeableDrawer";
 
 function SideDrawer(props) {
     return (
-        <Drawer
+        <SwipeableDrawer
             variant="temporary"
             open={props.open}
             onClose={props.toggleDrawer}
+            onOpen={props.toggleDrawer}
             ModalProps={{
                 keepMounted: true, // Better open performance on mobile.
             }}
@@ -17,7 +18,7 @@ function SideDrawer(props) {
                 display='block'
                 toggleDrawer={props.toggleDrawer}
             />
-        </Drawer>
+        </SwipeableDrawer>
     );
 }
 
