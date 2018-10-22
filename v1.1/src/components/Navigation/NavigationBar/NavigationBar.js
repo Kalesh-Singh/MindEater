@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import Typography from "@material-ui/core/Typography/Typography";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import AppBar from "@material-ui/core/AppBar/AppBar";
+import MenuIcon from '@material-ui/icons/Menu';
+import NavigationItems from "../NavigationItems/NavigationItems";
 
 class NavigationBar extends Component {
     handleDrawerToggle;
+
     render() {
         return (
             <AppBar position="fixed">
@@ -15,11 +17,10 @@ class NavigationBar extends Component {
                         aria-label="Open drawer"
                         onClick={this.handleDrawerToggle}
                     >
-                        <MenuIcon />
+                        <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h6" color="inherit" noWrap>
-                        Responsive drawer
-                    </Typography>
+                    <NavigationItems display='flex'/>
+
                 </Toolbar>
             </AppBar>
         );

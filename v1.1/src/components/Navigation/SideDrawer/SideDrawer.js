@@ -6,7 +6,6 @@ class SideDrawer extends Component {
     render() {
         return (
             <Drawer
-                open
             >
                 <NavigationItems display='block'/>
             </Drawer>
