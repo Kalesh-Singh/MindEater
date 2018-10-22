@@ -20,3 +20,9 @@
     color: #40a4c8;
     text-decoration: underline;
 }
+
+.Header {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+}

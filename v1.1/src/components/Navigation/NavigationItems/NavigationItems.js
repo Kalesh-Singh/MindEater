@@ -11,10 +11,18 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import MyChallengesIcon from '@material-ui/icons/LibraryBooks';
 
 import classes from './NavigationItems.module.css';
+import Divider from "@material-ui/core/Divider/Divider";
 
 function NavigationItems(props) {
 
     const listStyle = (props.display === 'flex') ? classes.DesktopOnly : '';
+
+    const header = (props.display === 'block') ? (
+        <>
+            <h3 className={classes.Header}>MindEater</h3>
+            <Divider/>
+        </>
+    ) : null;
 
     return (
         <div className={listStyle}>
@@ -22,6 +30,7 @@ function NavigationItems(props) {
                 className={classes.NavigationItems}
                 style={{display: props.display, width: '100%'}}
             >
+                {header}
                 <NavLink
                     activeClassName={classes.active}
                     to='/dashboard'
