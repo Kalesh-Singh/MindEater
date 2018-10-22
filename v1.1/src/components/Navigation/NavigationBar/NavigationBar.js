@@ -18,7 +18,7 @@ class NavigationBar extends Component {
                         <IconButton
                             color="inherit"
                             aria-label="Open drawer"
-                            onClick={this.handleDrawerToggle}
+                            onClick={this.props.toggle}
                         >
                             <MenuIcon/>
                         </IconButton>
