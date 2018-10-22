@@ -7,43 +7,50 @@ import SolveChallengesIcon from '@material-ui/icons/Extension';
 import CreateChallengeIcon from '@material-ui/icons/NoteAdd';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import MyChallengesIcon from '@material-ui/icons/LibraryBooks';
-function NavigationItems(props) {
-    return (
 
-        <List style={{display: props.display, width: '100%'}}>
-            <ListItem button>
-                {props.display === 'block' ? (
-                    <ListItemIcon>
-                        <DashboardIcon/>
-                    </ListItemIcon>
-                ): null}
-                <ListItemText primary='Dashboard'/>
-            </ListItem>
-            <ListItem button>
-                {props.display === 'block' ? (
-                    <ListItemIcon>
-                        <MyChallengesIcon/>
-                    </ListItemIcon>
-                ): null}
-                <ListItemText primary='My Challenges'/>
-            </ListItem>
-            <ListItem button>
-                {props.display === 'block' ? (
-                    <ListItemIcon>
-                        <CreateChallengeIcon/>
-                    </ListItemIcon>
-                ): null}
-                <ListItemText primary='Create Challenge'/>
-            </ListItem>
-            <ListItem button>
-                {props.display === 'block' ? (
-                    <ListItemIcon>
-                        <SolveChallengesIcon/>
-                    </ListItemIcon>
-                ): null}
-                <ListItemText primary='Solve Challenges'/>
-            </ListItem>
-        </List>
+import classes from './NavigationItems.module.css';
+
+function NavigationItems(props) {
+
+    const listStyle = (props.display === 'flex') ? classes.DesktopOnly : '';
+
+    return (
+        <div className={listStyle}>
+            <List style={{display: props.display, width: '100%'}}>
+                <ListItem button>
+                    {props.display === 'block' ? (
+                        <ListItemIcon>
+                            <DashboardIcon/>
+                        </ListItemIcon>
+                    ) : null}
+                    <ListItemText primary='Dashboard'/>
+                </ListItem>
+                <ListItem button>
+                    {props.display === 'block' ? (
+                        <ListItemIcon>
+                            <MyChallengesIcon/>
+                        </ListItemIcon>
+                    ) : null}
+                    <ListItemText primary='My Challenges'/>
+                </ListItem>
+                <ListItem button>
+                    {props.display === 'block' ? (
+                        <ListItemIcon>
+                            <CreateChallengeIcon/>
+                        </ListItemIcon>
+                    ) : null}
+                    <ListItemText primary='Create Challenge'/>
+                </ListItem>
+                <ListItem button>
+                    {props.display === 'block' ? (
+                        <ListItemIcon>
+                            <SolveChallengesIcon/>
+                        </ListItemIcon>
+                    ) : null}
+                    <ListItemText primary='Solve Challenges'/>
+                </ListItem>
+            </List>
+        </div>
     );
 }
 

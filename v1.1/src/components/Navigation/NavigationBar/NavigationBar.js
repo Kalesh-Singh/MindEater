@@ -5,6 +5,8 @@ import AppBar from "@material-ui/core/AppBar/AppBar";
 import MenuIcon from '@material-ui/icons/Menu';
 import NavigationItems from "../NavigationItems/NavigationItems";
 
+import classes from './NavigationBar.module.css';
+
 class NavigationBar extends Component {
     handleDrawerToggle;
 
@@ -12,18 +14,21 @@ class NavigationBar extends Component {
         return (
             <AppBar position="fixed">
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="Open drawer"
-                        onClick={this.handleDrawerToggle}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
+                    <div className={classes.MenuIconButton}>
+                        <IconButton
+                            color="inherit"
+                            aria-label="Open drawer"
+                            onClick={this.handleDrawerToggle}
+                        >
+                            <MenuIcon/>
+                        </IconButton>
+                    </div>
                     <NavigationItems display='flex'/>
 
                 </Toolbar>
             </AppBar>
-        );
+        )
+            ;
     }
 }
 
