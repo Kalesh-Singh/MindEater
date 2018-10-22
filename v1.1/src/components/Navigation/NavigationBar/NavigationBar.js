@@ -8,8 +8,6 @@ import NavigationItems from "../NavigationItems/NavigationItems";
 import classes from './NavigationBar.module.css';
 
 class NavigationBar extends Component {
-    handleDrawerToggle;
-
     render() {
         return (
             <AppBar position="fixed">
@@ -18,7 +16,7 @@ class NavigationBar extends Component {
                         <IconButton
                             color="inherit"
                             aria-label="Open drawer"
-                            onClick={this.props.toggle}
+                            onClick={this.props.toggleDrawer}
                         >
                             <MenuIcon/>
                         </IconButton>

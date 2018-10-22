@@ -7,12 +7,16 @@ function SideDrawer(props) {
         <Drawer
             variant="temporary"
             open={props.open}
-            onClose={props.toggle}
+            onClose={props.toggleDrawer}
             ModalProps={{
                 keepMounted: true, // Better open performance on mobile.
             }}
         >
-            <NavigationItems display='block'/>
+
+            <NavigationItems
+                display='block'
+                toggleDrawer={props.toggleDrawer}
+            />
         </Drawer>
     );
 }

@@ -15,11 +15,11 @@ class Navigation extends Component {
         return (
             <div>
                 <NavigationBar
-                    toggle={this.handleDrawerToggle}
+                    toggleDrawer={this.handleDrawerToggle}
                 />
                 <SideDrawer
                     open={this.state.sideDrawer}
-                    toggle={this.handleDrawerToggle}
+                    toggleDrawer={this.handleDrawerToggle}
                 />
             </div>
         );
