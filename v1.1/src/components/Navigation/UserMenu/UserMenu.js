@@ -29,7 +29,7 @@ class UserMenu extends Component {
         return (
             <>
                 <IconButton
-                    style={{position: 'absolute', right: '18px'}}
+                    style={{position: 'absolute', right: '16px'}}
                     color="inherit"
                     aria-label="Open Account Properties"
                     buttonRef={node => {
