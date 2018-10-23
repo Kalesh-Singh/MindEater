@@ -2,6 +2,14 @@ import React, {Component} from 'react';
 import {Button} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 
+// import classNames from 'classnames';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Email from '@material-ui/icons/EmailOutlined';
+import Lock from '@material-ui/icons/LockOutlined';
+
 import classes from './SignIn.module.css';
 import fire from '../../../fire';
 
@@ -18,7 +26,8 @@ class SignIn extends Component {
             error: '',
             focused: false,
             valid: false
-        }
+        },
+        showPassword: false
     };
 
     signIn = (event) => {
@@ -37,8 +46,10 @@ class SignIn extends Component {
         let validForm = true;
         const form = {...this.state};
         for (let element in form) {
-            console.log(element + ' : ' + form[element].valid);
-            validForm = validForm && form[element].valid;
+            if (element !== 'showPassword') {
+                console.log(element + ' : ' + form[element].valid);
+                validForm = validForm && form[element].valid;
+            }
         }
         return validForm;
     };
@@ -90,6 +101,10 @@ class SignIn extends Component {
         }
     };
 
+    handleClickShowPassword = () => {
+        this.setState(state => ({showPassword: !state.showPassword}));
+    };
+
     render() {
 
         const validForm = this.checkFormValidity();
@@ -105,30 +120,63 @@ class SignIn extends Component {
                     type='email'
                     margin='normal'
                     autoFocus
+                    variant="outlined"
+                    placeholder="Email"
                     error={this.state.email.error.length > 0}
                     helperText={this.state.email.error}
                     value={this.state.email.value}
                     onChange={this.handleChange('email')}
                     onFocus={this.handleFocus('email')}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Email/>
+                            </InputAdornment>
+                        ),
+                    }}
                 />
                 <TextField
                     name='password'
                     label='Password'
-                    type='password'
-                    margin='normal'
+                    type={this.state.showPassword ? 'text' : 'password'}
+                    margin="normal"
+                    variant="outlined"
+                    placeholder="Password"
                     error={this.state.password.error.length > 0}
                     helperText={this.state.password.error}
                     value={this.state.password.value}
                     onChange={this.handleChange('password')}
                     onFocus={this.handleFocus('password')}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Lock/>
+                            </InputAdornment>
+                        ),
+                        endAdornment: (
+                            <InputAdornment variant="outlined" position="end">
+                                <IconButton
+                                    style={{background:"#eeeeee", color:"grey"}}
+                                    aria-label="Toggle password visibility"
+                                    onClick={this.handleClickShowPassword}
+                                >
+                                    {this.state.showPassword ? <VisibilityOff/> : <Visibility/>}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
                 />
                 <Button
                     variant='extendedFab'
                     type='submit'
                     disabled={!validForm}
-                >
-                    Sign In
+                >Sign In
                 </Button>
+                <div className={classes.Hr}>
+                    <div className={classes.FootLnk}>
+                        <a>Forgot Password?</a>
+                    </div>
+                </div>
             </form>
         );
     }

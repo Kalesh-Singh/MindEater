@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
 import TextField from "@material-ui/core/TextField/TextField";
 import {Button} from "@material-ui/core";
+import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 import classes from './SignUp.module.css';
 import fire from '../../../fire';
+
+import Lock from '@material-ui/icons/LockOutlined';
+import OpenLock from '@material-ui/icons/LockOpenOutlined';
+import Email from '@material-ui/icons/EmailOutlined';
+import Face from '@material-ui/icons/AccountCircleOutlined';
 
 class SignUp extends Component {
     state = {
@@ -30,15 +39,18 @@ class SignUp extends Component {
             error: '',
             focused: false,
             valid: false
-        }
+        },
+        showPassword: false
     };
 
     checkFormValidity = () => {
         let validForm = true;
         const form = {...this.state};
         for (let element in form) {
-            console.log(element + ' : ' + form[element].valid);
-            validForm = validForm && form[element].valid;
+            if (element !== 'showPassword') {
+                console.log(element + ' : ' + form[element].valid);
+                validForm = validForm && form[element].valid;
+            }
         }
         return validForm;
     };
@@ -156,6 +168,10 @@ class SignUp extends Component {
         }
     };
 
+    handleClickShowPassword = () => {
+        this.setState(state => ({showPassword: !state.showPassword}));
+    };
+
     render() {
 
         const validForm = this.checkFormValidity();
@@ -168,45 +184,92 @@ class SignUp extends Component {
                 <TextField
                     name='username'
                     label='Username'
+                    placeholder='Username'
                     margin='normal'
+                    variant='outlined'
                     error={this.state.username.error.length > 0}
                     helperText={this.state.username.error}
                     value={this.state.username.value}
                     onChange={this.handleChange('username')}
                     onFocus={this.handleFocus('username')}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment variant="outlined" position="start">
+                                <Face/>
+                            </InputAdornment>
+                        )
+                    }}
                 />
                 <TextField
                     name='email'
                     label='Email'
                     type='email'
+                    placeholder='Email'
                     margin='normal'
+                    variant='outlined'
                     error={this.state.email.error.length > 0}
                     helperText={this.state.email.error}
                     value={this.state.email.value}
                     onChange={this.handleChange('email')}
                     onFocus={this.handleFocus('email')}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment variant="outlined" position="start">
+                                <Email/>
+                            </InputAdornment>
+                        )
+                    }}
                 />
                 <TextField
                     name='password'
                     label='Password'
-                    type='password'
+                    placeholder='Password'
+                    type={this.state.showPassword ? 'text' : 'password'}
                     margin='normal'
+                    variant='outlined'
                     error={this.state.password.error.length > 0}
                     helperText={this.state.password.error}
                     value={this.state.password.value}
                     onChange={this.handleChange('password')}
                     onFocus={this.handleFocus('password')}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment variant="outlined" position="start">
+                                <OpenLock/>
+                            </InputAdornment>
+                        ),
+                        endAdornment: (
+                            <InputAdornment variant="outlined" position="end">
+                                <IconButton
+                                    style={{background:"#eeeeee", color:"grey"}}
+                                    aria-label="Toggle password visibility"
+                                    onClick={this.handleClickShowPassword}
+                                >
+                                    {this.state.showPassword ? <VisibilityOff/> : <Visibility/>}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
                 />
                 <TextField
                     name='repeatPassword'
                     label='Repeat Password'
-                    type='password'
+                    placeholder='Repeat Password'
+                    type={this.state.showPassword ? 'text' : 'password'}
                     margin='normal'
+                    variant='outlined'
                     error={this.state.repeatPassword.error.length > 0}
                     helperText={this.state.repeatPassword.error}
                     value={this.state.repeatPassword.value}
                     onChange={this.handleChange('repeatPassword')}
                     onFocus={this.handleFocus('repeatPassword')}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment variant="outlined" position="start">
+                                <Lock/>
+                            </InputAdornment>
+                        ),
+                    }}
                 />
                 <Button
                     variant='extendedFab'

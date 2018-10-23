@@ -2,3 +2,29 @@
     display: flex;
     flex-flow: column;
 }
+
+.SignUp button {
+    color: black;
+    background: #acc1ed;
+}
+
+.SignUp button:hover{
+    background: green;
+    color: white;
+}
+
+.Hr {
+    height: 1px;
+    margin: 10px 0 20px 0;
+    background: rgba(255, 255, 255, .2);
+}
+
+.FootLnk {
+    text-align: center;
+    color: black;
+    cursor: pointer;
+}
+
+.FootLnk:hover {
+    color: #5983da;
+}
