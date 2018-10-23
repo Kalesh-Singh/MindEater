@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
+import fire from '../../../fire';
+
 import Popper from "@material-ui/core/Popper/Popper";
 import Grow from "@material-ui/core/Grow/Grow";
 import Paper from "@material-ui/core/Paper/Paper";
@@ -13,16 +16,35 @@ class UserMenu extends Component {
         open: false,
     };
 
-    handleToggle = () => {
-        this.setState(state => ({ open: !state.open }));
+    componentDidMount() {
+        fire.auth().onAuthStateChanged(this.signOutObserver);
+    }
+
+    // Triggers when the auth state changes to handle sign-ins.
+    signOutObserver = (user) => {
+        if (!user) {
+            this.props.history.replace('/');
+        }
     };
 
-    handleClose = event => {
+    signOut = (event) => {
+        this.handleClose(event);
+        fire.auth().signOut()
+            .catch((error) => {
+                alert(error.message);
+            });
+    };
+
+    handleToggle = () => {
+        this.setState(state => ({open: !state.open}));
+    };
+
+    handleClose = (event) => {
         if (this.anchorEl.contains(event.target)) {
             return;
         }
 
-        this.setState({ open: false });
+        this.setState({open: false});
     };
 
     render() {
@@ -42,18 +64,18 @@ class UserMenu extends Component {
                     <AccountIcon/>
                 </IconButton>
                 <Popper open={this.state.open} anchorEl={this.anchorEl} transition disablePortal>
-                    {({ TransitionProps, placement }) => (
+                    {({TransitionProps, placement}) => (
                         <Grow
                             {...TransitionProps}
                             id="menu-list-grow"
-                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                            style={{transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom'}}
                         >
                             <Paper>
                                 <ClickAwayListener onClickAway={this.handleClose}>
                                     <MenuList>
                                         <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                                         <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                                        <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                                        <MenuItem onClick={this.signOut}>Sign Out</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                             </Paper>
@@ -65,4 +87,4 @@ class UserMenu extends Component {
     }
 }
 
-export default UserMenu;
+export default withRouter(UserMenu);
