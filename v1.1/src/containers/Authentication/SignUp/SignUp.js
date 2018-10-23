@@ -57,7 +57,7 @@ class SignUp extends Component {
 
     handleChange = name => event => {
         const updatedField = {...this.state[name]};
-        updatedField.value = event.target.value.trim();
+        updatedField.value = event.target';target≥p.value.trim();
         updatedField.error = this.checkValidity(name, updatedField);
         updatedField.valid = updatedField.error.length === 0;
         this.setState({[name]: updatedField});
@@ -110,6 +110,7 @@ class SignUp extends Component {
     };
 
     checkRepeatPassword = (repeatPassword) => {
+        console.log(this.state.password.value)
         if (repeatPassword.value.length === 0 && repeatPassword.focused) {
             return '* Required';
         } else if (repeatPassword.value !== this.state.password.value) {
