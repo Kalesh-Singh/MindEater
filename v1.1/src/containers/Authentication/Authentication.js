@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import fire from '../../fire';
+
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
 import Radio from "@material-ui/core/Radio/Radio";
@@ -13,6 +15,17 @@ class Authentication extends Component {
 
     state = {
         value: 'sign-in',
+    };
+
+    componentDidMount() {
+        fire.auth().onAuthStateChanged(this.signInObserver);
+    }
+
+    // Triggers when the auth state changes to handle sign-ins.
+    signInObserver = (user) => {
+        if (user) {
+            this.props.history.replace('/dashboard');
+        }
     };
 
     handleChange = event => {
