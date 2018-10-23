@@ -34,9 +34,6 @@ class SignIn extends Component {
         event.preventDefault();
         fire.auth().signInWithEmailAndPassword(
             this.state.email.value, this.state.password.value)
-            .then(() => {
-                alert('Sign In successful :)');
-            })
             .catch(function (error) {
                 alert(error.message);
             });

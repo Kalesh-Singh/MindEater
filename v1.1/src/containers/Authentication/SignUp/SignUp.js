@@ -59,9 +59,6 @@ class SignUp extends Component {
         event.preventDefault();
         fire.auth().createUserWithEmailAndPassword(
             this.state.email.value, this.state.password.value)
-            .then(() => {
-                alert('Sign up successful!');
-            })
             .catch((error) => {
                 alert(error.message);
             });

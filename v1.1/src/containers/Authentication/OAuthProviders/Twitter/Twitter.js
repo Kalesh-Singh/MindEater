@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-
 import {Button} from "@material-ui/core";
 import firebase from 'firebase/app';
 import fire from '../../../../fire';
 
-import GoogleIcon from "../../../../assets/svg/GoogleIcon/GoogleIcon";
+import TwitterIcon from "../../../../assets/svg/TwitterIcon/TwitterIcon";
 
-class Google extends Component {
-    signInWithGoogle = () => {
-        let provider = new firebase.auth.GoogleAuthProvider();
+class Twitter extends Component {
+
+    signInWithTwitter = () => {
+        let provider = new firebase.auth.TwitterAuthProvider();
         fire.auth().signInWithPopup(provider)
             .catch(function (error) {
                 alert(error.message);
@@ -19,12 +19,12 @@ class Google extends Component {
         return (
             <Button
                 variant='fab'
-                onClick={this.signInWithGoogle}
+                onClick={this.signInWithTwitter}
             >
-                <GoogleIcon/>
+                <TwitterIcon/>
             </Button>
         );
     }
 }
 
-export default Google;
+export default Twitter;
