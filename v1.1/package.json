@@ -4,11 +4,14 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.2.2",
+    "@material-ui/icons": "^3.0.1",
     "firebase": "^5.5.5",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-native": "^0.57.3",
     "react-native-firebase": "^5.0.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5"
   },
   "scripts": {

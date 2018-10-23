@@ -1,0 +1,11 @@
+.DesktopOnly {
+    display: none;
+    width: 100%;
+
+}
+
+@media (min-width: 650px) {
+    .DesktopOnly {
+        display: flex;
+    }
+}
