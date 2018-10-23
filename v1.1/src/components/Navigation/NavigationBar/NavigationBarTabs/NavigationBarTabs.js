@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Tabs from "@material-ui/core/Tabs/Tabs";
 import Tab from "@material-ui/core/Tab/Tab";
-import AccountIcon from '@material-ui/icons/AccountCircleOutlined';
 
 import classes from './NavigationBarTabs.module.css';
 
@@ -26,27 +25,27 @@ class NavigationBarTabs extends Component {
                 >
                     <Tab
                         label='Dashboard'
-                        value='0'
+                        value={0}
                         component={Link}
                         to='/dashboard'
                     />
                     <Tab
                         label='My Challenges'
-                        value='1'
+                        value={1}
                         component={Link}
                         to='/my-challenges'
                     />
 
                     <Tab
                         label='Create Challenge'
-                        value='2'
+                        value={2}
                         component={Link}
                         to='/create-challenge'
                     />
 
                     <Tab
                         label='Solve Challenges'
-                        value='3'
+                        value={3}
                         component={Link}
                         to='/solve-challenges'
                     />

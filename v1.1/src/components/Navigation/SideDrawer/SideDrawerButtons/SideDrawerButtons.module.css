@@ -4,7 +4,6 @@
     align-items: center;
 }
 
-.SideDrawerItems a:hover,
 .SideDrawerItems a:active,
 .SideDrawerItems a.active {
     color: #40a4c8;

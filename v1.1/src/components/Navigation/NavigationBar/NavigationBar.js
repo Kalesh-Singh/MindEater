@@ -26,7 +26,6 @@ class NavigationBar extends Component {
                         </div>
                         <NavigationBarTabs/>
                         <IconButton
-                            className={classes.AccountIcon}
                             style={{position: 'absolute', right: '18px'}}
                             color="inherit"
                             aria-label="Open Account Properties"

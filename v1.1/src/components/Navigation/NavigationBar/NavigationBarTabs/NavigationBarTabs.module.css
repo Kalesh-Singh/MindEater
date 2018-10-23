@@ -4,11 +4,8 @@
 
 }
 
-@media (min-width: 500px) {
+@media (min-width: 650px) {
     .DesktopOnly {
         display: flex;
-        /*align-items:center;*/
-        /*justify-content:center;*/
     }
 }
-
