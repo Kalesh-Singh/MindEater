@@ -23,7 +23,7 @@ class UserMenu extends Component {
     // Triggers when the auth state changes to handle sign-ins.
     signOutObserver = (user) => {
         if (!user) {
-            this.props.history.replace('/');
+            this.props.history.push('/');
         }
     };
 

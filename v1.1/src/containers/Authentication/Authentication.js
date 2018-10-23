@@ -24,7 +24,7 @@ class Authentication extends Component {
     // Triggers when the auth state changes to handle sign-ins.
     signInObserver = (user) => {
         if (user) {
-            this.props.history.replace('/dashboard');
+            this.props.history.push('/dashboard');
         }
     };
 
