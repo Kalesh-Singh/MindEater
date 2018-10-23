@@ -10,11 +10,9 @@ class Twitter extends Component {
     signInWithTwitter = () => {
         let provider = new firebase.auth.TwitterAuthProvider();
         fire.auth().signInWithPopup(provider)
-            .then(() => {
-                alert('Successfully signed in with Twitter');
-            }).catch(function (error) {
-            alert(error.message);
-        });
+            .catch(function (error) {
+                alert(error.message);
+            });
     };
 
     render() {

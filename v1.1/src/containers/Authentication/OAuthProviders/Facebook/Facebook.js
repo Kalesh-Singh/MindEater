@@ -9,11 +9,9 @@ class Facebook extends Component {
     signInWithFacebook = () => {
         let provider = new firebase.auth.FacebookAuthProvider();
         fire.auth().signInWithPopup(provider)
-            .then(() => {
-                alert('Successfully signed in with Facebook');
-            }).catch(function (error) {
-            alert(error.message);
-        });
+            .catch(function (error) {
+                alert(error.message);
+            });
     };
 
     render() {

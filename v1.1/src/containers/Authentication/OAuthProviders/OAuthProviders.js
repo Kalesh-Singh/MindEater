@@ -1,9 +1,10 @@
 import React from 'react';
-import Google from "./Google/Google";
 
-import classes from './OAuthProviders.module.css';
+import Google from "./Google/Google";
 import Facebook from "./Facebook/Facebook";
 import Twitter from "./Twitter/Twitter";
+
+import classes from './OAuthProviders.module.css';
 
 
 function OAuthProviders() {
