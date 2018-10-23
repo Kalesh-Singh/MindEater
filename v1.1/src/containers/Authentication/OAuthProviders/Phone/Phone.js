@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button} from "@material-ui/core";
 import PhoneIcon from "../../../../assets/svg/PhoneIcon/PhoneIcon";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import fire from "../../../../fire";
 
 class Phone extends Component {

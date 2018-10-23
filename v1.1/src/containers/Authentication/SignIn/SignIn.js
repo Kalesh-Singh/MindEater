@@ -25,9 +25,6 @@ class SignIn extends Component {
         event.preventDefault();
         fire.auth().signInWithEmailAndPassword(
             this.state.email.value, this.state.password.value)
-            .then(() => {
-                alert('Sign In successful :)');
-            })
             .catch(function (error) {
                 alert(error.message);
             });
@@ -37,7 +34,6 @@ class SignIn extends Component {
         let validForm = true;
         const form = {...this.state};
         for (let element in form) {
-            console.log(element + ' : ' + form[element].valid);
             validForm = validForm && form[element].valid;
         }
         return validForm;
