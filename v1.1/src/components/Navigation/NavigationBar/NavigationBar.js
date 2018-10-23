@@ -3,10 +3,10 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountIcon from '@material-ui/icons/AccountCircleOutlined';
 
 import classes from './NavigationBar.module.css';
 import NavigationBarTabs from "./NavigationBarTabs/NavigationBarTabs";
+import UserMenu from "../UserMenu/UserMenu";
 
 
 class NavigationBar extends Component {
@@ -25,13 +25,7 @@ class NavigationBar extends Component {
                             </IconButton>
                         </div>
                         <NavigationBarTabs/>
-                        <IconButton
-                            style={{position: 'absolute', right: '18px'}}
-                            color="inherit"
-                            aria-label="Open Account Properties"
-                        >
-                            <AccountIcon/>
-                        </IconButton>
+                        <UserMenu/>
                     </div>
                 </Toolbar>
             </AppBar>
