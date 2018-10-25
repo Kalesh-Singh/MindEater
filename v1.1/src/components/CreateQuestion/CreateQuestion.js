@@ -47,7 +47,17 @@ class CreateQuestion extends Component {
 
         return (
             <div style={{marginTop: '56px'}}>
-
+                <FormControl component="fieldset">
+                    <FormLabel component="legend">Options</FormLabel>
+                    <RadioGroup
+                        aria-label="Options"
+                        name="gender1"
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                    >
+                        {options}
+                    </RadioGroup>
+                </FormControl>
             </div>
         );
     }
