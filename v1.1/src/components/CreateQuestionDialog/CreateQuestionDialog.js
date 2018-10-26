@@ -67,7 +67,7 @@ class CreateQuestionDialog extends Component {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // Get a key for the new challenge.
+        // Get a ID for the new question.
         if(prevState.open === false && this.state.open === true) {
             fire.database().ref().child('questions').push()
                 .then(response => {

@@ -38,13 +38,15 @@ class CreateChallengeDialog extends Component {
         }
     };
 
-    componentDidMount() {
-        // Get a key for the new challenge.
-      fire.database().ref().child('challenges').push()
-            .then(response => {
-                console.log('Challenge Id' + response.key);
-                this.setState({challengeId: response.key});
-            });
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // Get a ID for the new challenge.
+        if(prevState.open === false && this.state.open === true) {
+            fire.database().ref().child('challenges').push()
+                .then(response => {
+                    console.log('Challenge Id' + response.key);
+                    this.setState({challengeId: response.key});
+                });
+        }
     }
 
     checkValidity = (name, element) => {
