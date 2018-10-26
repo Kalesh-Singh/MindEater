@@ -14,6 +14,7 @@ import fire from "../../fire";
 class CreateQuestionDialog extends Component {
 
     state = {
+        questionId: null,
         open: false,
         optionsValue: null,
         correctOption: null,
@@ -65,13 +66,15 @@ class CreateQuestionDialog extends Component {
         }
     };
 
-    componentDidMount() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         // Get a key for the new challenge.
-        fire.database().ref().child('posts').push()
-            .then(response => {
-                console.log('Challenge Id' + response.key);
-                this.setState({challengeId: response.key});
-            });
+        if(prevState.open === false && this.state.open === true) {
+            fire.database().ref().child('questions').push()
+                .then(response => {
+                    console.log('Question Id' + response.key);
+                    this.setState({questionId: response.key});
+                });
+        }
     }
 
     checkValidity = (name, element) => {
