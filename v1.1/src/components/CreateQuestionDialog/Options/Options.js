@@ -23,6 +23,7 @@ function Options(props) {
                     error={props.options.value[index].error.length > 0}
                     helperText={props.options.value[index].error}
                     onChange={props.optionChanged(index)}
+                    onFocus={props.optionFocused(index)}
                 />
             }/>
     ));
