@@ -68,11 +68,31 @@ class CreateQuestionDialog extends Component {
             case 'question':
                 return this.checkQuestion(element);
             case 'hint':
-                return '';      // TODO
+                return this.checkHint(element);
             case 'explanation':
-                return '';      // TODO
+                return this.checkExplanation(element);
             default:
                 return '';
+        }
+    };
+
+    checkExplanation = (explanation) => {
+        if (explanation.value.length === 0 && explanation.focused) {
+            return '* Required';
+        } else if (explanation.value.length > 300) {
+            return 'Cannot be longer than 300 characters';
+        } else {
+            return '';      // No error
+        }
+    };
+
+    checkHint = (hint) => {
+        if (hint.value.length === 0 && hint.focused) {
+            return '* Required';
+        } else if (hint.value.length > 100) {
+            return 'Cannot be longer than 100 characters';
+        } else {
+            return '';      // No error
         }
     };
 
@@ -230,8 +250,11 @@ class CreateQuestionDialog extends Component {
                                 rowsMax="4"
                                 margin="normal"
                                 fullWidth
-                                onChange={this.handleFieldChange('hint')}
+                                error={this.state.hint.error.length > 0}
+                                helperText={this.state.hint.error}
                                 value={this.state.hint.value}
+                                onChange={this.handleFieldChange('hint')}
+                                onFocus={this.handleFieldFocus('hint')}
                             />
                             <TextField
                                 label="Explanation"
@@ -239,8 +262,11 @@ class CreateQuestionDialog extends Component {
                                 rowsMax="4"
                                 margin="normal"
                                 fullWidth
-                                onChange={this.handleFieldChange('explanation')}
+                                error={this.state.explanation.error.length > 0}
+                                helperText={this.state.explanation.error}
                                 value={this.state.explanation.value}
+                                onChange={this.handleFieldChange('explanation')}
+                                onFocus={this.handleFieldFocus('explanation')}
                             />
                         </form>
                     </DialogContent>
