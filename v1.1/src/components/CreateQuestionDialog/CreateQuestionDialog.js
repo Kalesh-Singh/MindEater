@@ -120,8 +120,9 @@ class CreateQuestionDialog extends Component {
     };
 
     handleChange = event => {
-        console.log('Event vlaue', event.target.value);
-        this.setState({optionsValue: event.target.value, correctOption: event.target.value});
+        const updatedOptions = {...this.state.options};
+        updatedOptions.error = '';
+        this.setState({optionsValue: event.target.value, correctOption: event.target.value, options: updatedOptions});
     };
 
     handleOptionChange = index => event => {

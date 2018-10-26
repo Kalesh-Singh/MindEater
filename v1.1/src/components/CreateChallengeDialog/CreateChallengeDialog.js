@@ -39,7 +39,6 @@ class CreateChallengeDialog extends Component {
     };
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <Button onClick={this.handleClickOpen}>New Challenge</Button>
