@@ -7,11 +7,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabe
 import Radio from "@material-ui/core/Radio/Radio";
 import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
 
-import classes from './Options.module.css';
-
 
 function Options(props) {
-    console.log('Radio Group Value', props.value);
     const options = props.options.value.map((option, index) => (
             <FormControlLabel
                 key={index}

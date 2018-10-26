@@ -85,6 +85,7 @@ class CreateQuestionDialog extends Component {
     };
 
     checkValidity = (name, element) => {
+        // TODO:
         switch (name) {
             case 'options':
                 return this.checkOptions(element);
@@ -165,7 +166,6 @@ class CreateQuestionDialog extends Component {
     };
 
     render() {
-
         const {fullScreen} = this.props;
         return (
             <div>
@@ -178,9 +178,9 @@ class CreateQuestionDialog extends Component {
                     fullScreen={fullScreen}
                     open={this.state.open}
                     onClose={this.handleClose}
-                    aria-labelledby="responsive-dialog-title"
+                    aria-labelledby="create-question-dialog-title"
                 >
-                    <DialogTitle id="responsive-dialog-title">Create Question</DialogTitle>
+                    <DialogTitle id="create-question-dialog-title">Question</DialogTitle>
                     <DialogContent className={classes.root}>
                         <form className={classes.Form}>
                             <TextField

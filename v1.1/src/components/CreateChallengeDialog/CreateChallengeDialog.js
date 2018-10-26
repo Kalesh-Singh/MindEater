@@ -83,6 +83,7 @@ class CreateChallengeDialog extends Component {
                                 fullWidth
                                 onChange={this.handleFieldChange('description')}
                             />
+                            <h4>Questions</h4>
                             <CreateQuestionDialog disabled={!this.state.hasQuestion}/>
                         </form>
                     </DialogContent>
