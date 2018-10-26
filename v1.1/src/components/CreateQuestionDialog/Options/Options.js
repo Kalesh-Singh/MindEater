@@ -5,6 +5,7 @@ import FormControl from "@material-ui/core/FormControl/FormControl";
 import TextField from "@material-ui/core/TextField/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
 import Radio from "@material-ui/core/Radio/Radio";
+import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
 
 function Options(props) {
     console.log('Options error', props);
@@ -43,6 +44,8 @@ function Options(props) {
             >
                 {options}
             </RadioGroup>
+            {(props.options.error.length > 0) ? <FormHelperText>{props.options.error}</FormHelperText> : null}
+
         </FormControl>
     );
 }
