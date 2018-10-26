@@ -56,7 +56,7 @@ class CreateQuestionDialog extends Component {
         const { fullScreen } = this.props;
         return (
             <div>
-                <Button onClick={this.handleClickOpen}>Open responsive dialog</Button>
+                <Button onClick={this.handleClickOpen}>Add Question</Button>
                 <Dialog
                     fullScreen={fullScreen}
                     open={this.state.open}
@@ -97,13 +97,13 @@ class CreateQuestionDialog extends Component {
                     </DialogContent>
                     <DialogActions>
                         <Button
-                            onClick={this.handleClose}
+                            onClick={this.handleCancel}
                             color="primary"
                         >
                             Cancel
                         </Button>
                         <Button
-                            onClick={this.handleClose}
+                            onClick={this.handleSave}
                             color="primary" autoFocus
                         >
                             Save
