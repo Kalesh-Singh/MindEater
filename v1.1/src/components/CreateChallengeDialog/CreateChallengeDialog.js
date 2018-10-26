@@ -21,9 +21,40 @@ class CreateChallengeDialog extends Component {
 
     state = {
         open: false,
-        title: '',
-        description: '',
-        hasQuestion: false
+        hasQuestion: false,
+        title: {
+            value: '',
+            error: '',
+            focused: false,
+            valid: false
+        },
+        description: {
+            value: '',
+            error: '',
+            focused: false,
+            valid: false
+        }
+    };
+
+    checkValidity = (name, element) => {
+        switch (name) {
+            case 'title':
+                return this.checkTitle(element);      // TODO
+            case 'description': // TODO
+                return '';
+            default:
+                return '';
+        }
+    };
+
+    checkTitle = (title) => {
+        if (title.value.length === 0 && title.focused) {
+            return '* Required';
+        } else if (title.value.length > 300) {
+            return 'Cannot be longer than 300 characters';
+        } else {
+            return '';      // No error
+        }
     };
 
     handleClickOpen = () => {
@@ -34,8 +65,16 @@ class CreateChallengeDialog extends Component {
         this.setState({open: false});
     };
 
-    handleFieldChange = name => event => {
+   /* handleFieldChange = name => event => {
         this.setState({[name]: event.target.value});
+    };*/
+
+    handleFieldChange = name => event => {
+        const updatedField = {...this.state[name]};
+        updatedField.value = event.target.value;
+        updatedField.error = this.checkValidity(name, updatedField);
+        updatedField.valid = updatedField.error.length === 0;
+        this.setState({[name]: updatedField});
     };
 
     render() {
@@ -73,6 +112,7 @@ class CreateChallengeDialog extends Component {
                                 rowsMax="4"
                                 margin="normal"
                                 fullWidth
+                                value={this.state.title.value}
                                 onChange={this.handleFieldChange('title')}
                             />
                             <TextField
@@ -81,6 +121,7 @@ class CreateChallengeDialog extends Component {
                                 rowsMax="4"
                                 margin="normal"
                                 fullWidth
+                                value={this.state.description.value}
                                 onChange={this.handleFieldChange('description')}
                             />
                             <h4>Questions</h4>
