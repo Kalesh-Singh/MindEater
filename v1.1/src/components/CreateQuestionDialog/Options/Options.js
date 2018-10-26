@@ -7,29 +7,32 @@ import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabe
 import Radio from "@material-ui/core/Radio/Radio";
 
 function Options(props) {
+    console.log('Options error', props);
     const options = props.options.value.map((option, index) => (
-        <FormControlLabel
-            key={index}
-            value={props.options.value[index].value}
-            control={<Radio/>}
-            disabled={props.options.value[index].value === ''}
-            label={
-                <TextField
-                    name={'Option ' + (index + 1)}
-                    label={'Option ' + (index + 1)}
-                    type='text'
-                    margin='normal'
-                    value={props.options.value[index].value}
-                    error={props.options.value[index].error.length > 0}
-                    helperText={props.options.value[index].error}
-                    onChange={props.optionChanged(index)}
-                    onFocus={props.optionFocused(index)}
-                />
-            }/>
+            <FormControlLabel
+                key={index}
+                value={props.options.value[index].value}
+                control={<Radio/>}
+                disabled={props.options.value[index].value === ''}
+                label={
+                    <TextField
+                        name={'Option ' + (index + 1)}
+                        label={'Option ' + (index + 1)}
+                        type='text'
+                        margin='normal'
+                        value={props.options.value[index].value}
+                        error={props.options.value[index].error.length > 0}
+                        helperText={props.options.value[index].error}
+                        onChange={props.optionChanged(index)}
+                        onFocus={props.optionFocused(index)}
+                    />
+                }
+            />
     ));
     return (
         <FormControl
             component="fieldset"
+            error={props.options.error.length > 0}
         >
             <FormLabel component="legend">Options</FormLabel>
             <RadioGroup

@@ -65,12 +65,7 @@ class CreateQuestionDialog extends Component {
             valid: false
         },
 
-        correctOption: {
-            value: null,
-            error: '',
-            focused: false,
-            valid: false
-        }
+        correctOption: null
     };
 
     checkOptions = (options) => {
@@ -119,7 +114,7 @@ class CreateQuestionDialog extends Component {
     };
 
     checkCorrectOption = () => {
-        if (this.state.correctOption === null && this.state.options.focused) {
+        if (this.state.correctOption === null) {
             return 'You must check the correct option';
         } else {
             return '';
@@ -135,6 +130,7 @@ class CreateQuestionDialog extends Component {
     };
 
     handleChange = event => {
+        console.log('Event vlaue', event.target.value);
         this.setState({optionsValue: event.target.value, correctOption: event.target.value});
     };
 
@@ -180,7 +176,7 @@ class CreateQuestionDialog extends Component {
     };
 
     render() {
-        // console.log(this.state);
+        console.log(this.state);
 
         const {fullScreen} = this.props;
         return (
