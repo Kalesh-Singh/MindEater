@@ -27,7 +27,9 @@ function Options(props) {
     ));
 
     return (
-        <FormControl component="fieldset">
+        <FormControl
+            component="fieldset"
+        >
             <FormLabel component="legend">Options</FormLabel>
             <RadioGroup
                 aria-label="Options"
