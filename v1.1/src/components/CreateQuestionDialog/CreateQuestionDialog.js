@@ -99,6 +99,8 @@ class CreateQuestionDialog extends Component {
     checkOption = (option) => {
         if (option.value.length === 0 && option.focused) {
             return '* Required';
+        } else if (option.value.length > 15) {
+            return 'Cannot be longer than 15 characters';
         } else {
             return '';      // No error
         }
