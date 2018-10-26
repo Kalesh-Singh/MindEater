@@ -9,6 +9,7 @@ import withMobileDialog from "@material-ui/core/es/withMobileDialog/withMobileDi
 import classes from './CreateQuestionDialog.module.css';
 import TextField from "@material-ui/core/TextField/TextField";
 import Options from "./Options/Options";
+import fire from "../../fire";
 
 class CreateQuestionDialog extends Component {
 
@@ -63,6 +64,16 @@ class CreateQuestionDialog extends Component {
             valid: false
         }
     };
+
+    componentDidMount() {
+        // Get a key for the new challenge.
+        fire.database().ref().child('posts').push()
+            .then(response => {
+                console.log('Challenge Id' + response.key);
+                this.setState({challengeId: response.key});
+            });
+    }
+
     checkValidity = (name, element) => {
         switch (name) {
             case 'question':

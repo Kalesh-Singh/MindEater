@@ -40,7 +40,7 @@ class CreateChallengeDialog extends Component {
 
     componentDidMount() {
         // Get a key for the new challenge.
-      fire.database().ref().child('posts').push()
+      fire.database().ref().child('challenges').push()
             .then(response => {
                 console.log('Challenge Id' + response.key);
                 this.setState({challengeId: response.key});
