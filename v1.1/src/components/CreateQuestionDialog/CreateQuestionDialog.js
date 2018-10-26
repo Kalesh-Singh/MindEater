@@ -61,7 +61,11 @@ class CreateQuestionDialog extends Component {
         const { fullScreen } = this.props;
         return (
             <div>
-                <Button onClick={this.handleClickOpen}>Add Question</Button>
+                <Button
+                    onClick={this.handleClickOpen}
+                >
+                    Add Question
+                </Button>
                 <Dialog
                     fullScreen={fullScreen}
                     open={this.state.open}
