@@ -39,7 +39,7 @@ class CreateChallengeDialog extends Component {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // Get a ID for the new challenge.
+        // Get ID for the new challenge.
         if(prevState.open === false && this.state.open === true) {
             fire.database().ref().child('challenges').push()
                 .then(response => {
@@ -165,7 +165,10 @@ class CreateChallengeDialog extends Component {
                                 onFocus={this.handleFieldFocus('description')}
                             />
                             <h4>Questions</h4>
-                            <CreateQuestionDialog disabled={!this.state.hasQuestion}/>
+                            <CreateQuestionDialog
+                                challengeId={this.state.challengeId}
+                                disabled={!this.state.hasQuestion}
+                            />
                         </form>
                     </DialogContent>
                 </Dialog>

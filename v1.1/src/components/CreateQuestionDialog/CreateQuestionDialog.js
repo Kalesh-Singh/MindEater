@@ -66,9 +66,43 @@ class CreateQuestionDialog extends Component {
         }
     };
 
+    writeQuestion = () => {
+        const options = this.state.options.value.map((option) => (option.value));
+        const questionData = {
+            question: this.state.question.value,
+            challenge: this.props.challengeId,
+            options: options,
+            correctOption: this.state.correctOption
+        };
+
+        // Get the questions list of the challenge
+        fire.database().ref('/challenges/' + this.props.challengeId + '/questions')
+            .once('value')
+            .then((snapshot) => {
+                const questions = snapshot.val() || [];
+                questions.push(this.state.questionId);
+
+                // Write to challenges and questions simultaneously
+                const updates = {};
+                updates['/questions/' + this.state.questionId] = questionData;
+                updates['/challenges/' + this.props.challengeId + '/questions'] = questions;
+
+                fire.database().ref().update(updates)
+                    .then(() => {
+                        console.log('Question was added to firebase');
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    };
+
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // Get a ID for the new question.
-        if(prevState.open === false && this.state.open === true) {
+        // Get ID for the new question.
+        if (prevState.open === false && this.state.open === true) {
             fire.database().ref().child('questions').push()
                 .then(response => {
                     console.log('Question Id' + response.key);
@@ -213,6 +247,7 @@ class CreateQuestionDialog extends Component {
 
     handleSave = (event) => {
         event.preventDefault();
+        this.writeQuestion();
         this.handleClose();
     };
 
