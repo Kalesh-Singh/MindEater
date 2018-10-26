@@ -14,6 +14,8 @@ class CreateQuestionDialog extends Component {
 
     state = {
         open: false,
+        optionsValue: null,
+        correctOption: null,
         question: {
             value: '',
             error: '',
@@ -32,54 +34,43 @@ class CreateQuestionDialog extends Component {
             focused: false,
             valid: false
         },
-        optionsValue: null,
+
         options: {
             value: [
                 {
                     value: '',
                     error: '',
                     focused: false,
-                    valid: false
                 },
                 {
                     value: '',
                     error: '',
                     focused: false,
-                    valid: false
                 },
                 {
                     value: '',
                     error: '',
                     focused: false,
-                    valid: false
                 },
                 {
                     value: '',
                     error: '',
                     focused: false,
-                    valid: false
                 }
             ],
             error: '',
             focused: false,
             valid: false
-        },
-
-        correctOption: null
+        }
     };
 
     checkOptions = (options) => {
-        console.log('Received options', options);
         const updatedOptions = {...options};
-        console.log('Updated options', updatedOptions);
 
         let updatedOptionsValid = true;
         const updatedOptionsValue = [];
         for (let option of updatedOptions.value) {
-            console.log('Updated options value', updatedOptions.value);
-            console.log('Option', option);
             const updatedOption = {...option};
-            console.log('Option', updatedOption);
             updatedOption.error = this.checkOption(updatedOption);
             updatedOptionsValid = updatedOptionsValid && updatedOption.error.length === 0;
             updatedOptionsValue.push(updatedOption);
@@ -105,7 +96,6 @@ class CreateQuestionDialog extends Component {
     };
 
     checkOption = (option) => {
-        console.log('option to be checked', option);
         if (option.value.length === 0 && option.focused) {
             return '* Required';
         } else {
@@ -165,18 +155,15 @@ class CreateQuestionDialog extends Component {
 
     handleSave = (event) => {
         event.preventDefault();
-        console.log('Create question');
         this.handleClose();
     };
 
     handleCancel = (event) => {
         event.preventDefault();
-        console.log('Canceled Create Question');
         this.handleClose();
     };
 
     render() {
-        console.log(this.state);
 
         const {fullScreen} = this.props;
         return (
