@@ -50,8 +50,8 @@ class CreateChallengeDialog extends Component {
     checkTitle = (title) => {
         if (title.value.length === 0 && title.focused) {
             return '* Required';
-        } else if (title.value.length > 300) {
-            return 'Cannot be longer than 300 characters';
+        } else if (title.value.length > 50) {
+            return 'Cannot be longer than 50 characters';
         } else {
             return '';      // No error
         }
@@ -75,6 +75,15 @@ class CreateChallengeDialog extends Component {
         updatedField.error = this.checkValidity(name, updatedField);
         updatedField.valid = updatedField.error.length === 0;
         this.setState({[name]: updatedField});
+    };
+
+    handleFieldFocus = name => () => {
+        const updatedField = {...this.state[name]};
+        if (!updatedField.focused) {
+            updatedField.focused = true;
+            updatedField.error = this.checkValidity(name, updatedField);
+            this.setState({[name]: updatedField});
+        }
     };
 
     render() {
@@ -112,8 +121,11 @@ class CreateChallengeDialog extends Component {
                                 rowsMax="4"
                                 margin="normal"
                                 fullWidth
+                                error={this.state.title.error.length > 0}
+                                helperText={this.state.title.error}
                                 value={this.state.title.value}
                                 onChange={this.handleFieldChange('title')}
+                                onFocus={this.handleFieldFocus('title')}
                             />
                             <TextField
                                 label="Description"
@@ -123,6 +135,7 @@ class CreateChallengeDialog extends Component {
                                 fullWidth
                                 value={this.state.description.value}
                                 onChange={this.handleFieldChange('description')}
+                                onFocus={this.handleFieldFocus('description')}
                             />
                             <h4>Questions</h4>
                             <CreateQuestionDialog disabled={!this.state.hasQuestion}/>
