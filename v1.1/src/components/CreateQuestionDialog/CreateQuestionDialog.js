@@ -63,6 +63,28 @@ class CreateQuestionDialog extends Component {
             valid: false
         }
     };
+    checkValidity = (name, element) => {
+        switch (name) {
+            case 'question':
+                return this.checkQuestion(element);
+            case 'hint':
+                return '';      // TODO
+            case 'explanation':
+                return '';      // TODO
+            default:
+                return '';
+        }
+    };
+
+    checkQuestion = (question) => {
+        if (question.value.length === 0 && question.focused) {
+            return '* Required';
+        } else if (question.value.length > 300) {
+            return 'Cannot be longer than 300 characters';
+        } else {
+            return '';      // No error
+        }
+    };
 
     checkOptions = (options) => {
         const updatedOptions = {...options};
@@ -82,18 +104,6 @@ class CreateQuestionDialog extends Component {
         updatedOptions.valid = updatedOptionsValid;
 
         this.setState({options: updatedOptions})
-    };
-
-    checkValidity = (name, element) => {
-        // TODO:
-        switch (name) {
-            case 'options':
-                return this.checkOptions(element);
-            case 'email':
-                return this.checkEmail(element);
-            default:
-                return '';
-        }
     };
 
     checkOption = (option) => {
@@ -128,6 +138,14 @@ class CreateQuestionDialog extends Component {
         this.setState({optionsValue: event.target.value, correctOption: event.target.value, options: updatedOptions});
     };
 
+    handleFieldChange = name => event => {
+        const updatedField = {...this.state[name]};
+        updatedField.value = event.target.value;
+        updatedField.error = this.checkValidity(name, updatedField);
+        updatedField.valid = updatedField.error.length === 0;
+        this.setState({[name]: updatedField});
+    };
+
     handleOptionChange = index => event => {
         const updatedOptions = {...this.state.options};
 
@@ -138,6 +156,15 @@ class CreateQuestionDialog extends Component {
         this.checkOptions(updatedOptions);
     };
 
+    handleFieldFocus = name => () => {
+        const updatedField = {...this.state[name]};
+        if (!updatedField.focused) {
+            updatedField.focused = true;
+            updatedField.error = this.checkValidity(name, updatedField);
+            this.setState({[name]: updatedField});
+        }
+    };
+
     handleOptionFocus = index => () => {
 
         const updatedOptions = {...this.state.options};
@@ -146,15 +173,8 @@ class CreateQuestionDialog extends Component {
         if (!updatedOption.focused) {
             updatedOption.focused = true;
             updatedOptions.value[index] = updatedOption;
-
             this.checkOptions(updatedOptions);
         }
-    };
-
-    handleFieldChange = name => event => {
-        const updatedField = {...this.state[name]};
-        updatedField.value = event.target.value;
-        this.setState({[name]: updatedField});
     };
 
     handleSave = (event) => {
@@ -191,8 +211,11 @@ class CreateQuestionDialog extends Component {
                                 rowsMax="4"
                                 margin="normal"
                                 fullWidth
-                                onChange={this.handleFieldChange('question')}
+                                error={this.state.question.error.length > 0}
+                                helperText={this.state.question.error}
                                 value={this.state.question.value}
+                                onChange={this.handleFieldChange('question')}
+                                onFocus={this.handleFieldFocus('question')}
                             />
                             <Options
                                 options={this.state.options}
