@@ -32,16 +32,16 @@ class CreateChallengeDialog extends Component {
             value: '',
             error: '',
             focused: false,
-            valid: false
+            valid: true
         }
     };
 
     checkValidity = (name, element) => {
         switch (name) {
             case 'title':
-                return this.checkTitle(element);      // TODO
-            case 'description': // TODO
-                return '';
+                return this.checkTitle(element);
+            case 'description':
+                return this.checkDescription(element);
             default:
                 return '';
         }
@@ -57,6 +57,14 @@ class CreateChallengeDialog extends Component {
         }
     };
 
+    checkDescription = (description) => {
+        if (description.value.length > 200) {
+            return 'Cannot be longer than 200 characters';
+        } else {
+            return '';      // No error
+        }
+    };
+
     handleClickOpen = () => {
         this.setState({open: true});
     };
@@ -64,10 +72,6 @@ class CreateChallengeDialog extends Component {
     handleClose = () => {
         this.setState({open: false});
     };
-
-   /* handleFieldChange = name => event => {
-        this.setState({[name]: event.target.value});
-    };*/
 
     handleFieldChange = name => event => {
         const updatedField = {...this.state[name]};
@@ -133,6 +137,8 @@ class CreateChallengeDialog extends Component {
                                 rowsMax="4"
                                 margin="normal"
                                 fullWidth
+                                error={this.state.description.error.length > 0}
+                                helperText={this.state.description.error}
                                 value={this.state.description.value}
                                 onChange={this.handleFieldChange('description')}
                                 onFocus={this.handleFieldFocus('description')}
