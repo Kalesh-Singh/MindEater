@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import fire from '../../fire';
 import Button from "@material-ui/core/Button/Button";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import AppBar from "@material-ui/core/AppBar/AppBar";
@@ -22,6 +23,7 @@ class CreateChallengeDialog extends Component {
     state = {
         open: false,
         hasQuestion: false,
+        challengeId: null,
         title: {
             value: '',
             error: '',
@@ -35,6 +37,15 @@ class CreateChallengeDialog extends Component {
             valid: true
         }
     };
+
+    componentDidMount() {
+        // Get a key for the new challenge.
+      fire.database().ref().child('posts').push()
+            .then(response => {
+                console.log('Challenge Id' + response.key);
+                this.setState({challengeId: response.key});
+            });
+    }
 
     checkValidity = (name, element) => {
         switch (name) {
@@ -88,6 +99,14 @@ class CreateChallengeDialog extends Component {
             updatedField.error = this.checkValidity(name, updatedField);
             this.setState({[name]: updatedField});
         }
+    };
+
+    writeChallenge = (challengeId) => {
+
+    };
+
+    writeQuestion = (questionId) => {
+
     };
 
     render() {
