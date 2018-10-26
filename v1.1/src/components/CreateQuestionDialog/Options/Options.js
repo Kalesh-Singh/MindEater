@@ -7,25 +7,25 @@ import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabe
 import Radio from "@material-ui/core/Radio/Radio";
 
 function Options(props) {
-
-    const options = props.options.map((option, index) => (
+    const options = props.options.value.map((option, index) => (
         <FormControlLabel
             key={index}
-            value={props.options[index]}
+            value={props.options.value[index].value}
             control={<Radio/>}
-            disabled={props.options[index] === ''}
+            disabled={props.options.value[index].value === ''}
             label={
                 <TextField
                     name={'Option ' + (index + 1)}
                     label={'Option ' + (index + 1)}
                     type='text'
                     margin='normal'
-                    value={props.options[index]}
-                    onChange={props.textChanged(index)}
+                    value={props.options.value[index].value}
+                    error={props.options.value[index].error.length > 0}
+                    helperText={props.options.value[index].error}
+                    onChange={props.optionChanged(index)}
                 />
             }/>
     ));
-
     return (
         <FormControl
             component="fieldset"

@@ -14,20 +14,118 @@ class CreateQuestionDialog extends Component {
 
     state = {
         open: false,
-        question: '',
-        hint: '',
-        explanation: '',
-        optionsValue: 'no options entered',
-        options: ['', '', '', ''],
-        correctOption: null
+        question: {
+            value: '',
+            error: '',
+            focused: false,
+            valid: false
+        },
+        hint: {
+            value: '',
+            error: '',
+            focused: false,
+            valid: false
+        },
+        explanation: {
+            value: '',
+            error: '',
+            focused: false,
+            valid: false
+        },
+        optionsValue: null,
+        options: {
+            value: [
+                {
+                    value: '',
+                    error: '',
+                    focused: false,
+                    valid: false
+                },
+                {
+                    value: '',
+                    error: '',
+                    focused: false,
+                    valid: false
+                },
+                {
+                    value: '',
+                    error: '',
+                    focused: false,
+                    valid: false
+                },
+                {
+                    value: '',
+                    error: '',
+                    focused: false,
+                    valid: false
+                }
+            ],
+            error: '',
+            focused: false,
+            valid: false
+        },
+
+        correctOption: {
+            value: null,
+            error: '',
+            focused: false,
+            valid: false
+        }
+    };
+
+    checkValidity = (name, element) => {
+        switch (name) {
+            case 'options':
+                return this.checkOptions(element);
+            case 'email':
+                return this.checkEmail(element);
+            default:
+                return '';
+        }
+    };
+
+    checkOption = (option) => {
+        if (option.value.length === 0 && option.focused) {
+            return '* Required';
+        } else {
+            return '';      // No error
+        }
+    };
+
+    checkCorrectOption = () => {
+        if (this.state.correctOption === null && this.state.options.focused) {
+            return 'You must check the correct option';
+        } else {
+            return '';
+        }
+    };
+
+    checkOptions = (options) => {
+        const updatedOptions = {...options};
+
+        let updatedOptionsValid = true;
+        const updatedOptionsValue = [];
+        for (let option in updatedOptions.value) {
+            const updatedOption = {...option};
+            updatedOption.error = this.checkOption(option.value);
+            updatedOptionsValid = updatedOptionsValid && updatedOption.error.length === 0;
+            updatedOptionsValue.push(updatedOption);
+        }
+        updatedOptions.error = this.checkCorrectOption();
+        updatedOptionsValid = updatedOptionsValid && updatedOptions.error.length === 0;
+
+        updatedOptions.value = updatedOptionsValue;
+        updatedOptions.valid = updatedOptionsValid;
+
+        this.setState({options: updatedOptions})
     };
 
     handleClickOpen = () => {
-        this.setState({ open: true });
+        this.setState({open: true});
     };
 
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({open: false});
     };
 
     handleChange = event => {
@@ -35,13 +133,17 @@ class CreateQuestionDialog extends Component {
     };
 
     handleOptionChange = index => event => {
-        const updatedOptions = [...this.state.options];
-        updatedOptions[index] = event.target.value.trim();
+        const updatedOptions = {...this.state.options};
+        const updatedOption = updatedOptions.value[index];
+        updatedOption.value = event.target.value.trim();
+        updatedOptions.value[index] = updatedOption;
         this.setState({options: updatedOptions});
     };
 
     handleFieldChange = name => event => {
-        this.setState({[name]: event.target.value});
+        const updatedField = {...this.state[name]};
+        updatedField.value = event.target.value;
+        this.setState({[name]: updatedField});
     };
 
     handleSave = (event) => {
@@ -58,7 +160,8 @@ class CreateQuestionDialog extends Component {
 
     render() {
         console.log(this.state);
-        const { fullScreen } = this.props;
+
+        const {fullScreen} = this.props;
         return (
             <div>
                 <Button
@@ -82,10 +185,11 @@ class CreateQuestionDialog extends Component {
                                 margin="normal"
                                 fullWidth
                                 onChange={this.handleFieldChange('question')}
+                                value={this.state.question.value}
                             />
                             <Options
                                 options={this.state.options}
-                                textChanged={this.handleOptionChange}
+                                optionChanged={this.handleOptionChange}
                                 value={this.state.optionsValue}
                                 changed={this.handleChange}
                             />
@@ -96,6 +200,7 @@ class CreateQuestionDialog extends Component {
                                 margin="normal"
                                 fullWidth
                                 onChange={this.handleFieldChange('hint')}
+                                value={this.state.hint.value}
                             />
                             <TextField
                                 label="Explanation"
@@ -104,6 +209,7 @@ class CreateQuestionDialog extends Component {
                                 margin="normal"
                                 fullWidth
                                 onChange={this.handleFieldChange('explanation')}
+                                value={this.state.explanation.value}
                             />
                         </form>
                     </DialogContent>
