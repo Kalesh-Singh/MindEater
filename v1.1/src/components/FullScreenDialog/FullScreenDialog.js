@@ -34,7 +34,7 @@ class FullScreenDialog extends Component {
     render() {
         return (
             <div>
-                <Button onClick={this.handleClickOpen}>Open full-screen dialog</Button>
+                <Button onClick={this.handleClickOpen}>New Challenge</Button>
                 <Dialog
                     fullScreen
                     open={this.state.open}
@@ -54,6 +54,7 @@ class FullScreenDialog extends Component {
                             </Button>
                         </Toolbar>
                     </AppBar>
+                    {/* TODO: Remove list and add challenge form here*/}
                     <List>
                         <ListItem button>
                             <ListItemText primary="Phone ringtone" secondary="Titania" />

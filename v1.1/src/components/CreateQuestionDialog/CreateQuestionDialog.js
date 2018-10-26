@@ -34,25 +34,30 @@ class CreateQuestionDialog extends Component {
         this.setState({optionsValue: event.target.value, correctOption: event.target.value});
     };
 
-    handleTextChange = index => event => {
+    handleOptionChange = index => event => {
         const updatedOptions = [...this.state.options];
         updatedOptions[index] = event.target.value.trim();
         this.setState({options: updatedOptions});
     };
 
+    handleFieldChange = name => event => {
+        this.setState({[name]: event.target.value});
+    };
+
     handleSave = (event) => {
         event.preventDefault();
-        console.log('Create question')
+        console.log('Create question');
         this.handleClose();
     };
 
     handleCancel = (event) => {
         event.preventDefault();
-        console.log('Canceled Create Question')
+        console.log('Canceled Create Question');
         this.handleClose();
     };
 
     render() {
+        console.log(this.state);
         const { fullScreen } = this.props;
         return (
             <div>
@@ -72,10 +77,11 @@ class CreateQuestionDialog extends Component {
                                 rowsMax="4"
                                 margin="normal"
                                 fullWidth
+                                onChange={this.handleFieldChange('question')}
                             />
                             <Options
                                 options={this.state.options}
-                                textChanged={this.handleTextChange}
+                                textChanged={this.handleOptionChange}
                                 value={this.state.optionsValue}
                                 changed={this.handleChange}
                             />
@@ -85,6 +91,7 @@ class CreateQuestionDialog extends Component {
                                 rowsMax="4"
                                 margin="normal"
                                 fullWidth
+                                onChange={this.handleFieldChange('hint')}
                             />
                             <TextField
                                 label="Explanation"
@@ -92,6 +99,7 @@ class CreateQuestionDialog extends Component {
                                 rowsMax="4"
                                 margin="normal"
                                 fullWidth
+                                onChange={this.handleFieldChange('explanation')}
                             />
                         </form>
                     </DialogContent>
