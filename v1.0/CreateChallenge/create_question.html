@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Create Question</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+
+</head>
+<body>
+	<div class="challenge1">
+		<div class="container-challenge1">
+
+                    <form class="challenge1-form validate-form" id="question-form" onsubmit="return validateQuestion()">
+				<span class="challenge1-form-title">
+					Question
+				</span>
+                            
+                                <div class="wrap-input1 validate-input" data-validate = "Question is required">
+					<textarea class="input1" id="question" placeholder="Question"></textarea>
+					<span class="shadow-input1"></span>
+				</div>
+
+				<div class="wrap-input1 validate-input" data-validate = "Answer is required">
+					<input class="input1" type="text" id="option1" placeholder="Option 1">
+					<span class="shadow-input1"></span>
+				</div>
+
+				<div class="wrap-input1 validate-input" data-validate = "Answer is required">
+					<input class="input1" type="text" id="option2" placeholder="Option 2">
+					<span class="shadow-input1"></span>
+				</div>
+
+				<div class="wrap-input1 validate-input" data-validate = "Answer is required">
+					<input class="input1" type="text" id="option3" placeholder="Option 3">
+					<span class="shadow-input1"></span>
+				</div>
+                            
+                                <div class="wrap-input1 validate-input" data-validate = "Answer is required">
+					<input class="input1" type="text" id="solution" placeholder="Solution">
+					<span class="shadow-input1"></span>
+				</div>
+                            
+                                <div class="wrap-input1 validate-input" data-validate = "Hint is required">
+					<input class="input1" type="text" id="hint" placeholder="Hint">
+					<span class="shadow-input1"></span>
+				</div>
+                            
+                                <div class="wrap-input1 validate-input" data-validate = "Explanation is required">
+					<textarea class="input1" id="explanation" placeholder="Explaination"></textarea>
+					<span class="shadow-input1"></span>
+				</div>
+                            
+                            
+                            
+				<div class="container-challenge1-form-btn">
+					<button class="challenge1-form-btn" id="next">
+						<span>
+							Save
+						</span>
+					</button>
+				</div>
+			</form>
+                  
+		</div>
+	</div>
+
+
+        
+<!--===============================================================================================-->
+
+
+
+
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+</body>
+</html>
