@@ -6,12 +6,10 @@ import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import fire from '../../fire';
-
 import DeleteIcon from "@material-ui/icons/Delete"
 import QuestionDialog from "../QuestionDialog/QuestionDialog";
 
 class QuestionItem extends Component {
-
     state = {
         open: false
     };

@@ -21,7 +21,6 @@ function Transition(props) {
 }
 
 class CreateChallengeDialog extends Component {
-
     state = {
         open: false,
         challengeId: null,
@@ -101,7 +100,6 @@ class CreateChallengeDialog extends Component {
                             }
                         });
 
-
                     this.setState({challengeId: response.key});
                 });
         }
@@ -159,10 +157,6 @@ class CreateChallengeDialog extends Component {
             updatedField.error = this.checkValidity(name, updatedField);
             this.setState({[name]: updatedField});
         }
-    };
-
-    writeChallenge = (challengeId) => {
-
     };
 
     render() {
@@ -226,7 +220,6 @@ class CreateChallengeDialog extends Component {
                             onFocus={this.handleFieldFocus('description')}
                         />
                         <h4>Questions</h4>
-
                         <List>
                             {questionItems}
                         </List>

@@ -3,7 +3,6 @@ import {Button} from "@material-ui/core";
 import QuestionDialog from "../QuestionDialog/QuestionDialog";
 
 class AddQuestion extends Component {
-
     state = {
         open: false
     };
@@ -19,9 +18,7 @@ class AddQuestion extends Component {
     render() {
         return (
             <>
-                <Button
-                    onClick={this.handleClickOpen}
-                >
+                <Button onClick={this.handleClickOpen}>
                     Add Question
                 </Button>
                 <QuestionDialog

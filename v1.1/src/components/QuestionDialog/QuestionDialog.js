@@ -11,7 +11,6 @@ import fire from "../../fire";
 import withMobileDialog from "@material-ui/core/es/withMobileDialog/withMobileDialog";
 
 class QuestionDialog extends Component {
-
     initialState = {
         questionId: null,
         optionsValue: null,

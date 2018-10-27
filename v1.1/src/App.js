@@ -8,7 +8,6 @@ import MyChallenges from "./containers/MyChallenges/MyChallenges";
 
 
 class App extends Component {
-
     render() {
         return (
             <div>
@@ -17,7 +16,7 @@ class App extends Component {
                     <Route path='/' component={Navigation} />
                 </Switch>
 
-                TODO: Add routes to other pages here once created.
+                {/*TODO: Add routes to other pages here once created.*/}
                 <Route path='/dashboard' component={Dashboard} exact/>
                 <Route path='/my-challenges' component={MyChallenges} exact/>
             </div>
