@@ -154,14 +154,16 @@ class QuestionDialog extends Component {
             .catch(error => {
                 alert(error.message);
             });
-        fire.database().ref('/challenges/' + this.props.challengeId + '/questions')
-            .push(this.state.questionId)
-            .then(() => {
-                console.log('Question ID added to challenge');
-            })
-            .catch(error => {
-                alert(error.message);
-            })
+        if (!this.props.question) {
+            fire.database().ref('/challenges/' + this.props.challengeId + '/questions')
+                .push(this.state.questionId)
+                .then(() => {
+                    console.log('Question ID added to challenge');
+                })
+                .catch(error => {
+                    alert(error.message);
+                })
+        }
     };
 
     initializeStateFromProps = () => {
@@ -320,7 +322,8 @@ class QuestionDialog extends Component {
     };
 
     checkCorrectOption = (correctOption) => {
-        if (correctOption === null) {
+        const options = this.state.options.value.map(option => (option.value));
+        if (correctOption === null || !options.includes(correctOption)) {
             return 'You must check the correct option';
         } else {
             return '';
