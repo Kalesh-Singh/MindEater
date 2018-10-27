@@ -8,15 +8,12 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import Typography from "@material-ui/core/Typography/Typography";
 import Slide from "@material-ui/core/Slide/Slide";
 import CloseIcon from '@material-ui/icons/Close';
-import CreateQuestionDialog from "../CreateQuestionDialog/CreateQuestionDialog";
 import TextField from "@material-ui/core/TextField/TextField";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-
 import classes from "./CreateChallengeDialog.module.css";
 import QuestionItem from "../QuestionItem/QuestionItem";
 import List from "@material-ui/core/List/List";
 import Divider from "@material-ui/core/Divider/Divider";
-import QuestionDialog from "../QuestionDialog/QuestionDialog";
 import AddQuestion from "../AddQuestion/AddQuestion";
 
 function Transition(props) {
@@ -88,6 +85,23 @@ class CreateChallengeDialog extends Component {
                             this.setState({questions: updatedQuestions})
                         });
 
+                    fire.database().ref('/questions/')
+                        .on('child_changed', snapshot => {
+                            if (snapshot.val().challenge === this.state.challengeId) {
+                                const questionId = snapshot.key;
+                                const updatedQuestions = [...this.state.questions];
+                                const oldQuestionIndex = updatedQuestions
+                                    .findIndex((question) => (question.id === questionId));
+                                const oldQuestion = {...updatedQuestions[oldQuestionIndex]};
+                                const updatedQuestion = snapshot.val();
+                                updatedQuestion.id = questionId;
+                                updatedQuestion.key = oldQuestion.key;
+                                updatedQuestions[oldQuestionIndex] = updatedQuestion;
+                                this.setState({questions: updatedQuestions});
+                            }
+                        });
+
+
                     this.setState({challengeId: response.key});
                 });
         }
@@ -152,17 +166,6 @@ class CreateChallengeDialog extends Component {
     };
 
     render() {
-        // TODO: Delete
-        const question1 = {
-            challenge : "-LPqwPrcVKBk0N5OHQbP",
-            correctOption : "4",
-            options : [ "1", "2", "3", "4" ],
-            question : "What is 2 + 2",
-            id: "fahfiakdf",
-            hint: "This is a hint",
-            explanation: "This is an explanation"
-        };
-
         const validForm = this.checkFormValidity();
 
         const questionItems = this.state.questions.map((question, index) => (

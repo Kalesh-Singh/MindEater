@@ -218,7 +218,7 @@ class QuestionDialog extends Component {
                     }
                 ],
                 error: '',
-                valid: false
+                valid: true
             }
         };
         this.setState(propsState);
