@@ -8,7 +8,7 @@ import withMobileDialog from "@material-ui/core/es/withMobileDialog/withMobileDi
 
 import classes from './CreateQuestionDialog.module.css';
 import TextField from "@material-ui/core/TextField/TextField";
-import Options from "./Options/Options";
+import Options from "../QuestionDialog/Options/Options";
 import fire from "../../fire";
 
 class CreateQuestionDialog extends Component {

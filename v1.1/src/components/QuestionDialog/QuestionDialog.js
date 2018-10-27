@@ -3,7 +3,7 @@ import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
 import classes from "./QuestionDialog.module.css";
 import TextField from "@material-ui/core/TextField/TextField";
-import Options from "../CreateQuestionDialog/Options/Options";
+import Options from "./Options/Options";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import Dialog from "@material-ui/core/Dialog/Dialog";
