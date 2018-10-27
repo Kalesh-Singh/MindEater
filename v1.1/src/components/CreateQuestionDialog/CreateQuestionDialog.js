@@ -43,27 +43,43 @@ class CreateQuestionDialog extends Component {
                     value: '',
                     error: '',
                     focused: false,
+                    valid: false
                 },
                 {
                     value: '',
                     error: '',
                     focused: false,
+                    valid: false
                 },
                 {
                     value: '',
                     error: '',
                     focused: false,
+                    valid: false
                 },
                 {
                     value: '',
                     error: '',
                     focused: false,
+                    valid: false
                 }
             ],
             error: '',
-            focused: false,
             valid: false
         }
+    };
+
+    checkFormValidity = () => {
+        let validForm = true;
+        const form = {...this.state};
+        for (let element in form) {
+            if (element !== 'questionId' && element !== 'open'
+                && element !== 'optionsValue' && element !== 'correctOption') {
+                console.log(element + ' : ' + form[element].valid);
+                validForm = validForm && form[element].valid;
+            }
+        }
+        return validForm;
     };
 
     writeQuestion = () => {
@@ -154,7 +170,7 @@ class CreateQuestionDialog extends Component {
         }
     };
 
-    checkOptions = (options) => {
+    getCheckedOptions = (options, correctOption) => {
         const updatedOptions = {...options};
 
         let updatedOptionsValid = true;
@@ -162,16 +178,17 @@ class CreateQuestionDialog extends Component {
         for (let option of updatedOptions.value) {
             const updatedOption = {...option};
             updatedOption.error = this.checkOption(updatedOption);
-            updatedOptionsValid = updatedOptionsValid && updatedOption.error.length === 0;
+            updatedOption.valid = updatedOption.error.length === 0;
+            updatedOptionsValid = updatedOptionsValid && updatedOption.valid;
             updatedOptionsValue.push(updatedOption);
         }
-        updatedOptions.error = this.checkCorrectOption();
+        updatedOptions.error = this.checkCorrectOption(correctOption);
         updatedOptionsValid = updatedOptionsValid && updatedOptions.error.length === 0;
 
         updatedOptions.value = updatedOptionsValue;
         updatedOptions.valid = updatedOptionsValid;
 
-        this.setState({options: updatedOptions})
+        return updatedOptions;
     };
 
     checkOption = (option) => {
@@ -184,8 +201,8 @@ class CreateQuestionDialog extends Component {
         }
     };
 
-    checkCorrectOption = () => {
-        if (this.state.correctOption === null) {
+    checkCorrectOption = (correctOption) => {
+        if (correctOption === null) {
             return 'You must check the correct option';
         } else {
             return '';
@@ -203,7 +220,8 @@ class CreateQuestionDialog extends Component {
     handleChange = event => {
         const updatedOptions = {...this.state.options};
         updatedOptions.error = '';
-        this.setState({optionsValue: event.target.value, correctOption: event.target.value, options: updatedOptions});
+        const checkedOptions = this.getCheckedOptions(updatedOptions, event.target.value);
+        this.setState({options: checkedOptions, optionsValue: event.target.value, correctOption: event.target.value})
     };
 
     handleFieldChange = name => event => {
@@ -216,12 +234,11 @@ class CreateQuestionDialog extends Component {
 
     handleOptionChange = index => event => {
         const updatedOptions = {...this.state.options};
-
         const updatedOption = updatedOptions.value[index];
         updatedOption.value = event.target.value.trim();
         updatedOptions.value[index] = updatedOption;
-
-        this.checkOptions(updatedOptions);
+        const checkedOptions = this.getCheckedOptions(updatedOptions, this.state.correctOption);
+        this.setState({options: checkedOptions});
     };
 
     handleFieldFocus = name => () => {
@@ -234,14 +251,13 @@ class CreateQuestionDialog extends Component {
     };
 
     handleOptionFocus = index => () => {
-
         const updatedOptions = {...this.state.options};
-
         const updatedOption = updatedOptions.value[index];
         if (!updatedOption.focused) {
             updatedOption.focused = true;
             updatedOptions.value[index] = updatedOption;
-            this.checkOptions(updatedOptions);
+            const checkedOptions = this.getCheckedOptions(updatedOptions, this.state.correctOption);
+            this.setState({options: checkedOptions});
         }
     };
 
@@ -257,6 +273,10 @@ class CreateQuestionDialog extends Component {
     };
 
     render() {
+        const validForm = this.checkFormValidity();
+        console.log('Valid form', validForm);
+        console.log('State', this.state);
+
         const {fullScreen} = this.props;
         return (
             <div>
@@ -328,6 +348,7 @@ class CreateQuestionDialog extends Component {
                         </Button>
                         <Button
                             onClick={this.handleSave}
+                            disabled={!validForm}
                             color="primary" autoFocus
                         >
                             Save
