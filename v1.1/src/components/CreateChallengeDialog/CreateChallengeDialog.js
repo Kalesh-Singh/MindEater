@@ -13,6 +13,9 @@ import TextField from "@material-ui/core/TextField/TextField";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
 
 import classes from "./CreateChallengeDialog.module.css";
+import QuestionItem from "../QuestionItem/QuestionItem";
+import List from "@material-ui/core/List/List";
+import Divider from "@material-ui/core/Divider/Divider";
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
@@ -52,6 +55,48 @@ class CreateChallengeDialog extends Component {
         return validForm;
     };
 
+    /*    componentDidUpdate(prevProps, prevState, snapshot) {
+            // Get ID for the new challenge.
+            if (prevState.open === false && this.state.open === true) {
+                fire.database().ref().child('challenges').push()
+                    .then(response => {
+                        console.log('Challenge Id' + response.key);
+
+                        fire.database().ref('/challenges/' + response.key + '/questions')
+                            .on('value', snapshot => {
+                                const questionIds = snapshot.val() || [];
+
+                                console.log('Question IDs', questionIds);
+
+                                this.setState({challengeId: response.key, questionIds: questionIds});
+                            });
+                    });
+            }
+
+            // Get the new question
+            if (prevState.questionIds.length !== this.state.questionIds.length) {
+                const questionIdObject = this.state.questionIds[this.state.questionIds.length - 1];
+                const questionIdKey = (Object.keys(questionIdObject))[0];
+                const questionId = questionIdObject[questionIdKey];
+                console.log('New Question ID', questionId);
+
+                const updatedQuestions = [...this.state.questions];
+
+                fire.database().ref('questions/' + questionId).once('value')
+                    .then(snapshot => {
+                        const question = snapshot.val();
+                        question.id = questionId;
+                        question.key = questionIdKey;
+                        updatedQuestions.push(question);
+                        console.log('Updated Questions', updatedQuestions);
+                        this.setState({questions: updatedQuestions});
+                    })
+                    .catch(error => {
+                        alert(error.message);
+                    });
+            }
+        }*/
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         // Get ID for the new challenge.
         if (prevState.open === false && this.state.open === true) {
@@ -60,34 +105,48 @@ class CreateChallengeDialog extends Component {
                     console.log('Challenge Id' + response.key);
 
                     fire.database().ref('/challenges/' + response.key + '/questions')
-                        .on('value', snapshot => {
-                            const questionIds = snapshot.val() || [];
-
-                            console.log('Question IDs', questionIds);
-
-                            this.setState({challengeId: response.key, questionIds: questionIds});
+                        .on('child_added', questionId => {
+                            fire.database().ref('questions/' + questionId.val()).once('value')
+                                .then(snapshot => {
+                                    const updatedQuestions = [...this.state.questions];
+                                    const question = snapshot.val();
+                                    question.id = questionId.val();
+                                    question.key = questionId.key;
+                                    updatedQuestions.push(question);
+                                    console.log('Updated Questions', updatedQuestions);
+                                    this.setState({questions: updatedQuestions});
+                                })
+                                .catch(error => {
+                                    alert(error.message);
+                                });
                         });
+
+                    this.setState({challengeId: response.key});
                 });
         }
 
-        // Get the new question
-        if (prevState.questionIds.length !== this.state.questionIds.length) {
-            const questionId = this.state.questionIds[this.state.questionIds.length - 1];
-            console.log('New Question ID', questionId);
+        /* // Get the new question
+         if (prevState.questionIds.length !== this.state.questionIds.length) {
+             const questionIdObject = this.state.questionIds[this.state.questionIds.length - 1];
+             const questionIdKey = (Object.keys(questionIdObject))[0];
+             const questionId = questionIdObject[questionIdKey];
+             console.log('New Question ID', questionId);
 
-            const updatedQuestions = [...this.state.questions];
+             const updatedQuestions = [...this.state.questions];
 
-            fire.database().ref('questions/' + questionId).once('value')
-                .then(snapshot => {
-                    const question = snapshot.val();
-                    question.id = questionId;
-                    updatedQuestions.push(question);
-                    this.setState({questions: updatedQuestions});
-                })
-                .catch(error => {
-                    alert(error.message);
-                });
-        }
+             fire.database().ref('questions/' + questionId).once('value')
+                 .then(snapshot => {
+                     const question = snapshot.val();
+                     question.id = questionId;
+                     question.key = questionIdKey;
+                     updatedQuestions.push(question);
+                     console.log('Updated Questions', updatedQuestions);
+                     this.setState({questions: updatedQuestions});
+                 })
+                 .catch(error => {
+                     alert(error.message);
+                 });
+         }*/
     }
 
     checkValidity = (name, element) => {
@@ -150,6 +209,11 @@ class CreateChallengeDialog extends Component {
 
     render() {
         const validForm = this.checkFormValidity();
+
+        const questionItems = this.state.questions.map((question, index) => (
+            <QuestionItem question={question} index={index + 1}/>
+        ));
+
         return (
             <div>
                 <Button onClick={this.handleClickOpen}>New Challenge</Button>
@@ -201,6 +265,10 @@ class CreateChallengeDialog extends Component {
                             onFocus={this.handleFieldFocus('description')}
                         />
                         <h4>Questions</h4>
+
+                        <List>
+                            {questionItems}
+                        </List>
                         <CreateQuestionDialog
                             challengeId={this.state.challengeId}
                         />
