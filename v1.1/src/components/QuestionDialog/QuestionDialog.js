@@ -140,7 +140,9 @@ class QuestionDialog extends Component {
             question: this.state.question.value,
             challenge: this.props.challengeId,
             options: options,
-            correctOption: this.state.correctOption
+            correctOption: this.state.correctOption,
+            hint: this.state.hint.value,
+            explanation: this.state.explanation.value
         };
 
         // Write to challenges and questions simultaneously
