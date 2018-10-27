@@ -75,7 +75,6 @@ class CreateQuestionDialog extends Component {
         for (let element in form) {
             if (element !== 'questionId' && element !== 'open'
                 && element !== 'optionsValue' && element !== 'correctOption') {
-                console.log(element + ' : ' + form[element].valid);
                 validForm = validForm && form[element].valid;
             }
         }
@@ -121,7 +120,6 @@ class CreateQuestionDialog extends Component {
         if (prevState.open === false && this.state.open === true) {
             fire.database().ref().child('questions').push()
                 .then(response => {
-                    console.log('Question Id' + response.key);
                     this.setState({questionId: response.key});
                 });
         }
@@ -274,8 +272,6 @@ class CreateQuestionDialog extends Component {
 
     render() {
         const validForm = this.checkFormValidity();
-        console.log('Valid form', validForm);
-        console.log('State', this.state);
 
         const {fullScreen} = this.props;
         return (

@@ -22,8 +22,8 @@ class CreateChallengeDialog extends Component {
 
     state = {
         open: false,
-        hasQuestion: false,
         challengeId: null,
+        questions: [],
         title: {
             value: '',
             error: '',
@@ -38,9 +38,22 @@ class CreateChallengeDialog extends Component {
         }
     };
 
+    checkFormValidity = () => {
+        let validForm = true;
+        const form = {...this.state};
+        for (let element in form) {
+            if (element === 'questions') {
+                validForm = validForm && form[element].length !== 0;
+            } else if (element !== 'open' && element !== 'challengeId') {
+                validForm = validForm && form[element].valid;
+            }
+        }
+        return validForm;
+    };
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         // Get ID for the new challenge.
-        if(prevState.open === false && this.state.open === true) {
+        if (prevState.open === false && this.state.open === true) {
             fire.database().ref().child('challenges').push()
                 .then(response => {
                     console.log('Challenge Id' + response.key);
@@ -112,6 +125,10 @@ class CreateChallengeDialog extends Component {
     };
 
     render() {
+        const validForm = this.checkFormValidity();
+        console.log('Valid form', validForm);
+        console.log('State', this.state);
+
         return (
             <div>
                 <Button onClick={this.handleClickOpen}>New Challenge</Button>
@@ -131,7 +148,6 @@ class CreateChallengeDialog extends Component {
                             </Typography>
                             <Button
                                 color="inherit"
-                                disabled={!this.state.hasQuestion}
                                 onClick={this.handleClose}>
                                 Save
                             </Button>
@@ -139,37 +155,34 @@ class CreateChallengeDialog extends Component {
                     </AppBar>
 
                     <DialogContent className={classes.root}>
-                        <form>
-                            <TextField
-                                label="Title"
-                                multiline
-                                rowsMax="4"
-                                margin="normal"
-                                fullWidth
-                                error={this.state.title.error.length > 0}
-                                helperText={this.state.title.error}
-                                value={this.state.title.value}
-                                onChange={this.handleFieldChange('title')}
-                                onFocus={this.handleFieldFocus('title')}
-                            />
-                            <TextField
-                                label="Description"
-                                multiline
-                                rowsMax="4"
-                                margin="normal"
-                                fullWidth
-                                error={this.state.description.error.length > 0}
-                                helperText={this.state.description.error}
-                                value={this.state.description.value}
-                                onChange={this.handleFieldChange('description')}
-                                onFocus={this.handleFieldFocus('description')}
-                            />
-                            <h4>Questions</h4>
-                            <CreateQuestionDialog
-                                challengeId={this.state.challengeId}
-                                disabled={!this.state.hasQuestion}
-                            />
-                        </form>
+                        <TextField
+                            label="Title"
+                            multiline
+                            rowsMax="4"
+                            margin="normal"
+                            fullWidth
+                            error={this.state.title.error.length > 0}
+                            helperText={this.state.title.error}
+                            value={this.state.title.value}
+                            onChange={this.handleFieldChange('title')}
+                            onFocus={this.handleFieldFocus('title')}
+                        />
+                        <TextField
+                            label="Description"
+                            multiline
+                            rowsMax="4"
+                            margin="normal"
+                            fullWidth
+                            error={this.state.description.error.length > 0}
+                            helperText={this.state.description.error}
+                            value={this.state.description.value}
+                            onChange={this.handleFieldChange('description')}
+                            onFocus={this.handleFieldFocus('description')}
+                        />
+                        <h4>Questions</h4>
+                        <CreateQuestionDialog
+                            challengeId={this.state.challengeId}
+                        />
                     </DialogContent>
                 </Dialog>
             </div>
