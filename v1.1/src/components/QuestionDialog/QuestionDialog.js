@@ -324,6 +324,9 @@ class QuestionDialog extends Component {
     checkCorrectOption = (correctOption) => {
         const options = this.state.options.value.map(option => (option.value));
         if (correctOption === null || !options.includes(correctOption)) {
+            if(!options.includes(correctOption)) {
+                this.setState({correctOption: null, optionsValue: null})
+            }
             return 'You must check the correct option';
         } else {
             return '';
