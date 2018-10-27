@@ -24,6 +24,7 @@ class CreateChallengeDialog extends Component {
         open: false,
         challengeId: null,
         questions: [],
+        questionIds: [],
         title: {
             value: '',
             error: '',
@@ -57,7 +58,34 @@ class CreateChallengeDialog extends Component {
             fire.database().ref().child('challenges').push()
                 .then(response => {
                     console.log('Challenge Id' + response.key);
-                    this.setState({challengeId: response.key});
+
+                    fire.database().ref('/challenges/' + response.key + '/questions')
+                        .on('value', snapshot => {
+                            const questionIds = snapshot.val() || [];
+
+                            console.log('Question IDs', questionIds);
+
+                            this.setState({challengeId: response.key, questionIds: questionIds});
+                        });
+                });
+        }
+
+        // Get the new question
+        if (prevState.questionIds.length !== this.state.questionIds.length) {
+            const questionId = this.state.questionIds[this.state.questionIds.length - 1];
+            console.log('New Question ID', questionId);
+
+            const updatedQuestions = [...this.state.questions];
+
+            fire.database().ref('questions/' + questionId).once('value')
+                .then(snapshot => {
+                    const question = snapshot.val();
+                    question.id = questionId;
+                    updatedQuestions.push(question);
+                    this.setState({questions: updatedQuestions});
+                })
+                .catch(error => {
+                    alert(error.message);
                 });
         }
     }
@@ -120,15 +148,8 @@ class CreateChallengeDialog extends Component {
 
     };
 
-    writeQuestion = (questionId) => {
-
-    };
-
     render() {
         const validForm = this.checkFormValidity();
-        console.log('Valid form', validForm);
-        console.log('State', this.state);
-
         return (
             <div>
                 <Button onClick={this.handleClickOpen}>New Challenge</Button>
