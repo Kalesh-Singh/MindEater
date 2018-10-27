@@ -16,6 +16,8 @@ import classes from "./CreateChallengeDialog.module.css";
 import QuestionItem from "../QuestionItem/QuestionItem";
 import List from "@material-ui/core/List/List";
 import Divider from "@material-ui/core/Divider/Divider";
+import QuestionDialog from "../QuestionDialog/QuestionDialog";
+import AddQuestion from "../AddQuestion/AddQuestion";
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
@@ -150,6 +152,17 @@ class CreateChallengeDialog extends Component {
     };
 
     render() {
+        // TODO: Delete
+        const question1 = {
+            challenge : "-LPqwPrcVKBk0N5OHQbP",
+            correctOption : "4",
+            options : [ "1", "2", "3", "4" ],
+            question : "What is 2 + 2",
+            id: "fahfiakdf",
+            hint: "This is a hint",
+            explanation: "This is an explanation"
+        };
+
         const validForm = this.checkFormValidity();
 
         const questionItems = this.state.questions.map((question, index) => (
@@ -214,9 +227,7 @@ class CreateChallengeDialog extends Component {
                         <List>
                             {questionItems}
                         </List>
-                        <CreateQuestionDialog
-                            challengeId={this.state.challengeId}
-                        />
+                        <AddQuestion challengeId={this.state.challengeId}/>
                     </DialogContent>
                 </Dialog>
             </div>
