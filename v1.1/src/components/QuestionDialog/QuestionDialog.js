@@ -223,12 +223,6 @@ class QuestionDialog extends Component {
         this.setState(propsState);
     };
 
-    componentDidMount() {
-        if (this.props.question) {
-            this.initializeStateFromProps();
-        }
-    }
-
     componentDidUpdate(prevProps, prevState, snapshot) {
         // Get ID for the new question.
         if (prevProps.open === false && this.props.open === true) {
