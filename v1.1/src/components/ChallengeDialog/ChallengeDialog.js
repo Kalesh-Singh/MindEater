@@ -15,6 +15,9 @@ import Slide from "@material-ui/core/Slide/Slide";
 import fire from "../../fire";
 import QuestionItem from "../QuestionItem/QuestionItem";
 import Divider from "@material-ui/core/Divider/Divider";
+import FormControl from "@material-ui/core/FormControl/FormControl";
+import FormLabel from "@material-ui/core/FormLabel/FormLabel";
+import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
 
 
 function Transition(props) {
@@ -116,7 +119,7 @@ class ChallengeDialog extends Component {
     initializeStateFromProps = () => {
         const propsState = {
             challengeId: this.props.challenge.id,
-            // TODO: I'm assuming that the questions will already be in the form needed by the QuestionItem Component.
+            // TODO: The assumption here is that the questions will already be in the form needed by the QuestionItem Component.
             questions: [...this.props.challenge.questions],
             title: {
                 value: this.props.challenge.title,
@@ -181,6 +184,14 @@ class ChallengeDialog extends Component {
         }
     };
 
+    getQuestionsError = () => {
+      if (this.state.questions.length === 0) {
+          return 'You must add at least 1 question to the challenge';
+      } else {
+          return '';        // No error
+      }
+    };
+
     handleFieldChange = name => event => {
         const updatedField = {...this.state[name]};
         updatedField.value = event.target.value;
@@ -199,6 +210,9 @@ class ChallengeDialog extends Component {
     };
 
     render() {
+
+        const questionsError = this.getQuestionsError();
+
         const validForm = this.checkFormValidity();
 
         const questionItems = this.state.questions.map((question, index) => (
@@ -256,7 +270,14 @@ class ChallengeDialog extends Component {
                         onChange={this.handleFieldChange('description')}
                         onFocus={this.handleFieldFocus('description')}
                     />
-                    <h4>Questions</h4>
+
+                    <FormControl
+                        error={questionsError.length > 0}
+                        style={{width: '100%'}}
+                    >
+                        <FormLabel component="label">Questions</FormLabel>
+                        {(questionsError.length > 0) ? <FormHelperText>{questionsError}</FormHelperText> : null}
+                    </FormControl>
                     <List>
                         {questionItems}
                     </List>
