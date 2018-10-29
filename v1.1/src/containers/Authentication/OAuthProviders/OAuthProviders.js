@@ -3,6 +3,7 @@ import React from 'react';
 import Google from "./Google/Google";
 import Facebook from "./Facebook/Facebook";
 import Twitter from "./Twitter/Twitter";
+import Phone from "./Phone/Phone";
 
 import classes from './OAuthProviders.module.css';
 

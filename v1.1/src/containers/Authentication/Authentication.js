@@ -9,6 +9,8 @@ import OAuthProviders from "./OAuthProviders/OAuthProviders";
 import Blogo from "../../assets/svg/black_logo.png";
 import Tabs from "@material-ui/core/Tabs/Tabs";
 import Tab from "@material-ui/core/Tab/Tab";
+import AddAccount from "@material-ui/icons/PersonAddTwoTone";
+import Account from "@material-ui/icons/AccountCircleTwoTone";
 
 class Authentication extends Component {
 
@@ -66,15 +68,21 @@ class Authentication extends Component {
                             </div>
                             <Tabs fullWidth
                                   value={this.state.value}
+                                  indicatorColor='primary'
+                                  textColor={"primary"}
+
                             >
                                 <Tab
                                     label='Sign In'
                                     value='sign-in'
+                                    icon={<Account/>}
                                     onClick={() => {this.handleToggle('sign-in')}}
                                 />
                                 <Tab
-                                    label='Sign Out'
+                                    label='Sign Up'
                                     value='sign-up'
+                                    indicatorColor="primary"
+                                    icon={<AddAccount/>}
                                     onClick={() => {this.handleToggle('sign-up')}}
                                 />
                             </Tabs>

@@ -9,6 +9,7 @@
 .Background {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/svg/Login_Background.png) center;
     background-size:cover;
+
 }
 
 .Authentication h1 {
@@ -34,8 +35,9 @@
 }
 
 .Padd {
-    padding: 16px;
+    padding: 25px;
 }
+
 
 /* Mind Eater Logo */
 .Logo {
@@ -52,6 +54,14 @@
     border: solid #111111;
     /*transform: translate(-50%);*/
     border-radius: 10px;
+}
+
+.Boxy {
+    background: white;
+    width:47.5%;
+    height:25%;
+    margin: 10px;
+    border: 5px solid #acc1ed;
 }
 
 .letter {
