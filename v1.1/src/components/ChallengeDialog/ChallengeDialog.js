@@ -29,6 +29,7 @@ class ChallengeDialog extends Component {
     initialState = {
         challengeId: null,
         questions: [],
+        isPartial: true,
         title: {
             value: '',
             error: '',
@@ -60,13 +61,43 @@ class ChallengeDialog extends Component {
         }
     };
 
+    handleSave = () => {
+        this.props.closed();
+        this.writeChallenge();
+    };
+
+    writeChallenge = () => {
+        // Write the challenge title, description and isPartial,
+        // since the questions are already in the database by now.
+        const updates = {};
+        updates['/challenges/' + this.state.challengeId + '/title'] = this.state.title.value;
+        updates['/challenges/' + this.state.challengeId + '/description'] = this.state.description.value;
+        updates['/challenges/' + this.state.challengeId + '/isPartial'] = false;
+
+        fire.database().ref().update(updates)
+            .then(() => {console.log('The challenge was saved in the database.')})
+            .catch(error => {alert(error.message)});
+    };
+
+    writePartialChallenge = () => {
+        // Write the challenge title, description and isPartial,
+        // since the questions are already in the database by now.
+        const updates = {};
+        updates['/challenges/' + this.state.challengeId + '/title'] = this.state.title.value;
+        updates['/challenges/' + this.state.challengeId + '/description'] = this.state.description.value;
+
+        fire.database().ref().update(updates)
+            .then(() => {console.log('The partial challenge was saved in the database.')})
+            .catch(error => {alert(error.message)});
+    };
+
     checkFormValidity = () => {
         let validForm = true;
         const form = {...this.state};
         for (let element in form) {
             if (element === 'questions') {
                 validForm = validForm && form[element].length !== 0;
-            } else if (element !== 'open' && element !== 'challengeId') {
+            } else if (element !== 'open' && element !== 'challengeId' && element !== 'isPartial') {
                 validForm = validForm && form[element].valid;
             }
         }
@@ -142,7 +173,8 @@ class ChallengeDialog extends Component {
         if (prevProps.open === false && this.props.open === true) {
             if (!this.props.challenge) {
                 this.setState(this.initialState);
-                fire.database().ref().child('challenges').push()
+                // Also initialize the challenge isPartial to true.
+                fire.database().ref().child('challenges').push({isPartial: true})
                     .then(response => {
                         console.log('Challenge Id' + response.key);
                         this.setListeners(response.key);
@@ -239,7 +271,9 @@ class ChallengeDialog extends Component {
                         </Typography>
                         <Button
                             color="inherit"
-                            onClick={this.props.closed}>
+                            onClick={this.handleSave}
+                            disabled={!validForm}
+                        >
                             Save
                         </Button>
                     </Toolbar>
@@ -281,7 +315,10 @@ class ChallengeDialog extends Component {
                     <List>
                         {questionItems}
                     </List>
-                    <AddQuestion challengeId={this.state.challengeId}/>
+                    <AddQuestion
+                        challengeId={this.state.challengeId}
+                        savePartial={this.writePartialChallenge}
+                    />
                 </DialogContent>
             </Dialog>
         );

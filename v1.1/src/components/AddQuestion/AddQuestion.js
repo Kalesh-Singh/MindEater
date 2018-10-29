@@ -24,6 +24,7 @@ class AddQuestion extends Component {
                 <QuestionDialog
                     open={this.state.open}
                     closed={this.handleClose}
+                    savePartial={this.props.savePartial}
                     challengeId={this.props.challengeId}
                 />
             </>
