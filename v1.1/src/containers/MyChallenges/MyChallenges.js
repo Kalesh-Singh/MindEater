@@ -3,7 +3,6 @@ import AddChallenge from "../../components/AddChallenge/AddChallenge";
 import fire from "../../fire";
 import EditChallengeCard from "../../components/EditChallengeCard/EditChallengeCard";
 import List from "@material-ui/core/List/List";
-import ListItem from "@material-ui/core/ListItem/ListItem";
 
 import classes from "./MyChallenges.module.css";
 
@@ -50,6 +49,7 @@ class MyChallenges extends Component {
     }
 
     render() {
+        console.log(this.state);
 
         const myChallenges = this.state.myChallenges.map(challenge => (
             <EditChallengeCard

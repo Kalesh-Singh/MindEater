@@ -6,10 +6,17 @@ import Typography from "@material-ui/core/Typography/Typography";
 import classes from "./EditChallengeCard.module.css";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import ChallengeDialog from "../ChallengeDialog/ChallengeDialog";
+import fire from "../../fire";
 
 class EditChallengeCard extends Component {
     state = {
-        open: false
+        open: false,
+        challenge: {
+            id: this.props.challenge.id,
+            title: this.props.challenge.title,
+            description: this.props.challenge.description,
+            questions: []
+        }
     };
 
     handleClickOpen = () => {
@@ -30,12 +37,10 @@ class EditChallengeCard extends Component {
                     <CardActionArea>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
-                                {/*Lizard*/}
                                 {this.props.challenge.title}
                             </Typography>
                             <Typography component="p">
                                 {this.props.challenge.description}
-                                {/*Some lizard details*/}
                             </Typography>
                         </CardContent>
                     </CardActionArea>
@@ -43,6 +48,7 @@ class EditChallengeCard extends Component {
                 <ChallengeDialog
                     open={this.state.open}
                     closed={this.handleClose}
+                    challenge={this.state.challenge}
                 />
             </ListItem>
         );
