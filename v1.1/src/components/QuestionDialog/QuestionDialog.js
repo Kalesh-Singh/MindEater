@@ -373,7 +373,9 @@ class QuestionDialog extends Component {
     handleSave = (event) => {
         event.preventDefault();
         this.writeQuestion();
-        this.props.savePartial();
+        if (!this.props.wasSaved) {
+            this.props.savePartial();
+        }
         this.props.closed();
     };
 

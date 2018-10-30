@@ -75,8 +75,12 @@ class ChallengeDialog extends Component {
         updates['/challenges/' + this.state.challengeId + '/isPartial'] = false;
 
         fire.database().ref().update(updates)
-            .then(() => {console.log('The challenge was saved in the database.')})
-            .catch(error => {alert(error.message)});
+            .then(() => {
+                console.log('The challenge was saved in the database.')
+            })
+            .catch(error => {
+                alert(error.message)
+            });
     };
 
     writePartialChallenge = () => {
@@ -87,8 +91,12 @@ class ChallengeDialog extends Component {
         updates['/challenges/' + this.state.challengeId + '/description'] = this.state.description.value;
 
         fire.database().ref().update(updates)
-            .then(() => {console.log('The partial challenge was saved in the database.')})
-            .catch(error => {alert(error.message)});
+            .then(() => {
+                console.log('The partial challenge was saved in the database.')
+            })
+            .catch(error => {
+                alert(error.message)
+            });
     };
 
     checkFormValidity = () => {
@@ -217,11 +225,11 @@ class ChallengeDialog extends Component {
     };
 
     getQuestionsError = () => {
-      if (this.state.questions.length === 0) {
-          return 'You must add at least 1 question to the challenge';
-      } else {
-          return '';        // No error
-      }
+        if (this.state.questions.length === 0) {
+            return 'You must add at least 1 question to the challenge';
+        } else {
+            return '';        // No error
+        }
     };
 
     handleFieldChange = name => event => {
@@ -248,10 +256,12 @@ class ChallengeDialog extends Component {
         const validForm = this.checkFormValidity();
 
         const questionItems = this.state.questions.map((question, index) => (
-            <div key={question.key}>
-                <EditQuestionListItem question={question} index={index + 1}/>
-                <Divider/>
-            </div>
+            <EditQuestionListItem
+                key={question.key}
+                question={question}
+                index={index + 1}
+                wasSaved
+            />
         ));
 
         return (
