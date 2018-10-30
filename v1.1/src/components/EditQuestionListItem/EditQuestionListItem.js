@@ -9,7 +9,7 @@ import fire from '../../fire';
 import DeleteIcon from "@material-ui/icons/Delete"
 import QuestionDialog from "../QuestionDialog/QuestionDialog";
 
-class QuestionItem extends Component {
+class EditQuestionListItem extends Component {
     state = {
         open: false
     };
@@ -72,4 +72,4 @@ class QuestionItem extends Component {
     }
 }
 
-export default QuestionItem;
+export default EditQuestionListItem;

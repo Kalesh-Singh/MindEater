@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography/Typography";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import Slide from "@material-ui/core/Slide/Slide";
 import fire from "../../fire";
-import QuestionItem from "../QuestionItem/QuestionItem";
+import EditQuestionListItem from "../EditQuestionListItem/EditQuestionListItem";
 import Divider from "@material-ui/core/Divider/Divider";
 import FormControl from "@material-ui/core/FormControl/FormControl";
 import FormLabel from "@material-ui/core/FormLabel/FormLabel";
@@ -150,7 +150,7 @@ class ChallengeDialog extends Component {
     initializeStateFromProps = () => {
         const propsState = {
             challengeId: this.props.challenge.id,
-            // TODO: The assumption here is that the questions will already be in the form needed by the QuestionItem Component.
+            // TODO: The assumption here is that the questions will already be in the form needed by the EditQuestionListItem Component.
             questions: [...this.props.challenge.questions],
             title: {
                 value: this.props.challenge.title,
@@ -249,7 +249,7 @@ class ChallengeDialog extends Component {
 
         const questionItems = this.state.questions.map((question, index) => (
             <div key={question.key}>
-                <QuestionItem question={question} index={index + 1}/>
+                <EditQuestionListItem question={question} index={index + 1}/>
                 <Divider/>
             </div>
         ));

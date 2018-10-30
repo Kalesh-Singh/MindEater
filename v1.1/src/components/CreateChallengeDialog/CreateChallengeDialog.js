@@ -11,7 +11,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import TextField from "@material-ui/core/TextField/TextField";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
 import classes from "./CreateChallengeDialog.module.css";
-import QuestionItem from "../QuestionItem/QuestionItem";
+import EditQuestionListItem from "../EditQuestionListItem/EditQuestionListItem";
 import List from "@material-ui/core/List/List";
 import Divider from "@material-ui/core/Divider/Divider";
 import AddQuestion from "../AddQuestion/AddQuestion";
@@ -164,7 +164,7 @@ class CreateChallengeDialog extends Component {
 
         const questionItems = this.state.questions.map((question, index) => (
             <div key={question.key}>
-                <QuestionItem question={question} index={index + 1}/>
+                <EditQuestionListItem question={question} index={index + 1}/>
                 <Divider/>
             </div>
         ));

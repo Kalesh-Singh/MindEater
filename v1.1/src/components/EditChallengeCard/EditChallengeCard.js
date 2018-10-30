@@ -6,7 +6,6 @@ import Typography from "@material-ui/core/Typography/Typography";
 import classes from "./EditChallengeCard.module.css";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import ChallengeDialog from "../ChallengeDialog/ChallengeDialog";
-import fire from "../../fire";
 
 class EditChallengeCard extends Component {
     state = {
