@@ -344,7 +344,7 @@ class QuestionDialog extends Component {
     handleOptionChange = index => event => {
         const updatedOptions = {...this.state.options};
         const updatedOption = updatedOptions.value[index];
-        updatedOption.value = event.target.value.trim();
+        updatedOption.value = event.target.value;
         updatedOptions.value[index] = updatedOption;
         const checkedOptions = this.getCheckedOptions(updatedOptions, this.state.correctOption);
         this.setState({options: checkedOptions});
