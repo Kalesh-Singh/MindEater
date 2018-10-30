@@ -9,6 +9,7 @@ import ChallengeDialog from "../ChallengeDialog/ChallengeDialog";
 import CardActions from "@material-ui/core/CardActions/CardActions";
 import Button from "@material-ui/core/Button/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
+import fire from "../../fire";
 
 class EditChallengeCard extends Component {
     state = {
@@ -29,12 +30,47 @@ class EditChallengeCard extends Component {
         this.setState({open: false});
     };
 
+    deleteChallenge = () => {
+        // Get the question IDs of the challenge
+        fire.database().ref('/challenges/' + this.state.challenge.id + '/questions').once('value')
+            .then(snapshot => {
+                // Delete the challenge questions
+                const questionObject = snapshot.val();
+                for (let questionKey in questionObject) {
+                    const questionId = questionObject[questionKey];
+                    fire.database().ref('/questions/' + questionId)
+                        .remove()
+                        .then(() => {
+                            console.log('Challenge question deleted')
+                        })
+                        .catch(error => {
+                            alert(error.message)
+                        });
+                }
+
+                // Delete the challenge itself
+                fire.database().ref('/challenges/' + this.state.challenge.id)
+                    .remove()
+                    .then(() => {
+                        console.log('Challenge deleted')
+                    })
+                    .catch(error => {
+                        alert(error.message)
+                    });
+            })
+            .catch(error => {
+                alert(error.message)
+            });
+    };
+
     render() {
         return (
             <ListItem className={classes.root}>
                 <Card
-                    style={{width: '100%', height: '100%', display: 'flex',
-                        flexFlow: 'column', justifyContent: 'space-between'}}
+                    style={{
+                        width: '100%', height: '100%', display: 'flex',
+                        flexFlow: 'column', justifyContent: 'space-between'
+                    }}
                 >
                     <CardActionArea onClick={this.handleClickOpen}>
                         <CardContent>
@@ -47,9 +83,12 @@ class EditChallengeCard extends Component {
                         </CardContent>
                     </CardActionArea>
                     <CardActions style={{alignSelf: 'flex-end'}}>
-                        <Button color="secondary">
+                        <Button
+                            color="secondary"
+                            onClick={this.deleteChallenge}
+                        >
                             Delete
-                            <DeleteIcon style={{marginLeft: '8px'}} />
+                            <DeleteIcon style={{marginLeft: '8px'}}/>
                         </Button>
                     </CardActions>
                 </Card>

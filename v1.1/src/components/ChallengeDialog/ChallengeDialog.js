@@ -46,6 +46,7 @@ class ChallengeDialog extends Component {
 
     state = {
         challengeId: null,
+        isPartial: true,
         questions: [],
         title: {
             value: '',
@@ -64,6 +65,38 @@ class ChallengeDialog extends Component {
     handleSave = () => {
         this.props.closed();
         this.writeChallenge();
+    };
+
+    handleCancel = (valid) => () => {
+        this.props.closed();
+
+        if (!valid) {
+            console.log('All changes will be discarded -- Discard Changes, Cancel');
+        } else if (this.state.isPartial) {
+            console.log('Do you want to save the challenge -- No, Yes');
+        } else {
+            console.log('Do you want to save any changes made -- No, Yes');
+        }
+
+        // TODO: Update this to match the cases above - Probably with dialog boxes
+        if (!valid) {
+            this.deleteChallenge();
+        }
+    };
+
+    deleteChallenge = () => {
+        // Delete the challenge questions
+        for (let question of this.state.questions) {
+            fire.database().ref('/questions/' + question.id)
+                .remove()
+                .then(() => {console.log('Challenge question deleted')})
+                .catch(error => {alert(error.message)});
+        }
+        // Delete the challenge itself
+        fire.database().ref('/challenges/' + this.state.challengeId)
+            .remove()
+            .then(() => {console.log('Challenge deleted')})
+            .catch(error => {alert(error.message)});
     };
 
     writeChallenge = () => {
@@ -158,8 +191,8 @@ class ChallengeDialog extends Component {
     initializeStateFromProps = () => {
         const propsState = {
             challengeId: this.props.challenge.id,
-            // TODO: The assumption here is that the questions will already be in the form needed by the EditQuestionListItem Component.
             questions: [...this.props.challenge.questions],
+            isPartial: this.props.challenge.isPartial,
             title: {
                 value: this.props.challenge.title,
                 error: '',
@@ -273,7 +306,7 @@ class ChallengeDialog extends Component {
             >
                 <AppBar style={{position: 'relative'}}>
                     <Toolbar>
-                        <IconButton color="inherit" onClick={this.props.closed} aria-label="Close">
+                        <IconButton color="inherit" onClick={this.handleCancel(validForm)} aria-label="Close">
                             <CloseIcon/>
                         </IconButton>
                         <Typography variant="h6" color="inherit" style={{flex: '1'}}>
