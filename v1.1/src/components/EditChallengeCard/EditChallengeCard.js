@@ -6,6 +6,9 @@ import Typography from "@material-ui/core/Typography/Typography";
 import classes from "./EditChallengeCard.module.css";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import ChallengeDialog from "../ChallengeDialog/ChallengeDialog";
+import CardActions from "@material-ui/core/CardActions/CardActions";
+import Button from "@material-ui/core/Button/Button";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class EditChallengeCard extends Component {
     state = {
@@ -30,10 +33,10 @@ class EditChallengeCard extends Component {
         return (
             <ListItem className={classes.root}>
                 <Card
-                    style={{width: '100%', height: '100%'}}
-                    onClick={this.handleClickOpen}
+                    style={{width: '100%', height: '100%', display: 'flex',
+                        flexFlow: 'column', justifyContent: 'space-between'}}
                 >
-                    <CardActionArea>
+                    <CardActionArea onClick={this.handleClickOpen}>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
                                 {this.props.challenge.title}
@@ -43,6 +46,12 @@ class EditChallengeCard extends Component {
                             </Typography>
                         </CardContent>
                     </CardActionArea>
+                    <CardActions style={{alignSelf: 'flex-end'}}>
+                        <Button color="secondary">
+                            Delete
+                            <DeleteIcon style={{marginLeft: '8px'}} />
+                        </Button>
+                    </CardActions>
                 </Card>
                 <ChallengeDialog
                     open={this.state.open}
