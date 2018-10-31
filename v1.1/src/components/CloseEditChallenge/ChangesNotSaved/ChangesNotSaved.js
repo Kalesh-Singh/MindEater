@@ -7,6 +7,19 @@ import Button from "@material-ui/core/Button/Button";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 
 class ChangesNotSaved extends Component {
+
+    handleDiscard = () => {
+        this.props.closed();
+        this.props.closeChallengeDialog();
+        this.props.deleteChallenge();
+    };
+
+    handleSave = () => {
+        this.props.closed();
+        this.props.closeChallengeDialog();
+        this.props.saveChallenge();
+    };
+
     render() {
         return (
             <Dialog
@@ -23,12 +36,12 @@ class ChangesNotSaved extends Component {
                 </DialogContent>
                 <DialogActions>
                     <Button
-                        onClick={this.props.closed} color="secondary"
+                        onClick={this.handleDiscard} color="secondary"
                     >
                         Discard
                     </Button>
                     <Button
-                        onClick={this.props.closed}
+                        onClick={this.handleSave}
                         color="primary" autoFocus
                     >
                         Save

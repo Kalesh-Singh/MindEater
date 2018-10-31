@@ -85,6 +85,7 @@ class ChallengeDialog extends Component {
     };
 
     deleteChallenge = () => {
+        console.log('Delete challenge called !!!!');
         // Delete the challenge questions
         for (let question of this.state.questions) {
             fire.database().ref('/questions/' + question.id)
