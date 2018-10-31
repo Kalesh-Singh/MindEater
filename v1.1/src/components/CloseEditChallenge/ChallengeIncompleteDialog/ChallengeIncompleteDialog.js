@@ -8,9 +8,14 @@ import Button from "@material-ui/core/Button/Button";
 
 class ChallengeIncompleteDialog extends Component {
 
-    handleCloseChallengeDialog = () => {
+    handleDiscard = () => {
       this.props.closed();
       this.props.closeChallengeDialog();
+      this.props.deleteChallenge();
+    };
+
+    handleCancel = () => {
+        this.props.closed();
     };
 
     render() {
@@ -29,15 +34,16 @@ class ChallengeIncompleteDialog extends Component {
                 </DialogContent>
                 <DialogActions>
                     <Button
-                        onClick={this.handleCloseChallengeDialog} color="secondary"
+                        onClick={this.handleDiscard}
+                        color="secondary"
                     >
                         Discard
                     </Button>
                     <Button
-                        onClick={this.props.closed}
+                        onClick={this.handleCancel}
                         color="primary" autoFocus
                     >
-                        Save
+                        Cancel
                     </Button>
                 </DialogActions>
             </Dialog>

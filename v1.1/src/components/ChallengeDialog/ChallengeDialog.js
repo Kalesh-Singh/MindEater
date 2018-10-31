@@ -313,6 +313,8 @@ class ChallengeDialog extends Component {
                             challengeValid={validForm}
                             challengePartial={this.state.isPartial}
                             closeChallengeDialog={this.props.closed}
+                            deleteChallenge={this.deleteChallenge}
+                            saveChallenge={this.writeChallenge}
                         />
                         <Typography variant="h6" color="inherit" style={{flex: '1'}}>
                             New Challenge

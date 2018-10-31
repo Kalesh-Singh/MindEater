@@ -11,6 +11,7 @@ class CloseEditChallenge extends Component {
     // Expect props:
     // 1. closeChallengeDialog  (func)
     // 2. deleteChallenge       (func)
+    // 3. saveChallenge         (func)
     // 3. challengeValid        (bool)
     // 4. challengePartial      (bool)
 
@@ -83,16 +84,22 @@ class CloseEditChallenge extends Component {
                     open={this.state.openIncomplete}
                     closed={this.handleCloseIncomplete}
                     closeChallengeDialog={this.props.closeChallengeDialog}
+                    deleteChallenge={this.props.deleteChallenge}
+                    saveChallenge={this.props.writeChallenge}
                 />
                 <ChallengeNotSavedDialog
                     open={this.state.openChallengeNotSaved}
                     closed={this.handleCloseChallengeNotSaved}
                     closeChallengeDialog={this.props.closeChallengeDialog}
+                    deleteChallenge={this.props.deleteChallenge}
+                    saveChallenge={this.props.writeChallenge}
                 />
                 <ChangesNotSaved
                     open={this.state.openChangesNotSaved}
                     closed={this.handleCloseChangesNotSaved}
                     closeChallengeDialog={this.props.closeChallengeDialog}
+                    deleteChallenge={this.props.deleteChallenge}
+                    saveChallenge={this.props.writeChallenge}
                 />
             </>
         );

@@ -7,6 +7,12 @@ import Button from "@material-ui/core/Button/Button";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 
 class ChallengeNotSavedDialog extends Component {
+
+    handleCloseChallengeDialog = () => {
+        this.props.closed();
+        this.props.closeChallengeDialog();
+    };
+
     render() {
         return (
             <Dialog
@@ -23,7 +29,7 @@ class ChallengeNotSavedDialog extends Component {
                 </DialogContent>
                 <DialogActions>
                     <Button
-                        onClick={this.props.closed} color="secondary"
+                        onClick={this.handleCloseChallengeDialog} color="secondary"
                     >
                         Discard
                     </Button>
