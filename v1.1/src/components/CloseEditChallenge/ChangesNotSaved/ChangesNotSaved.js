@@ -11,7 +11,6 @@ class ChangesNotSaved extends Component {
     handleDiscard = () => {
         this.props.closed();
         this.props.closeChallengeDialog();
-        this.props.deleteChallenge();
     };
 
     handleSave = () => {

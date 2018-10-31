@@ -15,16 +15,6 @@ class CloseEditChallenge extends Component {
     // 3. challengeValid        (bool)
     // 4. challengePartial      (bool)
 
-    /*
-    if (!valid) {
-    console.log('All changes will be discarded -- Discard Changes, Cancel');
-} else if (this.state.isPartial) {
-    console.log('Do you want to save the challenge -- No, Yes');
-} else {
-    console.log('Do you want to save any changes made -- No, Yes');
-}
-*/
-
     state = {
         openIncomplete: false,
         openChallengeNotSaved: false,
