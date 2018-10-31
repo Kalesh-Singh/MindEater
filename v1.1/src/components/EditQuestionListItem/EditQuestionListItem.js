@@ -8,8 +8,9 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import fire from '../../fire';
 import DeleteIcon from "@material-ui/icons/Delete"
 import QuestionDialog from "../QuestionDialog/QuestionDialog";
+import Divider from "@material-ui/core/Divider/Divider";
 
-class QuestionItem extends Component {
+class EditQuestionListItem extends Component {
     state = {
         open: false
     };
@@ -61,15 +62,17 @@ class QuestionItem extends Component {
                         </IconButton>
                     </ListItemSecondaryAction>
                 </ListItem>
+                <Divider/>
                 <QuestionDialog
                     open={this.state.open}
                     closed={this.handleClose}
                     challengeId={this.props.question.challenge}
                     question={this.props.question}
+                    wasSaved={this.props.wasSaved}
                 />
             </div>
         );
     }
 }
 
-export default QuestionItem;
+export default EditQuestionListItem;
