@@ -216,7 +216,12 @@ class ChallengeDialog extends Component {
             if (!this.props.challenge) {
                 this.setState(this.initialState);
                 // Also initialize the challenge isPartial to true.
-                fire.database().ref().child('challenges').push({isPartial: true})
+                fire.database().ref().child('challenges').push(
+                    {
+                        title: '',
+                        description: '',
+                        isPartial: true
+                    })
                     .then(response => {
                         console.log('Challenge Id' + response.key);
                         this.setListeners(response.key);

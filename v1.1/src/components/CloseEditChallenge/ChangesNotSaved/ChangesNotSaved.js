@@ -14,9 +14,10 @@ class ChangesNotSaved extends Component {
     };
 
     handleSave = () => {
+        this.props.saveChallenge();
+        setTimeout(2000);
         this.props.closed();
         this.props.closeChallengeDialog();
-        this.props.saveChallenge();
     };
 
     render() {

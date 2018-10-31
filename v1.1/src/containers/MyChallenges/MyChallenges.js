@@ -15,6 +15,7 @@ class MyChallenges extends Component {
     setListeners = () => {
         fire.database().ref('/challenges/')
             .on('child_added', snapshot => {
+                console.log('Child Added - challenges');
                 // TODO: Check if owner is this user
                 const challenge = snapshot.val();
                 challenge.id = snapshot.key;
@@ -24,6 +25,7 @@ class MyChallenges extends Component {
             });
         fire.database().ref('/challenges/')
             .on('child_removed', snapshot => {
+                console.log('Child Removed - challenges');
                 // TODO: Check if owner is this user
                 const challengeId = snapshot.key;
                 const updatedMyChallenges
@@ -32,6 +34,7 @@ class MyChallenges extends Component {
             });
         fire.database().ref('/challenges/')
             .on('child_changed', snapshot => {
+                console.log('Child Changed - challenges');
                 // TODO: Check if owner is this user
                 const challengeId = snapshot.key;
                 const updatedMyChallenges = [...this.state.myChallenges];
@@ -45,6 +48,7 @@ class MyChallenges extends Component {
     };
 
     componentDidMount() {
+        console.log('My challenges did mount');
         this.setListeners();
     }
 
