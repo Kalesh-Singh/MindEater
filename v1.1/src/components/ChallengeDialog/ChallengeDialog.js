@@ -14,10 +14,10 @@ import Dialog from "@material-ui/core/Dialog/Dialog";
 import Slide from "@material-ui/core/Slide/Slide";
 import fire from "../../fire";
 import EditQuestionListItem from "../EditQuestionListItem/EditQuestionListItem";
-import Divider from "@material-ui/core/Divider/Divider";
 import FormControl from "@material-ui/core/FormControl/FormControl";
 import FormLabel from "@material-ui/core/FormLabel/FormLabel";
 import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
+import CloseEditChallenge from "../CloseEditChallenge/CloseEditChallenge";
 
 
 function Transition(props) {
@@ -306,9 +306,14 @@ class ChallengeDialog extends Component {
             >
                 <AppBar style={{position: 'relative'}}>
                     <Toolbar>
-                        <IconButton color="inherit" onClick={this.handleCancel(validForm)} aria-label="Close">
+                        {/*<IconButton color="inherit" onClick={this.handleCancel(validForm)} aria-label="Close">
                             <CloseIcon/>
-                        </IconButton>
+                        </IconButton>*/}
+                        <CloseEditChallenge
+                            challengeValid={validForm}
+                            challengePartial={this.state.isPartial}
+                            closeChallengeDialog={this.props.closed}
+                        />
                         <Typography variant="h6" color="inherit" style={{flex: '1'}}>
                             New Challenge
                         </Typography>
