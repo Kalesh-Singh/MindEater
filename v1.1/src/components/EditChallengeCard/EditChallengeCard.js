@@ -22,6 +22,14 @@ class EditChallengeCard extends Component {
         }
     };
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.challenge.title !== this.props.challenge.title
+            || prevProps.challenge.description !== this.props.challenge.description) {
+            this.state.challenge.title = this.props.challenge.title;
+            this.state.challenge.description = this.props.challenge.description;
+        }
+    }
+
     handleClickOpen = () => {
         this.setState({open: true});
     };
