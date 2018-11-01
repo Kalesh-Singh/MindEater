@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 
+
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
@@ -11,11 +12,6 @@ import Lock from '@material-ui/icons/LockOutlined';
 
 import classes from './SignIn.module.css';
 import fire from '../../../fire';
-import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions/DialogActions";
-import Dialog from "@material-ui/core/Dialog/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 
 class SignIn extends Component {
     state = {
@@ -31,8 +27,7 @@ class SignIn extends Component {
             focused: false,
             valid: false
         },
-        open:false,
-        showPassword: false,
+        showPassword: false
     };
 
     signIn = (event) => {
@@ -48,7 +43,7 @@ class SignIn extends Component {
         let validForm = true;
         const form = {...this.state};
         for (let element in form) {
-            if (element !== 'showPassword' && element !== 'open') {
+            if (element !== 'showPassword') {
                 console.log(element + ' : ' + form[element].valid);
                 validForm = validForm && form[element].valid;
             }
@@ -105,14 +100,6 @@ class SignIn extends Component {
 
     handleClickShowPassword = () => {
         this.setState(state => ({showPassword: !state.showPassword}));
-    };
-
-    handleClickOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
     };
 
     render() {
@@ -184,38 +171,7 @@ class SignIn extends Component {
                 </Button>
                 <div className={classes.Hr}>
                     <div className={classes.FootLnk}>
-                        <div>
-                            <a onClick={this.handleClickOpen}>Forgot Password?</a>
-                            <Dialog
-                                open={this.state.open}
-                                onClose={this.handleClose}
-                                aria-labelledby="form-dialog-title"
-                            >
-                                <DialogTitle id="form-dialog-title">Forgot Password?</DialogTitle>
-                                <DialogContent>
-                                    <DialogContentText>
-                                        Please input your email below to reset your password.
-                                    </DialogContentText>
-                                    <TextField
-                                        autoFocus
-                                        margin="dense"
-                                        id="name"
-                                        label='Email'
-                                        type='email'
-                                        placeholder="Email"
-                                        fullWidth
-                                    />
-                                </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={this.handleClose} color="primary">
-                                        Cancel
-                                    </Button>
-                                    <Button onClick={this.handleClose} color="primary">
-                                        Send
-                                    </Button>
-                                </DialogActions>
-                            </Dialog>
-                        </div>
+                        <a>Forgot Password?</a>
                     </div>
                 </div>
             </form>
