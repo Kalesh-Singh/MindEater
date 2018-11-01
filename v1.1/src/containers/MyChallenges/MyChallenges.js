@@ -46,10 +46,24 @@ class MyChallenges extends Component {
 
     componentDidMount() {
         this.setListeners();
+
+        fire.database().ref('/challenges/')
+            .once('value')
+            .then(snapshot => {
+                const challengesObject = snapshot.val();
+                const updatedChallenges = [];
+                for (let challengeId in challengesObject) {
+                    const challenge = challengesObject[challengeId];
+                    challenge.id = challengeId;
+                    updatedChallenges.push(challenge);
+                }
+                this.setState({myChallenges: updatedChallenges});
+            });
     }
 
     render() {
-        console.log(this.state);
+        console.log('My Challenges - render');
+        console.log('My Challenges - state', this.state);
 
         const myChallenges = this.state.myChallenges.map(challenge => (
             <EditChallengeCard
