@@ -5,19 +5,24 @@ import StepLabel from "@material-ui/core/StepLabel/StepLabel";
 import StepContent from "@material-ui/core/StepContent/StepContent";
 import Typography from "@material-ui/core/Typography/Typography";
 import Button from "@material-ui/core/Button/Button";
+import SolveQuestionOptions from "../SolveQuestionOptions/SolveQuestionOptions";
 
 
 class SolveChallengeStepper extends Component {
+
+    // Expected props:
+    // questions[]
 
     state = {
         activeStep: 0,
     };
 
     getSteps = () => {
-        return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+        return ['What is the answer for q1?', 'What is the answer for q2?', 'What is the answer for q3?'];
     };
 
     getStepContent = (step) => {
+        // TODO: return questions[step]
         switch (step) {
             case 0:
                 return `For each ad campaign that you create, you can control how much
@@ -44,29 +49,26 @@ class SolveChallengeStepper extends Component {
         const steps = this.getSteps();
 
         return (
-                <Stepper activeStep={this.state.activeStep} orientation="vertical">
-                    {steps.map((label, index) => {
-                        return (
-                            <Step key={label}>
-                                <StepLabel>{label}</StepLabel>
-                                <StepContent>
-                                    <Typography>{this.getStepContent(index)}</Typography>
-                                    <div>
-                                        <div>
-                                            <Button
-                                                variant="contained"
-                                                color="primary"
-                                                onClick={this.handleNext}
-                                            >
-                                                {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                            </Button>
-                                        </div>
-                                    </div>
-                                </StepContent>
-                            </Step>
-                        );
-                    })}
-                </Stepper>
+            <Stepper activeStep={this.state.activeStep} orientation="vertical">
+                {steps.map((label, index) => {
+                    return (
+                        <Step key={label}>
+                            <StepLabel>{label}</StepLabel>
+                            <StepContent>
+                                {/*<Typography>{this.getStepContent(index)}</Typography>*/}
+                                <SolveQuestionOptions/>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={this.handleNext}
+                                >
+                                    {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                </Button>
+                            </StepContent>
+                        </Step>
+                    );
+                })}
+            </Stepper>
         );
     }
 }
