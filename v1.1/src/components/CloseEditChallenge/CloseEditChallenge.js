@@ -95,10 +95,3 @@ class CloseEditChallenge extends Component {
 }
 
 export default CloseEditChallenge;
-
-
-{/*
-<IconButton color="inherit" onClick={this.handleCancel(validForm)} aria-label="Close">
-    <CloseIcon/>
-</IconButton>*/
-}
