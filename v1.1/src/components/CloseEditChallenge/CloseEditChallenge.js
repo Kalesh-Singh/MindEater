@@ -75,7 +75,6 @@ class CloseEditChallenge extends Component {
                     closed={this.handleCloseIncomplete}
                     closeChallengeDialog={this.props.closeChallengeDialog}
                     deleteChallenge={this.props.deleteChallenge}
-                    saveChallenge={this.props.saveChallenge}
                 />
                 <ChallengeNotSavedDialog
                     open={this.state.openChallengeNotSaved}
@@ -88,7 +87,6 @@ class CloseEditChallenge extends Component {
                     open={this.state.openChangesNotSaved}
                     closed={this.handleCloseChangesNotSaved}
                     closeChallengeDialog={this.props.closeChallengeDialog}
-                    deleteChallenge={this.props.deleteChallenge}
                     saveChallenge={this.props.saveChallenge}
                 />
             </>
