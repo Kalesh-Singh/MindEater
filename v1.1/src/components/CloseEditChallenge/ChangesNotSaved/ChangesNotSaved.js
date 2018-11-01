@@ -28,10 +28,10 @@ class ChangesNotSaved extends Component {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Changes Not Saved"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">{"Save Changes"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Do you want to save the changes made?
+                        Do you want to save any changes made?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
