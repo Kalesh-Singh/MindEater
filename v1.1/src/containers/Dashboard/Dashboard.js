@@ -6,9 +6,7 @@ import SolveChallengeStepper from "../../components/SolveChallengeStepper/SolveC
 class Dashboard extends Component {
 
     render() {
-
-        return (
-            <Grid
+        {/*<Grid
                 container
                 spacing={0}
                 direction="column"
@@ -23,7 +21,14 @@ class Dashboard extends Component {
                     </div>
                 </Grid>
                 <SolveChallengeStepper/>
-            </Grid>
+            </Grid>*/
+        }
+
+        return (
+            <div style={{marginTop: '100px'}}>
+                <h1>Dashboard</h1>
+                <p>Some awesome dashboard content!</p>
+            </div>
         );
     }
 }

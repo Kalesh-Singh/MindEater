@@ -52,7 +52,7 @@ class SolveChallengeStepper extends Component {
             <Stepper activeStep={this.state.activeStep} orientation="vertical">
                 {steps.map((label, index) => {
                     return (
-                        <Step key={label}>
+                        <Step key={index}>
                             <StepLabel>{label}</StepLabel>
                             <StepContent>
                                 {/*<Typography>{this.getStepContent(index)}</Typography>*/}
