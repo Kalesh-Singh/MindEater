@@ -17,6 +17,7 @@ import EditQuestionListItem from "../EditQuestionListItem/EditQuestionListItem";
 import FormControl from "@material-ui/core/FormControl/FormControl";
 import FormLabel from "@material-ui/core/FormLabel/FormLabel";
 import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
+import CloseEditChallenge from "../CloseEditChallenge/CloseEditChallenge";
 
 
 function Transition(props) {
@@ -84,6 +85,7 @@ class ChallengeDialog extends Component {
     };
 
     deleteChallenge = () => {
+        console.log('Delete challenge called !!!!');
         // Delete the challenge questions
         for (let question of this.state.questions) {
             fire.database().ref('/questions/' + question.id)
@@ -214,7 +216,12 @@ class ChallengeDialog extends Component {
             if (!this.props.challenge) {
                 this.setState(this.initialState);
                 // Also initialize the challenge isPartial to true.
-                fire.database().ref().child('challenges').push({isPartial: true})
+                fire.database().ref().child('challenges').push(
+                    {
+                        title: '',
+                        description: '',
+                        isPartial: true
+                    })
                     .then(response => {
                         console.log('Challenge Id' + response.key);
                         this.setListeners(response.key);
@@ -305,9 +312,16 @@ class ChallengeDialog extends Component {
             >
                 <AppBar style={{position: 'relative'}}>
                     <Toolbar>
-                        <IconButton color="inherit" onClick={this.handleCancel(validForm)} aria-label="Close">
+                        {/*<IconButton color="inherit" onClick={this.handleCancel(validForm)} aria-label="Close">
                             <CloseIcon/>
-                        </IconButton>
+                        </IconButton>*/}
+                        <CloseEditChallenge
+                            challengeValid={validForm}
+                            challengePartial={this.state.isPartial}
+                            closeChallengeDialog={this.props.closed}
+                            deleteChallenge={this.deleteChallenge}
+                            saveChallenge={this.writeChallenge}
+                        />
                         <Typography variant="h6" color="inherit" style={{flex: '1'}}>
                             New Challenge
                         </Typography>
