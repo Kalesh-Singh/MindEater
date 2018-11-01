@@ -8,7 +8,7 @@ import ChangesNotSaved from "./ChangesNotSaved/ChangesNotSaved";
 
 class CloseEditChallenge extends Component {
 
-    // Expect props:
+    // Expected props:
     // 1. closeChallengeDialog  (func)
     // 2. deleteChallenge       (func)
     // 3. saveChallenge         (func)
