@@ -1,23 +1,21 @@
 import React, {Component} from 'react';
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
-import CloseIcon from '@material-ui/icons/Close';
 import Button from "@material-ui/core/Button/Button";
 import classes from "./ChallengeDialog.module.css";
 import AddQuestion from "../AddQuestion/AddQuestion";
 import List from "@material-ui/core/List/List";
 import TextField from "@material-ui/core/TextField/TextField";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import Typography from "@material-ui/core/Typography/Typography";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import Slide from "@material-ui/core/Slide/Slide";
 import fire from "../../fire";
 import EditQuestionListItem from "../EditQuestionListItem/EditQuestionListItem";
-import Divider from "@material-ui/core/Divider/Divider";
 import FormControl from "@material-ui/core/FormControl/FormControl";
 import FormLabel from "@material-ui/core/FormLabel/FormLabel";
 import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
+import CloseChallenge from "../CreateChallengeDialog/CloseChallenge/CloseChallenge";
 
 
 function Transition(props) {
@@ -67,7 +65,7 @@ class ChallengeDialog extends Component {
         this.writeChallenge();
     };
 
-    handleCancel = (valid) => () => {
+   /* handleCancel = (valid) => () => {
         this.props.closed();
 
         if (!valid) {
@@ -82,7 +80,7 @@ class ChallengeDialog extends Component {
         if (!valid) {
             this.deleteChallenge();
         }
-    };
+    };*/
 
     deleteChallenge = () => {
         // Delete the challenge questions
@@ -306,9 +304,13 @@ class ChallengeDialog extends Component {
             >
                 <AppBar style={{position: 'relative'}}>
                     <Toolbar>
-                        <IconButton color="inherit" onClick={this.handleCancel(validForm)} aria-label="Close">
-                            <CloseIcon/>
-                        </IconButton>
+                        <CloseChallenge
+                            challengeValid={validForm}
+                            challengePartial={this.state.isPartial}
+                            closeChallengeDialog={this.props.closed}
+                            deleteChallenge={this.deleteChallenge}
+                            saveChallenge={this.writeChallenge}
+                        />
                         <Typography variant="h6" color="inherit" style={{flex: '1'}}>
                             New Challenge
                         </Typography>
