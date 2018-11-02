@@ -129,20 +129,3 @@ class Dashboard extends Component {
 }
 
 export default Dashboard;
-
-/*<Grid
-                container
-                spacing={0}
-                direction="column"
-                alignItems="center"
-                justify="top"
-                style={{minHeight: '100vh'}}
-            >
-                <Grid item xs={12} style={{background: "red"}}>
-                    <div style={{marginTop: '100px'}}>
-                        <h1>Dashboard</h1>
-                        <p>Some awesome dashboard content!</p>
-                    </div>
-                </Grid>
-                <SolveChallengeStepper/>
-            </Grid>*/
