@@ -119,6 +119,7 @@ class SolveChallengeStepper extends Component {
                                             <Button
                                                 variant="contained"
                                                 color="primary"
+                                                disabled={!this.state.selectedOption}
                                                 onClick={this.state.activeStep === steps.length - 1 ? this.handleFinish : this.handleNext}
                                             >
                                                 {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
