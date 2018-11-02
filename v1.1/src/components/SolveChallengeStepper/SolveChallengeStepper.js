@@ -28,7 +28,8 @@ class SolveChallengeStepper extends Component {
     state = {
         score: 0,
         activeStep: 0,
-        selectedOption: null
+        selectedOption: null,
+        questions: []
     };
 
     handleChange = event => {
@@ -48,13 +49,24 @@ class SolveChallengeStepper extends Component {
 
         this.setState(state => {
             const correctAnswer = this.props.questions[state.activeStep].correctOption;
+            console.log('correct option', correctAnswer);
             const selectedAnswer = state.selectedOption;
             const questionScore = (correctAnswer === selectedAnswer) ? 1 : 0;
-            console.log('Question Score: ', questionScore);
+
+            const updatedQuestion = {
+                ...this.props.questions[state.activeStep],
+                score: questionScore,
+                selectedAnswer: selectedAnswer
+            };
+
+            const updatedQuestions = [...this.state.questions];
+            updatedQuestions.push(updatedQuestion);
+
             return {
                 activeStep: state.activeStep + 1,
                 score: state.score + questionScore,
-                selectedOption: null
+                selectedOption: null,
+                questions: updatedQuestions
             }
         });
     };
