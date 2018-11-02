@@ -10,6 +10,7 @@ import Slide from "@material-ui/core/Slide/Slide";
 import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
+import SolveChallengeSummary from "../SolveChallengeSummary/SolveChallengeSummary";
 
 
 function Transition(props) {
@@ -26,14 +27,24 @@ class SolveChallengeStepper extends Component {
     // 5. challengeDescription  (string)
 
     state = {
+        open: false,
         score: 0,
         activeStep: 0,
         selectedOption: null,
         questions: []
     };
 
+
+    handleClickOpen = () => {
+        this.setState({open: true});
+    };
+
+    handleClose = () => {
+        this.setState({open: false});
+    };
+
     handleChange = event => {
-        this.setState({ selectedOption : event.target.value });
+        this.setState({selectedOption: event.target.value});
     };
 
     getSteps = () => {
@@ -73,7 +84,7 @@ class SolveChallengeStepper extends Component {
 
     handleFinish = () => {
         this.handleNext();
-        this.props.closed();
+        this.handleClickOpen();
     };
 
     render() {
@@ -81,43 +92,52 @@ class SolveChallengeStepper extends Component {
         const steps = this.getSteps();
 
         return (
-            <Dialog
-                fullScreen
-                open={this.props.open}
-                onClose={this.props.closed}
-                TransitionComponent={Transition}
-            >
-                <DialogTitle id="solve-question-dialog-title">{this.props.challengeTitle}</DialogTitle>
+            <>
+                <Dialog
+                    fullScreen
+                    open={this.props.open}
+                    onClose={this.props.closed}
+                    TransitionComponent={Transition}
+                >
+                    <DialogTitle id="solve-question-dialog-title">{this.props.challengeTitle}</DialogTitle>
 
-                <DialogContent>
-                    <DialogContentText id="solve-question-dialog-description">
-                        {this.props.challengeDescription}
-                    </DialogContentText>
-                    <Stepper activeStep={this.state.activeStep} orientation="vertical">
-                        {steps.map((label, index) => {
-                            return (
-                                <Step key={index}>
-                                    <StepLabel>{label}</StepLabel>
-                                    <StepContent>
-                                        <SolveQuestionOptions
-                                            options={this.getStepContent(index)}
-                                            selectedOption={this.state.selectedOption}
-                                            optionChanged={this.handleChange}
-                                        />
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={this.state.activeStep === steps.length - 1 ? this.handleFinish : this.handleNext}
-                                        >
-                                            {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                        </Button>
-                                    </StepContent>
-                                </Step>
-                            );
-                        })}
-                    </Stepper>
-                </DialogContent>
-            </Dialog>
+                    <DialogContent>
+                        <DialogContentText id="solve-question-dialog-description">
+                            {this.props.challengeDescription}
+                        </DialogContentText>
+                        <Stepper activeStep={this.state.activeStep} orientation="vertical">
+                            {steps.map((label, index) => {
+                                return (
+                                    <Step key={index}>
+                                        <StepLabel>{label}</StepLabel>
+                                        <StepContent>
+                                            <SolveQuestionOptions
+                                                options={this.getStepContent(index)}
+                                                selectedOption={this.state.selectedOption}
+                                                optionChanged={this.handleChange}
+                                            />
+                                            <Button
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={this.state.activeStep === steps.length - 1 ? this.handleFinish : this.handleNext}
+                                            >
+                                                {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                            </Button>
+                                        </StepContent>
+                                    </Step>
+                                );
+                            })}
+                        </Stepper>
+                    </DialogContent>
+                </Dialog>
+                <SolveChallengeSummary
+                    open={this.state.open}
+                    closed={this.handleClose}
+                    closeStepper={this.props.closed}
+                    questions={this.state.questions}
+                    score={this.state.score}
+                />
+            </>
         );
     }
 }

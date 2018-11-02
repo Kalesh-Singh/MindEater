@@ -12,13 +12,14 @@ class SolveChallengeSummary extends Component {
     // 1. open          (bool)
     // 2. closed        (func)
     // 3. closeStepper  (func)
-    // 4. steps         (Array)     Can get from the getStep() function.
+    // 4. questions     (Array)     - These objects are expected to contain the user's answer and score.
     // 5. score         (number)
 
     // TODO: Decide which component will push to firebase.
 
     handleOk = () => {
         this.props.closed();
+        this.props.closeStepper();
     };
 
     render() {
@@ -26,7 +27,7 @@ class SolveChallengeSummary extends Component {
         return (
             <Dialog
                 open={this.props.open}
-                onClose={this.props.closed}
+                onClose={this.handleOk}
                 aria-labelledby="challenge-summary-dialog-title"
                 aria-describedby="challenge-summary-dialog-description"
             >
