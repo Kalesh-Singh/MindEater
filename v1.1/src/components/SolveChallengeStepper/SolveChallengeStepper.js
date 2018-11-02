@@ -3,45 +3,48 @@ import Stepper from "@material-ui/core/Stepper/Stepper";
 import Step from "@material-ui/core/Step/Step";
 import StepLabel from "@material-ui/core/StepLabel/StepLabel";
 import StepContent from "@material-ui/core/StepContent/StepContent";
-import Typography from "@material-ui/core/Typography/Typography";
 import Button from "@material-ui/core/Button/Button";
 import SolveQuestionOptions from "../SolveQuestionOptions/SolveQuestionOptions";
+import Dialog from "@material-ui/core/Dialog/Dialog";
+import Slide from "@material-ui/core/Slide/Slide";
+import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
 
+
+function Transition(props) {
+    return <Slide direction="up" {...props} />;
+}
 
 class SolveChallengeStepper extends Component {
 
     // Expected props:
-    // questions[]
+    // 1. open                  (bool)
+    // 2. closed                (func)
+    // 3. questions             (Array)
+    // 4. challengeTitle        (string)
+    // 5. challengeDescription  (string)
 
     state = {
         activeStep: 0,
+        selectedOption: null
+    };
+
+    handleChange = event => {
+        this.setState({ selectedOption : event.target.value });
     };
 
     getSteps = () => {
-        return ['What is the answer for q1?', 'What is the answer for q2?', 'What is the answer for q3?'];
+        return this.props.questions.map(question => (question.question));
     };
 
     getStepContent = (step) => {
-        // TODO: return questions[step]
-        switch (step) {
-            case 0:
-                return `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`;
-            case 1:
-                return 'An ad group contains one or more ads which target a shared set of keywords.';
-            case 2:
-                return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
-            default:
-                return 'Unknown step';
-        }
+        return this.props.questions[step].options;
+
     };
 
     handleNext = () => {
-        this.setState(state => ({activeStep: state.activeStep + 1}));
+        this.setState(state => ({activeStep: state.activeStep + 1, selectedOption: null}));
     };
 
     render() {
@@ -49,26 +52,43 @@ class SolveChallengeStepper extends Component {
         const steps = this.getSteps();
 
         return (
-            <Stepper activeStep={this.state.activeStep} orientation="vertical">
-                {steps.map((label, index) => {
-                    return (
-                        <Step key={index}>
-                            <StepLabel>{label}</StepLabel>
-                            <StepContent>
-                                {/*<Typography>{this.getStepContent(index)}</Typography>*/}
-                                <SolveQuestionOptions/>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={this.handleNext}
-                                >
-                                    {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                </Button>
-                            </StepContent>
-                        </Step>
-                    );
-                })}
-            </Stepper>
+            <Dialog
+                fullScreen
+                open={this.props.open}
+                onClose={this.props.closed}
+                TransitionComponent={Transition}
+            >
+                <DialogTitle id="solve-question-dialog-title">{this.props.challengeTitle}</DialogTitle>
+
+                <DialogContent>
+                    <DialogContentText id="solve-question-dialog-description">
+                        {this.props.challengeDescription}
+                    </DialogContentText>
+                    <Stepper activeStep={this.state.activeStep} orientation="vertical">
+                        {steps.map((label, index) => {
+                            return (
+                                <Step key={index}>
+                                    <StepLabel>{label}</StepLabel>
+                                    <StepContent>
+                                        <SolveQuestionOptions
+                                            options={this.getStepContent(index)}
+                                            selectedOption={this.state.selectedOption}
+                                            optionChanged={this.handleChange}
+                                        />
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={this.state.activeStep === steps.length - 1 ? this.props.closed : this.handleNext}
+                                        >
+                                            {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                        </Button>
+                                    </StepContent>
+                                </Step>
+                            );
+                        })}
+                    </Stepper>
+                </DialogContent>
+            </Dialog>
         );
     }
 }

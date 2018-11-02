@@ -6,20 +6,13 @@ import Radio from "@material-ui/core/Radio/Radio";
 
 class SolveQuestionOptions extends Component {
 
-    state = {
-        value: null
-    };
-
-    handleChange = event => {
-        this.setState({ value: event.target.value });
-    };
+    // Expected props
+    // 1. options               (Array)
+    // 2. selectedOption        (string)
+    // 3. optionChanged    (func)
 
     render() {
-
-        // TODO: Expected options array as a prop
-        const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
-
-        const optionComponents = options.map((option, index) => (
+        const optionComponents = this.props.options.map((option, index) => (
             <FormControlLabel
                 key={index}
                 value={option}
@@ -27,7 +20,6 @@ class SolveQuestionOptions extends Component {
                 label={option}
             />
         ));
-
         return (
             <FormControl
                 component="fieldset"
@@ -36,8 +28,8 @@ class SolveQuestionOptions extends Component {
                 <RadioGroup
                     aria-label="Options"
                     name="Options"
-                    value={this.state.value}
-                    onChange={this.handleChange}
+                    value={this.props.selectedOption}
+                    onChange={this.props.optionChanged}
                 >
                     {optionComponents}
                 </RadioGroup>

@@ -14,6 +14,7 @@ class Dashboard extends Component {
         fire.database().ref('/challenges/')
             .on('child_added', snapshot => {
                 console.log('Child Added - challenges');
+                // TODO: Check if owner is not this user
                 const challenge = snapshot.val();
                 challenge.id = snapshot.key;
                 const updatedChallenges = [...this.state.challenges];
@@ -23,6 +24,7 @@ class Dashboard extends Component {
         fire.database().ref('/challenges/')
             .on('child_removed', snapshot => {
                 console.log('Child Removed - challenges');
+                // TODO: Check if owner is not this user
                 const challengeId = snapshot.key;
                 const updatedChallenges
                     = this.state.challenges.filter((challenge) => (challenge.id !== challengeId));
@@ -31,6 +33,7 @@ class Dashboard extends Component {
         fire.database().ref('/challenges/')
             .on('child_changed', snapshot => {
                 console.log('Child Changed - challenges');
+                // TODO: Check if owner is not this user
                 const challengeId = snapshot.key;
                 const updatedChallenges = [...this.state.challenges];
                 const oldChallengeIndex = updatedChallenges
