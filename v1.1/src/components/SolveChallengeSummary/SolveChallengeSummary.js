@@ -10,8 +10,8 @@ import TableHead from "@material-ui/core/TableHead/TableHead";
 import TableRow from "@material-ui/core/TableRow/TableRow";
 import TableCell from "@material-ui/core/TableCell/TableCell";
 import TableBody from "@material-ui/core/TableBody/TableBody";
-
 import classes from "./SolveChallengeSummary.module.css";
+import withMobileDialog from "@material-ui/core/es/withMobileDialog/withMobileDialog";
 
 class SolveChallengeSummary extends Component {
 
@@ -30,10 +30,12 @@ class SolveChallengeSummary extends Component {
     };
 
     render() {
-        // Make this some sort of dialog pop up
+        const {fullScreen} = this.props;
+
         return (
             <Dialog
                 open={this.props.open}
+                fullScreen={fullScreen}
                 aria-labelledby="challenge-summary-dialog-title"
                 aria-describedby="challenge-summary-dialog-description"
             >
@@ -79,4 +81,4 @@ class SolveChallengeSummary extends Component {
     }
 }
 
-export default SolveChallengeSummary;
+export default withMobileDialog('xs')(SolveChallengeSummary);
