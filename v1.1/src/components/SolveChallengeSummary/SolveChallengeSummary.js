@@ -11,6 +11,8 @@ import TableRow from "@material-ui/core/TableRow/TableRow";
 import TableCell from "@material-ui/core/TableCell/TableCell";
 import TableBody from "@material-ui/core/TableBody/TableBody";
 
+import classes from "./SolveChallengeSummary.module.css";
+
 class SolveChallengeSummary extends Component {
 
     // Expected props
@@ -36,7 +38,7 @@ class SolveChallengeSummary extends Component {
                 aria-describedby="challenge-summary-dialog-description"
             >
                 <DialogTitle id="challenge-summary-dialog-title">{"Challenge Summary"}</DialogTitle>
-                <DialogContent>
+                <DialogContent className={classes.Content}>
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -59,6 +61,9 @@ class SolveChallengeSummary extends Component {
                                 ))}
                         </TableBody>
                     </Table>
+                    <DialogContentText className={classes.Score} id="solve-question-dialog-description">
+                        You scored {this.props.score} points!
+                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
 
