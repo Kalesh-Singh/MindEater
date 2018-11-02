@@ -26,6 +26,7 @@ class SolveChallengeStepper extends Component {
     // 5. challengeDescription  (string)
 
     state = {
+        score: 0,
         activeStep: 0,
         selectedOption: null
     };
@@ -44,7 +45,23 @@ class SolveChallengeStepper extends Component {
     };
 
     handleNext = () => {
-        this.setState(state => ({activeStep: state.activeStep + 1, selectedOption: null}));
+
+        this.setState(state => {
+            const correctAnswer = this.props.questions[state.activeStep].correctOption;
+            const selectedAnswer = state.selectedOption;
+            const questionScore = (correctAnswer === selectedAnswer) ? 1 : 0;
+            console.log('Question Score: ', questionScore);
+            return {
+                activeStep: state.activeStep + 1,
+                score: state.score + questionScore,
+                selectedOption: null
+            }
+        });
+    };
+
+    handleFinish = () => {
+        this.handleNext();
+        this.props.closed();
     };
 
     render() {
@@ -78,7 +95,7 @@ class SolveChallengeStepper extends Component {
                                         <Button
                                             variant="contained"
                                             color="primary"
-                                            onClick={this.state.activeStep === steps.length - 1 ? this.props.closed : this.handleNext}
+                                            onClick={this.state.activeStep === steps.length - 1 ? this.handleFinish : this.handleNext}
                                         >
                                             {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                                         </Button>
