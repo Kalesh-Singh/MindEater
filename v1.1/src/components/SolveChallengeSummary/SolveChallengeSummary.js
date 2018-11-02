@@ -5,6 +5,11 @@ import DialogContentText from "@material-ui/core/DialogContentText/DialogContent
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
+import Table from "@material-ui/core/Table/Table";
+import TableHead from "@material-ui/core/TableHead/TableHead";
+import TableRow from "@material-ui/core/TableRow/TableRow";
+import TableCell from "@material-ui/core/TableCell/TableCell";
+import TableBody from "@material-ui/core/TableBody/TableBody";
 
 class SolveChallengeSummary extends Component {
 
@@ -27,15 +32,33 @@ class SolveChallengeSummary extends Component {
         return (
             <Dialog
                 open={this.props.open}
-                onClose={this.handleOk}
                 aria-labelledby="challenge-summary-dialog-title"
                 aria-describedby="challenge-summary-dialog-description"
             >
                 <DialogTitle id="challenge-summary-dialog-title">{"Challenge Summary"}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="challenge-summary-dialog-description">
-                        Here is a summary of your results.
-                    </DialogContentText>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Question</TableCell>
+                                <TableCell>Correct Answer</TableCell>
+                                <TableCell>Your Answer</TableCell>
+                                <TableCell numeric>Score</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {this.props.questions.map(question => (
+                                    <TableRow key={question.id}>
+                                        <TableCell component="th" scope="row">
+                                            {question.question}
+                                        </TableCell>
+                                        <TableCell>{question.correctOption}</TableCell>
+                                        <TableCell>{question.selectedAnswer}</TableCell>
+                                        <TableCell numeric>{question.score}</TableCell>
+                                    </TableRow>
+                                ))}
+                        </TableBody>
+                    </Table>
                 </DialogContent>
                 <DialogActions>
 
