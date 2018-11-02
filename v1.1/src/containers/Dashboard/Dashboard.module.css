@@ -3,3 +3,15 @@
     flex-wrap: wrap;
     box-sizing: border-box;
 }
+
+.Db {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.challengeCard {
+    marginTop: 100%;
+    float: left;
+    background: #5983da;
+}
