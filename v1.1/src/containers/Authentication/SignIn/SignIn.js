@@ -170,7 +170,7 @@ class SignIn extends Component {
                                     aria-label="Toggle password visibility"
                                     onClick={this.handleClickShowPassword}
                                 >
-                                    {this.state.showPassword ? <VisibilityOff/> : <Visibility/>}
+                                    {this.state.showPassword ? <Visibility/>: <VisibilityOff/>}
                                 </IconButton>
                             </InputAdornment>
                         ),
