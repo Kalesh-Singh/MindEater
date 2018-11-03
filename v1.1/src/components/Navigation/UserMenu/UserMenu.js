@@ -10,6 +10,7 @@ import MenuList from "@material-ui/core/MenuList/MenuList";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import AccountIcon from '@material-ui/icons/AccountCircleOutlined';
 import IconButton from "@material-ui/core/IconButton/IconButton";
+import Avatar from "@material-ui/core/Avatar/Avatar";
 
 class UserMenu extends Component {
     state = {
@@ -61,7 +62,7 @@ class UserMenu extends Component {
                     aria-haspopup="true"
                     onClick={this.handleToggle}
                 >
-                    <AccountIcon/>
+                    {fire.auth().currentUser.photoURL ? <Avatar src={fire.auth().currentUser.photoURL}/> : <AccountIcon/>}
                 </IconButton>
                 <Popper open={this.state.open} anchorEl={this.anchorEl} transition disablePortal>
                     {({TransitionProps, placement}) => (
