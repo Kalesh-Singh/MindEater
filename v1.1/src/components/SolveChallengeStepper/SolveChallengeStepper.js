@@ -143,9 +143,9 @@ class SolveChallengeStepper extends Component {
                                         <StepLabel>{label}</StepLabel>
                                         <StepContent>
                                             {this.state.timesAttempted === 1 && !this.state.finished ?
-                                                <ExpansionPanel className={classes.Hint}>
+                                                <ExpansionPanel>
                                                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                                        <Typography>Show hint</Typography>
+                                                        <Typography style={{color: '#93C500'}}>Show hint</Typography>
                                                     </ExpansionPanelSummary>
                                                     <ExpansionPanelDetails>
                                                         <Typography>
@@ -161,9 +161,9 @@ class SolveChallengeStepper extends Component {
                                                 disabled={this.state.finished}
                                             />
                                             {this.state.finished ?
-                                                <ExpansionPanel className={classes.Explanation}>
+                                                <ExpansionPanel>
                                                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                                        <Typography>See Explanation</Typography>
+                                                        <Typography style={{color: '#FFC300'}}>See Explanation</Typography>
                                                     </ExpansionPanelSummary>
                                                     <ExpansionPanelDetails>
                                                         <Typography>
@@ -172,8 +172,10 @@ class SolveChallengeStepper extends Component {
                                                     </ExpansionPanelDetails>
                                                 </ExpansionPanel> : null
                                             }
-                                            <div>
+                                            <div className={classes.Buttons}>
                                                 <Button
+                                                    style={{marginRight: '10px'}}
+                                                    className={classes.Button}
                                                     variant="contained"
                                                     color="primary"
                                                     disabled={!this.state.selectedOption}
