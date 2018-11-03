@@ -11,6 +11,12 @@ import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
 import SolveChallengeSummary from "../SolveChallengeSummary/SolveChallengeSummary";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails/ExpansionPanelDetails";
+import Typography from "@material-ui/core/Typography/Typography";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import classes from "./SolveChallengeStepper.module.css";
 
 
 function Transition(props) {
@@ -31,8 +37,19 @@ class SolveChallengeStepper extends Component {
         score: 0,
         activeStep: 0,
         selectedOption: null,
+        timesAttempted: 0,
+        finished: false,
         questions: []
     };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.questions !== this.props.questions) {
+            console.log('Questions did update - Stepper');
+            const updatedQuestions = [...this.props.questions];
+            this.setState({questions: updatedQuestions})
+        }
+
+    }
 
 
     handleClickOpen = () => {
@@ -56,28 +73,42 @@ class SolveChallengeStepper extends Component {
 
     };
 
+    handleSolve = () => {
+        this.setState(state => {
+            const correctAnswer = state.questions[state.activeStep].correctOption;
+            console.log('correct option', correctAnswer);
+            const selectedAnswer = state.selectedOption;
+            const questionScore = (correctAnswer === selectedAnswer) ? 2 - state.timesAttempted : 0;
+
+            const updatedQuestion = {
+                ...state.questions[state.activeStep],
+                score: questionScore,
+                selectedAnswer: selectedAnswer,
+            };
+
+            const updatedQuestions = [...state.questions];
+            updatedQuestions[state.activeStep] = updatedQuestion;
+
+            const finished = state.timesAttempted === 1 || correctAnswer === selectedAnswer;
+
+            return {
+                score: state.score + questionScore,
+                selectedOption: null,
+                timesAttempted: state.timesAttempted + 1,
+                finished: finished,
+                questions: updatedQuestions
+            }
+        });
+    };
+
     handleNext = () => {
 
         this.setState(state => {
-            const correctAnswer = this.props.questions[state.activeStep].correctOption;
-            console.log('correct option', correctAnswer);
-            const selectedAnswer = state.selectedOption;
-            const questionScore = (correctAnswer === selectedAnswer) ? 1 : 0;
-
-            const updatedQuestion = {
-                ...this.props.questions[state.activeStep],
-                score: questionScore,
-                selectedAnswer: selectedAnswer
-            };
-
-            const updatedQuestions = [...this.state.questions];
-            updatedQuestions.push(updatedQuestion);
-
             return {
                 activeStep: state.activeStep + 1,
-                score: state.score + questionScore,
                 selectedOption: null,
-                questions: updatedQuestions
+                timesAttempted: 0,
+                finished: false
             }
         });
     };
@@ -111,19 +142,57 @@ class SolveChallengeStepper extends Component {
                                     <Step key={index}>
                                         <StepLabel>{label}</StepLabel>
                                         <StepContent>
+                                            {this.state.timesAttempted === 1 && !this.state.finished ?
+                                                <ExpansionPanel>
+                                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                                                        <Typography style={{color: '#93C500'}}>Show hint</Typography>
+                                                    </ExpansionPanelSummary>
+                                                    <ExpansionPanelDetails>
+                                                        <Typography>
+                                                            {this.props.questions[index].hint}
+                                                        </Typography>
+                                                    </ExpansionPanelDetails>
+                                                </ExpansionPanel> : null
+                                            }
                                             <SolveQuestionOptions
                                                 options={this.getStepContent(index)}
                                                 selectedOption={this.state.selectedOption}
                                                 optionChanged={this.handleChange}
+                                                disabled={this.state.finished}
                                             />
-                                            <Button
-                                                variant="contained"
-                                                color="primary"
-                                                disabled={!this.state.selectedOption}
-                                                onClick={this.state.activeStep === steps.length - 1 ? this.handleFinish : this.handleNext}
-                                            >
-                                                {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                            </Button>
+                                            {this.state.finished ?
+                                                <ExpansionPanel>
+                                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                                                        <Typography style={{color: '#FFC300'}}>See Explanation</Typography>
+                                                    </ExpansionPanelSummary>
+                                                    <ExpansionPanelDetails>
+                                                        <Typography>
+                                                            {this.props.questions[index].explanation}
+                                                        </Typography>
+                                                    </ExpansionPanelDetails>
+                                                </ExpansionPanel> : null
+                                            }
+                                            <div className={classes.Buttons}>
+                                                <Button
+                                                    style={{marginRight: '10px'}}
+                                                    className={classes.Button}
+                                                    variant="contained"
+                                                    color="primary"
+                                                    disabled={!this.state.selectedOption}
+                                                    onClick={this.handleSolve}
+                                                >
+                                                    Solve
+                                                </Button>
+
+                                                <Button
+                                                    variant="contained"
+                                                    color="primary"
+                                                    disabled={!this.state.finished}
+                                                    onClick={this.state.activeStep === steps.length - 1 ? this.handleFinish : this.handleNext}
+                                                >
+                                                    {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                                </Button>
+                                            </div>
                                         </StepContent>
                                     </Step>
                                 );
