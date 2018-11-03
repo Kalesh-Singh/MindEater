@@ -11,6 +11,12 @@ import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
 import SolveChallengeSummary from "../SolveChallengeSummary/SolveChallengeSummary";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails/ExpansionPanelDetails";
+import Typography from "@material-ui/core/Typography/Typography";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import classes from "./SolveChallengeStepper.module.css";
 
 
 function Transition(props) {
@@ -107,32 +113,6 @@ class SolveChallengeStepper extends Component {
         });
     };
 
-    /* handleNext = () => {
-
-         this.setState(state => {
-             const correctAnswer = this.props.questions[state.activeStep].correctOption;
-             console.log('correct option', correctAnswer);
-             const selectedAnswer = state.selectedOption;
-             const questionScore = (correctAnswer === selectedAnswer) ? 1 : 0;
-
-             const updatedQuestion = {
-                 ...this.props.questions[state.activeStep],
-                 score: questionScore,
-                 selectedAnswer: selectedAnswer
-             };
-
-             const updatedQuestions = [...this.state.questions];
-             updatedQuestions.push(updatedQuestion);
-
-             return {
-                 activeStep: state.activeStep + 1,
-                 score: state.score + questionScore,
-                 selectedOption: null,
-                 questions: updatedQuestions
-             }
-         });
-     };*/
-
     handleFinish = () => {
         this.handleNext();
         this.handleClickOpen();
@@ -162,16 +142,37 @@ class SolveChallengeStepper extends Component {
                                     <Step key={index}>
                                         <StepLabel>{label}</StepLabel>
                                         <StepContent>
-                                            <p>{'Hint: ' + this.props.questions[index].hint}</p>
+                                            {this.state.timesAttempted === 1 && !this.state.finished ?
+                                                <ExpansionPanel className={classes.Hint}>
+                                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                                                        <Typography>Show hint</Typography>
+                                                    </ExpansionPanelSummary>
+                                                    <ExpansionPanelDetails>
+                                                        <Typography>
+                                                            {this.props.questions[index].hint}
+                                                        </Typography>
+                                                    </ExpansionPanelDetails>
+                                                </ExpansionPanel> : null
+                                            }
                                             <SolveQuestionOptions
                                                 options={this.getStepContent(index)}
                                                 selectedOption={this.state.selectedOption}
                                                 optionChanged={this.handleChange}
                                                 disabled={this.state.finished}
                                             />
-                                            <p>{'Explanation: ' + this.props.questions[index].explanation}</p>
+                                            {this.state.finished ?
+                                                <ExpansionPanel className={classes.Explanation}>
+                                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                                                        <Typography>See Explanation</Typography>
+                                                    </ExpansionPanelSummary>
+                                                    <ExpansionPanelDetails>
+                                                        <Typography>
+                                                            {this.props.questions[index].explanation}
+                                                        </Typography>
+                                                    </ExpansionPanelDetails>
+                                                </ExpansionPanel> : null
+                                            }
                                             <div>
-                                                {/* TODO: Wire up this solve button */}
                                                 <Button
                                                     variant="contained"
                                                     color="primary"
