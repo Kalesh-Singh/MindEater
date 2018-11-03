@@ -31,8 +31,19 @@ class SolveChallengeStepper extends Component {
         score: 0,
         activeStep: 0,
         selectedOption: null,
+        timesAttempted: 0,
+        finished: false,
         questions: []
     };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.questions !== this.props.questions) {
+            console.log('Questions did update - Stepper');
+            const updatedQuestions = [...this.props.questions];
+            this.setState({questions: updatedQuestions})
+        }
+
+    }
 
 
     handleClickOpen = () => {
@@ -56,31 +67,71 @@ class SolveChallengeStepper extends Component {
 
     };
 
-    handleNext = () => {
-
+    handleSolve = () => {
         this.setState(state => {
-            const correctAnswer = this.props.questions[state.activeStep].correctOption;
+            const correctAnswer = state.questions[state.activeStep].correctOption;
             console.log('correct option', correctAnswer);
             const selectedAnswer = state.selectedOption;
-            const questionScore = (correctAnswer === selectedAnswer) ? 1 : 0;
+            const questionScore = (correctAnswer === selectedAnswer) ? 2 - state.timesAttempted : 0;
 
             const updatedQuestion = {
-                ...this.props.questions[state.activeStep],
+                ...state.questions[state.activeStep],
                 score: questionScore,
-                selectedAnswer: selectedAnswer
+                selectedAnswer: selectedAnswer,
             };
 
-            const updatedQuestions = [...this.state.questions];
-            updatedQuestions.push(updatedQuestion);
+            const updatedQuestions = [...state.questions];
+            updatedQuestions[state.activeStep] = updatedQuestion;
+
+            const finished = state.timesAttempted === 1 || correctAnswer === selectedAnswer;
 
             return {
-                activeStep: state.activeStep + 1,
                 score: state.score + questionScore,
                 selectedOption: null,
+                timesAttempted: state.timesAttempted + 1,
+                finished: finished,
                 questions: updatedQuestions
             }
         });
     };
+
+    handleNext = () => {
+
+        this.setState(state => {
+            return {
+                activeStep: state.activeStep + 1,
+                selectedOption: null,
+                timesAttempted: 0,
+                finished: false
+            }
+        });
+    };
+
+    /* handleNext = () => {
+
+         this.setState(state => {
+             const correctAnswer = this.props.questions[state.activeStep].correctOption;
+             console.log('correct option', correctAnswer);
+             const selectedAnswer = state.selectedOption;
+             const questionScore = (correctAnswer === selectedAnswer) ? 1 : 0;
+
+             const updatedQuestion = {
+                 ...this.props.questions[state.activeStep],
+                 score: questionScore,
+                 selectedAnswer: selectedAnswer
+             };
+
+             const updatedQuestions = [...this.state.questions];
+             updatedQuestions.push(updatedQuestion);
+
+             return {
+                 activeStep: state.activeStep + 1,
+                 score: state.score + questionScore,
+                 selectedOption: null,
+                 questions: updatedQuestions
+             }
+         });
+     };*/
 
     handleFinish = () => {
         this.handleNext();
@@ -116,20 +167,28 @@ class SolveChallengeStepper extends Component {
                                                 options={this.getStepContent(index)}
                                                 selectedOption={this.state.selectedOption}
                                                 optionChanged={this.handleChange}
+                                                disabled={this.state.finished}
                                             />
                                             <p>{'Explanation: ' + this.props.questions[index].explanation}</p>
                                             <div>
                                                 {/* TODO: Wire up this solve button */}
-                                                <Button>Solve</Button>
+                                                <Button
+                                                    variant="contained"
+                                                    color="primary"
+                                                    disabled={!this.state.selectedOption}
+                                                    onClick={this.handleSolve}
+                                                >
+                                                    Solve
+                                                </Button>
 
-                                            <Button
-                                                variant="contained"
-                                                color="primary"
-                                                disabled={!this.state.selectedOption}
-                                                onClick={this.state.activeStep === steps.length - 1 ? this.handleFinish : this.handleNext}
-                                            >
-                                                {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                            </Button>
+                                                <Button
+                                                    variant="contained"
+                                                    color="primary"
+                                                    disabled={!this.state.finished}
+                                                    onClick={this.state.activeStep === steps.length - 1 ? this.handleFinish : this.handleNext}
+                                                >
+                                                    {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                                </Button>
                                             </div>
                                         </StepContent>
                                     </Step>
