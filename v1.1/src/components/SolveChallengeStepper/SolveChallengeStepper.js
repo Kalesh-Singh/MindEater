@@ -118,6 +118,10 @@ class SolveChallengeStepper extends Component {
                                                 optionChanged={this.handleChange}
                                             />
                                             <p>{'Explanation: ' + this.props.questions[index].explanation}</p>
+                                            <div>
+                                                {/* TODO: Wire up this solve button */}
+                                                <Button>Solve</Button>
+
                                             <Button
                                                 variant="contained"
                                                 color="primary"
@@ -126,6 +130,7 @@ class SolveChallengeStepper extends Component {
                                             >
                                                 {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                                             </Button>
+                                            </div>
                                         </StepContent>
                                     </Step>
                                 );
