@@ -111,11 +111,13 @@ class SolveChallengeStepper extends Component {
                                     <Step key={index}>
                                         <StepLabel>{label}</StepLabel>
                                         <StepContent>
+                                            <p>{'Hint: ' + this.props.questions[index].hint}</p>
                                             <SolveQuestionOptions
                                                 options={this.getStepContent(index)}
                                                 selectedOption={this.state.selectedOption}
                                                 optionChanged={this.handleChange}
                                             />
+                                            <p>{'Explanation: ' + this.props.questions[index].explanation}</p>
                                             <Button
                                                 variant="contained"
                                                 color="primary"
