@@ -62,7 +62,9 @@ class UserMenu extends Component {
                     aria-haspopup="true"
                     onClick={this.handleToggle}
                 >
-                    {/*{fire.auth().currentUser.photoURL ? <Avatar src={fire.auth().currentUser.photoURL}/> : */ <AccountIcon/>}}
+                    {fire.auth().currentUser && fire.auth().currentUser.photoURL
+                        ? <Avatar src={fire.auth().currentUser.photoURL}/>
+                        : <AccountIcon/>}
                 </IconButton>
                 <Popper open={this.state.open} anchorEl={this.anchorEl} transition disablePortal>
                     {({TransitionProps, placement}) => (

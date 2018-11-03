@@ -16,6 +16,7 @@ class SolveQuestionOptions extends Component {
             <FormControlLabel
                 key={index}
                 value={option}
+                disabled={this.props.disabled}
                 control={<Radio/>}
                 label={option}
             />
