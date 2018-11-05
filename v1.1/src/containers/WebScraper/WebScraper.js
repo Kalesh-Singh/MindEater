@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import TextField from "@material-ui/core/TextField/TextField";
+import Button from "@material-ui/core/Button/Button";
 
 class WebScraper extends Component {
     state = {
@@ -9,6 +10,10 @@ class WebScraper extends Component {
 
     handleChange = event => {
         this.setState({title: event.target.value});
+    };
+
+    getImg = () => {
+
     };
 
     render() {
@@ -23,6 +28,13 @@ class WebScraper extends Component {
                     onChange={this.handleChange}
                 />
                 {this.state.imgUrl ? <p>{this.state.imgUrl}</p> : null}
+                <Button
+                    color="inherit"
+                    onClick={this.getImg}
+                    disabled={this.state.title === ''}
+                >
+                    Get Image
+                </Button>
             </div>
         );
     }
