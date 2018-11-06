@@ -21,27 +21,17 @@ class WebScraper extends Component {
         const imgUrl = 'https://www.shutterstock.com/search?search_source=base_landing_page&language=en&searchterm='
             + searchTerm + '&image_type=all';
 
-        /*const url = "https://anyorigin.com/go?url="
-            + encodeURIComponent(imgUrl)
-            + "&callback=?";*/
-
-        // const url = "https://crossorigin.me/" + encodeURIComponent(imgUrl);
-
-
         const url = "https://allorigins.me/get?url="
             + encodeURIComponent(imgUrl)
             + "&callback=?";
 
         $.getJSON(url, response => {
-                // console.log(response);
                 $.each(response, (key, val) => {
                     if (key === 'contents') {
-                        // console.log(val);
                         const html = val;
                         const $ = cheerio.load(html);
                         const images = $(".img-wrap");
                         const challengeImg = images[0].children[1].attribs.src;
-                        // console.log(challengeImg);
                         this.setState({imgUrl: challengeImg});
                     }
                 });
