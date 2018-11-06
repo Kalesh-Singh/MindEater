@@ -6,7 +6,9 @@ admin.initializeApp();
 
 exports.getChallengeImage = functions.database.ref('/challenges/{pushId}/title')
     .onUpdate((change, context) => {
-        const oldChallengeTitle = change.before.val();
         const newChallengeTitle = change.after.val();
         console.log("This is the challenge title from firebase functions", newChallengeTitle);
+
+        console.log("Need to scrape for a new image");
+        return Promise.reject();
     });
