@@ -1,6 +1,6 @@
 import fire from "./fire";
 import $ from "jquery";
-import cheerio from "cheerio"
+import cheerio from "cheerio";
 
 const getBlob = (url) => {
     return new Promise((resolve, reject) => {
@@ -17,7 +17,7 @@ const getBlob = (url) => {
 };
 
 const imgURLForChallenge = (oldURL, challengeId) => {
-    const picRef = fire.storage().ref(/challenges/ + challengeId);
+    const picRef = fire.storage().ref(/challenges/ + challengeId + '/imgURL');
 
     this.getBlob(oldURL)
         .then(blob => {
@@ -40,7 +40,7 @@ const imgURLForChallenge = (oldURL, challengeId) => {
         })
 };
 
-const getImage = (challengeTitle, challengeId) => {
+const getChallengeImage = (challengeTitle, challengeId) => {
     const searchTerm = challengeTitle.split(' ').join('+');
     const imgUrl = 'https://www.shutterstock.com/search?search_source=base_landing_page&language=en&searchterm='
         + searchTerm + '&image_type=all';
@@ -63,3 +63,5 @@ const getImage = (challengeTitle, challengeId) => {
     );
 
 };
+
+export default getChallengeImage;
