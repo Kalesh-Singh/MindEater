@@ -71,6 +71,7 @@ exports.getChallengeImage = functions.database.ref('/challenges/{pushId}/title')
                console.log(error.message);
                success = false;
            });
+           */
 
         return (success) ? Promise.resolve() : Promise.reject();
-    });*/
+    });
