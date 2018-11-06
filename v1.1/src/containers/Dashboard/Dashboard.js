@@ -52,6 +52,20 @@ class Dashboard extends Component {
                 updatedChallenges[oldChallengeIndex] = updatedChallenge;
                 this.setState({challenges: updatedChallenges});
             });
+
+        fire.database().ref('/challengeImages/')
+            .on('child_changed', snapshot => {
+                console.log('Challenge ID = ', snapshot.key);
+                console.log('Challeange Img URL = ', snapshot.val().imgURL);
+                const challengeId = snapshot.key;
+                const updatedChallenges = [...this.state.challenges];
+                const oldChallengeIndex = updatedChallenges
+                    .findIndex(challenge => (challenge.id === challengeId));
+                const updatedChallenge = updatedChallenges[oldChallengeIndex];
+                updatedChallenge.imgURL = snapshot.val().imgURL;
+                updatedChallenges[oldChallengeIndex] = updatedChallenge;
+                this.setState({challenges: updatedChallenges});
+            });
     };
 
     componentDidMount() {

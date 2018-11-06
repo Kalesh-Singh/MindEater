@@ -45,20 +45,6 @@ class MyChallenges extends Component {
                 updatedMyChallenges[oldChallengeIndex] = updatedChallenge;
                 this.setState({myChallenges: updatedMyChallenges});
             });
-
-        fire.database().ref('/challengeImages/')
-            .on('child_changed', snapshot => {
-                console.log('Challenge ID = ', snapshot.key);
-                console.log('Challeange Img URL = ', snapshot.val().imgURL);
-                const challengeId = snapshot.key;
-                const updatedMyChallenges = [...this.state.myChallenges];
-                const oldChallengeIndex = updatedMyChallenges
-                    .findIndex(challenge => (challenge.id === challengeId));
-                const updatedChallenge = updatedMyChallenges[oldChallengeIndex];
-                updatedChallenge.imgURL = snapshot.val().imgURL;
-                updatedMyChallenges[oldChallengeIndex] = updatedChallenge;
-                this.setState({myChallenges: updatedMyChallenges});
-            });
     };
 
     componentDidMount() {

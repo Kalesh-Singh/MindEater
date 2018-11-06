@@ -82,9 +82,8 @@ class SolveChallengeCard extends Component {
                     }}
                 >
                     <CardActionArea onClick={this.handleClickOpen}>
-                        <img src={this.props.challenge.imgURL} />
                         <CardMedia
-                            // image={this.props.challenge.imgURL}
+                            image={this.props.challenge.imgURL}
                             title={this.props.challenge.title}
                         />
 
