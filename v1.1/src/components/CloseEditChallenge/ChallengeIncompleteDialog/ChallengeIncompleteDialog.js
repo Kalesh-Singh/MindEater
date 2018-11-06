@@ -40,7 +40,7 @@ class ChallengeIncompleteDialog extends Component {
                         Discard
                     </Button>
                     <Button
-                        onClick={this.handleCancel}d
+                        onClick={this.handleCancel}
                         color="primary" autoFocus
                     >
                         Cancel
