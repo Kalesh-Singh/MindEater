@@ -7,6 +7,7 @@ import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
 import Typography from "@material-ui/core/Typography/Typography";
 import fire from "../../fire";
 import SolveChallengeStepper from "../SolveChallengeStepper/SolveChallengeStepper";
+import CardMedia from "@material-ui/core/CardMedia/CardMedia";
 
 class SolveChallengeCard extends Component {
 
@@ -81,6 +82,11 @@ class SolveChallengeCard extends Component {
                     }}
                 >
                     <CardActionArea onClick={this.handleClickOpen}>
+                        <CardMedia
+                            image={this.props.challenge.imgURL}
+                            title={this.props.challenge.title}
+                        />
+
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
                                 {this.props.challenge.title}

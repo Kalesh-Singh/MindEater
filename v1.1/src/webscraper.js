@@ -28,7 +28,7 @@ const imgURLForChallenge = (oldURL, challengeId) => {
         })
         .then(url => {
             const updates = {};
-            updates['/challenges/' + challengeId + '/imgURL'] = url;
+            updates['/challengeImages/' + challengeId + '/imgURL'] = url;
             return fire.database().ref().update(updates);
 
         })
@@ -40,7 +40,7 @@ const imgURLForChallenge = (oldURL, challengeId) => {
         })
 };
 
-const getChallengeImage = (challengeTitle, challengeId) => {
+const saveChallengeImageURL = (challengeTitle, challengeId) => {
     const searchTerm = challengeTitle.split(' ').join('+');
     const imgUrl = 'https://www.shutterstock.com/search?search_source=base_landing_page&language=en&searchterm='
         + searchTerm + '&image_type=all';
@@ -64,4 +64,4 @@ const getChallengeImage = (challengeTitle, challengeId) => {
 
 };
 
-export default getChallengeImage;
+export default saveChallengeImageURL;
