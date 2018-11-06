@@ -1,0 +1,10 @@
+.Figure{
+    width:300px; /*container-width*/
+    overflow:hidden; /*hide bounds of image */
+    margin:0;   /*reset margin of figure tag*/
+}
+.Figure img{
+    display:block; /*remove inline-block spaces*/
+    width:100%; /*make image streatch*/
+    margin-bottom: -20px;
+}
