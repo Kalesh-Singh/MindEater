@@ -1,4 +1,4 @@
-const axios = require('axios');
+const request = require('request');
 const cheerio = require('cheerio');
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
@@ -19,7 +19,7 @@ exports.getChallengeImage = functions.database.ref('/challenges/{pushId}/title')
             + encodeURIComponent(imgUrl)
             + "&callback=?";
 
-        let promise = null;
+        let success = false;
 
         /*$.getJSON(url, response => {
                 const html = response.contents;
@@ -60,5 +60,17 @@ exports.getChallengeImage = functions.database.ref('/challenges/{pushId}/title')
             }
         });*/
 
-        return promise;
-    });
+       /*axios.get(url, {
+           proxy: false,
+       })
+           .then(response => {
+               console.log(response);
+               success = true;
+           })
+           .catch(error => {
+               console.log(error.message);
+               success = false;
+           });
+
+        return (success) ? Promise.resolve() : Promise.reject();
+    });*/
