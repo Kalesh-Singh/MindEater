@@ -68,9 +68,7 @@ class Authentication extends Component {
                             </div>
                             <Tabs fullWidth
                                   value={this.state.value}
-                                  indicatorColor='primary'
                                   textColor={"primary"}
-
                             >
                                 <Tab
                                     label='Sign In'
@@ -81,7 +79,6 @@ class Authentication extends Component {
                                 <Tab
                                     label='Sign Up'
                                     value='sign-up'
-                                    indicatorColor="primary"
                                     icon={<AddAccount/>}
                                     onClick={() => {this.handleToggle('sign-up')}}
                                 />
