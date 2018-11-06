@@ -73,5 +73,17 @@ exports.getChallengeImage = functions.database.ref('/challenges/{pushId}/title')
            });
            */
 
+       request(url, { json: true }, (err, res, body) => {
+          if (err) {
+              console.log(err);
+              success = false;
+              return err;
+          }
+          console.log('res ==', res);
+          success = true;
+          console.log('body == ', body);
+       });
+
+
         return (success) ? Promise.resolve() : Promise.reject();
     });
