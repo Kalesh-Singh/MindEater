@@ -9,10 +9,12 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
+    "ajax": "0.0.4",
     "cheerio": "^1.0.0-rc.2",
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.0.3",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "request": "^2.88.0"
   },
   "private": true
 }
