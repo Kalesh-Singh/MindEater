@@ -26,15 +26,15 @@ class WebScraper extends Component {
             + "&callback=?";
 
         $.getJSON(url, response => {
-                $.each(response, (key, val) => {
-                    if (key === 'contents') {
-                        const html = val;
-                        const $ = cheerio.load(html);
-                        const images = $(".img-wrap");
-                        const challengeImg = images[0].children[1].attribs.src;
-                        this.setState({imgUrl: challengeImg});
-                    }
-                });
+                const html = response.contents;
+                const $ = cheerio.load(html);
+                const images = $(".img-wrap");
+                if (images[0]) {
+                    const challengeImg = images[0].children[1].attribs.src;
+                    this.setState({imgUrl: challengeImg});
+                } else {
+                    // TODO: Set the state to the default challenge image.
+                }
             }
         );
 
@@ -60,7 +60,7 @@ class WebScraper extends Component {
                     Get Image
                 </Button>
                 <figure className={classes.Figure}>
-                    <img src={this.state.imgUrl} width="100%" />
+                    <img src={this.state.imgUrl} width="100%"/>
                 </figure>
             </div>
         );
