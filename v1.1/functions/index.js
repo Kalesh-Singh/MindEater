@@ -15,11 +15,14 @@ exports.getChallengeImage = functions.database.ref('/challenges/{pushId}/title')
         const imgUrl = 'https://www.shutterstock.com/search?search_source=base_landing_page&language=en&searchterm='
             + searchTerm + '&image_type=all';
 
-        const url = "https://allorigins.me/get?url="
+       /* const url = "https://allorigins.me/get?url="
             + encodeURIComponent(imgUrl)
-            + "&callback=?";
+            + "&callback=?";*/
 
-        let success = false;
+       const url = "https://www.google.com";
+        console.log(url);
+
+
 
         /*$.getJSON(url, response => {
                 const html = response.contents;
