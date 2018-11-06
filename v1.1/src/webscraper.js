@@ -17,9 +17,9 @@ const getBlob = (url) => {
 };
 
 const imgURLForChallenge = (oldURL, challengeId) => {
-    const picRef = fire.storage().ref(/challenges/ + challengeId + '/imgURL');
+    const picRef = fire.storage().ref(/challenges/ + challengeId + '/img');
 
-    this.getBlob(oldURL)
+    getBlob(oldURL)
         .then(blob => {
             return picRef.put(blob)
         })
@@ -55,7 +55,7 @@ const getChallengeImage = (challengeTitle, challengeId) => {
             const images = $(".img-wrap");
             if (images[0]) {
                 const challengeImgUrl = images[0].children[1].attribs.src;
-                this.imgURLForChallenge(challengeImgUrl, challengeId);
+                imgURLForChallenge(challengeImgUrl, challengeId);
             } else {
                 // TODO: Set the state to the default challenge image.
             }

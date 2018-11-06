@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
-import CloseIcon from '@material-ui/icons/Close';
 import Button from "@material-ui/core/Button/Button";
 import classes from "./ChallengeDialog.module.css";
 import AddQuestion from "../AddQuestion/AddQuestion";
 import List from "@material-ui/core/List/List";
 import TextField from "@material-ui/core/TextField/TextField";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import Typography from "@material-ui/core/Typography/Typography";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import Slide from "@material-ui/core/Slide/Slide";
@@ -18,7 +16,6 @@ import FormControl from "@material-ui/core/FormControl/FormControl";
 import FormLabel from "@material-ui/core/FormLabel/FormLabel";
 import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
 import CloseEditChallenge from "../CloseEditChallenge/CloseEditChallenge";
-
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;

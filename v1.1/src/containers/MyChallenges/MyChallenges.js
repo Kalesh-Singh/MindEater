@@ -5,6 +5,7 @@ import EditChallengeCard from "../../components/EditChallengeCard/EditChallengeC
 import List from "@material-ui/core/List/List";
 
 import classes from "./MyChallenges.module.css";
+import getChallengeImage from "../../webscraper";
 
 class MyChallenges extends Component {
 
@@ -42,6 +43,7 @@ class MyChallenges extends Component {
                     .findIndex(challenge => (challenge.id === challengeId));
                 const updatedChallenge = snapshot.val();
                 updatedChallenge.id = challengeId;
+                getChallengeImage(updatedChallenge.title, updatedChallenge.id);
                 updatedMyChallenges[oldChallengeIndex] = updatedChallenge;
                 this.setState({myChallenges: updatedMyChallenges});
             });
