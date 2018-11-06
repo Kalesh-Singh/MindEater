@@ -16,6 +16,7 @@ import FormControl from "@material-ui/core/FormControl/FormControl";
 import FormLabel from "@material-ui/core/FormLabel/FormLabel";
 import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
 import CloseEditChallenge from "../CloseEditChallenge/CloseEditChallenge";
+import saveChallengeImageURL from "../../webscraper";
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
@@ -112,6 +113,8 @@ class ChallengeDialog extends Component {
             .catch(error => {
                 alert(error.message)
             });
+
+        saveChallengeImageURL(this.state.title.value, this.state.challengeId);
     };
 
     writePartialChallenge = () => {

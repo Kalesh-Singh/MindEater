@@ -5,7 +5,6 @@ import EditChallengeCard from "../../components/EditChallengeCard/EditChallengeC
 import List from "@material-ui/core/List/List";
 
 import classes from "./MyChallenges.module.css";
-import getChallengeImageURL from "../../webscraper";
 
 class MyChallenges extends Component {
 
@@ -43,19 +42,22 @@ class MyChallenges extends Component {
                     .findIndex(challenge => (challenge.id === challengeId));
                 const updatedChallenge = snapshot.val();
                 updatedChallenge.id = challengeId;
-                fire.database().ref().update('/challengeImages/' + challengeId)
-                    .once('value')
-                    .then(snapshot => {
+                updatedMyChallenges[oldChallengeIndex] = updatedChallenge;
+                this.setState({myChallenges: updatedMyChallenges});
+            });
 
-                    })
-                    .catch(error => {alert(error.message)});
-                getChallengeImageURL(updatedChallenge.title, updatedChallenge.id)
-                    .then(url => {
-                        updatedChallenge.imgURL = url;
-                        updatedMyChallenges[oldChallengeIndex] = updatedChallenge;
-                        this.setState({myChallenges: updatedMyChallenges});
-                    })
-                    .catch(error => {alert(error.message)});
+        fire.database().ref('/challengeImages/')
+            .on('child_changed', snapshot => {
+                console.log('Challenge ID = ', snapshot.key);
+                console.log('Challeange Img URL = ', snapshot.val().imgURL);
+                const challengeId = snapshot.key;
+                const updatedMyChallenges = [...this.state.myChallenges];
+                const oldChallengeIndex = updatedMyChallenges
+                    .findIndex(challenge => (challenge.id === challengeId));
+                const updatedChallenge = updatedMyChallenges[oldChallengeIndex];
+                updatedChallenge.imgURL = snapshot.val().imgURL;
+                updatedMyChallenges[oldChallengeIndex] = updatedChallenge;
+                this.setState({myChallenges: updatedMyChallenges});
             });
     };
 
