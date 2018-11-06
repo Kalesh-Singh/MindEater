@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import TextField from "@material-ui/core/TextField/TextField";
 import Button from "@material-ui/core/Button/Button";
-import ajax from "ajax";
 import $ from "jquery";
 import cheerio from "cheerio";
-import axios from 'axios';
-import rp from 'request-promise';
 
 import classes from "./WebScraper.module.css";
 
@@ -30,7 +27,6 @@ class WebScraper extends Component {
 
         $.getJSON(url, response => {
                 // console.log(response);
-
                 $.each(response, (key, val) => {
                     if (key === 'contents') {
                         // console.log(val);
