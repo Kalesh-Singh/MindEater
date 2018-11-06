@@ -21,7 +21,14 @@ class WebScraper extends Component {
         const imgUrl = 'https://www.shutterstock.com/search?search_source=base_landing_page&language=en&searchterm='
             + searchTerm + '&image_type=all';
 
-        const url = "https://anyorigin.com/go?url="
+        /*const url = "https://anyorigin.com/go?url="
+            + encodeURIComponent(imgUrl)
+            + "&callback=?";*/
+
+        // const url = "https://crossorigin.me/" + encodeURIComponent(imgUrl);
+
+
+        const url = "https://allorigins.me/get?url="
             + encodeURIComponent(imgUrl)
             + "&callback=?";
 
