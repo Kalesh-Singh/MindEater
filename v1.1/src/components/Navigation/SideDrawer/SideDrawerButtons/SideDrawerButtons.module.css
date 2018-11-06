@@ -1,3 +1,5 @@
+
+
 .SideDrawerItems a {
     text-decoration: none;
     width: 100%;
@@ -10,8 +12,30 @@
     text-decoration: underline;
 }
 
+.SideDrawerItems a:hover{
+    background: #5d9bf6;
+}
+
 .Header {
     width: 100%;
     text-align: center;
-    padding: 8px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+
+}
+
+/* Mind Eater Logo */
+.Logo {
+    width:50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    float:left;
+    padding-left: 20px;
+}
+
+.Background {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../../assets/svg/Drawer_Back.png) center;
+    background-size:cover;
+
 }

@@ -1,6 +1,27 @@
+.body {
+    background: black;
+}
+
+
 .root {
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
+    background: #40a4c8;
+}
+
+.header{
+    text-align: center;
+    background: #3F50B5;
+    align-items: center;
+    border:solid black;
+    border-radius: 10px;
+    color: white;
+}
+
+.CreateChallenge {
+    text-align: center;
+    align-items: center;
+    padding: 20px;
 }
 

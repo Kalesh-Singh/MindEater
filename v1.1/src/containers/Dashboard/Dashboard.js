@@ -82,9 +82,7 @@ class Dashboard extends Component {
 
         const CardStyle = {
             boxShadow: "0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
-            marginTop:"100px",
-            width:"350px",
-            height:"560px"
+            marginTop:"100px"
         };
 
         const primaryColor = "#9c27b0";
@@ -101,6 +99,23 @@ class Dashboard extends Component {
 
         return (
             <>
+                {/*<Grid direction="row">*/}
+                {/*<div style={{marginTop: '80px'}}>*/}
+                    {/*<svg viewBox={"100 0 960 300"}>*/}
+                        {/*<symbol id="s-text">*/}
+                            {/*<text text-anchor="left" x="10%" y="80%">Mind Eater</text>*/}
+                        {/*</symbol>*/}
+
+                        {/*<g>*/}
+                            {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
+                            {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
+                            {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
+                            {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
+                            {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
+                        {/*</g>*/}
+                    {/*</svg>*/}
+                {/*</div>*/}
+                {/*</Grid>*/}
                 <div className={classes.root}>
                 <Grid
                     container
@@ -108,11 +123,13 @@ class Dashboard extends Component {
                     direction="row"
                     alignItems="flex-start"
                     justify="center"
+
                 >
                     <Grid GridItem xs={12} sm={6} md={3}>
                         {/*<div className={classes.Db}>*/}
                         <Card
-                            style={CardStyle}>
+                        style={CardStyle}>
+
                             <CardActionArea>
                                 <CardMedia
                                     title="Start Solving Challenges"

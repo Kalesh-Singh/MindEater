@@ -5,13 +5,15 @@ import List from "@material-ui/core/List/List";
 import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
-import SolveChallengesIcon from '@material-ui/icons/ExtensionOutlined';
-import CreateChallengeIcon from '@material-ui/icons/NoteAddOutlined';
-import DashboardIcon from '@material-ui/icons/DashboardOutlined';
-import MyChallengesIcon from '@material-ui/icons/LibraryBooksOutlined';
+import SolveChallengesIcon from '@material-ui/icons/ExtensionTwoTone';
+import CreateChallengeIcon from '@material-ui/icons/NoteAddTwoTone';
+import DashboardIcon from '@material-ui/icons/DashboardTwoTone';
+import MyChallengesIcon from '@material-ui/icons/LibraryBooksTwoTone';
 import Divider from "@material-ui/core/Divider/Divider";
 
 import classes from "./SideDrawerButtons.module.css";
+import Blogo from "../../../../assets/svg/black_logo.png";
+import DBack from "../../../../assets/svg/Drawer_Back.png";
 
 function SideDrawerButtons(props) {
     return (
@@ -20,6 +22,7 @@ function SideDrawerButtons(props) {
                 className={classes.SideDrawerItems}
                 style={{display: 'block', width: '100%'}}
             >
+                <img className={classes.Logo} src={Blogo} alt='Mind Eater Logo'/>
                 <h3 className={classes.Header}>MindEater</h3>
                 <Divider/>
                 <NavLink
