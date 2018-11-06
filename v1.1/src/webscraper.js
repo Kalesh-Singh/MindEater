@@ -17,7 +17,7 @@ const getBlob = (url) => {
 };
 
 const imgURLForChallenge = (oldURL, challengeId) => {
-    const picRef = fire.storage().ref(/challenges/ + challengeId + '/img');
+    const picRef = fire.storage().ref(/challenges/ + challengeId + '/img.webp');
 
     getBlob(oldURL)
         .then(blob => {
