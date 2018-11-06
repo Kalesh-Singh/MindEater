@@ -1,4 +1,4 @@
-const request = require('request');
+const axios = require('axios');
 const cheerio = require('cheerio');
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
@@ -19,7 +19,7 @@ exports.getChallengeImage = functions.database.ref('/challenges/{pushId}/title')
             + encodeURIComponent(imgUrl)
             + "&callback=?";
 
-        let promise = Promise.reject("getJSON never triggered");
+        let promise = null;
 
         /*$.getJSON(url, response => {
                 const html = response.contents;
