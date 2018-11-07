@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import fire from "../../fire";
 import SolveChallengeCard from "../../components/SolveChallengeCard/SolveChallengeCard";
-import classes from "../Dashboard/Dashboard.module.css";
+import classes from "./SolveChallenges.module.css";
 import List from "@material-ui/core/List/List";
 import Typography from "@material-ui/core/Typography/Typography";
+import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
 
 class SolveChallenges extends Component {
 
     state = {
+        loading: true,
         challenges: []
     };
 
@@ -95,9 +97,23 @@ class SolveChallenges extends Component {
                     color="inherit"
                     align="center"
                 >Let the games Begin!</Typography>
-            <List className={classes.root}>
-                {challenges}
-            </List>
+                {this.state.loading ?
+                    <div className={classes.LoadingBar}>
+                        <LinearProgress variant="query"/>
+                        <br/>
+                        <LinearProgress variant="query" color="secondary"/>
+                        <br/>
+                        <Typography
+                            variant="h6"
+                            color="inherit"
+                            align="center">
+                            Loading Challenges ...
+                        </Typography>
+                    </div>
+                    : null}
+                <List className={classes.List}>
+                    {challenges}
+                </List>
             </div>
         );
     }

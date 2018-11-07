@@ -1,0 +1,9 @@
+.List {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.LoadingBar {
+    padding: 16px;
+}
