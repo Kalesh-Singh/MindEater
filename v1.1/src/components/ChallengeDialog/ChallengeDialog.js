@@ -116,8 +116,15 @@ class ChallengeDialog extends Component {
             .catch(error => {
                 alert(error.message)
             });
-
-        // TODO: Delete the challenge images.
+        // Delete the challenge image
+        fire.database().ref('/challengeImages/' + this.state.challengeId)
+            .remove()
+            .then(() => {
+                console.log('Challenge image deleted')
+            })
+            .catch(error => {
+                alert(error.message)
+            });
     };
 
     writeChallenge = () => {
