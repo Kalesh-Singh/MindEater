@@ -22,17 +22,20 @@ class Dashboard extends Component {
     setListeners = () => {
         fire.database().ref('/challenges/')
             .on('child_added', snapshot => {
-                console.log('Child Added - challenges');
                 // TODO: Check if owner is not this user
                 const challenge = snapshot.val();
                 challenge.id = snapshot.key;
                 const updatedChallenges = [...this.state.challenges];
-                updatedChallenges.push(challenge);
-                this.setState({challenges: updatedChallenges});
+                fire.database().ref('/challengeImages/' + challenge.id)
+                    .once('value')
+                    .then(imgSnapshot => {
+                        challenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
+                        updatedChallenges.push(challenge);
+                        this.setState({challenges: updatedChallenges});
+                    });
             });
         fire.database().ref('/challenges/')
             .on('child_removed', snapshot => {
-                console.log('Child Removed - challenges');
                 // TODO: Check if owner is not this user
                 const challengeId = snapshot.key;
                 const updatedChallenges
@@ -41,7 +44,6 @@ class Dashboard extends Component {
             });
         fire.database().ref('/challenges/')
             .on('child_changed', snapshot => {
-                console.log('Child Changed - challenges');
                 // TODO: Check if owner is not this user
                 const challengeId = snapshot.key;
                 const updatedChallenges = [...this.state.challenges];
@@ -49,26 +51,39 @@ class Dashboard extends Component {
                     .findIndex(challenge => (challenge.id === challengeId));
                 const updatedChallenge = snapshot.val();
                 updatedChallenge.id = challengeId;
-                updatedChallenges[oldChallengeIndex] = updatedChallenge;
-                this.setState({challenges: updatedChallenges});
+                fire.database().ref('/challengeImages/' + challengeId)
+                    .once('value')
+                    .then(imgSnapshot => {
+                        updatedChallenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
+                        updatedChallenges[oldChallengeIndex] = updatedChallenge;
+                        this.setState({challenges: updatedChallenges});
+                    });
             });
     };
 
     componentDidMount() {
-        console.log('Dashboard did mount');
         this.setListeners();
 
         fire.database().ref('/challenges/')
             .once('value')
             .then(snapshot => {
-                const challengesObject = snapshot.val();
                 const updatedChallenges = [];
-                for (let challengeId in challengesObject) {
-                    const challenge = challengesObject[challengeId];
-                    challenge.id = challengeId;
-                    updatedChallenges.push(challenge);
-                }
-                this.setState({challenges: updatedChallenges});
+                const challengesObject = snapshot.val();
+
+                fire.database().ref('/challengeImages/')
+                    .once('value')
+                    .then(imagesSnapshot => {
+                        const imagesObject = imagesSnapshot.val();
+
+                        for (let challengeId in challengesObject) {
+                            const challenge = challengesObject[challengeId];
+                            challenge.id = challengeId;
+                            challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
+                            updatedChallenges.push(challenge);
+                        }
+
+                        this.setState({challenges: updatedChallenges});
+                    });
             });
     }
 

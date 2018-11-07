@@ -69,6 +69,16 @@ class EditChallengeCard extends Component {
             .catch(error => {
                 alert(error.message)
             });
+
+        // Delete the challenge image
+        fire.database().ref('/challengeImages/' + this.state.challenge.id)
+            .remove()
+            .then(() => {
+                console.log('Challenge image deleted')
+            })
+            .catch(error => {
+                alert(error.message)
+            });
     };
 
     render() {
