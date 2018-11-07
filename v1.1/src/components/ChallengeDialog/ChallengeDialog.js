@@ -18,6 +18,7 @@ import FormControl from "@material-ui/core/FormControl/FormControl";
 import FormLabel from "@material-ui/core/FormLabel/FormLabel";
 import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
 import CloseEditChallenge from "../CloseEditChallenge/CloseEditChallenge";
+import saveChallengeImageURL from "../../webscraper";
 
 
 function Transition(props) {
@@ -27,6 +28,7 @@ function Transition(props) {
 class ChallengeDialog extends Component {
 
     initialState = {
+        saving: false,
         challengeId: null,
         questions: [],
         isPartial: true,
@@ -45,6 +47,7 @@ class ChallengeDialog extends Component {
     };
 
     state = {
+        saving: false,
         challengeId: null,
         isPartial: true,
         questions: [],
@@ -63,8 +66,8 @@ class ChallengeDialog extends Component {
     };
 
     handleSave = () => {
-        this.props.closed();
-        this.writeChallenge();
+        this.writeChallenge()
+            .then(this.props.closed);
     };
 
     handleCancel = (valid) => () => {
@@ -98,6 +101,8 @@ class ChallengeDialog extends Component {
             .remove()
             .then(() => {console.log('Challenge deleted')})
             .catch(error => {alert(error.message)});
+
+        // TODO: Delete the challenge images.
     };
 
     writeChallenge = () => {
@@ -108,13 +113,9 @@ class ChallengeDialog extends Component {
         updates['/challenges/' + this.state.challengeId + '/description'] = this.state.description.value;
         updates['/challenges/' + this.state.challengeId + '/isPartial'] = false;
 
-        fire.database().ref().update(updates)
-            .then(() => {
-                console.log('The challenge was saved in the database.')
-            })
-            .catch(error => {
-                alert(error.message)
-            });
+
+        return saveChallengeImageURL(this.state.challengeId, this.state.title.value)
+            .then(() => (fire.database().ref().update(updates)));
     };
 
     writePartialChallenge = () => {
@@ -139,7 +140,8 @@ class ChallengeDialog extends Component {
         for (let element in form) {
             if (element === 'questions') {
                 validForm = validForm && form[element].length !== 0;
-            } else if (element !== 'open' && element !== 'challengeId' && element !== 'isPartial') {
+            } else if (element !== 'open' && element !== 'challengeId'
+                && element !== 'isPartial' && element !== 'saving') {
                 validForm = validForm && form[element].valid;
             }
         }
