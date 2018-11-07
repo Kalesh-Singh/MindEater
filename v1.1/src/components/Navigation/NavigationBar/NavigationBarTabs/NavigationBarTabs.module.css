@@ -1,7 +1,11 @@
 .DesktopOnly {
     display: none;
     width: 100%;
+}
 
+.DesktopOnly a:hover{
+    color: black;
+    font-size: 15px;
 }
 
 @media (min-width: 650px) {
