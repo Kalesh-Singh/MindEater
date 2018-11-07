@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button} from '@material-ui/core';
+import Button from "@material-ui/core/Button/Button";
 import ChallengeDialog from "../ChallengeDialog/ChallengeDialog";
 import PlusIcon from "@material-ui/icons/Add"
 
@@ -22,7 +22,7 @@ class AddChallenge extends Component {
         return (
             <>
                 <Button onClick={this.handleClickOpen}
-                style={{background:"black", color:"white", borderRadius:"20px", fontWeight:1}}>
+                style={{background:"green", color:"white", borderRadius:"20px"}}>
                     <PlusIcon style={{marginRight: '8px'}}/>Create New Challenge</Button>
                 <ChallengeDialog
                     open={this.state.open}

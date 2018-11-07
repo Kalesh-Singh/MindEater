@@ -19,6 +19,11 @@ import FormLabel from "@material-ui/core/FormLabel/FormLabel";
 import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
 import CloseEditChallenge from "../CloseEditChallenge/CloseEditChallenge";
 
+import SaveIcon from "@material-ui/icons/Save"
+import HelpIc from "@material-ui/icons/HelpOutline";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import Fade from '@material-ui/core/Fade';
+
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
@@ -303,6 +308,8 @@ class ChallengeDialog extends Component {
             />
         ));
 
+        const NeedHelp = "Not sure what to do? \n Click here for more help";
+
         return (
             <Dialog
                 fullScreen
@@ -319,18 +326,35 @@ class ChallengeDialog extends Component {
                             deleteChallenge={this.deleteChallenge}
                             saveChallenge={this.writeChallenge}
                         />
-                        <Typography variant="h6" color="inherit" style={{flex: '1'}}>
+                        <Typography variant="h6" color="inherit" style={{flex: '1', textAlign:"center"}}>
                             New Challenge
                         </Typography>
                         <Button
                             color="inherit"
                             onClick={this.handleSave}
                             disabled={!validForm}
-                        >
-                            Save
+                            variant={"outlined"}
+                        ><SaveIcon style={{marginRight: '8px'}}/>Save
                         </Button>
                     </Toolbar>
                 </AppBar>
+
+                <div>
+                    <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={NeedHelp}>
+                        <Button
+                            color={"#a60016"}
+                            variant={"raised"}
+                            style={{color:"black",
+                            margin: 0,
+                            top: 'auto',
+                            right: 20,
+                            bottom: 20,
+                            left: 'auto',
+                            position: 'fixed'}}>
+                            <HelpIc/>
+                        </Button>
+                    </Tooltip>
+                </div>
 
                 <DialogContent className={classes.root}>
                     <TextField

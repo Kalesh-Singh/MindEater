@@ -86,7 +86,7 @@ class MyChallenges extends Component {
                     <AddChallenge/>
                 </div>
                 <List className={classes.root}
-                style={{boxShadow: "0 10px 20px 8px rgba(0, 0, 0, 0.2), 0 4px 20px 0px rgba(0, 0, 0, 0.2), 0 8px 10px 5px rgba(0, 0, 0, 0.3)"}}>
+                >
                     {myChallenges}
                 </List>
             </div>
