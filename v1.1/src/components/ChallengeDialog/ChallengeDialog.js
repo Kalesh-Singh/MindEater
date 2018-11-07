@@ -74,26 +74,6 @@ class ChallengeDialog extends Component {
             });
     };
 
-    handleCancel = (valid) => () => {
-
-        // TODO: ?????? Delete ??????
-        this.props.closed();
-
-        if (!valid) {
-            console.log('All changes will be discarded -- Discard Changes, Cancel');
-        } else if (this.state.isPartial) {
-            console.log('Do you want to save the challenge -- No, Yes');
-        } else {
-            console.log('Do you want to save any changes made -- No, Yes');
-        }
-
-        // TODO: Update this to match the cases above - Probably with dialog boxes
-        // TODO: Check if this isn't already done ???????
-        if (!valid) {
-            this.deleteChallenge();
-        }
-    };
-
     deleteChallenge = () => {
         console.log('Delete challenge called !!!!');
         // Delete the challenge questions
