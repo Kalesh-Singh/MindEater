@@ -19,6 +19,7 @@ import FormLabel from "@material-ui/core/FormLabel/FormLabel";
 import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
 import CloseEditChallenge from "../CloseEditChallenge/CloseEditChallenge";
 import saveChallengeImageURL from "../../webscraper";
+import SavingModal from "../SavingModal/SavingModal";
 
 
 function Transition(props) {
@@ -28,7 +29,7 @@ function Transition(props) {
 class ChallengeDialog extends Component {
 
     initialState = {
-        saving: false,
+        saving: true,
         challengeId: null,
         questions: [],
         isPartial: true,
@@ -47,7 +48,7 @@ class ChallengeDialog extends Component {
     };
 
     state = {
-        saving: false,
+        saving: true,
         challengeId: null,
         isPartial: true,
         questions: [],
@@ -93,14 +94,22 @@ class ChallengeDialog extends Component {
         for (let question of this.state.questions) {
             fire.database().ref('/questions/' + question.id)
                 .remove()
-                .then(() => {console.log('Challenge question deleted')})
-                .catch(error => {alert(error.message)});
+                .then(() => {
+                    console.log('Challenge question deleted')
+                })
+                .catch(error => {
+                    alert(error.message)
+                });
         }
         // Delete the challenge itself
         fire.database().ref('/challenges/' + this.state.challengeId)
             .remove()
-            .then(() => {console.log('Challenge deleted')})
-            .catch(error => {alert(error.message)});
+            .then(() => {
+                console.log('Challenge deleted')
+            })
+            .catch(error => {
+                alert(error.message)
+            });
 
         // TODO: Delete the challenge images.
     };
@@ -306,76 +315,79 @@ class ChallengeDialog extends Component {
         ));
 
         return (
-            <Dialog
-                fullScreen
-                open={this.props.open}
-                onClose={this.props.closed}
-                TransitionComponent={Transition}
-            >
-                <AppBar style={{position: 'relative'}}>
-                    <Toolbar>
-                        <CloseEditChallenge
-                            challengeValid={validForm}
-                            challengePartial={this.state.isPartial}
-                            closeChallengeDialog={this.props.closed}
-                            deleteChallenge={this.deleteChallenge}
-                            saveChallenge={this.writeChallenge}
+            <>
+                <Dialog
+                    fullScreen
+                    open={this.props.open}
+                    onClose={this.props.closed}
+                    TransitionComponent={Transition}
+                >
+                    <AppBar style={{position: 'relative'}}>
+                        <Toolbar>
+                            <CloseEditChallenge
+                                challengeValid={validForm}
+                                challengePartial={this.state.isPartial}
+                                closeChallengeDialog={this.props.closed}
+                                deleteChallenge={this.deleteChallenge}
+                                saveChallenge={this.writeChallenge}
+                            />
+                            <Typography variant="h6" color="inherit" style={{flex: '1'}}>
+                                New Challenge
+                            </Typography>
+                            <Button
+                                color="inherit"
+                                onClick={this.handleSave}
+                                disabled={!validForm}
+                            >
+                                Save
+                            </Button>
+                        </Toolbar>
+                    </AppBar>
+
+                    <DialogContent className={classes.root}>
+                        <TextField
+                            label="Title"
+                            multiline
+                            rowsMax="4"
+                            margin="normal"
+                            fullWidth
+                            error={this.state.title.error.length > 0}
+                            helperText={this.state.title.error}
+                            value={this.state.title.value}
+                            onChange={this.handleFieldChange('title')}
+                            onFocus={this.handleFieldFocus('title')}
                         />
-                        <Typography variant="h6" color="inherit" style={{flex: '1'}}>
-                            New Challenge
-                        </Typography>
-                        <Button
-                            color="inherit"
-                            onClick={this.handleSave}
-                            disabled={!validForm}
+                        <TextField
+                            label="Description"
+                            multiline
+                            rowsMax="4"
+                            margin="normal"
+                            fullWidth
+                            error={this.state.description.error.length > 0}
+                            helperText={this.state.description.error}
+                            value={this.state.description.value}
+                            onChange={this.handleFieldChange('description')}
+                            onFocus={this.handleFieldFocus('description')}
+                        />
+
+                        <FormControl
+                            error={questionsError.length > 0}
+                            style={{width: '100%'}}
                         >
-                            Save
-                        </Button>
-                    </Toolbar>
-                </AppBar>
-
-                <DialogContent className={classes.root}>
-                    <TextField
-                        label="Title"
-                        multiline
-                        rowsMax="4"
-                        margin="normal"
-                        fullWidth
-                        error={this.state.title.error.length > 0}
-                        helperText={this.state.title.error}
-                        value={this.state.title.value}
-                        onChange={this.handleFieldChange('title')}
-                        onFocus={this.handleFieldFocus('title')}
-                    />
-                    <TextField
-                        label="Description"
-                        multiline
-                        rowsMax="4"
-                        margin="normal"
-                        fullWidth
-                        error={this.state.description.error.length > 0}
-                        helperText={this.state.description.error}
-                        value={this.state.description.value}
-                        onChange={this.handleFieldChange('description')}
-                        onFocus={this.handleFieldFocus('description')}
-                    />
-
-                    <FormControl
-                        error={questionsError.length > 0}
-                        style={{width: '100%'}}
-                    >
-                        <FormLabel component="label">Questions</FormLabel>
-                        {(questionsError.length > 0) ? <FormHelperText>{questionsError}</FormHelperText> : null}
-                    </FormControl>
-                    <List>
-                        {questionItems}
-                    </List>
-                    <AddQuestion
-                        challengeId={this.state.challengeId}
-                        savePartial={this.writePartialChallenge}
-                    />
-                </DialogContent>
-            </Dialog>
+                            <FormLabel component="label">Questions</FormLabel>
+                            {(questionsError.length > 0) ? <FormHelperText>{questionsError}</FormHelperText> : null}
+                        </FormControl>
+                        <List>
+                            {questionItems}
+                        </List>
+                        <AddQuestion
+                            challengeId={this.state.challengeId}
+                            savePartial={this.writePartialChallenge}
+                        />
+                    </DialogContent>
+                </Dialog>
+                <SavingModal open={this.state.saving}/>
+            </>
         );
     }
 }
