@@ -27,8 +27,14 @@ class Dashboard extends Component {
                 const challenge = snapshot.val();
                 challenge.id = snapshot.key;
                 const updatedChallenges = [...this.state.challenges];
-                updatedChallenges.push(challenge);
-                this.setState({challenges: updatedChallenges});
+                fire.database().ref('/challengeImages/' + challenge.id)
+                    .once('value')
+                    .then(imgSnapshot => {
+                        console.log('CHILD ADDED', imgSnapshot.val());
+                        challenge.imgURL = imgSnapshot.val().imgURL;
+                        updatedChallenges.push(challenge);
+                        this.setState({challenges: updatedChallenges});
+                    });
             });
         fire.database().ref('/challenges/')
             .on('child_removed', snapshot => {
@@ -49,8 +55,14 @@ class Dashboard extends Component {
                     .findIndex(challenge => (challenge.id === challengeId));
                 const updatedChallenge = snapshot.val();
                 updatedChallenge.id = challengeId;
-                updatedChallenges[oldChallengeIndex] = updatedChallenge;
-                this.setState({challenges: updatedChallenges});
+                fire.database().ref('/challengeImages/' + challengeId)
+                    .once('value')
+                    .then(imgSnapshot => {
+                        console.log('CHILD CHANGED', imgSnapshot.val());
+                        updatedChallenge.imgURL = imgSnapshot.val().imgURL;
+                        updatedChallenges[oldChallengeIndex] = updatedChallenge;
+                        this.setState({challenges: updatedChallenges});
+                    });
             });
     };
 
