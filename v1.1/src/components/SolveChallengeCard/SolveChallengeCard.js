@@ -79,7 +79,7 @@ class SolveChallengeCard extends Component {
                 <Card
                     style={{
                         width: '100%', height: '100%', display: 'flex',
-                        flexFlow: 'column', justifyContent: 'space-between', border:"solid black"
+                        flexFlow: 'column', justifyContent: 'space-between'
                     }}
                 >
                     < CardActionArea onClick={this.handleClickOpen}>
