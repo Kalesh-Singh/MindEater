@@ -91,9 +91,9 @@ class SolveChallenges extends Component {
         return (
             <div style={{marginTop: "100px"}}>
                 <Typography
-                    variant="h3"
+                    variant="h4"
                     color="inherit"
-                    aling="center"
+                    align="center"
                 >Let the games Begin!</Typography>
             <List className={classes.root}>
                 {challenges}
