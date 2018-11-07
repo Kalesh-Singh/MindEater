@@ -24,11 +24,17 @@ class Dashboard extends Component {
             .on('child_added', snapshot => {
                 console.log('Child Added - challenges');
                 // TODO: Check if owner is not this user
+                const updatedChallenges = [...this.state.challenges];
                 const challenge = snapshot.val();
                 challenge.id = snapshot.key;
-                const updatedChallenges = [...this.state.challenges];
-                updatedChallenges.push(challenge);
-                this.setState({challenges: updatedChallenges});
+                fire.database().ref('/challengeImages/' + challenge.id).once('value')
+                    .then(snapshot => {
+                        challenge.imgURL = snapshot.val();
+                        updatedChallenges.push(challenge);
+                        this.setState({challenges: updatedChallenges});
+                    })
+                    .catch(error => {alert(error.message)});
+
             });
         fire.database().ref('/challenges/')
             .on('child_removed', snapshot => {
@@ -49,8 +55,13 @@ class Dashboard extends Component {
                     .findIndex(challenge => (challenge.id === challengeId));
                 const updatedChallenge = snapshot.val();
                 updatedChallenge.id = challengeId;
-                updatedChallenges[oldChallengeIndex] = updatedChallenge;
-                this.setState({challenges: updatedChallenges});
+                fire.database().ref('/challengeImages/' + challengeId).once('value')
+                    .then(snapshot => {
+                        updatedChallenge.imgURL = snapshot.val();
+                        console.log("URRRLLL", updatedChallenge.imgURL);
+                        updatedChallenges[oldChallengeIndex] = updatedChallenge;
+                        this.setState({challenges: updatedChallenges});
+                    }).catch(error => {alert(error.message)});
             });
 
         fire.database().ref('/challengeImages/')
@@ -59,12 +70,36 @@ class Dashboard extends Component {
                 console.log('Challeange Img URL = ', snapshot.val().imgURL);
                 const challengeId = snapshot.key;
                 const updatedChallenges = [...this.state.challenges];
-                const oldChallengeIndex = updatedChallenges
-                    .findIndex(challenge => (challenge.id === challengeId));
-                const updatedChallenge = updatedChallenges[oldChallengeIndex];
-                updatedChallenge.imgURL = snapshot.val().imgURL;
-                updatedChallenges[oldChallengeIndex] = updatedChallenge;
-                this.setState({challenges: updatedChallenges});
+                if (updatedChallenges !== []) {
+                    const oldChallengeIndex = updatedChallenges
+                        .findIndex(challenge => (challenge.id === challengeId));
+                    if (oldChallengeIndex !== -1) {
+                        const updatedChallenge = updatedChallenges[oldChallengeIndex];
+                        updatedChallenge.imgURL = snapshot.val().imgURL;
+                        updatedChallenges[oldChallengeIndex] = updatedChallenge;
+                        this.setState({challenges: updatedChallenges});
+                    }
+                }
+            });
+        fire.database().ref('/challengeImages/')
+            .on('child_added', snapshot => {
+                console.log("CHALLENGE IMAGES - Child added");
+                // console.log('Challenge ID = ', snapshot.key);
+                // console.log('Challeange Img URL = ', snapshot.val().imgURL);
+                const challengeId = snapshot.key;
+                // console.log("Challenge IDDD ", challengeId);
+                const updatedChallenges = [...this.state.challenges];
+                console.log("UPDATED CHALLENGES", updatedChallenges);
+                if (updatedChallenges !== []) {
+                    const oldChallengeIndex = updatedChallenges
+                        .findIndex(challenge => (challenge.id === challengeId));
+                    if (oldChallengeIndex !== -1) {
+                        const updatedChallenge = updatedChallenges[oldChallengeIndex];
+                        updatedChallenge.imgURL = snapshot.val().imgURL;
+                        updatedChallenges[oldChallengeIndex] = updatedChallenge;
+                        this.setState({challenges: updatedChallenges});
+                    }
+                }
             });
     };
 
@@ -87,6 +122,7 @@ class Dashboard extends Component {
     }
 
     render() {
+        console.log(this.state.challenges);
         const challenges = this.state.challenges.map(challenge => (
             <SolveChallengeCard
                 key={challenge.id}
@@ -96,9 +132,9 @@ class Dashboard extends Component {
 
         const CardStyle = {
             boxShadow: "0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
-            marginTop:"100px",
-            width:"350px",
-            height:"560px"
+            marginTop: "100px",
+            width: "350px",
+            height: "560px"
         };
 
         const primaryColor = "#9c27b0";
@@ -109,73 +145,71 @@ class Dashboard extends Component {
         const roseColor = "#e91e63";
         const grayColor = "#999999";
 
-        const backgroundColor = {
-
-        }
+        const backgroundColor = {}
 
         return (
             <>
                 <div className={classes.root}>
-                <Grid
-                    container
-                    spacing={0}
-                    direction="row"
-                    alignItems="flex-start"
-                    justify="center"
-                >
-                    <Grid GridItem xs={12} sm={6} md={3}>
-                        {/*<div className={classes.Db}>*/}
-                        <Card
-                            style={CardStyle}>
-                            <CardActionArea>
-                                <CardMedia
-                                    title="Start Solving Challenges"
-                                    className={classes.ChallengeImage}
-                                    style={{height:"200px"}}
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant={"h4"} component={"h2"}>
-                                        Challenges
-                                    </Typography>
-                                    <Typography component={'p'}>
-                                        Begin solving other users challenges.
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                                {/*<Button size={"small"} color={"primary"} variant={"raised"}>*/}
-                                {/*<Play/>*/}
-                                {/*Start*/}
-                                {/*</Button>*/}
-                                <div className={classes.flex}>
-                                    <c className={classes.bttn}>Start</c>
-                                </div>
-                            </CardActions>
-                        </Card>
-                        {/*</div>*/}
+                    <Grid
+                        container
+                        spacing={0}
+                        direction="row"
+                        alignItems="flex-start"
+                        justify="center"
+                    >
+                        <Grid GridItem xs={12} sm={6} md={3}>
+                            {/*<div className={classes.Db}>*/}
+                            <Card
+                                style={CardStyle}>
+                                <CardActionArea>
+                                    <CardMedia
+                                        title="Start Solving Challenges"
+                                        className={classes.ChallengeImage}
+                                        style={{height: "200px"}}
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant={"h4"} component={"h2"}>
+                                            Challenges
+                                        </Typography>
+                                        <Typography component={'p'}>
+                                            Begin solving other users challenges.
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                                <CardActions>
+                                    {/*<Button size={"small"} color={"primary"} variant={"raised"}>*/}
+                                    {/*<Play/>*/}
+                                    {/*Start*/}
+                                    {/*</Button>*/}
+                                    <div className={classes.flex}>
+                                        <c className={classes.bttn}>Start</c>
+                                    </div>
+                                </CardActions>
+                            </Card>
+                            {/*</div>*/}
+                        </Grid>
+
+
+                        <Grid GridItem xs={12} sm={5} md={3}>
+                            <Card
+                                style={{marginTop: "100px"}}>
+                                <CardHeader style={{background: "green"}}/>
+
+                                <CardActionArea>
+                                    <CardMedia
+                                        title={"Points"}/>
+                                    <CardContent>
+                                        <Typography gutterBottom variant={"h4"} component={"h1"}>
+                                            Points
+                                        </Typography>
+                                        <Typography component={'p'}>
+                                            User tier will be displayed here:
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
+                        </Grid>
                     </Grid>
-
-
-                    <Grid GridItem xs={12} sm={5} md={3}>
-                        <Card
-                            style={{marginTop:"100px"}}>
-                            <CardHeader style={{background:"green"}}/>
-
-                            <CardActionArea>
-                                <CardMedia
-                                    title={"Points"}/>
-                                <CardContent>
-                                    <Typography gutterBottom variant={"h4"} component={"h1"}>
-                                        Points
-                                    </Typography>
-                                    <Typography component={'p'}>
-                                        User tier will be displayed here:
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                    </Grid>
-                </Grid>
                 </div>
 
                 <List className={classes.root}>
