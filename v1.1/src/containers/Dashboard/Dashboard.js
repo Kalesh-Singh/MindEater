@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import fire from "../../fire";
 import SolveChallengeCard from "../../components/SolveChallengeCard/SolveChallengeCard";
 import List from "@material-ui/core/List/List";
 import Grid from "@material-ui/core/Grid/Grid";
@@ -15,86 +14,7 @@ import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 
 class Dashboard extends Component {
 
-    state = {
-        challenges: []
-    };
-
-    setListeners = () => {
-        fire.database().ref('/challenges/')
-            .on('child_added', snapshot => {
-                // TODO: Check if owner is not this user
-                const challenge = snapshot.val();
-                challenge.id = snapshot.key;
-                const updatedChallenges = [...this.state.challenges];
-                fire.database().ref('/challengeImages/' + challenge.id)
-                    .once('value')
-                    .then(imgSnapshot => {
-                        challenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
-                        updatedChallenges.push(challenge);
-                        this.setState({challenges: updatedChallenges});
-                    });
-            });
-        fire.database().ref('/challenges/')
-            .on('child_removed', snapshot => {
-                // TODO: Check if owner is not this user
-                const challengeId = snapshot.key;
-                const updatedChallenges
-                    = this.state.challenges.filter((challenge) => (challenge.id !== challengeId));
-                this.setState({challenges: updatedChallenges});
-            });
-        fire.database().ref('/challenges/')
-            .on('child_changed', snapshot => {
-                // TODO: Check if owner is not this user
-                const challengeId = snapshot.key;
-                const updatedChallenges = [...this.state.challenges];
-                const oldChallengeIndex = updatedChallenges
-                    .findIndex(challenge => (challenge.id === challengeId));
-                const updatedChallenge = snapshot.val();
-                updatedChallenge.id = challengeId;
-                fire.database().ref('/challengeImages/' + challengeId)
-                    .once('value')
-                    .then(imgSnapshot => {
-                        updatedChallenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
-                        updatedChallenges[oldChallengeIndex] = updatedChallenge;
-                        this.setState({challenges: updatedChallenges});
-                    });
-            });
-    };
-
-    componentDidMount() {
-        this.setListeners();
-
-        fire.database().ref('/challenges/')
-            .once('value')
-            .then(snapshot => {
-                const updatedChallenges = [];
-                const challengesObject = snapshot.val();
-
-                fire.database().ref('/challengeImages/')
-                    .once('value')
-                    .then(imagesSnapshot => {
-                        const imagesObject = imagesSnapshot.val();
-
-                        for (let challengeId in challengesObject) {
-                            const challenge = challengesObject[challengeId];
-                            challenge.id = challengeId;
-                            challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
-                            updatedChallenges.push(challenge);
-                        }
-
-                        this.setState({challenges: updatedChallenges});
-                    });
-            });
-    }
-
     render() {
-        const challenges = this.state.challenges.map(challenge => (
-            <SolveChallengeCard
-                key={challenge.id}
-                challenge={challenge}
-            />
-        ));
-
         const CardStyle = {
             boxShadow: "0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
             marginTop:"100px"
@@ -108,12 +28,9 @@ class Dashboard extends Component {
         const roseColor = "#e91e63";
         const grayColor = "#999999";
 
-        const backgroundColor = {
-
-        }
+        const backgroundColor = {}
 
         return (
-            <>
                 {/*<Grid direction="row">*/}
                 {/*<div style={{marginTop: '80px'}}>*/}
                     {/*<svg viewBox={"100 0 960 300"}>*/}
@@ -131,7 +48,7 @@ class Dashboard extends Component {
                     {/*</svg>*/}
                 {/*</div>*/}
                 {/*</Grid>*/}
-                <div className={classes.root}>
+             <div className={classes.root}>
                 <Grid
                     container
                     spacing={0}
@@ -149,7 +66,7 @@ class Dashboard extends Component {
                                 <CardMedia
                                     title="Start Solving Challenges"
                                     className={classes.ChallengeImage}
-                                    style={{height:"200px"}}
+                                    style={{height: "200px"}}
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant={"h4"} component={"h2"}>
@@ -176,8 +93,8 @@ class Dashboard extends Component {
 
                     <Grid GridItem xs={12} sm={5} md={3}>
                         <Card
-                            style={{marginTop:"100px"}}>
-                            <CardHeader style={{background:"green"}}/>
+                            style={{marginTop: "100px"}}>
+                            <CardHeader style={{background: "green"}}/>
 
                             <CardActionArea>
                                 <CardMedia
@@ -194,12 +111,7 @@ class Dashboard extends Component {
                         </Card>
                     </Grid>
                 </Grid>
-                </div>
-
-                <List className={classes.root}>
-                    {challenges}
-                </List>
-            </>
+            </div>
         );
     }
 }

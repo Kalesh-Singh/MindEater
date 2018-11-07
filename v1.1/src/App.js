@@ -5,6 +5,7 @@ import Authentication from "./containers/Authentication/Authentication";
 import Navigation from "./components/Navigation/Navigation";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import MyChallenges from "./containers/MyChallenges/MyChallenges";
+import SolveChallenges from "./containers/SolveChallenges/SolveChallenges";
 
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
                 {/*TODO: Add routes to other pages here once created.*/}
                 <Route path='/dashboard' component={Dashboard} exact/>
                 <Route path='/my-challenges' component={MyChallenges} exact/>
+                <Route path='/solve-challenges' component={SolveChallenges} exact/>
             </div>
         );
     }
