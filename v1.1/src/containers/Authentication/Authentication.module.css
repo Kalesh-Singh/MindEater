@@ -1,0 +1,22 @@
+.Authentication {
+    width: 100vw;
+    flex-direction: column;
+}
+
+.Authentication h1 {
+    text-align: center;
+}
+
+@media (min-width: 500px) {
+    .Authentication {
+        width: 500px;
+    }
+}
+
+.Radio {
+    justify-content: space-around;
+}
+
+.Radio svg {
+    display: none;
+}
