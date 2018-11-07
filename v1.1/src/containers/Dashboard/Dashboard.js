@@ -31,7 +31,7 @@ class Dashboard extends Component {
                     .once('value')
                     .then(imgSnapshot => {
                         console.log('CHILD ADDED', imgSnapshot.val());
-                        challenge.imgURL = imgSnapshot.val().imgURL;
+                        challenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
                         updatedChallenges.push(challenge);
                         this.setState({challenges: updatedChallenges});
                     });
@@ -59,7 +59,7 @@ class Dashboard extends Component {
                     .once('value')
                     .then(imgSnapshot => {
                         console.log('CHILD CHANGED', imgSnapshot.val());
-                        updatedChallenge.imgURL = imgSnapshot.val().imgURL;
+                        updatedChallenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
                         updatedChallenges[oldChallengeIndex] = updatedChallenge;
                         this.setState({challenges: updatedChallenges});
                     });
@@ -84,7 +84,7 @@ class Dashboard extends Component {
                         for (let challengeId in challengesObject) {
                             const challenge = challengesObject[challengeId];
                             challenge.id = challengeId;
-                            challenge.imgURL = imagesObject[challengeId].imgURL;
+                            challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
                             console.log('CHALLENGE', challenge);
                             updatedChallenges.push(challenge);
                         }
