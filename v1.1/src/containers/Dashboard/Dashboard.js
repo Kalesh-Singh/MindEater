@@ -30,24 +30,25 @@ class Dashboard extends Component {
 
         const backgroundColor = {}
 
-        return (
-                {/*<Grid direction="row">*/}
-                {/*<div style={{marginTop: '80px'}}>*/}
-                    {/*<svg viewBox={"100 0 960 300"}>*/}
-                        {/*<symbol id="s-text">*/}
-                            {/*<text text-anchor="left" x="10%" y="80%">Mind Eater</text>*/}
-                        {/*</symbol>*/}
+        {/*<Grid direction="row">*/}
+        {/*<div style={{marginTop: '80px'}}>*/}
+        {/*<svg viewBox={"100 0 960 300"}>*/}
+        {/*<symbol id="s-text">*/}
+        {/*<text text-anchor="left" x="10%" y="80%">Mind Eater</text>*/}
+        {/*</symbol>*/}
 
-                        {/*<g>*/}
-                            {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
-                            {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
-                            {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
-                            {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
-                            {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
-                        {/*</g>*/}
-                    {/*</svg>*/}
-                {/*</div>*/}
-                {/*</Grid>*/}
+        {/*<g>*/}
+        {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
+        {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
+        {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
+        {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
+        {/*<use href="#s-text" className={classes["text-copy"]}></use>*/}
+        {/*</g>*/}
+        {/*</svg>*/}
+        {/*</div>*/}
+        {/*</Grid>*/}
+
+        return (
              <div className={classes.root}>
                 <Grid
                     container

@@ -447,7 +447,6 @@ class ChallengeDialog extends Component {
                         <AddQuestion
                             challengeId={this.state.challengeId}
                             savePartial={this.writePartialChallenge}
-                            style={{background:"red"}}
                         />
                     </DialogContent>
                 </Dialog>

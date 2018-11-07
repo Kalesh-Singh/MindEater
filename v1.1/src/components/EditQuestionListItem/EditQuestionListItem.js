@@ -10,6 +10,7 @@ import DeleteIcon from "@material-ui/icons/Delete"
 import QuestionDialog from "../QuestionDialog/QuestionDialog";
 import Divider from "@material-ui/core/Divider/Divider";
 
+
 class EditQuestionListItem extends Component {
     state = {
         open: false
@@ -45,20 +46,21 @@ class EditQuestionListItem extends Component {
                 <ListItem
                     onClick={this.handleClickOpen}
                 >
-                    <ListItemAvatar>
+                    <ListItemAvatar style={{background:"#33bfff", cursor:"pointer"}}>
                         <Avatar>
                             {this.props.index}
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText
                         primary={this.props.question.question}
+                        style={{cursor:"pointer"}}
                     />
                     <ListItemSecondaryAction>
                         <IconButton
                             aria-label="Delete"
                             onClick={this.deleteQuestion}
                         >
-                            <DeleteIcon/>
+                            <DeleteIcon color="secondary"/>
                         </IconButton>
                     </ListItemSecondaryAction>
                 </ListItem>
