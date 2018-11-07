@@ -22,7 +22,6 @@ class Dashboard extends Component {
     setListeners = () => {
         fire.database().ref('/challenges/')
             .on('child_added', snapshot => {
-                console.log('Child Added - challenges');
                 // TODO: Check if owner is not this user
                 const challenge = snapshot.val();
                 challenge.id = snapshot.key;
@@ -30,7 +29,6 @@ class Dashboard extends Component {
                 fire.database().ref('/challengeImages/' + challenge.id)
                     .once('value')
                     .then(imgSnapshot => {
-                        console.log('CHILD ADDED', imgSnapshot.val());
                         challenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
                         updatedChallenges.push(challenge);
                         this.setState({challenges: updatedChallenges});
@@ -38,7 +36,6 @@ class Dashboard extends Component {
             });
         fire.database().ref('/challenges/')
             .on('child_removed', snapshot => {
-                console.log('Child Removed - challenges');
                 // TODO: Check if owner is not this user
                 const challengeId = snapshot.key;
                 const updatedChallenges
@@ -47,7 +44,6 @@ class Dashboard extends Component {
             });
         fire.database().ref('/challenges/')
             .on('child_changed', snapshot => {
-                console.log('Child Changed - challenges');
                 // TODO: Check if owner is not this user
                 const challengeId = snapshot.key;
                 const updatedChallenges = [...this.state.challenges];
@@ -58,7 +54,6 @@ class Dashboard extends Component {
                 fire.database().ref('/challengeImages/' + challengeId)
                     .once('value')
                     .then(imgSnapshot => {
-                        console.log('CHILD CHANGED', imgSnapshot.val());
                         updatedChallenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
                         updatedChallenges[oldChallengeIndex] = updatedChallenge;
                         this.setState({challenges: updatedChallenges});
@@ -67,7 +62,6 @@ class Dashboard extends Component {
     };
 
     componentDidMount() {
-        console.log('Dashboard did mount');
         this.setListeners();
 
         fire.database().ref('/challenges/')
@@ -85,7 +79,6 @@ class Dashboard extends Component {
                             const challenge = challengesObject[challengeId];
                             challenge.id = challengeId;
                             challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
-                            console.log('CHALLENGE', challenge);
                             updatedChallenges.push(challenge);
                         }
 
@@ -95,7 +88,6 @@ class Dashboard extends Component {
     }
 
     render() {
-        console.log(this.state.challenges);
         const challenges = this.state.challenges.map(challenge => (
             <SolveChallengeCard
                 key={challenge.id}
