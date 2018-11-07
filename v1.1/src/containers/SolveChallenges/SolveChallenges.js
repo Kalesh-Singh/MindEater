@@ -9,7 +9,7 @@ import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
 class SolveChallenges extends Component {
 
     state = {
-        loading: true,
+        loading: false,
         challenges: []
     };
 
@@ -17,6 +17,7 @@ class SolveChallenges extends Component {
         fire.database().ref('/challenges/')
             .on('child_added', snapshot => {
                 // TODO: Check if owner is not this user
+                this.setState({loading: true});
                 const challenge = snapshot.val();
                 challenge.id = snapshot.key;
                 const updatedChallenges = [...this.state.challenges];
@@ -25,7 +26,7 @@ class SolveChallenges extends Component {
                     .then(imgSnapshot => {
                         challenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
                         updatedChallenges.push(challenge);
-                        this.setState({challenges: updatedChallenges});
+                        this.setState({challenges: updatedChallenges, loading: false});
                     });
             });
         fire.database().ref('/challenges/')
@@ -39,6 +40,7 @@ class SolveChallenges extends Component {
         fire.database().ref('/challenges/')
             .on('child_changed', snapshot => {
                 // TODO: Check if owner is not this user
+                this.setState({loading: true});
                 const challengeId = snapshot.key;
                 const updatedChallenges = [...this.state.challenges];
                 const oldChallengeIndex = updatedChallenges
@@ -50,14 +52,14 @@ class SolveChallenges extends Component {
                     .then(imgSnapshot => {
                         updatedChallenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
                         updatedChallenges[oldChallengeIndex] = updatedChallenge;
-                        this.setState({challenges: updatedChallenges});
+                        this.setState({challenges: updatedChallenges, loading: false});
                     });
             });
     };
 
     componentDidMount() {
         this.setListeners();
-
+        this.setState({loading: true});
         fire.database().ref('/challenges/')
             .once('value')
             .then(snapshot => {
@@ -76,7 +78,7 @@ class SolveChallenges extends Component {
                             updatedChallenges.push(challenge);
                         }
 
-                        this.setState({challenges: updatedChallenges});
+                        this.setState({challenges: updatedChallenges, loading: false});
                     });
             });
     }
