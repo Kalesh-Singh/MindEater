@@ -396,7 +396,8 @@ class QuestionDialog extends Component {
                 onClose={this.handleClose}
                 aria-labelledby="create-question-dialog-title"
             >
-                <DialogTitle id="create-question-dialog-title">Question</DialogTitle>
+                <DialogTitle id="create-question-dialog-title"
+                >Question</DialogTitle>
                 <DialogContent className={classes.root}>
                     <form className={classes.Form}>
                         <TextField
