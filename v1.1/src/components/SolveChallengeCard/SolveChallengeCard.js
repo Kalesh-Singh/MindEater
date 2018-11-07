@@ -7,6 +7,7 @@ import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
 import Typography from "@material-ui/core/Typography/Typography";
 import fire from "../../fire";
 import SolveChallengeStepper from "../SolveChallengeStepper/SolveChallengeStepper";
+import CardMedia from "@material-ui/core/CardMedia/CardMedia";
 
 class SolveChallengeCard extends Component {
 
@@ -72,6 +73,7 @@ class SolveChallengeCard extends Component {
     }
 
     render() {
+        console.log("SOLVE IMG URL", this.props.challenge.imgURL);
         return (
             <ListItem className={classes.root}>
                 <Card
@@ -80,7 +82,10 @@ class SolveChallengeCard extends Component {
                         flexFlow: 'column', justifyContent: 'space-between'
                     }}
                 >
-                    <CardActionArea onClick={this.handleClickOpen}>
+                    < CardActionArea onClick={this.handleClickOpen}>
+                        <figure className={classes.Figure}>
+                            <img src={this.props.challenge.imgURL}/>
+                        </figure>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
                                 {this.props.challenge.title}
