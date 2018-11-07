@@ -61,18 +61,29 @@ class Dashboard extends Component {
         fire.database().ref('/challenges/')
             .once('value')
             .then(snapshot => {
-                const challengesObject = snapshot.val();
                 const updatedChallenges = [];
-                for (let challengeId in challengesObject) {
-                    const challenge = challengesObject[challengeId];
-                    challenge.id = challengeId;
-                    updatedChallenges.push(challenge);
-                }
-                this.setState({challenges: updatedChallenges});
+                const challengesObject = snapshot.val();
+
+                fire.database().ref('/challengeImages/')
+                    .once('value')
+                    .then(imagesSnapshot => {
+                        const imagesObject = imagesSnapshot.val();
+
+                        for (let challengeId in challengesObject) {
+                            const challenge = challengesObject[challengeId];
+                            challenge.id = challengeId;
+                            challenge.imgURL = imagesObject[challengeId].imgURL;
+                            console.log('CHALLENGE', challenge);
+                            updatedChallenges.push(challenge);
+                        }
+
+                        this.setState({challenges: updatedChallenges});
+                    });
             });
     }
 
     render() {
+        console.log(this.state.challenges);
         const challenges = this.state.challenges.map(challenge => (
             <SolveChallengeCard
                 key={challenge.id}

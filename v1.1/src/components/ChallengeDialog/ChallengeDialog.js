@@ -75,6 +75,8 @@ class ChallengeDialog extends Component {
     };
 
     handleCancel = (valid) => () => {
+
+        // TODO: ?????? Delete ??????
         this.props.closed();
 
         if (!valid) {
@@ -86,6 +88,7 @@ class ChallengeDialog extends Component {
         }
 
         // TODO: Update this to match the cases above - Probably with dialog boxes
+        // TODO: Check if this isn't already done ???????
         if (!valid) {
             this.deleteChallenge();
         }
