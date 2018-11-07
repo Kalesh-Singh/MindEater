@@ -29,7 +29,7 @@ function Transition(props) {
 class ChallengeDialog extends Component {
 
     initialState = {
-        saving: true,
+        saving: false,
         challengeId: null,
         questions: [],
         isPartial: true,
@@ -48,7 +48,7 @@ class ChallengeDialog extends Component {
     };
 
     state = {
-        saving: true,
+        saving: false,
         challengeId: null,
         isPartial: true,
         questions: [],
@@ -68,7 +68,10 @@ class ChallengeDialog extends Component {
 
     handleSave = () => {
         this.writeChallenge()
-            .then(this.props.closed);
+            .then(() => {
+                this.setState({saving: false});
+                this.props.closed();
+            });
     };
 
     handleCancel = (valid) => () => {
@@ -122,7 +125,7 @@ class ChallengeDialog extends Component {
         updates['/challenges/' + this.state.challengeId + '/description'] = this.state.description.value;
         updates['/challenges/' + this.state.challengeId + '/isPartial'] = false;
 
-
+        this.setState({saving: true});
         return saveChallengeImageURL(this.state.challengeId, this.state.title.value)
             .then(() => (fire.database().ref().update(updates)));
     };
