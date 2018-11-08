@@ -5,6 +5,7 @@ import EditChallengeCard from "../../components/EditChallengeCard/EditChallengeC
 import List from "@material-ui/core/List/List";
 
 import classes from "./MyChallenges.module.css";
+import Divider from "@material-ui/core/Divider/Divider";
 
 class MyChallenges extends Component {
 
@@ -85,6 +86,7 @@ class MyChallenges extends Component {
                 <div className={classes.CreateChallenge}>
                     <AddChallenge/>
                 </div>
+                <Divider style={{marginBottom:"20px"}}/>
                 <List className={classes.root}
                 >
                     {myChallenges}

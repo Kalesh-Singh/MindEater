@@ -6,6 +6,7 @@ import ChallengeIncompleteDialog
 import ChallengeNotSavedDialog from "./ChallengeNotSavedDialog/ChallengeNotSavedDialog";
 import ChangesNotSaved from "./ChangesNotSaved/ChangesNotSaved";
 
+import classes from "./CloseEditChallenge.module.css";
 class CloseEditChallenge extends Component {
 
     // Expected props:
@@ -66,8 +67,9 @@ class CloseEditChallenge extends Component {
         return (
             <>
                 <IconButton
-                    color="inherit"
-                    onClick={openCloseDialog}>
+                    color={"inherit"}
+                    onClick={openCloseDialog}
+                >
                     <CloseIcon/>
                 </IconButton>
                 <ChallengeIncompleteDialog

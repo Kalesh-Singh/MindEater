@@ -10,6 +10,9 @@ import DeleteIcon from "@material-ui/icons/Delete"
 import QuestionDialog from "../QuestionDialog/QuestionDialog";
 import Divider from "@material-ui/core/Divider/Divider";
 
+import classes from "./EditQuestionListItem.module.css"
+import Fade from "@material-ui/core/Fade/Fade";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 
 class EditQuestionListItem extends Component {
     state = {
@@ -41,9 +44,14 @@ class EditQuestionListItem extends Component {
     };
 
     render() {
+
+        const EditQ = "Edit question";
+
         return (
             <div key={this.props.question.id}>
+                <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={EditQ}>
                 <ListItem
+                    className={classes.items}
                     onClick={this.handleClickOpen}
                 >
                     <ListItemAvatar style={{background:"#33bfff", cursor:"pointer"}}>
@@ -64,6 +72,7 @@ class EditQuestionListItem extends Component {
                         </IconButton>
                     </ListItemSecondaryAction>
                 </ListItem>
+                </Tooltip>
                 <Divider/>
                 <QuestionDialog
                     open={this.state.open}

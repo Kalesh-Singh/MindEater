@@ -396,9 +396,11 @@ class QuestionDialog extends Component {
                 onClose={this.handleClose}
                 aria-labelledby="create-question-dialog-title"
             >
-                <DialogTitle id="create-question-dialog-title"
-                >Question</DialogTitle>
+                <DialogTitle id="create-question-dialog-title" style={{textAlign:"center"}}
+                >New Question</DialogTitle>
+
                 <DialogContent className={classes.root}>
+                    <h3 style={{marginBottom:"2px"}}>Enter your question below:</h3>
                     <form className={classes.Form}>
                         <TextField
                             label="Question"
@@ -412,6 +414,7 @@ class QuestionDialog extends Component {
                             onChange={this.handleFieldChange('question')}
                             onFocus={this.handleFieldFocus('question')}
                         />
+                        <h3 style={{textAlign:"center"}}>Input the multiple choices for your question:</h3>
                         <Options
                             options={this.state.options}
                             optionChanged={this.handleOptionChange}
@@ -419,6 +422,7 @@ class QuestionDialog extends Component {
                             value={this.state.optionsValue}
                             changed={this.handleChange}
                         />
+                        <h5 style={{textAlign:"left"}}>Note: Remember to make sure that at least one option is the correct answer to your question.</h5>
                         <TextField
                             label="Hint"
                             multiline

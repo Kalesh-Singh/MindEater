@@ -23,7 +23,7 @@ class NavigationBarTabs extends Component {
                       className={classes.DesktopOnly}
                       onChange={this.handleChange}
                       value={value}
-                      style={{background:"#e3e3e3", borderRadius:"5px", textAlign:"center", color:"#3f50B5"}}
+                      style={{textAlign:"center", color:"white"}}
                 >
                     <Tab
                         label='Dashboard'

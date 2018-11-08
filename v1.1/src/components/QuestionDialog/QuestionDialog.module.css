@@ -17,6 +17,5 @@
 .Form {
     display: flex;
     flex-flow: column;
-    align-items: center;
     box-sizing: border-box;
 }

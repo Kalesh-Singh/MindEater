@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Button, createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 import QuestionDialog from "../QuestionDialog/QuestionDialog";
 import green from "@material-ui/core/es/colors/green";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import Fade from "@material-ui/core/Fade/Fade";
 
 const theme = createMuiTheme({
     palette: {
@@ -29,15 +31,22 @@ class AddQuestion extends Component {
         this.setState({open: false});
     };
 
+
+
     render() {
+
+        const AddQ = "Add a new question";
+
         return (
             <>
                 <MuiThemeProvider theme={theme}>
+                    <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={AddQ}>
                 <Button onClick={this.handleClickOpen}
                 color="primary"
-                variant={"extendedFab"}>
+                variant={"contained"}>
                     Add Question
                 </Button>
+                    </Tooltip>
                 </MuiThemeProvider>
                 <QuestionDialog
                     open={this.state.open}

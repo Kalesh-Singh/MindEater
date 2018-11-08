@@ -1,0 +1,10 @@
+.items{
+    position: absolute;
+    bottom: 0;
+    left:0;
+}
+
+.items:hover {
+    background-color: #4CAF50 !important;
+    color: #FFF;
+}
