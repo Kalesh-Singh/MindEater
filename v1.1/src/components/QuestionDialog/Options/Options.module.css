@@ -1,0 +1,7 @@
+.root {
+    color: #4CAF50 !important;
+}
+
+.options:hover {
+    background-color: rgba(0, 255, 0, 0.1) !important;
+}

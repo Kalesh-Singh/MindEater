@@ -6,6 +6,9 @@ import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 
+import classes from "./ChangesNotSaved.module.css"
+import Alert from "@material-ui/icons/ErrorOutline";
+
 class ChangesNotSaved extends Component {
 
     handleDiscard = () => {
@@ -28,21 +31,25 @@ class ChangesNotSaved extends Component {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Save Changes"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title"> <Alert style={{marginRight:"4px", color:"red"}}/> {"Save Changes"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         Do you want to save any changes made?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
+
                     <Button
-                        onClick={this.handleDiscard} color="secondary"
+                        className={classes.Disc}
+                        onClick={this.handleDiscard}
+                        color="secondary"
                     >
                         Discard
                     </Button>
                     <Button
+                        className={classes.Sve}
                         onClick={this.handleSave}
-                        color="primary" autoFocus
+                        color="primary"
                     >
                         Save
                     </Button>

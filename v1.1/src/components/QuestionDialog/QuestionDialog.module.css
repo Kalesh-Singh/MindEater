@@ -19,3 +19,24 @@
     flex-flow: column;
     box-sizing: border-box;
 }
+
+.butonSave:hover {
+    background-color: #4CAF50 !important;
+
+    color: #FFF;
+}
+
+.TextField:hover {
+    background-color: rgba(0, 255, 0, 0.1) !important;
+}
+
+.butonCancel {
+    position: absolute;
+    bottom: 0;
+    left:0;
+}
+
+.butonCancel:hover {
+    background-color: #d50000 !important;
+    color: #FFFFFF;
+}

@@ -391,7 +391,7 @@ class ChallengeDialog extends Component {
                         aria-labelledby="form-dialog-title"
                         TransitionComponent={Transition}
                     >
-                        <DialogTitle id="form-dialog-title"><InfoIc style={{marginRight:"10px"}}/>Description</DialogTitle>
+                        <DialogTitle id="form-dialog-title"><InfoIc style={{marginRight:"10px", color:"blue"}}/>Description</DialogTitle>
                         <DialogContent>
                             <DialogContentText style={{color:"black"}}>
                                 In order to create a valid question, you must fill out the required fields, this includes the Title of the Challenge;
@@ -400,7 +400,7 @@ class ChallengeDialog extends Component {
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={this.handleClose} color="primary">
+                            <Button onClick={this.handleClose} color="primary" className={classes.bouton}>
                                 Got it!
                             </Button>
                         </DialogActions>
@@ -408,7 +408,7 @@ class ChallengeDialog extends Component {
                 </div>
 
                 <DialogContent className={classes.root}>
-                    <h3 style={{marginTop:"100px"}}>Input the title of Your challenge:</h3>
+                    <h3 style={{marginTop:"50px"}}>Input the title of Your challenge:</h3>
                     <TextField
                         label="Title"
                         multiline

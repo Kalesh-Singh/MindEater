@@ -9,6 +9,14 @@ import Button from "@material-ui/core/Button/Button";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import fire from "../../fire";
 import withMobileDialog from "@material-ui/core/es/withMobileDialog/withMobileDialog";
+import Divider from "@material-ui/core/Divider/Divider";
+import EditIcon from "@material-ui/icons/EditOutlined"
+import Hint from "@material-ui/icons/NewReleasesOutlined"
+import Description from "@material-ui/icons/DescriptionOutlined"
+import Grid from "@material-ui/core/Grid/Grid";
+import SaveIcon from "@material-ui/icons/SaveOutlined";
+import CancelIcon from "@material-ui/icons/CloseOutlined"
+
 
 class QuestionDialog extends Component {
     initialState = {
@@ -118,7 +126,7 @@ class QuestionDialog extends Component {
             ],
             error: '',
             valid: false
-        }
+        },
     };
 
     checkFormValidity = () => {
@@ -317,7 +325,7 @@ class QuestionDialog extends Component {
     checkCorrectOption = (correctOption) => {
         const options = this.state.options.value.map(option => (option.value));
         if (correctOption === null || !options.includes(correctOption)) {
-            if(!options.includes(correctOption)) {
+            if (!options.includes(correctOption)) {
                 this.setState({correctOption: null, optionsValue: null})
             }
             return 'You must check the correct option';
@@ -396,25 +404,34 @@ class QuestionDialog extends Component {
                 onClose={this.handleClose}
                 aria-labelledby="create-question-dialog-title"
             >
-                <DialogTitle id="create-question-dialog-title" style={{textAlign:"center"}}
+                <DialogTitle id="create-question-dialog-title" style={{textAlign: "center"}}
                 >New Question</DialogTitle>
 
                 <DialogContent className={classes.root}>
-                    <h3 style={{marginBottom:"2px"}}>Enter your question below:</h3>
+                    <h3 style={{marginBottom: "2px"}}>Enter your question below:</h3>
                     <form className={classes.Form}>
-                        <TextField
-                            label="Question"
-                            multiline
-                            rowsMax="4"
-                            margin="normal"
-                            fullWidth
-                            error={this.state.question.error.length > 0}
-                            helperText={this.state.question.error}
-                            value={this.state.question.value}
-                            onChange={this.handleFieldChange('question')}
-                            onFocus={this.handleFieldFocus('question')}
-                        />
-                        <h3 style={{textAlign:"center"}}>Input the multiple choices for your question:</h3>
+                        <Grid container={true} spacing={8} alignItems="center">
+                            <Grid item>
+                                <EditIcon/>
+                            </Grid>
+                            <Grid item xs={11}>
+                                <TextField
+                                    className={classes.TextField}
+                                    label="Question"
+                                    multiline
+                                    rowsMax="4"
+                                    margin="normal"
+                                    fullWidth
+                                    variant={"outlined"}
+                                    error={this.state.question.error.length > 0}
+                                    helperText={this.state.question.error}
+                                    value={this.state.question.value}
+                                    onChange={this.handleFieldChange('question')}
+                                    onFocus={this.handleFieldFocus('question')}
+                                />
+                            </Grid>
+                        </Grid>
+                        <h3 style={{textAlign: "center"}}>Input the multiple choices for your question:</h3>
                         <Options
                             options={this.state.options}
                             optionChanged={this.handleOptionChange}
@@ -422,46 +439,69 @@ class QuestionDialog extends Component {
                             value={this.state.optionsValue}
                             changed={this.handleChange}
                         />
-                        <h5 style={{textAlign:"left"}}>Note: Remember to make sure that at least one option is the correct answer to your question.</h5>
-                        <TextField
-                            label="Hint"
-                            multiline
-                            rowsMax="4"
-                            margin="normal"
-                            fullWidth
-                            error={this.state.hint.error.length > 0}
-                            helperText={this.state.hint.error}
-                            value={this.state.hint.value}
-                            onChange={this.handleFieldChange('hint')}
-                            onFocus={this.handleFieldFocus('hint')}
-                        />
-                        <TextField
-                            label="Explanation"
-                            multiline
-                            rowsMax="4"
-                            margin="normal"
-                            fullWidth
-                            error={this.state.explanation.error.length > 0}
-                            helperText={this.state.explanation.error}
-                            value={this.state.explanation.value}
-                            onChange={this.handleFieldChange('explanation')}
-                            onFocus={this.handleFieldFocus('explanation')}
-                        />
+                        <h5 style={{textAlign: "left"}}>Note: Make sure to check one option as the correct answer to
+                            your question.</h5>
+
+                        <Divider/>
+                        <h3 style={{marginBottom: "5px"}}> Enter a hint, this will be used to help the user out while trying to solve this question:</h3>
+                        <Grid container={true} spacing={8} alignItems="center">
+                            <Grid item>
+                                <Hint/>
+                            </Grid>
+                            <Grid item xs={11}>
+                                <TextField
+                                    className={classes.TextField}
+                                    label="Hint"
+                                    multiline
+                                    rowsMax="4"
+                                    margin="normal"
+                                    fullWidth
+                                    variant={"outlined"}
+                                    error={this.state.hint.error.length > 0}
+                                    helperText={this.state.hint.error}
+                                    value={this.state.hint.value}
+                                    onChange={this.handleFieldChange('hint')}
+                                    onFocus={this.handleFieldFocus('hint')}
+                                />
+                            </Grid>
+                        </Grid>
+                        <h3>Give a brief explanation on the solution to your question:</h3>
+                        <Grid container={true} spacing={8} alignItems="center">
+                            <Grid item>
+                                <Description/>
+                            </Grid>
+                            <Grid item xs={11}>
+                                <TextField
+                                    className={classes.TextField}
+                                    label="Explanation"
+                                    multiline
+                                    rowsMax="4"
+                                    margin="normal"
+                                    fullWidth
+                                    variant={"outlined"}
+                                    error={this.state.explanation.error.length > 0}
+                                    helperText={this.state.explanation.error}
+                                    value={this.state.explanation.value}
+                                    onChange={this.handleFieldChange('explanation')}
+                                    onFocus={this.handleFieldFocus('explanation')}
+                                />
+                            </Grid>
+                        </Grid>
                     </form>
                 </DialogContent>
                 <DialogActions>
                     <Button
                         onClick={this.handleCancel}
-                        color="primary"
-                    >
-                        Cancel
+                        color={"primary"}
+                        className={classes.butonCancel}
+                    ><CancelIcon style={{marginRight:"4px"}}/>Cancel
                     </Button>
                     <Button
                         onClick={this.handleSave}
                         disabled={!validForm}
                         color="primary" autoFocus
-                    >
-                        Save
+                        className={classes.butonSave}
+                    ><SaveIcon style={{marginRight:"4px"}}/>Save
                     </Button>
                 </DialogActions>
             </Dialog>

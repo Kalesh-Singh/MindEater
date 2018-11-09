@@ -102,6 +102,7 @@ class EditChallengeCard extends Component {
                     </CardActionArea>
                     <CardActions style={{alignSelf: 'flex-end'}}>
                         <Button
+                            className={classes.Del}
                             color="secondary"
                             onClick={this.deleteChallenge}
                         >

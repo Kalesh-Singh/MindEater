@@ -45,34 +45,36 @@ class EditQuestionListItem extends Component {
 
     render() {
 
-        const EditQ = "Edit question";
-
         return (
             <div key={this.props.question.id}>
-                <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={EditQ}>
                 <ListItem
                     className={classes.items}
                     onClick={this.handleClickOpen}
+                    style={{cursor:"pointer"}}
                 >
+                    <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={"Edit Question"}>
                     <ListItemAvatar style={{background:"#33bfff", cursor:"pointer"}}>
                         <Avatar>
                             {this.props.index}
                         </Avatar>
                     </ListItemAvatar>
+                    </Tooltip>
                     <ListItemText
+                        className={classes.TextItem}
                         primary={this.props.question.question}
-                        style={{cursor:"pointer"}}
                     />
+                    <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={"Delete"}>
                     <ListItemSecondaryAction>
                         <IconButton
                             aria-label="Delete"
                             onClick={this.deleteQuestion}
                         >
-                            <DeleteIcon color="secondary"/>
+                            <DeleteIcon
+                                className={classes.Trash}/>
                         </IconButton>
                     </ListItemSecondaryAction>
+                    </Tooltip>
                 </ListItem>
-                </Tooltip>
                 <Divider/>
                 <QuestionDialog
                     open={this.state.open}

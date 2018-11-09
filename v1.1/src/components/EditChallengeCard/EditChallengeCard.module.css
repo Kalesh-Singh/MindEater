@@ -9,3 +9,8 @@
         min-width: 300px;
     }
 }
+
+.Del:hover{
+    background-color: #d50000 !important;
+    color: #FFFFFF;
+}

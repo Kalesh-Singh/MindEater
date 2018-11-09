@@ -4,6 +4,21 @@ import ChallengeDialog from "../ChallengeDialog/ChallengeDialog";
 import PlusIcon from "@material-ui/icons/Add"
 
 import classes from "./AddChallenge.module.css";
+import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
+import lightBlue from "@material-ui/core/es/colors/lightBlue";
+
+const theme = createMuiTheme({
+    palette: {
+        primary: lightBlue,
+    },
+    overrides: {
+        MuiButton: {
+            raisedPrimary: {
+                color: 'white',
+            },
+        },
+    }
+});
 
 class AddChallenge extends Component {
     state = {
@@ -21,9 +36,13 @@ class AddChallenge extends Component {
     render() {
         return (
             <>
+                <MuiThemeProvider theme={theme}>
                 <Button onClick={this.handleClickOpen}
-                style={{background:"green", color:"white", borderRadius:"20px"}}>
+                        color="primary"
+                        variant={"raised"}
+                        className={classes.NewChallenge}>
                     <PlusIcon style={{marginRight: '8px'}}/>Create New Challenge</Button>
+                </MuiThemeProvider>
                 <ChallengeDialog
                     open={this.state.open}
                     closed={this.handleClose}
