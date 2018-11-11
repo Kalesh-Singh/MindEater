@@ -11,6 +11,14 @@ import Tabs from "@material-ui/core/Tabs/Tabs";
 import Tab from "@material-ui/core/Tab/Tab";
 import AddAccount from "@material-ui/icons/PersonAddTwoTone";
 import Account from "@material-ui/icons/AccountCircleTwoTone";
+import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
+import lightBlue from "@material-ui/core/es/colors/lightBlue";
+
+const theme = createMuiTheme({
+    palette: {
+        primary: lightBlue,
+    },
+});
 
 class Authentication extends Component {
 
@@ -66,10 +74,11 @@ class Authentication extends Component {
                                     <span className={classes.letter}>r</span>
                                 </div>
                             </div>
+                            <MuiThemeProvider theme={theme}>
                             <Tabs fullWidth
                                   value={this.state.value}
                                   indicatorColor='primary'
-                                  textColor={"primary"}
+                                  textColor={"black"}
 
                             >
                                 <Tab
@@ -77,15 +86,17 @@ class Authentication extends Component {
                                     value='sign-in'
                                     icon={<Account/>}
                                     onClick={() => {this.handleToggle('sign-in')}}
+                                    className={classes.SignBttn}
                                 />
                                 <Tab
                                     label='Sign Up'
                                     value='sign-up'
-                                    indicatorColor="primary"
                                     icon={<AddAccount/>}
                                     onClick={() => {this.handleToggle('sign-up')}}
+                                    className={classes.SignBttn}
                                 />
                             </Tabs>
+                            </MuiThemeProvider>
                             {form}
                             {this.state.value === 'sign-up'?
                                 <div className={classes.Hr}>

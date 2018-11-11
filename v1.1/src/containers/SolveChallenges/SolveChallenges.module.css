@@ -7,3 +7,12 @@
 .LoadingBar {
     padding: 16px;
 }
+
+.header {
+    text-align: center;
+    background: #2096F3;
+    align-items: center;
+    border:solid black;
+    border-radius: 10px;
+    color: white;
+}

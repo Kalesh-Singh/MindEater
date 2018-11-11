@@ -3,7 +3,7 @@
     flex-direction: column;
     background: #eeeeee;
     box-shadow: 0 15px 25px 0 rgba(0, 0, 0, .44), 0 27px 60px 0 rgba(0, 0, 0, .49);
-    border-radius: 20px;
+    border-radius: 15px;
 }
 
 .Background {
@@ -11,6 +11,12 @@
     background-size:cover;
 
 }
+
+.SignBttn:hover {
+    color: #2096F3 !important;
+    font-size: 15px;
+}
+
 
 .Authentication h1 {
     text-align: center;
@@ -53,7 +59,7 @@
     margin-bottom: 20px;
     border: solid #111111;
     /*transform: translate(-50%);*/
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 .Boxy {
@@ -263,5 +269,5 @@
 }
 
 .FootLnk:hover {
-    color: #5983da;
+    color: #2096F3;
 }

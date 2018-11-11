@@ -5,11 +5,11 @@
 
 .SignIn button {
      color: black;
-     background: #acc1ed;
+     background: #20caff;
  }
 
 .SignIn button:hover{
-    background: green;
+    background: #4CAF50;
     color: white;
 }
 
@@ -26,5 +26,15 @@
 }
 
 .FootLnk:hover {
-    color: #5983da;
+    color: #2096F3;
+}
+
+.cancelBttn:hover {
+    background-color: #d50000 !important;
+    color: #FFFFFF;
+}
+
+.sendBttn:hover {
+    background-color: #4CAF50 !important;
+    color: #FFFFFF;
 }

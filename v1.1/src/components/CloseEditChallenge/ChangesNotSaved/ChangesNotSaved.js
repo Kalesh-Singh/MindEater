@@ -31,7 +31,12 @@ class ChangesNotSaved extends Component {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title"> <Alert style={{marginRight:"4px", color:"red"}}/> {"Save Changes"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title"> <Alert style={{color:"red",
+                    margin: 0,
+                    top: 20,
+                    right: 20,
+                    bottom: 'auto',
+                    left: 'auto', position:"absolute"}}/> {"Save Changes"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         Do you want to save any changes made?

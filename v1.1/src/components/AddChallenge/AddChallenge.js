@@ -6,6 +6,8 @@ import PlusIcon from "@material-ui/icons/Add"
 import classes from "./AddChallenge.module.css";
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 import lightBlue from "@material-ui/core/es/colors/lightBlue";
+import Fade from "@material-ui/core/Fade/Fade";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 
 const theme = createMuiTheme({
     palette: {
@@ -33,15 +35,29 @@ class AddChallenge extends Component {
         this.setState({open: false});
     };
 
+
     render() {
+
+
         return (
             <>
                 <MuiThemeProvider theme={theme}>
+                    <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={"Create Challenge"}>
                 <Button onClick={this.handleClickOpen}
                         color="primary"
-                        variant={"raised"}
+                        variant="fab"
+                        style={{
+                            margin: 0,
+                            top: 'auto',
+                            right: "auto",
+                            bottom: 20,
+                            left: 20,
+                            position: 'fixed',
+                        zIndex:1}}
                         className={classes.NewChallenge}>
-                    <PlusIcon style={{marginRight: '8px'}}/>Create New Challenge</Button>
+                    <PlusIcon/>
+                </Button>
+                    </Tooltip>
                 </MuiThemeProvider>
                 <ChallengeDialog
                     open={this.state.open}

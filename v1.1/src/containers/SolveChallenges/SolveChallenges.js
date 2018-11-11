@@ -5,6 +5,17 @@ import classes from "./SolveChallenges.module.css";
 import List from "@material-ui/core/List/List";
 import Typography from "@material-ui/core/Typography/Typography";
 import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
+import Divider from "@material-ui/core/Divider/Divider";
+import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
+import green from "@material-ui/core/es/colors/green";
+import lightBlue from "@material-ui/core/es/colors/lightBlue";
+
+const theme = createMuiTheme({
+    palette: {
+        primary: lightBlue,
+        secondary: green,
+    },
+});
 
 class SolveChallenges extends Component {
 
@@ -94,14 +105,14 @@ class SolveChallenges extends Component {
 
         return (
             <div style={{marginTop: "100px"}}>
-                <Typography
-                    variant="h4"
-                    color="inherit"
-                    align="center"
-                >Let the games Begin!</Typography>
+                <MuiThemeProvider theme={theme}>
+                <div className={classes.header}>
+                <h1>Let the games Begin!</h1>
+                <p>Start Solving Challenges</p>
+                </div>
                 {this.state.loading ?
                     <div className={classes.LoadingBar}>
-                        <LinearProgress variant="query"/>
+                        <LinearProgress variant="query" color={"primary"}/>
                         <br/>
                         <LinearProgress variant="query" color="secondary"/>
                         <br/>
@@ -116,6 +127,7 @@ class SolveChallenges extends Component {
                 <List className={classes.List}>
                     {challenges}
                 </List>
+                </MuiThemeProvider>
             </div>
         );
     }

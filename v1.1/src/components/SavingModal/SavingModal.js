@@ -3,6 +3,14 @@ import CircularProgress from "@material-ui/core/CircularProgress/CircularProgres
 import Typography from "@material-ui/core/Typography/Typography";
 import Modal from "@material-ui/core/Modal/Modal";
 import classes from "./SavingModal.module.css";
+import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
+import lightBlue from "@material-ui/core/es/colors/lightBlue";
+
+const theme = createMuiTheme({
+    palette: {
+        primary: lightBlue,
+    },
+});
 
 function SavingModal(props) {
 
@@ -16,11 +24,14 @@ function SavingModal(props) {
             open={props.open}
         >
             <div className={classes.Modal}>
+                <MuiThemeProvider theme={theme}>
                 <CircularProgress
                     variant="indeterminate"
-                    size={80}
+                    size={100}
                     style={{marginBottom: "16px"}}
+                    color={"primary"}
                 />
+                </MuiThemeProvider>
                 <Typography
                     variant="h6"
                     color="inherit"

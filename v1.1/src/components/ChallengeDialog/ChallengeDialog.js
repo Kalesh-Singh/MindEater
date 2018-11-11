@@ -355,7 +355,7 @@ class ChallengeDialog extends Component {
                         <Typography variant="h6" color="inherit" style={{flex: '1', textAlign:"center"}}>
                             New Challenge
                         </Typography>
-                            <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={SaveProgress}>
+                            <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} disableFocusListener disableTouchListener title={SaveProgress}>
                         <Button
                             className={classes.bouton}
                             color="inherit"
@@ -369,7 +369,7 @@ class ChallengeDialog extends Component {
 
                 <div>
                     <MuiThemeProvider theme={theme}>
-                    <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={NeedHelp}>
+                    <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} disableFocusListener disableTouchListener placement={"left"} title={NeedHelp}>
                         <Button
                             color={"primary"}
                             variant={"raised"}

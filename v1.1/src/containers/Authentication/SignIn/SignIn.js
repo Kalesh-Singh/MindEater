@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button} from '@material-ui/core';
+import {Button, createMuiTheme, MuiThemeProvider} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -16,6 +16,14 @@ import DialogContentText from "@material-ui/core/DialogContentText/DialogContent
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
+import lightBlue from "@material-ui/core/es/colors/lightBlue";
+import HelpIcon from "@material-ui/icons/HelpOutline"
+
+const theme = createMuiTheme({
+    palette: {
+        primary: lightBlue,
+    },
+});
 
 class SignIn extends Component {
     state = {
@@ -170,7 +178,7 @@ class SignIn extends Component {
                                     aria-label="Toggle password visibility"
                                     onClick={this.handleClickShowPassword}
                                 >
-                                    {this.state.showPassword ? <Visibility/>: <VisibilityOff/>}
+                                    {this.state.showPassword ? <Visibility style={{color:"black"}}/>: <VisibilityOff style={{color:"black"}}/>}
                                 </IconButton>
                             </InputAdornment>
                         ),
@@ -191,28 +199,38 @@ class SignIn extends Component {
                                 onClose={this.handleClose}
                                 aria-labelledby="form-dialog-title"
                             >
-                                <DialogTitle id="form-dialog-title">Forgot Password?</DialogTitle>
+                                <DialogTitle id="form-dialog-title"> <HelpIcon style={{
+                                    margin: 0,
+                                    top: 20,
+                                    right: 20,
+                                    bottom: 'auto',
+                                    left: 'auto', position:"absolute"}}/>Forgot Password</DialogTitle>
                                 <DialogContent>
                                     <DialogContentText>
                                         Please input your email below to reset your password.
                                     </DialogContentText>
+                                    <MuiThemeProvider theme={theme}>
                                     <TextField
                                         autoFocus
                                         margin="dense"
-                                        id="name"
                                         label='Email'
                                         type='email'
+                                        name='email'
                                         placeholder="Email"
                                         fullWidth
+                                        color="primary"
                                     />
+                                    </MuiThemeProvider>
                                 </DialogContent>
                                 <DialogActions>
-                                    <Button onClick={this.handleClose} color="primary">
+                                    <MuiThemeProvider theme={theme}>
+                                    <Button onClick={this.handleClose} color="primary" className={classes.cancelBttn}>
                                         Cancel
                                     </Button>
-                                    <Button onClick={this.handleClose} color="primary">
+                                    <Button onClick={this.handleClose} color="primary" className={classes.sendBttn}>
                                         Send
                                     </Button>
+                                    </MuiThemeProvider>
                                 </DialogActions>
                             </Dialog>
                         </div>

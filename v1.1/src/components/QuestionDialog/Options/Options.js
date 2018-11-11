@@ -41,7 +41,7 @@ function Options(props) {
             error={props.options.error.length > 0}
             style={{width: '100%'}}
         >
-            <FormLabel component="legend" >Options</FormLabel>
+            <FormLabel component="legend">Options</FormLabel>
             <RadioGroup
                 aria-label="Options"
                 name="Options"

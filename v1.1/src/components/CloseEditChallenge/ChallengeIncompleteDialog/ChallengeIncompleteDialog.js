@@ -30,7 +30,11 @@ class ChallengeIncompleteDialog extends Component {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title" style={{textAlign:"center"}}> <Alert style={{color:"red", marginRight:"2px"}}/>{"Challenge Incomplete"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title" style={{marginRight:"25px"}}> <Alert style={{color:"red", margin:0,
+                    top: 20,
+                    right: 20,
+                    bottom: 'auto',
+                    left: 'auto', position:"absolute"}}/>{"Challenge Incomplete"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{textAlign:"center"}}>
                         All changes will be discarded.
