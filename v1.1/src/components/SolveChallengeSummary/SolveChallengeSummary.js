@@ -70,7 +70,9 @@ class SolveChallengeSummary extends Component {
                 <DialogActions>
 
                     <Button
+                        className={classes.okBttn}
                         onClick={this.handleOk}
+                        variant={"outlined"}
                         color="primary" autoFocus
                     >
                         Ok

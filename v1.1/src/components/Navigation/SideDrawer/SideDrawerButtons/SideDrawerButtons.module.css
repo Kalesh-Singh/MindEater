@@ -33,9 +33,3 @@
     float:left;
     padding-left: 20px;
 }
-
-.Background {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../../assets/svg/Drawer_Back.png) center;
-    background-size:cover;
-
-}

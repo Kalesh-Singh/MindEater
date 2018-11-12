@@ -13,7 +13,6 @@ import Divider from "@material-ui/core/Divider/Divider";
 
 import classes from "./SideDrawerButtons.module.css";
 import Blogo from "../../../../assets/svg/black_logo.png";
-import DBack from "../../../../assets/svg/Drawer_Back.png";
 
 function SideDrawerButtons(props) {
     return (

@@ -49,9 +49,9 @@ class AddChallenge extends Component {
                         style={{
                             margin: 0,
                             top: 'auto',
-                            right: "auto",
+                            right: 20,
                             bottom: 20,
-                            left: 20,
+                            left: 'auto',
                             position: 'fixed',
                         zIndex:1}}
                         className={classes.NewChallenge}>
