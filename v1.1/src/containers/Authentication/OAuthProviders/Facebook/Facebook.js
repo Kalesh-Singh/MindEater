@@ -21,7 +21,7 @@ class Facebook extends Component {
                         alert(error.message);
                     })
             })
-            .catch(function (error) {
+            .catch(error => {
                 alert(error.message);
             });
     };
