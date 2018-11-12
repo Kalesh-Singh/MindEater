@@ -59,6 +59,18 @@ class SignUp extends Component {
         event.preventDefault();
         fire.auth().createUserWithEmailAndPassword(
             this.state.email.value, this.state.password.value)
+            .then(() => {
+                const user = fire.auth().currentUser;
+                const updates = {};
+                updates['/users/' + user.uid + '/username'] = this.state.username.value;
+                fire.database().ref().update(updates)
+                    .then(() => {
+                        console.log('Saved user name to database.');
+                    })
+                    .catch(error => {
+                        alert(error.message);
+                    })
+            })
             .catch((error) => {
                 alert(error.message);
             });

@@ -9,7 +9,19 @@ class Facebook extends Component {
     signInWithFacebook = () => {
         let provider = new firebase.auth.FacebookAuthProvider();
         fire.auth().signInWithPopup(provider)
-            .catch(function (error) {
+            .then(() => {
+                const user = fire.auth().currentUser;
+                const updates = {};
+                updates['/users/' + user.uid + '/username'] = user.displayName;
+                fire.database().ref().update(updates)
+                    .then(() => {
+                        console.log('Saved user name to database.');
+                    })
+                    .catch(error => {
+                        alert(error.message);
+                    })
+            })
+            .catch(error => {
                 alert(error.message);
             });
     };
