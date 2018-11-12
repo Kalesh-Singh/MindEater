@@ -5,3 +5,8 @@
 .Score {
     padding: 16px 0;
 }
+
+.okBttn:hover {
+    background-color: #4CAF50 !important;
+    color:#FFF;
+}
