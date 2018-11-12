@@ -5,6 +5,10 @@ import DialogContent from "@material-ui/core/DialogContent/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import Button from "@material-ui/core/Button/Button";
+import Alert from "@material-ui/icons/ErrorOutline"
+
+import classes from "./ChallengeIncompleteDialog.module.css"
+
 
 class ChallengeIncompleteDialog extends Component {
 
@@ -26,22 +30,29 @@ class ChallengeIncompleteDialog extends Component {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Challenge Incomplete"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title" style={{marginRight:"25px"}}> <Alert style={{color:"red", margin:0,
+                    top: 20,
+                    right: 20,
+                    bottom: 'auto',
+                    left: 'auto', position:"absolute"}}/>{"Challenge Incomplete"}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
+                    <DialogContentText id="alert-dialog-description" style={{textAlign:"center"}}>
                         All changes will be discarded.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button
+                        className={classes.DiscardBttn}
                         onClick={this.handleDiscard}
                         color="secondary"
                     >
                         Discard
                     </Button>
+
                     <Button
-                        onClick={this.handleCancel}d
-                        color="primary" autoFocus
+                        className={classes.Cont}
+                        onClick={this.handleCancel}
+                        color="primary"
                     >
                         Cancel
                     </Button>

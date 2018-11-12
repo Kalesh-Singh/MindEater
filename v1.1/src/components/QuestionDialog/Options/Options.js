@@ -7,16 +7,19 @@ import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabe
 import Radio from "@material-ui/core/Radio/Radio";
 import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
 
+import classes from "./Options.module.css"
+
 
 function Options(props) {
     const options = props.options.value.map((option, index) => (
             <FormControlLabel
                 key={index}
                 value={props.options.value[index].value}
-                control={<Radio/>}
+                control={<Radio className={classes.root}/>}
                 disabled={props.options.value[index].value === ''}
                 label={
                     <TextField
+                        className={classes.options}
                         name={'Option ' + (index + 1)}
                         label={'Option ' + (index + 1)}
                         type='text'

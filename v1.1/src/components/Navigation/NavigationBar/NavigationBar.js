@@ -8,12 +8,11 @@ import classes from './NavigationBar.module.css';
 import NavigationBarTabs from "./NavigationBarTabs/NavigationBarTabs";
 import UserMenu from "../UserMenu/UserMenu";
 
-
 class NavigationBar extends Component {
     render() {
         return (
             <AppBar position="fixed">
-                <Toolbar>
+                <Toolbar style={{background:"#2096F3"}}>
                     <div className={classes.Container}>
                         <div className={classes.MenuIconButton}>
                             <IconButton

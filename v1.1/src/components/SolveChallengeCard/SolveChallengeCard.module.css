@@ -25,3 +25,7 @@
         max-width: 300px;
     }
 }
+
+.Like:hover {
+    color: #d50000 !important;
+}

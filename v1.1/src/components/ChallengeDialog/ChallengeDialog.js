@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
-import CloseIcon from '@material-ui/icons/Close';
 import Button from "@material-ui/core/Button/Button";
 import classes from "./ChallengeDialog.module.css";
 import AddQuestion from "../AddQuestion/AddQuestion";
 import List from "@material-ui/core/List/List";
 import TextField from "@material-ui/core/TextField/TextField";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import Typography from "@material-ui/core/Typography/Typography";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import Slide from "@material-ui/core/Slide/Slide";
@@ -334,6 +332,7 @@ class ChallengeDialog extends Component {
         ));
 
         const NeedHelp = "Not sure what to do? \n Click here for more help";
+        const SaveProgress = "Save Challenge"
 
         return (
             <>
@@ -344,7 +343,7 @@ class ChallengeDialog extends Component {
                     TransitionComponent={Transition}
                 >
                     <AppBar style={{position: 'relative'}}>
-                        <Toolbar>
+                        <Toolbar style={{background:"#2096F3"}}>
                             <CloseEditChallenge
                                 challengeValid={validForm}
                                 challengePartial={this.state.isPartial}
@@ -356,19 +355,21 @@ class ChallengeDialog extends Component {
                         <Typography variant="h6" color="inherit" style={{flex: '1', textAlign:"center"}}>
                             New Challenge
                         </Typography>
+                            <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} disableFocusListener disableTouchListener title={SaveProgress}>
                         <Button
+                            className={classes.bouton}
                             color="inherit"
                             onClick={this.handleSave}
                             disabled={!validForm}
-                            variant={"outlined"}
-                        ><SaveIcon style={{marginRight: '8px'}}/>Save
+                        ><SaveIcon style={{marginRight: '4px'}}/>Save
                         </Button>
+                            </Tooltip>
                     </Toolbar>
                 </AppBar>
 
                 <div>
                     <MuiThemeProvider theme={theme}>
-                    <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={NeedHelp}>
+                    <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} disableFocusListener disableTouchListener placement={"left"} title={NeedHelp}>
                         <Button
                             color={"primary"}
                             variant={"raised"}
@@ -390,7 +391,7 @@ class ChallengeDialog extends Component {
                         aria-labelledby="form-dialog-title"
                         TransitionComponent={Transition}
                     >
-                        <DialogTitle id="form-dialog-title"><InfoIc style={{marginRight:"10px"}}/>Description</DialogTitle>
+                        <DialogTitle id="form-dialog-title"><InfoIc style={{marginRight:"10px", color:"blue"}}/>Description</DialogTitle>
                         <DialogContent>
                             <DialogContentText style={{color:"black"}}>
                                 In order to create a valid question, you must fill out the required fields, this includes the Title of the Challenge;
@@ -399,7 +400,7 @@ class ChallengeDialog extends Component {
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={this.handleClose} color="primary">
+                            <Button onClick={this.handleClose} color="primary" className={classes.bouton}>
                                 Got it!
                             </Button>
                         </DialogActions>
@@ -407,7 +408,7 @@ class ChallengeDialog extends Component {
                 </div>
 
                 <DialogContent className={classes.root}>
-                    <h3 style={{marginTop:"100px"}}>Input the title of Your challenge:</h3>
+                    <h3 style={{marginTop:"50px"}}>Input the title of Your challenge:</h3>
                     <TextField
                         label="Title"
                         multiline

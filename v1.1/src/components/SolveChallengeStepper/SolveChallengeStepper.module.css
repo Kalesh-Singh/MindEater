@@ -1,3 +1,15 @@
 .Buttons {
     margin-top: 10px;
 }
+
+.stepperCompleted circle {
+    color:green;
+}
+
+.stepperActive circle {
+    color:lightblue;
+}
+
+.stepperDisabled circle {
+    color:red;
+}

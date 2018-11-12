@@ -1,0 +1,9 @@
+.Cont:hover {
+    background-color: #4CAF50 !important;
+    color: #FFF;
+}
+
+.DiscardBttn:hover {
+    background-color: #d50000 !important;
+    color: #FFFFFF;
+}

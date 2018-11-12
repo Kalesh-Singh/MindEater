@@ -10,6 +10,9 @@ import DeleteIcon from "@material-ui/icons/Delete"
 import QuestionDialog from "../QuestionDialog/QuestionDialog";
 import Divider from "@material-ui/core/Divider/Divider";
 
+import classes from "./EditQuestionListItem.module.css"
+import Fade from "@material-ui/core/Fade/Fade";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 
 class EditQuestionListItem extends Component {
     state = {
@@ -41,28 +44,36 @@ class EditQuestionListItem extends Component {
     };
 
     render() {
+
         return (
             <div key={this.props.question.id}>
                 <ListItem
+                    className={classes.items}
                     onClick={this.handleClickOpen}
+                    style={{cursor:"pointer"}}
                 >
+                    <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={"Edit Question"}>
                     <ListItemAvatar style={{background:"#33bfff", cursor:"pointer"}}>
                         <Avatar>
                             {this.props.index}
                         </Avatar>
                     </ListItemAvatar>
+                    </Tooltip>
                     <ListItemText
+                        className={classes.TextItem}
                         primary={this.props.question.question}
-                        style={{cursor:"pointer"}}
                     />
+                    <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={"Delete"}>
                     <ListItemSecondaryAction>
                         <IconButton
                             aria-label="Delete"
                             onClick={this.deleteQuestion}
                         >
-                            <DeleteIcon color="secondary"/>
+                            <DeleteIcon
+                                className={classes.Trash}/>
                         </IconButton>
                     </ListItemSecondaryAction>
+                    </Tooltip>
                 </ListItem>
                 <Divider/>
                 <QuestionDialog
