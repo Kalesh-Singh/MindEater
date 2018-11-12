@@ -143,13 +143,15 @@ class QuestionDialog extends Component {
 
     writeQuestion = () => {
         const options = this.state.options.value.map((option) => (option.value));
+        const user = fire.auth().currentUser;
         const questionData = {
             question: this.state.question.value,
             challenge: this.props.challengeId,
             options: options,
             correctOption: this.state.correctOption,
             hint: this.state.hint.value,
-            explanation: this.state.explanation.value
+            explanation: this.state.explanation.value,
+            owner: user.uid
         };
 
         // Write to challenges and questions simultaneously
