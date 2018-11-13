@@ -88,7 +88,9 @@ class SolveChallenges extends Component {
                             if (imagesObject) {
                                 challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
                             }
-                            updatedChallenges.push(challenge);
+                            if (!challenge.isPartial) {    // TODO: Check if owner is not this user
+                                updatedChallenges.push(challenge);
+                            }
                         }
 
                         this.setState({challenges: updatedChallenges, loading: false});
