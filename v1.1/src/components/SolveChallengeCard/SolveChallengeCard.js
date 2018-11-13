@@ -7,15 +7,13 @@ import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
 import Typography from "@material-ui/core/Typography/Typography";
 import fire from "../../fire";
 import SolveChallengeStepper from "../SolveChallengeStepper/SolveChallengeStepper";
-import CardMedia from "@material-ui/core/CardMedia/CardMedia";
 import Favorite from "@material-ui/icons/Favorite"
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder"
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Fade from "@material-ui/core/Fade/Fade";
-import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
+import Divider from "@material-ui/core/Divider/Divider";
 
 class SolveChallengeCard extends Component {
 
@@ -103,12 +101,13 @@ class SolveChallengeCard extends Component {
                             </Typography>
                         </CardContent>
                     </CardActionArea>
-                    <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} disableFocusListener disableTouchListener placement={"right"} title={"Like Challenge"}>
+                    <Divider/>
+                    <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} disableFocusListener disableTouchListener placement={"left"} title={"Like Challenge"}>
                         <FormControlLabel
                             control={
-                                <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite style={{color:"#d50000"}}/>} value="checkedH" style={{marginLeft:'15px'}}/>
+                                <Checkbox icon={<FavoriteBorder/>} checkedIcon={<Favorite style={{color:"#d50000"}}/>} value="checkedH" style={{marginLeft:'15px'}}/>
                             }
-                            style={{marginRight:'auto'}}
+                            style={{marginLeft:'auto'}}
                         />
                     </Tooltip>
                 </Card>

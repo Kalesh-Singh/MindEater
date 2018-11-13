@@ -376,12 +376,11 @@ class ChallengeDialog extends Component {
                                 deleteChallenge={this.deleteChallenge}
                                 saveChallenge={this.writeChallenge}
                             />
-
                             <Typography variant="h6" color="inherit" style={{flex: '1', textAlign: "center"}}>
                                 New Challenge
                             </Typography>
                             <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} disableFocusListener
-                                     disableTouchListener title={SaveProgress}>
+                                     title={SaveProgress}>
                                 <Button
                                     className={classes.bouton}
                                     color="inherit"
@@ -396,12 +395,11 @@ class ChallengeDialog extends Component {
                     <div>
                         <MuiThemeProvider theme={theme}>
                             <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} disableFocusListener
-                                     disableTouchListener placement={"left"} title={NeedHelp}>
+                                     placement={"left"} title={NeedHelp}>
                                 <Button
                                     color={"primary"}
                                     variant={"raised"}
                                     style={{
-                                        color: "black",
                                         margin: 0,
                                         top: 'auto',
                                         right: 20,
@@ -465,7 +463,6 @@ class ChallengeDialog extends Component {
                             onChange={this.handleFieldChange('description')}
                             onFocus={this.handleFieldFocus('description')}
                         />
-
                         <FormControl
                             error={questionsError.length > 0}
                             style={{width: '100%'}}

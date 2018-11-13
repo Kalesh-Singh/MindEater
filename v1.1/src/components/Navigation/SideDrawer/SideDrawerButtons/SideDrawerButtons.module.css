@@ -6,14 +6,9 @@
     align-items: center;
 }
 
-.SideDrawerItems a:active,
 .SideDrawerItems a.active {
-    color: #40a4c8;
+    color: #2096F3;
     text-decoration: underline;
-}
-
-.SideDrawerItems a:hover{
-    background: #5d9bf6;
 }
 
 .Header {
@@ -32,4 +27,10 @@
     margin-right: auto;
     float:left;
     padding-left: 20px;
+}
+
+.Bttn:hover {
+    background-color: rgba(32, 150,243, 0.4) !important;
+    color: white;
+    border-radius: 5px;
 }
