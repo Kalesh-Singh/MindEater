@@ -85,7 +85,9 @@ class SolveChallenges extends Component {
                         for (let challengeId in challengesObject) {
                             const challenge = challengesObject[challengeId];
                             challenge.id = challengeId;
-                            challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
+                            if (imagesObject) {
+                                challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
+                            }
                             updatedChallenges.push(challenge);
                         }
 
