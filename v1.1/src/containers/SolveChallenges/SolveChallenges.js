@@ -84,11 +84,14 @@ class SolveChallenges extends Component {
 
                         for (let challengeId in challengesObject) {
                             const challenge = challengesObject[challengeId];
+                            // TODO: Check if owner is not this user
                             challenge.id = challengeId;
                             if (imagesObject) {
                                 challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
                             }
-                            updatedChallenges.push(challenge);
+                            if (!challenge.isPartial) {
+                                updatedChallenges.push(challenge);
+                            }
                         }
 
                         this.setState({challenges: updatedChallenges, loading: false});
