@@ -259,6 +259,18 @@ class ChallengeDialog extends Component {
                         console.log('Challenge Id' + response.key);
                         this.setListeners(response.key);
                         this.setState({challengeId: response.key});
+
+                        const user = fire.auth().currentUser;
+                        const updates = {};
+                        updates['/users/' + user.uid + '/challenges/' + response.key] = true;
+
+                        fire.database().ref().update(updates)
+                            .then(() => {
+                                console.log('Added the challenge id to the users list of challenges');
+                            })
+                            .catch(error => {
+                                alert(error.message)
+                            });
                     });
             } else {
                 this.initializeStateFromProps();
