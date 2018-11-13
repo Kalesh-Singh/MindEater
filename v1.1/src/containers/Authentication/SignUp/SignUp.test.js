@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import { configure, shallow } from 'enzyme';
 import { expect } from 'chai';
 import SignUp from './SignUp';
-import Adapter from 'enzyme-adapter-react-16'
+import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 describe("SignUp Testing Suite", function() {
     const div = document.createElement('div');
     const signUp = ReactDOM.render(<SignUp />, div);
+    var sinon = require('sinon');
     describe("Password Tests", function() {
         it('rejects empty-string passwords', () => {
             var password = {
@@ -81,57 +82,6 @@ describe("SignUp Testing Suite", function() {
                 valid: false
             }
             expect(signUp.checkPassword(password)).to.equal('');
-        });
-    })
-    describe("Password Matching Tests", function() {
-        it('rejects non-matching passwords', () => {
-            var state = {
-                email: {
-                    value: '',
-                    error: '',
-                    focused: false,
-                    valid: false
-                },
-                password: {
-                    value: 'P@ssw0rd',
-                    error: '',
-                    focused: false,
-                    valid: false
-                }
-            };
-            this.state = state;
-            var repeatPassword = {
-                value: 'paSsw0rd',
-                error: '',
-                focused: false,
-                valid: false
-            }
-            expect(signUp.checkRepeatPassword(repeatPassword)).to.not.equal('');
-        });
-        it('accepts matching passwords', () => {
-            var state = {
-                email: {
-                    value: '',
-                    error: '',
-                    focused: false,
-                    valid: false
-                },
-                password: {
-                    value: 'P@ssw0rd',
-                    error: '',
-                    focused: false,
-                    valid: false
-                }
-            };
-            this.state = state;
-            var repeatPassword = {
-                value: 'P@ssw0rd',
-                error: '',
-                focused: false,
-                valid: false
-            }
-            console.log(this.state);
-            expect(signUp.checkRepeatPassword(repeatPassword)).to.equal('');
         });
     })
     describe("Email Tests", function() {
