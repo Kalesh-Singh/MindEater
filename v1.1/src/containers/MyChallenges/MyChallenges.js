@@ -17,34 +17,37 @@ class MyChallenges extends Component {
         fire.database().ref('/challenges/')
             .on('child_added', snapshot => {
                 console.log('Child Added - challenges');
-                // TODO: Check if owner is this user
-                const challenge = snapshot.val();
-                challenge.id = snapshot.key;
-                const updatedMyChallenges = [...this.state.myChallenges];
-                updatedMyChallenges.push(challenge);
-                this.setState({myChallenges: updatedMyChallenges});
+                if (snapshot.val().owner === fire.auth().currentUser.uid) {
+                    const challenge = snapshot.val();
+                    challenge.id = snapshot.key;
+                    const updatedMyChallenges = [...this.state.myChallenges];
+                    updatedMyChallenges.push(challenge);
+                    this.setState({myChallenges: updatedMyChallenges});
+                }
             });
         fire.database().ref('/challenges/')
             .on('child_removed', snapshot => {
                 console.log('Child Removed - challenges');
-                // TODO: Check if owner is this user
-                const challengeId = snapshot.key;
-                const updatedMyChallenges
-                    = this.state.myChallenges.filter((challenge) => (challenge.id !== challengeId));
-                this.setState({myChallenges: updatedMyChallenges});
+                if (snapshot.val().owner === fire.auth().currentUser.uid) {
+                    const challengeId = snapshot.key;
+                    const updatedMyChallenges
+                        = this.state.myChallenges.filter((challenge) => (challenge.id !== challengeId));
+                    this.setState({myChallenges: updatedMyChallenges});
+                }
             });
         fire.database().ref('/challenges/')
             .on('child_changed', snapshot => {
                 console.log('Child Changed - challenges');
-                // TODO: Check if owner is this user
-                const challengeId = snapshot.key;
-                const updatedMyChallenges = [...this.state.myChallenges];
-                const oldChallengeIndex = updatedMyChallenges
-                    .findIndex(challenge => (challenge.id === challengeId));
-                const updatedChallenge = snapshot.val();
-                updatedChallenge.id = challengeId;
-                updatedMyChallenges[oldChallengeIndex] = updatedChallenge;
-                this.setState({myChallenges: updatedMyChallenges});
+                if (snapshot.val().owner === fire.auth().currentUser.uid) {
+                    const challengeId = snapshot.key;
+                    const updatedMyChallenges = [...this.state.myChallenges];
+                    const oldChallengeIndex = updatedMyChallenges
+                        .findIndex(challenge => (challenge.id === challengeId));
+                    const updatedChallenge = snapshot.val();
+                    updatedChallenge.id = challengeId;
+                    updatedMyChallenges[oldChallengeIndex] = updatedChallenge;
+                    this.setState({myChallenges: updatedMyChallenges});
+                }
             });
     };
 
@@ -59,8 +62,10 @@ class MyChallenges extends Component {
                 const updatedChallenges = [];
                 for (let challengeId in challengesObject) {
                     const challenge = challengesObject[challengeId];
-                    challenge.id = challengeId;
-                    updatedChallenges.push(challenge);
+                    if (challenge.owner === fire.auth().currentUser.uid) {
+                        challenge.id = challengeId;
+                        updatedChallenges.push(challenge);
+                    }
                 }
                 this.setState({myChallenges: updatedChallenges});
             });
