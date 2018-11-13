@@ -131,6 +131,7 @@ class SignUp extends Component {
     };
 
     checkRepeatPassword = (repeatPassword) => {
+        console.log("PONG",this)
         if (repeatPassword.value.length === 0 && repeatPassword.focused) {
             return '* Required';
         } else if (repeatPassword.value !== this.state.password.value) {

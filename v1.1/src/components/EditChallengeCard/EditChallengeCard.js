@@ -73,12 +73,21 @@ class EditChallengeCard extends Component {
             .catch(error => {
                 alert(error.message)
             });
-
         // Delete the challenge image
         fire.database().ref('/challengeImages/' + this.state.challenge.id)
             .remove()
             .then(() => {
                 console.log('Challenge image deleted')
+            })
+            .catch(error => {
+                alert(error.message)
+            });
+        // Delete challenge from the user's list of challenges
+        const user = fire.auth().currentUser;
+        fire.database().ref('/users/' + user.uid + '/challenges/' + this.state.challenge.id)
+            .remove()
+            .then(() => {
+                console.log('Challenge removed from list of user challenges');
             })
             .catch(error => {
                 alert(error.message)
