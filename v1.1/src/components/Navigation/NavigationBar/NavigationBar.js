@@ -21,8 +21,8 @@ class NavigationBar extends Component {
                                 onClick={this.props.toggleDrawer}
                             >
                                 <MenuIcon/>
-                                <span className={classes.Brand}>MindEater</span>
                             </IconButton>
+                            <span className={classes.Brand}>MindEater</span>
                         </div>
                         <NavigationBarTabs/>
                         <UserMenu/>

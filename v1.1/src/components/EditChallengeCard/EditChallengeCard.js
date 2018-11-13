@@ -10,6 +10,10 @@ import CardActions from "@material-ui/core/CardActions/CardActions";
 import Button from "@material-ui/core/Button/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import fire from "../../fire";
+import CardHeader from "@material-ui/core/CardHeader/CardHeader";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import Zoom from "@material-ui/core/Zoom/Zoom";
+import Divider from "@material-ui/core/Divider/Divider";
 
 class EditChallengeCard extends Component {
     state = {
@@ -81,15 +85,23 @@ class EditChallengeCard extends Component {
             });
     };
 
+    static getRandomColor(){
+        let colorValues = ["red", "blue", "green", "yellow", "orange", "pink", "violet",
+            "brown", "teal", "olive", "lime", "navy", "#2096F3", "#4CAF50", "#d50000"];
+        return colorValues[Math.floor(Math.random() * colorValues.length)];
+    }
+
     render() {
         return (
             <ListItem className={classes.root}>
                 <Card
                     style={{
                         width: '100%', height: '100%', display: 'flex',
-                        flexFlow: 'column', justifyContent: 'space-between'
+                        flexFlow: 'column', justifyContent: 'space-between', boxShadow:"rgba(0, 0, 0, 0.2) 5px 5px 15px"
                     }}
                 >
+                    <CardHeader style={{background: EditChallengeCard.getRandomColor()}}/>
+                    <Tooltip TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} disableFocusListeners placement={"bottom"} title={"Edit"} enterDelay={50} leaveDelay={200}>
                     <CardActionArea onClick={this.handleClickOpen}>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
@@ -100,6 +112,8 @@ class EditChallengeCard extends Component {
                             </Typography>
                         </CardContent>
                     </CardActionArea>
+                    </Tooltip>
+                    <Divider/>
                     <CardActions style={{alignSelf: 'flex-end'}}>
                         <Button
                             className={classes.Del}

@@ -14,7 +14,7 @@ import Divider from "@material-ui/core/Divider/Divider";
 import classes from "./SideDrawerButtons.module.css";
 import Blogo from "../../../../assets/svg/black_logo.png";
 
-function SideDrawerButtons(props) {
+function SideDrawerButtons(props, routeName) {
     return (
         <div>
             <List
@@ -23,13 +23,13 @@ function SideDrawerButtons(props) {
             >
                 <img className={classes.Logo} src={Blogo} alt='Mind Eater Logo'/>
                 <h3 className={classes.Header}>MindEater</h3>
-                <Divider/>
+                <Divider style={{margin:"15px"}}/>
                 <NavLink
-                    activeClassName={classes.active}
                     to='/dashboard'
                     onClick={props.toggleDrawer}
+                    activeClassName={classes.active}
                 >
-                    <ListItem button>
+                    <ListItem button className={classes.Bttn}>
                         <ListItemIcon>
                             <DashboardIcon/>
                         </ListItemIcon>
@@ -41,7 +41,7 @@ function SideDrawerButtons(props) {
                     to='/my-challenges'
                     onClick={props.toggleDrawer}
                 >
-                    <ListItem button>
+                    <ListItem button className={classes.Bttn}>
                         <ListItemIcon>
                             <MyChallengesIcon/>
                         </ListItemIcon>
@@ -53,7 +53,7 @@ function SideDrawerButtons(props) {
                     to='/create-challenge'
                     onClick={props.toggleDrawer}
                 >
-                    <ListItem button>
+                    <ListItem button className={classes.Bttn}>
                         <ListItemIcon>
                             <CreateChallengeIcon/>
                         </ListItemIcon>
@@ -65,7 +65,7 @@ function SideDrawerButtons(props) {
                     to='/solve-challenges'
                     onClick={props.toggleDrawer}
                 >
-                    <ListItem button>
+                    <ListItem button className={classes.Bttn}>
                         <ListItemIcon>
                             <SolveChallengesIcon/>
                         </ListItemIcon>
