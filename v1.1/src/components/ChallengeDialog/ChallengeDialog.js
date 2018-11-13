@@ -121,17 +121,16 @@ class ChallengeDialog extends Component {
             .catch(error => {
                 alert(error.message)
             });
+        // TODO: Delete challenge from the list of user's challenges
     };
 
     writeChallenge = () => {
         // Write the challenge title, description and isPartial,
         // since the questions are already in the database by now.
-        const user = fire.auth().currentUser;
         const updates = {};
         updates['/challenges/' + this.state.challengeId + '/title'] = this.state.title.value;
         updates['/challenges/' + this.state.challengeId + '/description'] = this.state.description.value;
         updates['/challenges/' + this.state.challengeId + '/isPartial'] = false;
-        updates['/challenges/' + this.state.challengeId + '/owner'] = user.uid;
 
         this.setState({saving: true});
         return saveChallengeImageURL(this.state.challengeId, this.state.title.value)
@@ -141,9 +140,12 @@ class ChallengeDialog extends Component {
     writePartialChallenge = () => {
         // Write the challenge title, description and isPartial,
         // since the questions are already in the database by now.
+        const user = fire.auth().currentUser;
         const updates = {};
         updates['/challenges/' + this.state.challengeId + '/title'] = this.state.title.value;
         updates['/challenges/' + this.state.challengeId + '/description'] = this.state.description.value;
+        updates['/challenges/' + this.state.challengeId + '/owner'] = user.uid;
+        updates['/users/' + user.uid + '/challenges/' + this.state.challengeId] = true;
 
         fire.database().ref().update(updates)
             .then(() => {
