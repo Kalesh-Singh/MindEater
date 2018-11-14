@@ -24,6 +24,7 @@ import red from "@material-ui/core/es/colors/red";
 import ThinkingIcon from "../../assets/svg/QuestionIcons/ThinkingIcon";
 import SadIcon from "../../assets/svg/QuestionIcons/SadIcon";
 import HappyIcon from "../../assets/svg/QuestionIcons/HappyIcon";
+import Correct from "./Correct/Correct";
 
 const theme = createMuiTheme({
     Step: {
@@ -116,7 +117,7 @@ class SolveChallengeStepper extends Component {
 
             return {
                 score: state.score + questionScore,
-                selectedOption: null,
+                selectedOption: state.selectedOption,
                 timesAttempted: state.timesAttempted + 1,
                 finished: finished,
                 questions: updatedQuestions
@@ -143,6 +144,21 @@ class SolveChallengeStepper extends Component {
     render() {
 
         const steps = this.getSteps();
+
+        let feedback = null;
+
+        if (!this.state.finished) {
+            feedback = <ThinkingIcon/>
+        } else {
+            const correctOption = this.state.questions[this.state.activeStep].correctOption;
+            console.log('CORRECT OPTION =', correctOption);
+            console.log('SELECTED OPTION =', this.state.selectedOption);
+            if (correctOption === this.state.selectedOption) {
+                feedback = <><HappyIcon/><Correct/></>
+            } else {
+                feedback = <><SadIcon/></>
+            }
+        }
 
         return (
             <>
@@ -230,10 +246,7 @@ class SolveChallengeStepper extends Component {
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        {/* TODO: Put Icons here */}
-                                                        {/*<ThinkingIcon/>*/}
-                                                        <SadIcon/>
-                                                        {/*<HappyIcon/>*/}
+                                                        {feedback}
                                                     </div>
                                                 </div>
                                             </StepContent>
