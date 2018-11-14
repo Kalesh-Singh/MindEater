@@ -13,3 +13,9 @@
 .stepperDisabled circle {
     color:red;
 }
+
+.ContentRow {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+}
