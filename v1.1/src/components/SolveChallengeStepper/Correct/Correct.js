@@ -1,22 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Typography from "@material-ui/core/Typography/Typography";
 import Paper from "@material-ui/core/Paper/Paper";
-import CorrectIcon from '@material-ui/icons/Check';
+import CorrectIcon from '@material-ui/icons/CheckOutlined';
 import classes from "./Correct.module.css";
 
-class Correct extends Component {
-    render() {
-        return (
-            <Paper elevation={1}>
-                <div className={classes.Row}>
-                    <Typography variant="h5" component="h3">
-                        Correct!
-                    </Typography>
-                    <CorrectIcon/>
-                </div>
-            </Paper>
-        );
-    }
+function Correct() {
+    return (
+        <Paper elevation={1}>
+            <div className={classes.Row}>
+                <CorrectIcon/>
+                <Typography variant="h5" component="h3">
+                    Correct!
+                </Typography>
+            </div>
+        </Paper>
+    );
 }
 
 export default Correct;

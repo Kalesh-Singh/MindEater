@@ -25,6 +25,8 @@ import ThinkingIcon from "../../assets/svg/QuestionIcons/ThinkingIcon";
 import SadIcon from "../../assets/svg/QuestionIcons/SadIcon";
 import HappyIcon from "../../assets/svg/QuestionIcons/HappyIcon";
 import Correct from "./Correct/Correct";
+import Wrong from "./Wrong/Wrong";
+import Puzzled from "./Puzzled/Puzzled";
 
 const theme = createMuiTheme({
     Step: {
@@ -52,7 +54,8 @@ class SolveChallengeStepper extends Component {
         selectedOption: null,
         timesAttempted: 0,
         finished: false,
-        questions: []
+        questions: [],
+        icon: 'THINKING'
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -68,7 +71,8 @@ class SolveChallengeStepper extends Component {
                     selectedOption: null,
                     timesAttempted: 0,
                     finished: false,
-                    questions: updatedQuestions
+                    questions: updatedQuestions,
+                    icon: 'THINKING'
                 })
             } else {
                 this.setState({questions: updatedQuestions});
@@ -114,13 +118,15 @@ class SolveChallengeStepper extends Component {
             updatedQuestions[state.activeStep] = updatedQuestion;
 
             const finished = state.timesAttempted === 1 || correctAnswer === selectedAnswer;
+            const icon = (correctAnswer === state.selectedOption) ? "HAPPY" : "SAD";
 
             return {
                 score: state.score + questionScore,
-                selectedOption: state.selectedOption,
+                selectedOption: null,
                 timesAttempted: state.timesAttempted + 1,
                 finished: finished,
-                questions: updatedQuestions
+                questions: updatedQuestions,
+                icon: icon
             }
         });
     };
@@ -131,7 +137,8 @@ class SolveChallengeStepper extends Component {
                 activeStep: state.activeStep + 1,
                 selectedOption: null,
                 timesAttempted: 0,
-                finished: false
+                finished: false,
+                icon: "THINKING"
             }
         });
     };
@@ -147,17 +154,18 @@ class SolveChallengeStepper extends Component {
 
         let feedback = null;
 
-        if (!this.state.finished) {
-            feedback = <ThinkingIcon/>
-        } else {
-            const correctOption = this.state.questions[this.state.activeStep].correctOption;
-            console.log('CORRECT OPTION =', correctOption);
-            console.log('SELECTED OPTION =', this.state.selectedOption);
-            if (correctOption === this.state.selectedOption) {
-                feedback = <><HappyIcon/><Correct/></>
-            } else {
-                feedback = <><SadIcon/></>
-            }
+        switch (this.state.icon) {
+            case "HAPPY":
+                feedback = <><HappyIcon/><Correct/></>;
+                break;
+            case "SAD":
+                feedback = <><SadIcon/><Wrong/></>;
+                break;
+            case "THINKING":
+                feedback = <><ThinkingIcon/><Puzzled/></>;
+                break;
+            default:
+                feedback = <><ThinkingIcon/><Puzzled/></>;
         }
 
         return (
@@ -245,7 +253,7 @@ class SolveChallengeStepper extends Component {
                                                             </Button>
                                                         </div>
                                                     </div>
-                                                    <div>
+                                                    <div className={classes.ContentCol}>
                                                         {feedback}
                                                     </div>
                                                 </div>
