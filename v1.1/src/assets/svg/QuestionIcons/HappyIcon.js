@@ -2,7 +2,7 @@ import React from 'react';
 
 function HappyIcon() {
     return (
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+        <svg width="65%" height="65%" version="1.1" xmlns="http://www.w3.org/2000/svg"
              xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              viewBox="0 0 473.931 473.931" style="enable-background:new 0 0 473.931 473.931;" xmlSpace="preserve">
             <circle style="fill:#FFC10E;" cx="236.966" cy="236.966" r="236.966"/>

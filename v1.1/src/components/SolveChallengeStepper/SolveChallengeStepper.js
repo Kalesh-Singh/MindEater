@@ -229,8 +229,7 @@ class SolveChallengeStepper extends Component {
                                                     </div>
                                                     <div>
                                                         {/* TODO: Put Icons here */}
-                                                        <h1>Icon</h1>
-                                                        {/*<ThinkingIcon/>*/}
+                                                        <ThinkingIcon/>
                                                     </div>
                                                 </div>
                                             </StepContent>
