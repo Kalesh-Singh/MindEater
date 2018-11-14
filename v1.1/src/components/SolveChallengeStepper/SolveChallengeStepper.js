@@ -52,14 +52,26 @@ class SolveChallengeStepper extends Component {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.questions !== this.props.questions) {
+
+        if (prevProps.questions !== this.props.questions || prevProps.open !== this.props.open) {
             console.log('Questions did update - Stepper');
             const updatedQuestions = [...this.props.questions];
-            this.setState({questions: updatedQuestions})
+            if (!prevProps.open && this.props.open) {
+                this.setState({
+                    open: false,
+                    score: 0,
+                    activeStep: 0,
+                    selectedOption: null,
+                    timesAttempted: 0,
+                    finished: false,
+                    questions: updatedQuestions
+                })
+            } else {
+                this.setState({questions: updatedQuestions});
+            }
         }
 
     }
-
 
     handleClickOpen = () => {
         this.setState({open: true});
@@ -79,7 +91,6 @@ class SolveChallengeStepper extends Component {
 
     getStepContent = (step) => {
         return this.props.questions[step].options;
-
     };
 
     handleSolve = () => {
@@ -111,7 +122,6 @@ class SolveChallengeStepper extends Component {
     };
 
     handleNext = () => {
-
         this.setState(state => {
             return {
                 activeStep: state.activeStep + 1,
@@ -150,12 +160,12 @@ class SolveChallengeStepper extends Component {
                                 {steps.map((label, index) => {
                                     return (
                                         <Step key={index}
-                                              // className={index === this.state.activeStep
-                                              //     ? classes.stepperActive
-                                              //     : (index < this.state.activeStep)
-                                              //         ?
-                                              //         classes.stepperDisabled
-                                              //         : classes.stepperCompleted}
+                                            // className={index === this.state.activeStep
+                                            //     ? classes.stepperActive
+                                            //     : (index < this.state.activeStep)
+                                            //         ?
+                                            //         classes.stepperDisabled
+                                            //         : classes.stepperCompleted}
                                         >
                                             <StepLabel>{label}</StepLabel>
                                             <StepContent>
