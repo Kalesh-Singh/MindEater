@@ -22,6 +22,7 @@ import green from "@material-ui/core/es/colors/green";
 import lightBlue from "@material-ui/core/es/colors/lightBlue";
 import red from "@material-ui/core/es/colors/red";
 import ThinkingIcon from "../../assets/svg/QuestionIcons/ThinkingIcon";
+import SadIcon from "../../assets/svg/QuestionIcons/SadIcon";
 
 const theme = createMuiTheme({
     Step: {
@@ -229,7 +230,8 @@ class SolveChallengeStepper extends Component {
                                                     </div>
                                                     <div>
                                                         {/* TODO: Put Icons here */}
-                                                        <ThinkingIcon/>
+                                                        {/*<ThinkingIcon/>*/}
+                                                        <SadIcon/>
                                                     </div>
                                                 </div>
                                             </StepContent>
