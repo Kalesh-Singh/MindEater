@@ -21,6 +21,12 @@ import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 import green from "@material-ui/core/es/colors/green";
 import lightBlue from "@material-ui/core/es/colors/lightBlue";
 import red from "@material-ui/core/es/colors/red";
+import ThinkingIcon from "../../assets/svg/QuestionIcons/ThinkingIcon";
+import SadIcon from "../../assets/svg/QuestionIcons/SadIcon";
+import HappyIcon from "../../assets/svg/QuestionIcons/HappyIcon";
+import Correct from "./Correct/Correct";
+import Wrong from "./Wrong/Wrong";
+import Puzzled from "./Puzzled/Puzzled";
 
 const theme = createMuiTheme({
     Step: {
@@ -48,7 +54,8 @@ class SolveChallengeStepper extends Component {
         selectedOption: null,
         timesAttempted: 0,
         finished: false,
-        questions: []
+        questions: [],
+        icon: 'THINKING'
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -64,7 +71,8 @@ class SolveChallengeStepper extends Component {
                     selectedOption: null,
                     timesAttempted: 0,
                     finished: false,
-                    questions: updatedQuestions
+                    questions: updatedQuestions,
+                    icon: 'THINKING'
                 })
             } else {
                 this.setState({questions: updatedQuestions});
@@ -110,13 +118,15 @@ class SolveChallengeStepper extends Component {
             updatedQuestions[state.activeStep] = updatedQuestion;
 
             const finished = state.timesAttempted === 1 || correctAnswer === selectedAnswer;
+            const icon = (correctAnswer === state.selectedOption) ? "HAPPY" : "SAD";
 
             return {
                 score: state.score + questionScore,
                 selectedOption: null,
                 timesAttempted: state.timesAttempted + 1,
                 finished: finished,
-                questions: updatedQuestions
+                questions: updatedQuestions,
+                icon: icon
             }
         });
     };
@@ -127,7 +137,8 @@ class SolveChallengeStepper extends Component {
                 activeStep: state.activeStep + 1,
                 selectedOption: null,
                 timesAttempted: 0,
-                finished: false
+                finished: false,
+                icon: "THINKING"
             }
         });
     };
@@ -140,6 +151,22 @@ class SolveChallengeStepper extends Component {
     render() {
 
         const steps = this.getSteps();
+
+        let feedback = null;
+
+        switch (this.state.icon) {
+            case "HAPPY":
+                feedback = <><HappyIcon/><Correct/></>;
+                break;
+            case "SAD":
+                feedback = <><SadIcon/><Wrong/></>;
+                break;
+            case "THINKING":
+                feedback = <><ThinkingIcon/><Puzzled/></>;
+                break;
+            default:
+                feedback = <><ThinkingIcon/><Puzzled/></>;
+        }
 
         return (
             <>
@@ -169,58 +196,66 @@ class SolveChallengeStepper extends Component {
                                         >
                                             <StepLabel>{label}</StepLabel>
                                             <StepContent>
-                                                {this.state.timesAttempted === 1 && !this.state.finished ?
-                                                    <ExpansionPanel>
-                                                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                                            <Typography style={{color: '#93C500'}}>Show
-                                                                hint</Typography>
-                                                        </ExpansionPanelSummary>
-                                                        <ExpansionPanelDetails>
-                                                            <Typography>
-                                                                {this.props.questions[index].hint}
-                                                            </Typography>
-                                                        </ExpansionPanelDetails>
-                                                    </ExpansionPanel> : null
-                                                }
-                                                <SolveQuestionOptions
-                                                    options={this.getStepContent(index)}
-                                                    selectedOption={this.state.selectedOption}
-                                                    optionChanged={this.handleChange}
-                                                    disabled={this.state.finished}
-                                                />
-                                                {this.state.finished ?
-                                                    <ExpansionPanel>
-                                                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                                            <Typography style={{color: '#FFC300'}}>See
-                                                                Explanation</Typography>
-                                                        </ExpansionPanelSummary>
-                                                        <ExpansionPanelDetails>
-                                                            <Typography>
-                                                                {this.props.questions[index].explanation}
-                                                            </Typography>
-                                                        </ExpansionPanelDetails>
-                                                    </ExpansionPanel> : null
-                                                }
-                                                <div className={classes.Buttons}>
-                                                    <Button
-                                                        style={{marginRight: '10px'}}
-                                                        className={classes.Button}
-                                                        variant="contained"
-                                                        color="primary"
-                                                        disabled={!this.state.selectedOption}
-                                                        onClick={this.handleSolve}
-                                                    >
-                                                        Solve
-                                                    </Button>
+                                                <div className={classes.ContentRow}>
+                                                    {/* TODO: Style with flex box */}
+                                                    <div>
+                                                        {this.state.timesAttempted === 1 && !this.state.finished ?
+                                                            <ExpansionPanel>
+                                                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                                                                    <Typography style={{color: '#93C500'}}>Show
+                                                                        hint</Typography>
+                                                                </ExpansionPanelSummary>
+                                                                <ExpansionPanelDetails>
+                                                                    <Typography>
+                                                                        {this.props.questions[index].hint}
+                                                                    </Typography>
+                                                                </ExpansionPanelDetails>
+                                                            </ExpansionPanel> : null
+                                                        }
+                                                        <SolveQuestionOptions
+                                                            options={this.getStepContent(index)}
+                                                            selectedOption={this.state.selectedOption}
+                                                            optionChanged={this.handleChange}
+                                                            disabled={this.state.finished}
+                                                        />
+                                                        {this.state.finished ?
+                                                            <ExpansionPanel>
+                                                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                                                                    <Typography style={{color: '#FFC300'}}>See
+                                                                        Explanation</Typography>
+                                                                </ExpansionPanelSummary>
+                                                                <ExpansionPanelDetails>
+                                                                    <Typography>
+                                                                        {this.props.questions[index].explanation}
+                                                                    </Typography>
+                                                                </ExpansionPanelDetails>
+                                                            </ExpansionPanel> : null
+                                                        }
+                                                        <div className={classes.Buttons}>
+                                                            <Button
+                                                                style={{marginRight: '10px'}}
+                                                                className={classes.Button}
+                                                                variant="contained"
+                                                                color="primary"
+                                                                disabled={!this.state.selectedOption}
+                                                                onClick={this.handleSolve}
+                                                            >
+                                                                Solve
+                                                            </Button>
 
-                                                    <Button
-                                                        variant="contained"
-                                                        color="primary"
-                                                        disabled={!this.state.finished}
-                                                        onClick={this.state.activeStep === steps.length - 1 ? this.handleFinish : this.handleNext}
-                                                    >
-                                                        {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                                    </Button>
+                                                            <Button
+                                                                variant="contained"
+                                                                color="primary"
+                                                                disabled={!this.state.finished}
+                                                                onClick={this.state.activeStep === steps.length - 1 ? this.handleFinish : this.handleNext}
+                                                            >
+                                                                {this.state.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                                            </Button>
+                                                        </div>
+                                                    </div>
+                                                    <div className={classes.ContentCol}>
+                                                        {feedback}
+                                                    </div>
                                                 </div>
                                             </StepContent>
                                         </Step>
