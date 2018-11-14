@@ -3,7 +3,7 @@ import React from 'react';
 function HappyIcon() {
     return (
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              viewBox="0 0 473.931 473.931" style="enable-background:new 0 0 473.931 473.931;" xmlSpace="preserve">
             <circle style="fill:#FFC10E;" cx="236.966" cy="236.966" r="236.966"/>
             <path style="fill:#333333;" d="M81.391,237.127c0,85.911,69.649,155.56,155.56,155.56c85.915,0,155.567-69.649,155.567-155.56
