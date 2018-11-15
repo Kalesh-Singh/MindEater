@@ -25,5 +25,19 @@
     justify-content: space-around;
     align-items: center;
     margin-left: auto;
+    margin: 0;
+    top: 20px;
+    right: 20px;
+    bottom: auto;
+    left: auto;
+    position: fixed;
 
+}
+
+@media (max-width: 30em){
+    .ContentCol {
+        top: 10px;
+        right: 5px;
+        position: absolute;
+    }
 }

@@ -380,7 +380,7 @@ class ChallengeDialog extends Component {
                             <Typography variant="h6" color="inherit" style={{flex: '1', textAlign: "center"}}>
                                 New Challenge
                             </Typography>
-                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} disableFocusListener
+                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
                                      title={SaveProgress}>
                                 <Button
                                     className={classes.bouton}
@@ -392,50 +392,6 @@ class ChallengeDialog extends Component {
                             </Tooltip>
                         </Toolbar>
                     </AppBar>
-
-                    <div>
-                        <MuiThemeProvider theme={theme}>
-                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 600}} disableFocusListener
-                                     placement={"left"} title={NeedHelp}>
-                                <Button
-                                    color={"primary"}
-                                    variant={"raised"}
-                                    style={{
-                                        margin: 0,
-                                        top: 'auto',
-                                        right: 'auto',
-                                        bottom: 20,
-                                        left: 20,
-                                        position: 'fixed'
-                                    }}
-                                    onClick={this.handleClickOpen}>
-                                    <HelpIc style={{color: "white"}}/>
-                                </Button>
-                            </Tooltip>
-                        </MuiThemeProvider>
-                        <Dialog
-                            open={this.state.open}
-                            onClose={this.handleClose}
-                            aria-labelledby="form-dialog-title"
-                            TransitionComponent={Transition}
-                        >
-                            <DialogTitle id="form-dialog-title"><InfoIc style={{marginRight: "10px", color: "blue"}}/>Description</DialogTitle>
-                            <DialogContent>
-                                <DialogContentText style={{color: "black"}}>
-                                    In order to create a valid question, you must fill out the required fields, this
-                                    includes the Title of the Challenge;
-                                    the Description is optional. After that, you must create at least one question for
-                                    the challenge. Once that is completed you are
-                                    all done! You can then later add more questions to your challenge if you desire.
-                                </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={this.handleClose} color="primary" className={classes.bouton}>
-                                    Got it!
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
-                    </div>
 
                     <DialogContent className={classes.root}>
                         <h3 style={{marginTop: "50px"}}>Input the title of Your challenge:</h3>
@@ -478,6 +434,54 @@ class ChallengeDialog extends Component {
                             challengeId={this.state.challengeId}
                             savePartial={this.writePartialChallenge}
                         />
+
+                        <div>
+                            <MuiThemeProvider theme={theme}>
+                                <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}}
+                                         disableFocusListener
+                                         placement={"right"} title={NeedHelp}>
+                                    <Button
+                                        color={"primary"}
+                                        variant={"raised"}
+                                        style={{
+                                            margin: 0,
+                                            top: 'auto',
+                                            right: 'auto',
+                                            bottom: 20,
+                                            left: 20,
+                                            position: 'fixed', zIndex: "1"
+                                        }}
+                                        onClick={this.handleClickOpen}>
+                                        <HelpIc style={{color: "white"}}/>
+                                    </Button>
+                                </Tooltip>
+                            </MuiThemeProvider>
+                            <Dialog
+                                open={this.state.open}
+                                onClose={this.handleClose}
+                                aria-labelledby="form-dialog-title"
+                                TransitionComponent={Transition}
+                            >
+                                <DialogTitle id="form-dialog-title"><InfoIc
+                                    style={{marginRight: "10px", color: "blue"}}/>Description</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText style={{color: "black"}}>
+                                        In order to create a valid question, you must fill out the required fields, this
+                                        includes the Title of the Challenge;
+                                        the Description is optional. After that, you must create at least one question
+                                        for
+                                        the challenge. Once that is completed you are
+                                        all done! You can then later add more questions to your challenge if you desire.
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={this.handleClose} color="primary" className={classes.bouton}>
+                                        Got it!
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                        </div>
+
                     </DialogContent>
                 </Dialog>
                 <SavingModal open={this.state.saving}/>

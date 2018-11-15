@@ -155,16 +155,24 @@ class SolveChallengeStepper extends Component {
 
         switch (this.state.icon) {
             case "HAPPY":
-                feedback = <Paper className={classes.ContentCol} style={{background:"#4CAF50", marginRight:"auto"}}><HappyIcon/><Correct/></Paper>;
+                feedback = <Paper className={classes.ContentCol}
+                                  style={{background: "#4CAF50", marginRight: "auto"}}><HappyIcon/><Correct/></Paper>;
                 break;
             case "SAD":
-                feedback = <Paper className={classes.ContentCol} style={{background:"#d60000", marginRight:"auto"}}><SadIcon/><Wrong/></Paper>;
+                feedback = <Paper className={classes.ContentCol}
+                                  style={{background: "#d60000", marginRight: "auto"}}><SadIcon/><Wrong/></Paper>;
                 break;
             case "THINKING":
-                feedback = <Paper className={classes.ContentCol} style={{background:"#2096F3", marginRight:"auto"}}><ThinkingIcon/><Puzzled/></Paper>;
+                feedback = <Paper className={classes.ContentCol} style={{
+                    background: "#2096F3",
+                    marginRight: "auto"
+                }}><ThinkingIcon/><Puzzled/></Paper>;
                 break;
             default:
-                feedback = <Paper className={classes.ContentCol} style={{background:"#2096F3", marginRight:"auto"}}><ThinkingIcon/><Puzzled/></Paper>;
+                feedback = <Paper className={classes.ContentCol} style={{
+                    background: "#2096F3",
+                    marginRight: "auto"
+                }}><ThinkingIcon/><Puzzled/></Paper>;
         }
 
         return (
