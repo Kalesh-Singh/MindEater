@@ -7,7 +7,7 @@ import PuzzledIcon from '@material-ui/icons/HelpOutline';
 class Puzzled extends Component {
     render() {
         return (
-            <Paper elevation={14}>
+            <Paper elevation={1}>
                 <div className={classes.Row}>
                     <Typography variant="h5" component="h3">Hmm...</Typography>
                 </div>

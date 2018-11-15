@@ -3,15 +3,15 @@
 }
 
 .stepperCompleted circle {
-    color:green;
+    color:#4CAF50;
 }
 
 .stepperActive circle {
-    color:lightblue;
+    color:#2096F3;
 }
 
 .stepperDisabled circle {
-    color:red;
+    color:#d60000;
 }
 
 .ContentRow {
@@ -34,7 +34,17 @@
 
 }
 
-@media (max-width: 30em){
+.Submit:hover {
+    background-color: #4CAF50 !important;
+    color:#FFF;
+}
+
+.Next:hover {
+    background-color: #2096F3 !important;
+    color:#FFF;
+}
+
+@media (max-width: 35em){
     .ContentCol {
         top: 10px;
         right: 5px;
