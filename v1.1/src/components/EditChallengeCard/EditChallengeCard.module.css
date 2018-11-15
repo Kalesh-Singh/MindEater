@@ -14,3 +14,7 @@
     background-color: #d50000 !important;
     color: #FFFFFF;
 }
+
+.Hov:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
+}

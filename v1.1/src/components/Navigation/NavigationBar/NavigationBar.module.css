@@ -13,9 +13,9 @@
 }
 
 .Brand{
-    padding-left: 5px;
-    margin-top: 10px;
+    margin-left: 5px;
     font-size: 25px;
+    vertical-align: middle;
 }
 
 /*.Brand:hover{*/

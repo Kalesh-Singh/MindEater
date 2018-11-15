@@ -104,9 +104,10 @@ class EditChallengeCard extends Component {
         return (
             <ListItem className={classes.root}>
                 <Card
+                    className={classes.Hov}
                     style={{
                         width: '100%', height: '100%', display: 'flex',
-                        flexFlow: 'column', justifyContent: 'space-between', boxShadow:"rgba(0, 0, 0, 0.2) 5px 5px 15px"
+                        flexFlow: 'column', justifyContent: 'space-between'
                     }}
                 >
                     <CardHeader style={{background: EditChallengeCard.getRandomColor()}}/>
