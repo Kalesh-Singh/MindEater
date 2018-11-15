@@ -7,9 +7,10 @@ import classes from "./Wrong.module.css";
 class Wrong extends Component {
     render() {
         return (
-            <Paper elevation={14}>
+            <Paper elevation={1}>
                 <div className={classes.Row}>
-                    <WrongIcon style={{verticalAlign:"middle"}}/>
+                    <WrongIcon
+                        style={{textAlign:"center"}}/>
                     <Typography variant="h5" component="h3">
                         Wrong
                     </Typography>
