@@ -83,6 +83,7 @@ class SolveChallengeCard extends Component {
         return (
             <ListItem className={classes.root}>
                 <Card
+                    className={classes.Hov}
                     style={{
                         width: '100%', height: '100%', display: 'flex',
                         flexFlow: 'column', justifyContent: 'space-between'

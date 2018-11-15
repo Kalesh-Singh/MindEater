@@ -12,6 +12,21 @@ import TableCell from "@material-ui/core/TableCell/TableCell";
 import TableBody from "@material-ui/core/TableBody/TableBody";
 import classes from "./SolveChallengeSummary.module.css";
 import withMobileDialog from "@material-ui/core/es/withMobileDialog/withMobileDialog";
+import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
+import green from "@material-ui/core/es/colors/green";
+
+const theme = createMuiTheme({
+    palette: {
+        primary: green,
+    },
+    overrides: {
+        MuiButton: {
+            raisedPrimary: {
+                color: 'white',
+            },
+        },
+    }
+});
 
 class SolveChallengeSummary extends Component {
 
@@ -68,15 +83,18 @@ class SolveChallengeSummary extends Component {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-
+                    <MuiThemeProvider theme={theme}>
                     <Button
                         className={classes.okBttn}
                         onClick={this.handleOk}
-                        variant={"outlined"}
-                        color="primary" autoFocus
+                        variant={"raised"}
+                        color={"primary"}
+                        size={"large"}
+                        autoFocus={true}
                     >
                         Ok
                     </Button>
+                    </MuiThemeProvider>
                 </DialogActions>
             </Dialog>
         );

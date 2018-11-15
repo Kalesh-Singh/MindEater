@@ -19,14 +19,13 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import classes from "./SolveChallengeStepper.module.css";
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 import green from "@material-ui/core/es/colors/green";
-import lightBlue from "@material-ui/core/es/colors/lightBlue";
-import red from "@material-ui/core/es/colors/red";
 import ThinkingIcon from "../../assets/svg/QuestionIcons/ThinkingIcon";
 import SadIcon from "../../assets/svg/QuestionIcons/SadIcon";
 import HappyIcon from "../../assets/svg/QuestionIcons/HappyIcon";
 import Correct from "./Correct/Correct";
 import Wrong from "./Wrong/Wrong";
 import Puzzled from "./Puzzled/Puzzled";
+import Paper from "@material-ui/core/Paper/Paper";
 
 const theme = createMuiTheme({
     Step: {
@@ -156,16 +155,16 @@ class SolveChallengeStepper extends Component {
 
         switch (this.state.icon) {
             case "HAPPY":
-                feedback = <><HappyIcon/><Correct/></>;
+                feedback = <Paper className={classes.ContentCol} style={{background:"#4CAF50", marginRight:"auto"}}><HappyIcon/><Correct/></Paper>;
                 break;
             case "SAD":
-                feedback = <><SadIcon/><Wrong/></>;
+                feedback = <Paper className={classes.ContentCol} style={{background:"#d60000", marginRight:"auto"}}><SadIcon/><Wrong/></Paper>;
                 break;
             case "THINKING":
-                feedback = <><ThinkingIcon/><Puzzled/></>;
+                feedback = <Paper className={classes.ContentCol} style={{background:"#2096F3", marginRight:"auto"}}><ThinkingIcon/><Puzzled/></Paper>;
                 break;
             default:
-                feedback = <><ThinkingIcon/><Puzzled/></>;
+                feedback = <Paper className={classes.ContentCol} style={{background:"#2096F3", marginRight:"auto"}}><ThinkingIcon/><Puzzled/></Paper>;
         }
 
         return (
@@ -202,7 +201,7 @@ class SolveChallengeStepper extends Component {
                                                         {this.state.timesAttempted === 1 && !this.state.finished ?
                                                             <ExpansionPanel>
                                                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                                                    <Typography style={{color: '#93C500'}}>Show
+                                                                    <Typography style={{color: '#D50000'}}>Show
                                                                         hint</Typography>
                                                                 </ExpansionPanelSummary>
                                                                 <ExpansionPanelDetails>
@@ -221,7 +220,7 @@ class SolveChallengeStepper extends Component {
                                                         {this.state.finished ?
                                                             <ExpansionPanel>
                                                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                                                    <Typography style={{color: '#FFC300'}}>See
+                                                                    <Typography style={{color: '#4CAF50'}}>See
                                                                         Explanation</Typography>
                                                                 </ExpansionPanelSummary>
                                                                 <ExpansionPanelDetails>

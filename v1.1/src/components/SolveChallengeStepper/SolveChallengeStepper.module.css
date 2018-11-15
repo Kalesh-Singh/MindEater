@@ -17,7 +17,6 @@
 .ContentRow {
     display: flex;
     flex-flow: row;
-    justify-content: space-around;
 }
 
 .ContentCol {
@@ -25,4 +24,6 @@
     flex-flow: column;
     justify-content: space-around;
     align-items: center;
+    margin-left: auto;
+
 }
