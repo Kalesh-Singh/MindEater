@@ -26,6 +26,7 @@ import Correct from "./Correct/Correct";
 import Wrong from "./Wrong/Wrong";
 import Puzzled from "./Puzzled/Puzzled";
 import Paper from "@material-ui/core/Paper/Paper";
+import * as fire from "firebase";
 
 const theme = createMuiTheme({
     Step: {
@@ -144,7 +145,86 @@ class SolveChallengeStepper extends Component {
 
     handleFinish = () => {
         this.handleNext();
+        this.handleChallengeCompleted();
         this.handleClickOpen();
+    };
+
+    handleChallengeCompleted = () => {
+        // Check if the player is the owner of this challenge.
+        const userId = fire.auth().currentUser.uid;
+        const challengeOwner = this.state.questions[0].owner;      // All questions have the associated owner id.
+        const userOwnsChallenge = userId === challengeOwner;
+        console.log("Owns challenge " + userOwnsChallenge);
+
+        // Check if the player completed the challenge before.
+        const challengeId = this.state.questions[0].challenge;      // All questions have teh associated challenge id.
+        fire.database().ref('/users/' + userId + '/completedChallenges/' + challengeId)
+            .once('value')
+            .then(snapshot => {
+                // User has already completed the challenge.
+                const userCompletedBefore = !!snapshot.val();
+                console.log("Completed challenge before " + userCompletedBefore);
+
+                // If the player has not completed the challenge before and does not own the challenge.
+                if (!userOwnsChallenge && !userCompletedBefore) {
+                    // 1. Update the player's points earned.
+                    fire.database().ref('/users/' + userId + '/points')
+                        .once('value')
+                        .then(snapshot => {
+                            const currUserPoints = (snapshot.val()) ? snapshot.val() : 0;
+                            const updatedUserPoints = currUserPoints + this.state.score;
+                            const updates = {};
+                            updates['/users/' + userId + '/points'] = updatedUserPoints;
+                            fire.database().ref().update(updates)
+                                .then(() => {
+                                    console.log('Updated user points');
+                                })
+                                .catch(error => {
+                                    alert(error.message);
+                                });
+                        }).catch(error => {
+                        alert(error.message)
+                    });
+
+                    // 2. Update the number of times the challenge was completed.
+                    fire.database().ref('/challenges/' + challengeId + '/timesCompleted')
+                        .once('value')
+                        .then(snapshot => {
+                            const currTimesCompleted = (snapshot.val()) ? snapshot.val() : 0;
+                            const updatedTimesCompleted = currTimesCompleted + 1;
+                            const updates = {};
+                            updates['/challenges/' + challengeId + '/timesCompleted'] = updatedTimesCompleted;
+                            fire.database().ref().update(updates)
+                                .then(() => {
+                                    console.log('Updated challenge times completed.');
+                                })
+                                .catch(error => {
+                                    alert(error.message);
+                                });
+
+                        })
+                        .catch(error => {
+                            alert(error.message);
+                        });
+
+                }
+
+                // If the user did not take the challenge before, add the challenge to the user's completed list.
+                if (!userCompletedBefore) {
+                    const updates = {};
+                    updates['/users/' + userId + '/completedChallenges/' + challengeId] = true;
+                    fire.database().ref().update(updates)
+                        .then(() => {
+                            console.log('Updated users completed challenges.');
+                        })
+                        .catch(error => {
+                            alert(error.message);
+                        });
+                }
+
+            }).catch(error => {
+            alert(error.message)
+        });
     };
 
     render() {
@@ -155,16 +235,24 @@ class SolveChallengeStepper extends Component {
 
         switch (this.state.icon) {
             case "HAPPY":
-                feedback = <Paper className={classes.ContentCol} style={{background:"#4CAF50", marginRight:"auto"}}><HappyIcon/><Correct/></Paper>;
+                feedback = <Paper className={classes.ContentCol}
+                                  style={{background: "#4CAF50", marginRight: "auto"}}><HappyIcon/><Correct/></Paper>;
                 break;
             case "SAD":
-                feedback = <Paper className={classes.ContentCol} style={{background:"#d60000", marginRight:"auto"}}><SadIcon/><Wrong/></Paper>;
+                feedback = <Paper className={classes.ContentCol}
+                                  style={{background: "#d60000", marginRight: "auto"}}><SadIcon/><Wrong/></Paper>;
                 break;
             case "THINKING":
-                feedback = <Paper className={classes.ContentCol} style={{background:"#2096F3", marginRight:"auto"}}><ThinkingIcon/><Puzzled/></Paper>;
+                feedback = <Paper className={classes.ContentCol} style={{
+                    background: "#2096F3",
+                    marginRight: "auto"
+                }}><ThinkingIcon/><Puzzled/></Paper>;
                 break;
             default:
-                feedback = <Paper className={classes.ContentCol} style={{background:"#2096F3", marginRight:"auto"}}><ThinkingIcon/><Puzzled/></Paper>;
+                feedback = <Paper className={classes.ContentCol} style={{
+                    background: "#2096F3",
+                    marginRight: "auto"
+                }}><ThinkingIcon/><Puzzled/></Paper>;
         }
 
         return (
