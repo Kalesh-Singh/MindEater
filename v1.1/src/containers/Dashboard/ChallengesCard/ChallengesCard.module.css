@@ -1,0 +1,81 @@
+/* button for challenge*/
+c {
+    color: #5983da;
+    text-decoration: none;
+    transition: 0.3s all ease;
+}
+
+c:hover {
+    color: #acc1ed;
+}
+
+c:focus {
+    text-decoration: none;
+}
+
+c:active {
+    color: black;
+}
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height:100%;
+    /*border: solid black;*/
+}
+
+.bttn {
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+    font-size: 25px;
+
+}
+.bttn:after {
+    transition: 0.3s all ease;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    border: 3px solid #5983da;
+
+}
+.bttn:before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: -1;
+}
+.bttn:hover:after {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+    background: #e4ebf9;
+    opacity: 0.3;
+}
+.bttn:active {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+
+}
+.bttn:active:before {
+    background-color: #acc1ed;
+}
+.bttn:active:after {
+    border-color: #acc1ed;
+}

@@ -25,6 +25,7 @@ import Correct from "./Correct/Correct";
 import Wrong from "./Wrong/Wrong";
 import Puzzled from "./Puzzled/Puzzled";
 import Paper from "@material-ui/core/Paper/Paper";
+import grey from "@material-ui/core/es/colors/grey";
 
 const theme = createMuiTheme({
     completed: {
