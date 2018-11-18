@@ -19,7 +19,6 @@ class NavigationBarTabs extends Component {
         const value = this.state.value;
         return (
                 <Tabs fullWidth
-                      // inkBarStyle={{background:"#0000", height: "5px", marginTop: "-5px"}}
                       className={classes.DesktopOnly}
                       onChange={this.handleChange}
                       value={value}

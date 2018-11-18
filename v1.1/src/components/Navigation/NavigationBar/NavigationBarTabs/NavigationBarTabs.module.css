@@ -4,7 +4,7 @@
 }
 
 .DesktopOnly a:hover{
-    color: black;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 15px;
 }
 
