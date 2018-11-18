@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Muli:300,400,700');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
 body {
   background-color: grey;
   height: 200vh;
@@ -104,7 +100,7 @@ body {
 }
 
 .nav__content .nav__list-item:hover {
-  -webkit-transition-delay: 0.1s ease;
+  -webkit-transition-delay: 0.1s;
   transition-delay: 0.1s;
   color: #acc1ed;
 }
@@ -359,7 +355,7 @@ ul {
     margin: 0;
     padding: 50px;
     overflow: visible;
-    background-color: rgb(80, 80, 80, 0.9);
+    background-color: rgba(80, 80, 80, 0.9);
     position: -webkit-sticky; /* Safari */
     position: sticky;
     top:0;
@@ -375,7 +371,7 @@ li {
 }
 
 lic {
-position: centered;
+position: center;
 }
 
 li a, .dropbtn {
@@ -456,8 +452,8 @@ liT {
 }
 
 .SignOut-button:active:after {
-    padding: 5;
-    margin: 6;
+    padding: 5px;
+    margin: 6px;
     opacity: 1;
     transition: 0s
 }
@@ -548,7 +544,7 @@ button:hover, a:hover {
 /* Drop down menu*/
 .trigger-button {
     font-size: 50px;
-    cursor: pointer
+    cursor: pointer;
     position: absolute;
     top: 8px;
     left: 16px;
@@ -617,7 +613,7 @@ button:hover, a:hover {
     color: black;
     width:47.5%;
     height:25%;
-    position: left;
+    /*position: left;*/
     text-align:center;
     margin: 10px;
     float:left;
@@ -628,7 +624,7 @@ button:hover, a:hover {
 .inside {
     background: #5983da;
     color: black;
-    position: left;
+    /*position: top;*/
     margin:5%;
 }
 /* displays the content inside container centered*/
@@ -639,7 +635,6 @@ button:hover, a:hover {
     padding: 30px;
     text-align: center;
     display: table;
-    display: table-cell;
     vertical-align:middle;
 }
 

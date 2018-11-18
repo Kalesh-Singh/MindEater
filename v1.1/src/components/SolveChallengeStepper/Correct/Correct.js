@@ -6,7 +6,7 @@ import classes from "./Correct.module.css";
 
 function Correct() {
     return (
-        <Paper elevation={14}>
+        <Paper elevation={1}>
             <div className={classes.Row}>
                 <CorrectIcon style={{verticalAlign:"middle"}}/>
                 <Typography variant="h5" component="h3">
