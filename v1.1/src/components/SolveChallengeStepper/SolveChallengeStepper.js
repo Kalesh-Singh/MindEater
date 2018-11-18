@@ -18,7 +18,6 @@ import Typography from "@material-ui/core/Typography/Typography";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import classes from "./SolveChallengeStepper.module.css";
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
-import green from "@material-ui/core/es/colors/green";
 import ThinkingIcon from "../../assets/svg/QuestionIcons/ThinkingIcon";
 import SadIcon from "../../assets/svg/QuestionIcons/SadIcon";
 import HappyIcon from "../../assets/svg/QuestionIcons/HappyIcon";
@@ -29,9 +28,12 @@ import Paper from "@material-ui/core/Paper/Paper";
 import fire from "../../fire";
 
 const theme = createMuiTheme({
-    Step: {
-        iconColor: green,
+    completed: {
+        display: "inline-block"
     },
+    icon: {
+        color: "green !important"
+    }
 });
 
 function Transition(props) {
@@ -236,24 +238,20 @@ class SolveChallengeStepper extends Component {
 
         switch (this.state.icon) {
             case "HAPPY":
-                feedback = <Paper className={classes.ContentCol}
+                feedback = <Paper className={classes.ContentCol} elevation={15}
                                   style={{background: "#4CAF50", marginRight: "auto"}}><HappyIcon/><Correct/></Paper>;
                 break;
             case "SAD":
-                feedback = <Paper className={classes.ContentCol}
+                feedback = <Paper className={classes.ContentCol} elevation={15}
                                   style={{background: "#d60000", marginRight: "auto"}}><SadIcon/><Wrong/></Paper>;
                 break;
             case "THINKING":
-                feedback = <Paper className={classes.ContentCol} style={{
-                    background: "#2096F3",
-                    marginRight: "auto"
-                }}><ThinkingIcon/><Puzzled/></Paper>;
+                feedback = <Paper className={classes.ContentCol} elevation={15}
+                                  style={{background: "#2096F3", marginRight: "auto"}}><ThinkingIcon/><Puzzled/></Paper>;
                 break;
             default:
-                feedback = <Paper className={classes.ContentCol} style={{
-                    background: "#2096F3",
-                    marginRight: "auto"
-                }}><ThinkingIcon/><Puzzled/></Paper>;
+                feedback = <Paper className={classes.ContentCol} elevation={15}
+                                  style={{background: "#2096F3", marginRight: "auto"}}><ThinkingIcon/><Puzzled/></Paper>;
         }
 
         return (
@@ -267,7 +265,7 @@ class SolveChallengeStepper extends Component {
                     <DialogTitle id="solve-question-dialog-title">{this.props.challengeTitle}</DialogTitle>
 
                     <DialogContent>
-                        <DialogContentText id="solve-question-dialog-description" style={{alignItems: ""}}>
+                        <DialogContentText id="solve-question-dialog-description" style={{alignItems: "center"}}>
                             {this.props.challengeDescription}
                         </DialogContentText>
                         <MuiThemeProvider theme={theme}>
@@ -275,14 +273,16 @@ class SolveChallengeStepper extends Component {
                                 {steps.map((label, index) => {
                                     return (
                                         <Step key={index}
-                                            // className={index === this.state.activeStep
-                                            //     ? classes.stepperActive
-                                            //     : (index < this.state.activeStep)
-                                            //         ?
-                                            //         classes.stepperDisabled
-                                            //         : classes.stepperCompleted}
+                                            className={index === this.state.activeStep
+                                                ? classes.stepperActive
+                                                : (index < this.state.activeStep)
+                                                    ?
+                                                    classes.stepperCompleted
+                                                    : classes.stepperDisabled}
                                         >
-                                            <StepLabel>{label}</StepLabel>
+                                            <StepLabel
+                                                StepIconProps={{ classes: { root: this.props.icon } }}>
+                                                {label}</StepLabel>
                                             <StepContent>
                                                 <div className={classes.ContentRow}>
                                                     {/* TODO: Style with flex box */}
@@ -290,7 +290,7 @@ class SolveChallengeStepper extends Component {
                                                         {this.state.timesAttempted === 1 && !this.state.finished ?
                                                             <ExpansionPanel>
                                                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                                                    <Typography style={{color: '#D50000'}}>Show
+                                                                    <Typography variant="h7" component="h3" style={{color: '#D50000'}}>Show
                                                                         hint</Typography>
                                                                 </ExpansionPanelSummary>
                                                                 <ExpansionPanelDetails>
@@ -309,7 +309,7 @@ class SolveChallengeStepper extends Component {
                                                         {this.state.finished ?
                                                             <ExpansionPanel>
                                                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                                                    <Typography style={{color: '#4CAF50'}}>See
+                                                                    <Typography variant="h7" component="h3" style={{color: '#469c4a'}}>See
                                                                         Explanation</Typography>
                                                                 </ExpansionPanelSummary>
                                                                 <ExpansionPanelDetails>
@@ -322,17 +322,18 @@ class SolveChallengeStepper extends Component {
                                                         <div className={classes.Buttons}>
                                                             <Button
                                                                 style={{marginRight: '10px'}}
-                                                                className={classes.Button}
-                                                                variant="contained"
+                                                                className={classes.Submit}
+                                                                variant="raised"
                                                                 color="primary"
                                                                 disabled={!this.state.selectedOption}
                                                                 onClick={this.handleSolve}
                                                             >
-                                                                Solve
+                                                                Submit
                                                             </Button>
 
                                                             <Button
-                                                                variant="contained"
+                                                                className={classes.Next}
+                                                                variant="raised"
                                                                 color="primary"
                                                                 disabled={!this.state.finished}
                                                                 onClick={this.state.activeStep === steps.length - 1 ? this.handleFinish : this.handleNext}
