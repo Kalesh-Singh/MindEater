@@ -26,7 +26,7 @@ import Correct from "./Correct/Correct";
 import Wrong from "./Wrong/Wrong";
 import Puzzled from "./Puzzled/Puzzled";
 import Paper from "@material-ui/core/Paper/Paper";
-import * as fire from "firebase";
+import fire from "../../fire";
 
 const theme = createMuiTheme({
     Step: {
@@ -222,9 +222,10 @@ class SolveChallengeStepper extends Component {
                         });
                 }
 
-            }).catch(error => {
-            alert(error.message)
-        });
+            })
+            .catch(error => {
+                alert(error.message);
+            });
     };
 
     render() {
