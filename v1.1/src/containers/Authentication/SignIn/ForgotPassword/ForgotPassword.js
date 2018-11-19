@@ -110,7 +110,7 @@ class ForgotPassword extends Component {
 
     forgotPassword = () => {
         this.props.closed();
-        let emailAddress = 'nunezjesus@google.com';     // TODO: Change to email.value
+        const emailAddress = this.state.email.value;
         fire.auth().sendPasswordResetEmail(emailAddress)
             .then(() => {
                 console.log("Successfully sent reset email");
