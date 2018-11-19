@@ -14,13 +14,18 @@ class ChallengesCard extends Component {
         return (
             <>
 
-            <Card style={{marginTop:20}}>
-                <CardActionArea>
-                    <img
-                        className={classes.Challenge}
-                        alt={"Solve challenges"}
-                        src={Challenge}>
-                    </img>
+            <Card style={{marginTop:20, width:350}}>
+                <div style ={{marginTop:20}}>
+                    <div className={classes.Box}>
+                        <img
+                            width={"200px"}
+                            height={"150px"}
+                            className={classes.Challenge}
+                            alt={"Solve challenges"}
+                            src={Challenge}>
+                        </img>
+                    </div>
+                    <div>
                     <CardContent>
                         <Typography gutterBottom variant={"h4"} component={"h2"}>
                             Challenges
@@ -29,7 +34,9 @@ class ChallengesCard extends Component {
                             Begin solving other users challenges.
                         </Typography>
                     </CardContent>
-                </CardActionArea>
+                    </div>
+                </div>
+
                 <Divider className={classes.Divider}/>
                 <CardActions>
                     <div className={classes.flex}>
