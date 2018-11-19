@@ -194,7 +194,8 @@ class SolveChallengeStepper extends Component {
                         .once('value')
                         .then(snapshot => {
                             const currTimesCompleted = (snapshot.val()) ? snapshot.val() : 0;
-                            const updatedTimesCompleted = currTimesCompleted + 1;
+                            // Use negative numbers to facilitate firebase's order by function.
+                            const updatedTimesCompleted = currTimesCompleted - 1;
                             const updates = {};
                             updates['/challenges/' + challengeId + '/timesCompleted'] = updatedTimesCompleted;
                             fire.database().ref().update(updates)
