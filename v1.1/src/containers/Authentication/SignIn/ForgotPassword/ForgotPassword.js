@@ -55,8 +55,10 @@ class ForgotPassword extends Component {
             .then((signInMethods) => {
                 const updatedEmail = {...email};
                 if (signInMethods.length > 0) {
+                    // TODO: Check sign in method is email and password
                     updatedEmail.used = true;
                 } else {
+                    updatedEmail.used = false;
                     updatedEmail.error = 'No MindEater account is associated with this email';
                 }
                 this.setState({email: updatedEmail});
@@ -78,6 +80,17 @@ class ForgotPassword extends Component {
             updatedEmail.error = this.checkEmail(updatedEmail);
             this.setState({email: updatedEmail});
         }
+    };
+
+    forgotPassword = () => {
+        this.props.closed();
+        let emailAddress = 'nunezjesus@google.com';     // TODO: Change to email.value
+        fire.auth().sendPasswordResetEmail(emailAddress)
+            .then(() => {
+                alert('Successfully sent reset email')
+            }).catch(function (error) {
+            alert(error.message);
+        })
     };
 
     render() {
@@ -134,10 +147,19 @@ class ForgotPassword extends Component {
                 </DialogContent>
                 <DialogActions>
                     <MuiThemeProvider theme={theme}>
-                        <Button onClick={this.props.closed} color="primary" className={classes.cancelButton}>
+                        <Button
+                            onClick={this.props.closed}
+                            color="primary"
+                            className={classes.cancelButton}
+                        >
                             Cancel
                         </Button>
-                        <Button onClick={this.props.closed} color="primary" className={classes.sendButton}>
+                        <Button
+                            onClick={this.props.closed}
+                            color="primary"
+                            className={classes.sendButton}
+                            disabled={!this.state.email.valid || !this.state.email.used}
+                        >
                             Send
                         </Button>
                     </MuiThemeProvider>
