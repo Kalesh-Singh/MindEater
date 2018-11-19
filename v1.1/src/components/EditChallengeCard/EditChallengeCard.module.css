@@ -1,13 +1,7 @@
-.root{
+.root {
     max-width: 100%;
     display: flex;
-    flex: 1 1 250px;
-}
-
-@media (min-width: 600px) {
-    .root {
-        min-width: 300px;
-    }
+    flex: 1 1 300px;
 }
 
 .Del:hover{

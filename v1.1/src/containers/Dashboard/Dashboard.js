@@ -16,7 +16,7 @@ class Dashboard extends Component {
                 <RankCard className={classes.root}/>
                 <ChallengesCard className={classes.root}/>
                 <CompletedChallenges className={classes.root}/>
-            </div>
+                </div>
         );
     }
 }
