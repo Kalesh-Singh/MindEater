@@ -33,16 +33,6 @@ class SignIn extends Component {
         showPassword: false,
     };
 
-    forgotPassword = () =>{
-        let emailAddress = 'nunezjesus@google.com';
-        fire.auth().sendPasswordResetEmail(emailAddress)
-            .then(()=> {
-                alert('Successfully sent reset email')
-            }).catch(function (error){
-            alert(error.message);
-        })
-    };
-
     signIn = (event) => {
         event.preventDefault();
         fire.auth().signInWithEmailAndPassword(
