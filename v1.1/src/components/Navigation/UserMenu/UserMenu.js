@@ -48,8 +48,7 @@ class UserMenu extends Component {
         this.setState({open: false});
     };
 
-    handleProfile = (event)  => {
-        console.log("PROPS", this.props);
+    handleProfile = (event) => {
         this.handleClose(event);
         this.props.history.push('/profile');
     };
