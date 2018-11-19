@@ -28,13 +28,3 @@
 .FootLnk:hover {
     color: #2096F3;
 }
-
-.cancelBttn:hover {
-    background-color: #d50000 !important;
-    color: #FFFFFF;
-}
-
-.sendBttn:hover {
-    background-color: #4CAF50 !important;
-    color: #FFFFFF;
-}
