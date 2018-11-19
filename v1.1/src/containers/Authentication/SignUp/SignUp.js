@@ -61,6 +61,12 @@ class SignUp extends Component {
             this.state.email.value, this.state.password.value)
             .then(() => {
                 const user = fire.auth().currentUser;
+                if (user && user.emailVerified === false) {
+                    user.sendEmailVerification()
+                        .then(() => {
+                            console.log("Email verification sent");
+                        });
+                }
                 const updates = {};
                 updates['/users/' + user.uid + '/username'] = this.state.username.value;
                 fire.database().ref().update(updates)
@@ -75,7 +81,6 @@ class SignUp extends Component {
                 alert(error.message);
             });
     };
-
     handleChange = name => event => {
         const updatedField = {...this.state[name]};
         updatedField.value = event.target.value.trim();
@@ -131,7 +136,7 @@ class SignUp extends Component {
     };
 
     checkRepeatPassword = (repeatPassword) => {
-        console.log("PONG",this)
+        console.log("PONG", this)
         if (repeatPassword.value.length === 0 && repeatPassword.focused) {
             return '* Required';
         } else if (repeatPassword.value !== this.state.password.value) {
@@ -251,11 +256,12 @@ class SignUp extends Component {
                         endAdornment: (
                             <InputAdornment variant="outlined" position="end">
                                 <IconButton
-                                    style={{background:"#eeeeee", color:"grey"}}
+                                    style={{background: "#eeeeee", color: "grey"}}
                                     aria-label="Toggle password visibility"
                                     onClick={this.handleClickShowPassword}
                                 >
-                                    {this.state.showPassword ? <Visibility style={{color:"black"}}/>: <VisibilityOff style={{color:"black"}}/>}
+                                    {this.state.showPassword ? <Visibility style={{color: "black"}}/> :
+                                        <VisibilityOff style={{color: "black"}}/>}
                                 </IconButton>
                             </InputAdornment>
                         ),
