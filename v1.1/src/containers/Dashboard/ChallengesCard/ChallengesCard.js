@@ -14,7 +14,7 @@ class ChallengesCard extends Component {
         return (
             <>
 
-            <Card>
+            <Card style={{marginTop:20}}>
                 <CardActionArea>
                     <img
                         className={classes.Challenge}

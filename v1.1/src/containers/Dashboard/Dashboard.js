@@ -3,6 +3,7 @@ import classes from "./Dashboard.module.css";
 import ChallengesCard from "./ChallengesCard/ChallengesCard";
 import PointCard from "./PointCard/PointCard";
 import CompletedChallenges from "./CompletedChallenges/CompletedChallenges";
+import RankCard from "./RankCard/RankCard";
 
 
 class Dashboard extends Component {
@@ -11,8 +12,9 @@ class Dashboard extends Component {
 
         return (
             <div className={classes.Row}>
-                    <ChallengesCard className={classes.root}/>
-                    <PointCard className={classes.root}/>
+                <PointCard className={classes.root}/>
+                <RankCard className={classes.root}/>
+                <ChallengesCard className={classes.root}/>
                 <CompletedChallenges className={classes.root}/>
             </div>
         );
