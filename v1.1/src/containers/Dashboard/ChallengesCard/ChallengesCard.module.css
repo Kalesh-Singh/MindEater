@@ -1,4 +1,5 @@
 /* button for challenge*/
+
 c {
     color: #5983da;
     text-decoration: none;
@@ -78,4 +79,15 @@ c:active {
 }
 .bttn:active:after {
     border-color: #acc1ed;
+}
+
+.Challenge:hover {
+    cursor: pointer;
+    content: url('../../../assets/svg/ChallengeLit.gif');
+}
+
+.Divider{
+    margin-left: 20px !important;
+    margin-right:20px !important;
+    margin-bottom: 20px !important;
 }
