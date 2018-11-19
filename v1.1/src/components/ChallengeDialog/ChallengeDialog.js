@@ -254,7 +254,8 @@ class ChallengeDialog extends Component {
                         title: '',
                         description: '',
                         isPartial: true,
-                        owner: fire.auth().currentUser.uid
+                        owner: fire.auth().currentUser.uid,
+                        timesCompleted: 0
                     })
                     .then(response => {
                         console.log('Challenge Id' + response.key);
