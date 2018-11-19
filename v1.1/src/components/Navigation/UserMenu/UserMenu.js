@@ -48,6 +48,12 @@ class UserMenu extends Component {
         this.setState({open: false});
     };
 
+    handleProfile = (event)  => {
+        console.log("PROPS", this.props);
+        this.handleClose(event);
+        this.props.history.push('/profile');
+    };
+
     render() {
         return (
             <>
@@ -76,7 +82,7 @@ class UserMenu extends Component {
                             <Paper>
                                 <ClickAwayListener onClickAway={this.handleClose}>
                                     <MenuList>
-                                        <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                                        <MenuItem onClick={this.handleProfile}>Profile</MenuItem>
                                         <MenuItem onClick={this.handleClose}>My account</MenuItem>
                                         <MenuItem onClick={this.signOut}>Sign Out</MenuItem>
                                     </MenuList>
