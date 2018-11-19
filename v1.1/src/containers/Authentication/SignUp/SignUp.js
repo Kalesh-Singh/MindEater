@@ -55,18 +55,23 @@ class SignUp extends Component {
         return validForm;
     };
 
+    sendEmailVerification = () => {
+        const user = fire.auth().currentUser;
+        if (user && user.emailVerified === false) {
+            user.sendEmailVerification()
+                .then(() => {
+                    console.log("Email verification sent");
+                });
+        }
+    };
+
     signUp = (event) => {
         event.preventDefault();
         fire.auth().createUserWithEmailAndPassword(
             this.state.email.value, this.state.password.value)
             .then(() => {
                 const user = fire.auth().currentUser;
-                if (user && user.emailVerified === false) {
-                    user.sendEmailVerification()
-                        .then(() => {
-                            console.log("Email verification sent");
-                        });
-                }
+                this.sendEmailVerification();
                 const updates = {};
                 updates['/users/' + user.uid + '/username'] = this.state.username.value;
                 fire.database().ref().update(updates)
