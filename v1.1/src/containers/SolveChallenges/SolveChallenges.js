@@ -5,7 +5,6 @@ import classes from "./SolveChallenges.module.css";
 import List from "@material-ui/core/List/List";
 import Typography from "@material-ui/core/Typography/Typography";
 import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
-import Divider from "@material-ui/core/Divider/Divider";
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 import green from "@material-ui/core/es/colors/green";
 import lightBlue from "@material-ui/core/es/colors/lightBlue";
