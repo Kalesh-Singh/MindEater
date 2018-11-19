@@ -20,7 +20,7 @@ class ChallengesCard extends Component {
                     <Play className={classes.IconP}/>
                     </div>
                     <div>
-                    <CardContent>
+                    <CardContent style={{textAlign:"center"}}>
                         <Typography gutterBottom variant={"h4"} component={"h2"}>
                             Challenges
                         </Typography>
