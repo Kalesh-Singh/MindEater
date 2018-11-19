@@ -22,6 +22,10 @@ const theme = createMuiTheme({
     },
 });
 
+const PASSWORD_PROVIDER = "password";
+const GOOGLE_PROVIDER = "google.com";
+const FACEBOOK_PROVIDER = "facebook.com";
+
 class ForgotPassword extends Component {
 
     // Expected props
@@ -34,7 +38,8 @@ class ForgotPassword extends Component {
             error: '',
             focused: false,
             valid: false,
-            used: false         // Email associated with a MindEater account.
+            used: false,         // Email associated with a MindEater account.
+            provider: null
         }
     };
 
@@ -51,14 +56,35 @@ class ForgotPassword extends Component {
     };
 
     checkEmailUsed = (email) => {
+
         fire.auth().fetchSignInMethodsForEmail(email.value)
             .then((signInMethods) => {
                 const updatedEmail = {...email};
                 if (signInMethods.length > 0) {
-                    // TODO: Check sign in method is email and password
+                    console.log('SIGN IN METHODS', signInMethods);
                     updatedEmail.used = true;
+
+                    const signInMethod = signInMethods[0];
+
+                    switch (signInMethod) {
+                        case PASSWORD_PROVIDER:
+                            updatedEmail.provider = PASSWORD_PROVIDER;
+                            break;
+                        case GOOGLE_PROVIDER:
+                            updatedEmail.provider = GOOGLE_PROVIDER;
+                            updatedEmail.error = "This email is associated with a Google sign-in. Please sign in with Google";
+                            break;
+                        case FACEBOOK_PROVIDER:
+                            updatedEmail.provider = FACEBOOK_PROVIDER;
+                            updatedEmail.error = "This email is associated with a Facebook sign-in. Please sign in with Facebook";
+                            break;
+                        default:
+                            updatedEmail.provider = null;
+                            updatedEmail.error = 'No MindEater account is associated with this email';
+                    }
                 } else {
                     updatedEmail.used = false;
+                    updatedEmail.provider = null;
                     updatedEmail.error = 'No MindEater account is associated with this email';
                 }
                 this.setState({email: updatedEmail});
@@ -87,7 +113,7 @@ class ForgotPassword extends Component {
         let emailAddress = 'nunezjesus@google.com';     // TODO: Change to email.value
         fire.auth().sendPasswordResetEmail(emailAddress)
             .then(() => {
-                alert('Successfully sent reset email')
+                console.log("Successfully sent reset email");
             }).catch(function (error) {
             alert(error.message);
         })
@@ -96,6 +122,8 @@ class ForgotPassword extends Component {
     render() {
 
         const {fullScreen} = this.props;
+        const sendDisabled = !this.state.email.valid || !this.state.email.used
+            || this.state.email.provider !== PASSWORD_PROVIDER;
 
         return (
             <Dialog
@@ -155,10 +183,10 @@ class ForgotPassword extends Component {
                             Cancel
                         </Button>
                         <Button
-                            onClick={this.props.closed}
+                            onClick={this.forgotPassword}
                             color="primary"
                             className={classes.sendButton}
-                            disabled={!this.state.email.valid || !this.state.email.used}
+                            disabled={sendDisabled}
                         >
                             Send
                         </Button>
