@@ -5,16 +5,22 @@ import CardContent from "@material-ui/core/CardContent/CardContent";
 import Typography from "@material-ui/core/Typography/Typography";
 import CardActions from "@material-ui/core/CardActions/CardActions";
 import Card from "@material-ui/core/Card/Card";
+import Challenge from '../../../assets/svg/StaticChallenge.png';
 import classes from "./ChallengesCard.module.css";
+import Divider from "@material-ui/core/Divider/Divider";
 
 class ChallengesCard extends Component {
     render() {
         return (
-            <Card>
+            <>
+
+            <Card style={{marginTop:20}}>
                 <CardActionArea>
-                    <CardMedia
-                        title="Start Solving Challenges"
-                    />
+                    <img
+                        className={classes.Challenge}
+                        alt={"Solve challenges"}
+                        src={Challenge}>
+                    </img>
                     <CardContent>
                         <Typography gutterBottom variant={"h4"} component={"h2"}>
                             Challenges
@@ -24,12 +30,14 @@ class ChallengesCard extends Component {
                         </Typography>
                     </CardContent>
                 </CardActionArea>
+                <Divider className={classes.Divider}/>
                 <CardActions>
                     <div className={classes.flex}>
                         <c className={classes.bttn}>Start</c>
                     </div>
                 </CardActions>
             </Card>
+            </>
         );
     }
 }

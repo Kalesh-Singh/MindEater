@@ -1,11 +1,20 @@
+.root{
+    max-width: 100%;
+    display: flex;
+    flex: 1 1 300px;
+}
+
 .Row {
     display: flex;
     flex-flow: row;
     margin-top: 100px;
     align-items: center;
     justify-content: space-around;
+    flex-wrap: wrap;
+    box-sizing: border-box;
 }
 
 .ColumnR {
     flex-flow: column;
 }
+

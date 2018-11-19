@@ -1,33 +1,35 @@
 import React, {Component} from 'react';
-import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
-import CardMedia from "@material-ui/core/CardMedia/CardMedia";
+import classes from "../ChallengesCard/ChallengesCard.module.css";
 import CardContent from "@material-ui/core/CardContent/CardContent";
 import Typography from "@material-ui/core/Typography/Typography";
-import Card from "@material-ui/core/Card/Card";
 import CardActions from "@material-ui/core/CardActions/CardActions";
+import Card from "@material-ui/core/Card/Card";
+import Check from "@material-ui/icons/CheckCircle"
+import CardMedia from "@material-ui/core/CardMedia/CardMedia";
 import Divider from "@material-ui/core/Divider/Divider";
-import classes from "./PointCard.module.css"
 
-class PointCard extends Component {
+class CompletedChallenges extends Component {
     render() {
         return (
             <div>
-                <Card>
-                    <CardHeader style={{background: "#2096F3"}}/>
-                        <CardMedia
-                            title={"Points"}/>
+                <Card style={{marginTop:20}}>
+                    <CardActionArea>
+                        <CardMedia>
+                            <Check/>
+                        </CardMedia>
                         <CardContent>
-                            <Typography gutterBottom variant={"h4"} component={"h1"}>
-                                Points
+                            <Typography gutterBottom variant={"h4"} component={"h2"}>
+                                Completed Challenges
                             </Typography>
                             <Typography component={'p'}>
-                                User tier will be displayed here:
+                                "@userName" Progress
                             </Typography>
                         </CardContent>
+                    </CardActionArea>
                     <Divider className={classes.Divider}/>
                     <CardActions>
-                        <h4>This is where the points will be shown</h4>
+                        <h4>jdbgjdbgjdgh</h4>
                     </CardActions>
                 </Card>
             </div>
@@ -35,4 +37,4 @@ class PointCard extends Component {
     }
 }
 
-export default PointCard;
+export default CompletedChallenges;
