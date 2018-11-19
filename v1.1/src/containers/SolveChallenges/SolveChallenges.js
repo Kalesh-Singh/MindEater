@@ -37,6 +37,7 @@ class SolveChallenges extends Component {
                     .then(imgSnapshot => {
                         challenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
                         updatedChallenges.push(challenge);
+                        updatedChallenges.sort((a, b) => (a.timesCompleted - b.timesCompleted));
                         this.setState({challenges: updatedChallenges, loading: false});
                     });
             });
@@ -63,10 +64,12 @@ class SolveChallenges extends Component {
                     .then(imgSnapshot => {
                         updatedChallenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
                         updatedChallenges[oldChallengeIndex] = updatedChallenge;
+                        updatedChallenges.sort((a, b) => (a.timesCompleted - b.timesCompleted));
                         this.setState({challenges: updatedChallenges, loading: false});
                     });
             });
     };
+
 
     componentDidMount() {
         this.setListeners();
@@ -92,7 +95,7 @@ class SolveChallenges extends Component {
                                 updatedChallenges.push(challenge);
                             }
                         }
-
+                        updatedChallenges.sort((a, b) => (a.timesCompleted - b.timesCompleted));
                         this.setState({challenges: updatedChallenges, loading: false});
                     });
             });
@@ -110,27 +113,27 @@ class SolveChallenges extends Component {
         return (
             <div style={{marginTop: "100px"}}>
                 <MuiThemeProvider theme={theme}>
-                <div className={classes.header}>
-                <h1>Let the games Begin!</h1>
-                <p>Start Solving Challenges</p>
-                </div>
-                {this.state.loading ?
-                    <div className={classes.LoadingBar}>
-                        <LinearProgress variant="query" color={"primary"}/>
-                        <br/>
-                        <LinearProgress variant="query" color="secondary"/>
-                        <br/>
-                        <Typography
-                            variant="h6"
-                            color="inherit"
-                            align="center">
-                            Loading Challenges ...
-                        </Typography>
+                    <div className={classes.header}>
+                        <h1>Let the games Begin!</h1>
+                        <p>Start Solving Challenges</p>
                     </div>
-                    : null}
-                <List className={classes.List}>
-                    {challenges}
-                </List>
+                    {this.state.loading ?
+                        <div className={classes.LoadingBar}>
+                            <LinearProgress variant="query" color={"primary"}/>
+                            <br/>
+                            <LinearProgress variant="query" color="secondary"/>
+                            <br/>
+                            <Typography
+                                variant="h6"
+                                color="inherit"
+                                align="center">
+                                Loading Challenges ...
+                            </Typography>
+                        </div>
+                        : null}
+                    <List className={classes.List}>
+                        {challenges}
+                    </List>
                 </MuiThemeProvider>
             </div>
         );
