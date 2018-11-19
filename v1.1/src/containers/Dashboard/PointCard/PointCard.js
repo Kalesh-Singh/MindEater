@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
-import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia/CardMedia";
 import CardContent from "@material-ui/core/CardContent/CardContent";
 import Typography from "@material-ui/core/Typography/Typography";

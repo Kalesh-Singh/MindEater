@@ -11,6 +11,7 @@ import Card from "@material-ui/core/Card/Card";
 import Rank from "../../../assets/svg/Rank Icons/Beginner.svg";
 
 class RankCard extends Component {
+
     render() {
         return (
             <div>
