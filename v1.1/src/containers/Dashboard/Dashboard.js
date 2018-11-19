@@ -11,12 +11,12 @@ class Dashboard extends Component {
     render() {
 
         return (
-            <div className={classes.Row}>
+            <div className={classes.RowR}>
                 <PointCard className={classes.root}/>
                 <RankCard className={classes.root}/>
                 <ChallengesCard className={classes.root}/>
                 <CompletedChallenges className={classes.root}/>
-            </div>
+                </div>
         );
     }
 }

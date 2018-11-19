@@ -16,6 +16,7 @@ class RankCard extends Component {
         return (
             <div>
                 <Card style={{marginTop:20}}>
+                    <CardHeader style={{background:"#BC6428"}}/>
                     <div className={classes.ImgWrapper}>
                         <img
                             className={classes.RankSvg}

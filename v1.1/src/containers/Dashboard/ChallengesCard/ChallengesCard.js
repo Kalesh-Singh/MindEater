@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
-import CardMedia from "@material-ui/core/CardMedia/CardMedia";
 import CardContent from "@material-ui/core/CardContent/CardContent";
 import Typography from "@material-ui/core/Typography/Typography";
 import CardActions from "@material-ui/core/CardActions/CardActions";
 import Card from "@material-ui/core/Card/Card";
-import Challenge from '../../../assets/svg/StaticChallenge.png';
 import classes from "./ChallengesCard.module.css";
 import Divider from "@material-ui/core/Divider/Divider";
+import Play from "@material-ui/icons/ExtensionSharp"
+import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 
 class ChallengesCard extends Component {
     render() {
@@ -15,18 +14,13 @@ class ChallengesCard extends Component {
             <>
 
             <Card style={{marginTop:20, width:350}}>
+                <CardHeader style={{background: "#2096F3"}}/>
                 <div style ={{marginTop:20}}>
                     <div className={classes.Box}>
-                        <img
-                            width={"200px"}
-                            height={"150px"}
-                            className={classes.Challenge}
-                            alt={"Solve challenges"}
-                            src={Challenge}>
-                        </img>
+                    <Play className={classes.IconP}/>
                     </div>
                     <div>
-                    <CardContent>
+                    <CardContent style={{textAlign:"center"}}>
                         <Typography gutterBottom variant={"h4"} component={"h2"}>
                             Challenges
                         </Typography>

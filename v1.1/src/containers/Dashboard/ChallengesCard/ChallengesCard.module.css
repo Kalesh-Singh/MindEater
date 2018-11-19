@@ -81,11 +81,6 @@ c:active {
     border-color: #acc1ed;
 }
 
-.Challenge:hover {
-    cursor: pointer;
-    content: url('../../../assets/svg/ChallengeLit.gif');
-}
-
 .Divider{
     margin-left: 20px !important;
     margin-right:20px !important;
@@ -94,13 +89,19 @@ c:active {
 
 .Box {
     text-align: center;
-    width: 200px;
-    height:150px;
+    width: 80px;
+    height:80px;
     background-color: #2096F3 !important;
     z-index: 3 !important;
     padding: 15px;
-    margin: 0px 60px 20px;
+    margin: -10px 50px 20px 10px;
     float: left;
     box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;;
+}
+
+.IconP {
+    width: 80px !important;
+    height: 80px !important;
+    color: white;
 }
 
