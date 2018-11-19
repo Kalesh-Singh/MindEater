@@ -6,12 +6,14 @@ import CardActions from "@material-ui/core/CardActions/CardActions";
 import Card from "@material-ui/core/Card/Card";
 import Check from "@material-ui/icons/CheckCircleOutline"
 import Divider from "@material-ui/core/Divider/Divider";
+import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 
 class CompletedChallenges extends Component {
     render() {
         return (
             <div>
                 <Card style={{marginTop: 20}}>
+                    <CardHeader style={{background: "#4CAF50"}}/>
                     <div style ={{marginTop:20}}>
                         <div className={classes.Box}>
                             <Check style={{width:60, height:60, color:"white"}}/>

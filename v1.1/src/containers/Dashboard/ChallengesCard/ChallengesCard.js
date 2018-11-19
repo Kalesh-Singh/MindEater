@@ -6,6 +6,7 @@ import Card from "@material-ui/core/Card/Card";
 import classes from "./ChallengesCard.module.css";
 import Divider from "@material-ui/core/Divider/Divider";
 import Play from "@material-ui/icons/ExtensionSharp"
+import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 
 class ChallengesCard extends Component {
     render() {
@@ -13,6 +14,7 @@ class ChallengesCard extends Component {
             <>
 
             <Card style={{marginTop:20, width:350}}>
+                <CardHeader style={{background: "#2096F3"}}/>
                 <div style ={{marginTop:20}}>
                     <div className={classes.Box}>
                     <Play className={classes.IconP}/>
