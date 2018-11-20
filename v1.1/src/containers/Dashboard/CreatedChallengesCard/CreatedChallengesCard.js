@@ -13,7 +13,7 @@ class CreatedChallengesCard extends Component {
 
     state = {
         username: "Guest",
-        createdChallenges: 0
+        completedChallenges: 0
     };
 
     componentDidMount() {
@@ -28,10 +28,10 @@ class CreatedChallengesCard extends Component {
     };
 
     setListener = (user) => {
-        fire.database().ref('/users/' + user.uid + '/createdChallenges')
+        fire.database().ref('/users/' + user.uid + '/completedChallenges')
             .on('child_added', snapshot => {
                 this.setState(state => {
-                    return {createdChallenges: state.createdChallenges + 1}
+                    return {completedChallenges: state.completedChallenges + 1}
                 })
             });
     };
@@ -43,7 +43,7 @@ class CreatedChallengesCard extends Component {
                 fire.database().ref('/users/' + user.uid + '/completedChallenges')
                     .once('value')
                     .then(snapshot => {
-                        this.setState({username: user.displayName, createdChallenges: snapshot.numChildren()});
+                        this.setState({username: user.displayName, completedChallenges: snapshot.numChildren()});
                     })
                     .catch(error => {
                         alert(error.message)
@@ -73,7 +73,7 @@ class CreatedChallengesCard extends Component {
                         </CardContent>
                         <Divider className={classes.Divider}/>
                         <CardActions>
-                            <h4>You have created {this.state.createdChallenges} challenges</h4>
+                            <h4>You have created {this.state.completedChallenges} challenges</h4>
                         </CardActions>
                     </Card>
                 </div>
