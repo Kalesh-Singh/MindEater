@@ -38,9 +38,9 @@ import GrandMaster from "../../../assets/svg/Rank Icons/GrandMaster.svg";
 class RankCard extends Component {
 
     state = {
-        rankIcon: null,
-        rankTitle: null,
-        rankDescription: null
+        rankIcon: Beginner,
+        rankTitle: "Beginner",
+        rankDescription: "Still a long way to the top!"
     };
 
     componentDidMount() {
@@ -73,6 +73,9 @@ class RankCard extends Component {
     };
 
     getStateFromPoints = (points) => {
+        if (!points) {
+            return ({rankIcon: Beginner, rankTitle: "Beginner", rankDescription: "Still a long way to the top!"});
+        }
         if (points >= 462) {
             return ({rankIcon: GrandMaster, rankTitle: "Grandmaster", rankDescription: "Earned 462+ points!"});
         } else if (points >= 420) {
