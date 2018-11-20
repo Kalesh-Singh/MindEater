@@ -39,7 +39,7 @@ class Authentication extends Component {
     // Triggers when the auth state changes to handle sign-ins.
     signInObserver = (user) => {
         if (user) {
-            if (user.emailVerified) {
+            if (user.emailVerified || user.providerData[0].providerId === "twitter.com") {
                 console.log("USER", user);
                 this.props.history.push('/dashboard');
             } else {
