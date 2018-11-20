@@ -40,7 +40,8 @@ class RankCard extends Component {
     state = {
         rankIcon: Beginner,
         rankTitle: "Beginner",
-        rankDescription: "Still a long way to the top!"
+        rankDescription: "Still a long way to the top!",
+        rankColor: {background:"#000"}
     };
 
     componentDidMount() {
@@ -74,52 +75,52 @@ class RankCard extends Component {
 
     getStateFromPoints = (points) => {
         if (!points) {
-            return ({rankIcon: Beginner, rankTitle: "Beginner", rankDescription: "Still a long way to the top!"});
+            return ({rankIcon: Beginner, rankTitle: "Beginner", rankDescription: "Still a long way to the top!", rankColor:{background:"#BC6428"}});
         }
         if (points >= 462) {
-            return ({rankIcon: GrandMaster, rankTitle: "Grandmaster", rankDescription: "Earned 462+ points!"});
+            return ({rankIcon: GrandMaster, rankTitle: "Grandmaster", rankDescription: "Earned 462+ points!", rankColor:{background:"#FFCB5B"}});
         } else if (points >= 420) {
-            return ({rankIcon: Elite, rankTitle: "Elite", rankDescription: "Earned 420+ points!"});
+            return ({rankIcon: Elite, rankTitle: "Elite", rankDescription: "Earned 420+ points!", rankColor:{background:"#E2E5E7"}});
         } else if (points >= 380) {
-            return ({rankIcon: Legendary, rankTitle: "Legendary", rankDescription: "Earned 380+ points!"});
+            return ({rankIcon: Legendary, rankTitle: "Legendary", rankDescription: "Earned 380+ points!", rankColor:{background:"#3CB54A"}});
         } else if (points >= 342) {
-            return ({rankIcon: Heroic, rankTitle: "Heroic", rankDescription: "Earned 342+ points!"});
+            return ({rankIcon: Heroic, rankTitle: "Heroic", rankDescription: "Earned 342+ points!", rankColor:{background:"#E2E5E7"}});
         } else if (points >= 306) {
-            return ({rankIcon: Champion, rankTitle: "Champion", rankDescription: "Earned 306+ points!"});
+            return ({rankIcon: Champion, rankTitle: "Champion", rankDescription: "Earned 306+ points!", rankColor:{background:"#E2E5E7"}});
         } else if (points >= 272) {
-            return ({rankIcon: Supreme, rankTitle: "Supreme", rankDescription: "Earned 272+ points!"});
+            return ({rankIcon: Supreme, rankTitle: "Supreme", rankDescription: "Earned 272+ points!", rankColor:{background:"#E2E5E7"}});
         } else if (points >= 240) {
-            return ({rankIcon: Outstanding, rankTitle: "Outstanding", rankDescription: "Earned 240+ points!"});
+            return ({rankIcon: Outstanding, rankTitle: "Outstanding", rankDescription: "Earned 240+ points!", rankColor:{background:"#FFCB5B"}});
         } else if (points >= 210) {
-            return ({rankIcon: Master, rankTitle: "Master", rankDescription: "Earned 210+ points!"});
+            return ({rankIcon: Master, rankTitle: "Master", rankDescription: "Earned 210+ points!", rankColor:{background:"#FFCB5B"}});
         } else if (points >= 182) {
-            return ({rankIcon: Star, rankTitle: "Star", rankDescription: "Earned 182+ points!"});
+            return ({rankIcon: Star, rankTitle: "Star", rankDescription: "Earned 182+ points!", rankColor:{background:"#FFCB5B"}});
         } else if (points >= 156) {
-            return ({rankIcon: Professional, rankTitle: "Professional", rankDescription: "Earned 156+ points!"});
+            return ({rankIcon: Professional, rankTitle: "Professional", rankDescription: "Earned 156+ points!", rankColor:{background:"#EE2C39"}});
         } else if (points >= 132) {
-            return ({rankIcon: HighlyDistinguished, rankTitle: "Highly Distinguished", rankDescription: "Earned 132+ points!"});
+            return ({rankIcon: HighlyDistinguished, rankTitle: "Highly Distinguished", rankDescription: "Earned 132+ points!", rankColor:{background:"#EE2C39"}});
         } else if (points >= 110) {
-            return ({rankIcon: Distinguished, rankTitle: "Distinguished", rankDescription: "Earned 110+ points!"});
+            return ({rankIcon: Distinguished, rankTitle: "Distinguished", rankDescription: "Earned 110+ points!", rankColor:{background:"#EE2C39"}});
         } else if (points >= 90) {
-            return ({rankIcon: Veteran, rankTitle: "Veteran", rankDescription: "Earned 90+ points!"});
+            return ({rankIcon: Veteran, rankTitle: "Veteran", rankDescription: "Earned 90+ points!", rankColor: {background:"#3689C9"}});
         } else if (points >= 72) {
-            return ({rankIcon: HighlyCompetent, rankTitle: "Highly Competent", rankDescription: "Earned 72+ points!"});
+            return ({rankIcon: HighlyCompetent, rankTitle: "Highly Competent", rankDescription: "Earned 72+ points!", rankColor: {background:"#3689C9"}});
         } else if (points >= 56) {
-            return ({rankIcon: Competent, rankTitle: "Competent", rankDescription: "Earned 56+ points!"});
+            return ({rankIcon: Competent, rankTitle: "Competent", rankDescription: "Earned 56+ points!", rankColor: {background:"#3689C9"}});
         } else if (points >= 42) {
-            return ({rankIcon: AboveAverage, rankTitle: "Above Average", rankDescription: "Earned 42+ points!"});
+            return ({rankIcon: AboveAverage, rankTitle: "Above Average", rankDescription: "Earned 42+ points!", rankColor: {background:"#3CB54A"}});
         } else if (points >= 30) {
-            return ({rankIcon: Reasonable, rankTitle: "Reasonable", rankDescription: "Earned 30+ points!"});
+            return ({rankIcon: Reasonable, rankTitle: "Reasonable", rankDescription: "Earned 30+ points!", rankColor: {background:"#3CB54A"}});
         } else if (points >= 20) {
-            return ({rankIcon: Average, rankTitle: "Average", rankDescription: "Earned 20+ points!"});
+            return ({rankIcon: Average, rankTitle: "Average", rankDescription: "Earned 20+ points!", rankColor: {background:"#3CB54A"}});
         } else if (points >= 12) {
-            return ({rankIcon: Novice, rankTitle: "Novice", rankDescription: "Earned 12+ points!"});
+            return ({rankIcon: Novice, rankTitle: "Novice", rankDescription: "Earned 12+ points!", rankColor: {background:"#3CB54A"}});
         } else if (points >= 6) {
-            return ({rankIcon: Rookie, rankTitle: "Rookie", rankDescription: "Earned 6+ points!"});
+            return ({rankIcon: Rookie, rankTitle: "Rookie", rankDescription: "Earned 6+ points!", rankColor: {background:"#BC6428"}});
         } else if (points >= 2) {
-            return ({rankIcon: Inexperienced, rankTitle: "Inexperienced", rankDescription: "Earned 2+ points!"});
+            return ({rankIcon: Inexperienced, rankTitle: "Inexperienced", rankDescription: "Earned 2+ points!", rankColor: {background:"#BC6428"}});
         } else {
-            return ({rankIcon: Beginner, rankTitle: "Beginner", rankDescription: "Still a long way to the top!"});
+            return ({rankIcon: Beginner, rankTitle: "Beginner", rankDescription: "Still a long way to the top!", rankColor: {background:"#BC6428"}});
         }
     };
 
@@ -127,7 +128,7 @@ class RankCard extends Component {
         return (
             <div>
                 <Card className={classes.CardStyle}>
-                    <CardHeader style={{background:"#BC6428"}}/>
+                    <CardHeader style={this.state.rankColor}/>
                     <div className={classes.ImgWrapper}>
                         <img
                             className={classes.RankSvg}
