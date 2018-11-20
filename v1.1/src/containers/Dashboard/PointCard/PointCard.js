@@ -36,7 +36,7 @@ class PointCard extends Component {
         }
     };
     setListener = (user) => {
-        fire.database().ref('/users/' + user.uid + '/completedChallenges')
+        fire.database().ref('/users/' + user.uid + '/points')
             .on('child_changed', snapshot => {
                 this.setState({points: snapshot.val()})
             });
