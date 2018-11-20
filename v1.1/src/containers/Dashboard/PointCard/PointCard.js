@@ -4,12 +4,44 @@ import CardMedia from "@material-ui/core/CardMedia/CardMedia";
 import CardContent from "@material-ui/core/CardContent/CardContent";
 import Typography from "@material-ui/core/Typography/Typography";
 import Card from "@material-ui/core/Card/Card";
-import CardActions from "@material-ui/core/CardActions/CardActions";
 import Divider from "@material-ui/core/Divider/Divider";
 import classes from "./PointCard.module.css"
 import Android from "@material-ui/icons/AndroidOutlined";
+import fire from "../../../fire";
 
 class PointCard extends Component {
+
+    state = {
+        points: 0
+    };
+
+    componentDidMount() {
+        fire.auth().onAuthStateChanged(this.updatePoints);
+    }
+    updatePoints = (user) => {
+        if (user) {
+            fire.database().ref('/users/' + user.uid + '/points')
+                .once('value')
+                .then(snapshot => {
+                    if (snapshot.val()) {
+                        this.setState({points: snapshot.val()});
+                    }
+                })
+                .catch(error => {
+                    alert(error.message)
+                });
+
+            this.setState({username: user.displayName});
+            this.setListener(user);
+        }
+    };
+    setListener = (user) => {
+        fire.database().ref('/users/' + user.uid + '/completedChallenges')
+            .on('child_changed', snapshot => {
+                this.setState({points: snapshot.val()})
+            });
+    };
+
     render() {
         return (
             <div>
@@ -24,7 +56,7 @@ class PointCard extends Component {
                     </div>
                         <CardContent>
                             <Typography gutterBottom variant={"h4"} component={"h1"}>
-                                Points:
+                                Points: {this.state.points}
                             </Typography>
                         </CardContent>
                     <Divider className={classes.Divider}/>
