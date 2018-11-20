@@ -7,16 +7,59 @@ import Card from "@material-ui/core/Card/Card";
 import Check from "@material-ui/icons/CheckCircleOutline"
 import Divider from "@material-ui/core/Divider/Divider";
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
+import fire from "../../../fire"
 
 class CompletedChallenges extends Component {
+
+    state = {
+        username: "Guest",
+        completedChallenges: 0
+    };
+
+    componentDidMount() {
+        fire.auth().onAuthStateChanged(this.updateUsername);
+    }
+
+    updateUsername = (user) => {
+      if (user) {
+          this.setState({username: user.displayName});
+          this.setListener(user);
+      }
+    };
+
+    setListener = (user) => {
+        fire.database().ref('/users/' + user.uid + '/completedChallenges')
+            .on('child_added', snapshot => {
+                this.setState(state => {
+                    return {completedChallenges: state.completedChallenges + 1}
+                })
+            });
+    };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.username !== this.state.username) {
+            const user = fire.auth().currentUser;
+            if (user) {
+                fire.database().ref('/users/' + user.uid + '/completedChallenges')
+                    .once('value')
+                    .then(snapshot => {
+                        this.setState({username: user.displayName, completedChallenges: snapshot.numChildren()});
+                    })
+                    .catch(error => {
+                        alert(error.message)
+                    });
+            }
+        }
+    }
+
     render() {
         return (
             <div>
                 <Card className={classes.CardStyle}>
                     <CardHeader style={{background: "#4CAF50"}}/>
-                    <div style ={{marginTop:20}}>
+                    <div style={{marginTop: 20}}>
                         <div className={classes.Box}>
-                            <Check style={{width:60, height:60, color:"white"}}/>
+                            <Check style={{width: 60, height: 60, color: "white"}}/>
                         </div>
                     </div>
                     <CardContent>
@@ -24,12 +67,12 @@ class CompletedChallenges extends Component {
                             Completed Challenges
                         </Typography>
                         <Typography component={'p'}>
-                            "@userName" Progress
+                            {(fire.auth().currentUser) ? fire.auth().currentUser.displayName : "Guest"}
                         </Typography>
                     </CardContent>
                     <Divider className={classes.Divider}/>
                     <CardActions>
-                        <h4>You have completed a total of ###### challenges</h4>
+                        <h4>You have completed a total of {this.state.completedChallenges} challenges</h4>
                     </CardActions>
                 </Card>
             </div>
