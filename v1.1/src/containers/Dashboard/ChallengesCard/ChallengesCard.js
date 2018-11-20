@@ -12,7 +12,6 @@ class ChallengesCard extends Component {
     render() {
         return (
             <>
-
             <Card style={{marginTop:20, width:350}}>
                 <CardHeader style={{background: "#2096F3"}}/>
                 <div style ={{marginTop:20}}>
