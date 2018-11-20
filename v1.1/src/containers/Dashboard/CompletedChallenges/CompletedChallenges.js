@@ -67,7 +67,7 @@ class CompletedChallenges extends Component {
                             Completed Challenges
                         </Typography>
                         <Typography component={'p'}>
-                            {(fire.auth().currentUser) ? fire.auth().currentUser.displayName : "Guest"}
+                            {(fire.auth().currentUser) ? fire.auth().currentUser.displayName : "Guest"}' s progress:
                         </Typography>
                     </CardContent>
                     <Divider className={classes.Divider}/>
