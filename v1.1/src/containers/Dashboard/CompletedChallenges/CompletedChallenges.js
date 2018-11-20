@@ -69,7 +69,7 @@ class CompletedChallenges extends Component {
     render() {
         return (
             <div>
-                <Card style={{marginTop: 20}}>
+                <Card className={classes.CardStyle}>
                     <CardHeader style={{background: "#4CAF50"}}/>
                     <div style={{marginTop: 20}}>
                         <div className={classes.Box}>

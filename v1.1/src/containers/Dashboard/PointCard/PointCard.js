@@ -36,7 +36,7 @@ class PointCard extends Component {
         }
     };
     setListener = (user) => {
-        fire.database().ref('/users/' + user.uid + '/completedChallenges')
+        fire.database().ref('/users/' + user.uid + '/points')
             .on('child_changed', snapshot => {
                 this.setState({points: snapshot.val()})
             });
@@ -45,7 +45,7 @@ class PointCard extends Component {
     render() {
         return (
             <div>
-                <Card style={{width:"300px"}}>
+                <Card className={classes.CardStyle}>
                     <CardHeader style={{background: "#d60000"}}/>
                         <CardMedia
                             title={"Points"}/>

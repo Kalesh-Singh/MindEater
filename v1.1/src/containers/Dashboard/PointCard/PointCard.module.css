@@ -1,3 +1,8 @@
+.CardStyle {
+    width: 330px;
+    box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
+}
+
 .Divider{
     margin-left: 20px !important;
     margin-right:20px !important;
@@ -15,5 +20,5 @@
     margin-left: 10px;
     margin-right: 50px;
     float: left;
-    box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;;
+    box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
 }
