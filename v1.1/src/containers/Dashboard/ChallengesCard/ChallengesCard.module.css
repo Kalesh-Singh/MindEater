@@ -1,3 +1,9 @@
+.CardStyle {
+    margin-top: 20px;
+    width:350px;
+    box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
+}
+
 /* button for challenge*/
 
 c {
@@ -80,6 +86,8 @@ c:active {
 .bttn:active:after {
     border-color: #acc1ed;
 }
+
+/*End of Button*/
 
 .Divider{
     margin-left: 20px !important;

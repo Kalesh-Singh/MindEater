@@ -7,3 +7,13 @@
     background-color: #4CAF50 !important;
     color: #FFFFFF;
 }
+
+.Icon {
+    margin: 0;
+    top: 20px;
+    right: 20px;
+    bottom: auto;
+    left: auto;
+    position: absolute;
+    color: #3f50b5!important;
+}
