@@ -15,6 +15,7 @@ import fire from "../../../../fire";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import Email from '@material-ui/icons/EmailOutlined';
 import withMobileDialog from "@material-ui/core/es/withMobileDialog/withMobileDialog";
+import Icon from "@material-ui/icons/InfoOutlined"
 
 const theme = createMuiTheme({
     palette: {
@@ -133,16 +134,7 @@ class ForgotPassword extends Component {
                 aria-labelledby="form-dialog-title"
             >
                 <DialogTitle id="form-dialog-title">
-                    <HelpIcon
-                        style={{
-                            margin: 0,
-                            top: 20,
-                            right: 20,
-                            bottom: 'auto',
-                            left: 'auto', position: "absolute"
-                        }}
-                    />
-                    Forgot Password
+                    Forgot Password <Icon className={classes.Icon}/>
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
@@ -179,6 +171,7 @@ class ForgotPassword extends Component {
                             onClick={this.props.closed}
                             color="primary"
                             className={classes.cancelButton}
+
                         >
                             Cancel
                         </Button>

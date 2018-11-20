@@ -45,7 +45,7 @@ class PointCard extends Component {
     render() {
         return (
             <div>
-                <Card style={{width:"300px"}}>
+                <Card className={classes.CardStyle}>
                     <CardHeader style={{background: "#d60000"}}/>
                         <CardMedia
                             title={"Points"}/>

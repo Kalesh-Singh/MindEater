@@ -13,7 +13,7 @@ class ChallengesCard extends Component {
         return (
             <>
 
-            <Card style={{marginTop:20, width:350}}>
+            <Card className={classes.CardStyle}>
                 <CardHeader style={{background: "#2096F3"}}/>
                 <div style ={{marginTop:20}}>
                     <div className={classes.Box}>

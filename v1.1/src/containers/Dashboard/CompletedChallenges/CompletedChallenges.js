@@ -55,7 +55,7 @@ class CompletedChallenges extends Component {
     render() {
         return (
             <div>
-                <Card style={{marginTop: 20}}>
+                <Card className={classes.CardStyle}>
                     <CardHeader style={{background: "#4CAF50"}}/>
                     <div style={{marginTop: 20}}>
                         <div className={classes.Box}>
@@ -67,7 +67,7 @@ class CompletedChallenges extends Component {
                             Completed Challenges
                         </Typography>
                         <Typography component={'p'}>
-                            {(fire.auth().currentUser) ? fire.auth().currentUser.displayName : "Guest"}
+                            {(fire.auth().currentUser) ? fire.auth().currentUser.displayName : "Guest"}' s progress:
                         </Typography>
                     </CardContent>
                     <Divider className={classes.Divider}/>
