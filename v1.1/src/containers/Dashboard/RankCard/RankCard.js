@@ -45,6 +45,10 @@ class RankCard extends Component {
 
     componentDidMount() {
         fire.auth().onAuthStateChanged(this.updateRank);
+        const user = fire.auth().currentUser;
+        if (user) {
+            this.updateRank(user);
+        }
     }
     updateRank = (user) => {
         if (user) {
