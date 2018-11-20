@@ -7,7 +7,7 @@ import Card from "@material-ui/core/Card/Card";
 import Check from "@material-ui/icons/CheckCircleOutline"
 import Divider from "@material-ui/core/Divider/Divider";
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
-import fire from "../../../fire"
+import fire from "../../../fire";
 
 class CompletedChallenges extends Component {
 
@@ -18,13 +18,27 @@ class CompletedChallenges extends Component {
 
     componentDidMount() {
         fire.auth().onAuthStateChanged(this.updateUsername);
+        const user = fire.auth().currentUser;
+        if (user) {
+            this.updateUsername(user);
+        }
     }
 
     updateUsername = (user) => {
-      if (user) {
-          this.setState({username: user.displayName});
-          this.setListener(user);
-      }
+        if (user) {
+            fire.database().ref('/users/' + user.uid + '/username')
+                .once('value')
+                .then(snapshot => {
+                    console.log("USER Snapshot", snapshot);
+                    if (snapshot.val()) {
+                        console.log("USER Snapshot Val", snapshot.val());
+                        this.setState({username: snapshot.val()});
+                    }
+            }).catch(error => {
+                alert(error.message)
+            });
+            this.setListener(user);
+        }
     };
 
     setListener = (user) => {
@@ -43,7 +57,7 @@ class CompletedChallenges extends Component {
                 fire.database().ref('/users/' + user.uid + '/completedChallenges')
                     .once('value')
                     .then(snapshot => {
-                        this.setState({username: user.displayName, completedChallenges: snapshot.numChildren()});
+                        this.setState({completedChallenges: snapshot.numChildren()});
                     })
                     .catch(error => {
                         alert(error.message)
@@ -67,7 +81,7 @@ class CompletedChallenges extends Component {
                             Completed Challenges
                         </Typography>
                         <Typography component={'p'}>
-                            {(fire.auth().currentUser) ? fire.auth().currentUser.displayName : "Guest"}' s progress:
+                            {this.state.username}
                         </Typography>
                     </CardContent>
                     <Divider className={classes.Divider}/>
