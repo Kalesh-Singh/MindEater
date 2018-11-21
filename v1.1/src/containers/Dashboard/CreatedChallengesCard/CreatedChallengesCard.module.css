@@ -1,7 +1,7 @@
 .CardStyle {
     margin-top: 20px;
     box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
-    width: 400px;
+    width: 380px;
 }
 .Divider{
     margin-left: 20px !important;
@@ -18,7 +18,7 @@
     padding: 15px;
     margin: -10px 70px 10px 10px;
     float: left;
-    box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;;
+    box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
 }
 
 .CompletedIcon {

@@ -359,7 +359,7 @@ class ChallengeDialog extends Component {
         ));
 
         const NeedHelp = "Not sure what to do? \n Click here for more help";
-        const SaveProgress = "Save Challenge"
+        const SaveProgress = "Save Challenge";
 
         return (
             <>

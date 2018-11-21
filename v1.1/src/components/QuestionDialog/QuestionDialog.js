@@ -406,8 +406,9 @@ class QuestionDialog extends Component {
                 onClose={this.handleClose}
                 aria-labelledby="create-question-dialog-title"
             >
-                <DialogTitle id="create-question-dialog-title" style={{textAlign: "center"}}
-                >New Question</DialogTitle>
+                <DialogTitle id="create-question-dialog-title" className={classes.header}>
+                    <span className={classes.HeaderText}>New Question</span>
+                </DialogTitle>
 
                 <DialogContent className={classes.root}>
                     <h3 style={{marginBottom: "2px"}}>Enter your question below:</h3>
@@ -445,7 +446,8 @@ class QuestionDialog extends Component {
                             your question.</h5>
 
                         <Divider/>
-                        <h3 style={{marginBottom: "5px"}}> Enter a hint, this will be used to help the user out while trying to solve this question:</h3>
+                        <h3 style={{marginBottom: "5px"}}> Enter a hint, this will be used to help the user out while
+                            trying to solve this question:</h3>
                         <Grid container={true} spacing={8} alignItems="center">
                             <Grid item>
                                 <Hint/>
@@ -491,21 +493,23 @@ class QuestionDialog extends Component {
                         </Grid>
                     </form>
                 </DialogContent>
+                <div className={classes.Footer}>
                 <DialogActions>
                     <Button
                         onClick={this.handleCancel}
                         color={"primary"}
                         className={classes.butonCancel}
-                    ><CancelIcon style={{marginRight:"4px"}}/>Cancel
+                    ><CancelIcon style={{marginRight: "4px"}}/>Cancel
                     </Button>
                     <Button
                         onClick={this.handleSave}
                         disabled={!validForm}
                         color="primary" autoFocus
                         className={classes.butonSave}
-                    ><SaveIcon style={{marginRight:"4px"}}/>Save
+                    ><SaveIcon style={{marginRight: "4px"}}/>Save
                     </Button>
                 </DialogActions>
+                </div>
             </Dialog>
         );
     }
