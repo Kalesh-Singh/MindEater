@@ -68,7 +68,7 @@ class CreatedChallengesCard extends Component {
                                 Created Challenges
                             </Typography>
                             <Typography component={'p'}>
-                                {(fire.auth().currentUser) ? fire.auth().currentUser.displayName : "Guest"}'s progress:
+                                {(fire.auth().currentUser) ? fire.auth().currentUser.displayName : "Guest"}'s contributions:
                             </Typography>
                         </CardContent>
                         <Divider className={classes.Divider}/>

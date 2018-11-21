@@ -40,3 +40,17 @@
     background-color: #d50000 !important;
     color: #FFFFFF;
 }
+
+.header {
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 5px 10px !important;
+    display: inline-block;
+}
+
+.Footer {
+    border-top: solid rgba(31, 160, 255, 0.2);
+}
+
+.HeaderText {
+    color: black;
+}

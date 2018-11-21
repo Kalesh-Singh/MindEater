@@ -81,7 +81,7 @@ class CompletedChallenges extends Component {
                             Completed Challenges
                         </Typography>
                         <Typography component={'p'}>
-                            {this.state.username}
+                            {this.state.username}' s progress:
                         </Typography>
                     </CardContent>
                     <Divider className={classes.Divider}/>

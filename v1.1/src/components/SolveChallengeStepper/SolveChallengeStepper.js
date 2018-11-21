@@ -27,7 +27,14 @@ import Puzzled from "./Puzzled/Puzzled";
 import Paper from "@material-ui/core/Paper/Paper";
 import fire from "../../fire";
 import AppBar from "@material-ui/core/AppBar/AppBar";
-import Logo from "../../assets/svg/black_logo.png"
+import BlackLogo from "../../assets/svg/black_logo.png"
+import GreenLogo from "../../assets/svg/green_logo.png"
+import LightBlueLogo from "../../assets/svg/light_blue_logo.png"
+import BlueLogo from "../../assets/svg/blue_logo.png"
+import OrangeLogo from "../../assets/svg/orange_logo.png"
+import RedLogo from "../../assets/svg/red_logo.png"
+import YellowLogo from "../../assets/svg/yellow_logo.png"
+
 
 const theme = createMuiTheme({
     completed: {
@@ -61,6 +68,11 @@ class SolveChallengeStepper extends Component {
         questions: [],
         icon: 'THINKING'
     };
+
+    static getRandomLogo(){
+        let colorValues = [BlackLogo, GreenLogo, BlueLogo, OrangeLogo, RedLogo, YellowLogo, LightBlueLogo];
+        return colorValues[Math.floor(Math.random() * colorValues.length)];
+    }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
 
@@ -269,7 +281,7 @@ class SolveChallengeStepper extends Component {
                     <DialogTitle id="solve-question-dialog-title">
                         <div className={classes.Title}>{this.props.challengeTitle}</div>
                     </DialogTitle>
-                        <img className={classes.Logo} src={Logo} alt='MindEater'/>
+                        <img className={classes.Logo} src={SolveChallengeStepper.getRandomLogo()} alt='MindEater'/>
                     </AppBar>
                     <DialogContent style={{marginTop:100}}>
                         <DialogContentText id="solve-question-dialog-description">
