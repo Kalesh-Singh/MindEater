@@ -25,8 +25,8 @@ import Correct from "./Correct/Correct";
 import Wrong from "./Wrong/Wrong";
 import Puzzled from "./Puzzled/Puzzled";
 import Paper from "@material-ui/core/Paper/Paper";
-import grey from "@material-ui/core/es/colors/grey";
 import fire from "../../fire";
+import AppBar from "@material-ui/core/AppBar/AppBar";
 
 const theme = createMuiTheme({
     completed: {
@@ -264,10 +264,13 @@ class SolveChallengeStepper extends Component {
                     onClose={this.props.closed}
                     TransitionComponent={Transition}
                 >
-                    <DialogTitle id="solve-question-dialog-title">{this.props.challengeTitle}</DialogTitle>
-
-                    <DialogContent>
-                        <DialogContentText id="solve-question-dialog-description" style={{alignItems: "center"}}>
+                    <AppBar>
+                    <DialogTitle id="solve-question-dialog-title">
+                        <div className={classes.Title}>{this.props.challengeTitle}</div>
+                    </DialogTitle>
+                    </AppBar>
+                    <DialogContent style={{marginTop:100}}>
+                        <DialogContentText id="solve-question-dialog-description">
                             {this.props.challengeDescription}
                         </DialogContentText>
                         <MuiThemeProvider theme={theme}>

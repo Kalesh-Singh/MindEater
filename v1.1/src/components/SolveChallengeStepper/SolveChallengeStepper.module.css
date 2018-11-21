@@ -1,3 +1,15 @@
+.Title {
+    color: white !important;
+    font-size: 30px;
+}
+
+/*Another way to ini classes in CSS*/
+/*.title > * {*/
+    /*color: white !important;*/
+    /*text-align: center;*/
+/*}*/
+
+
 .Buttons {
     margin-top: 10px;
 }
@@ -24,8 +36,8 @@
     flex-flow: column;
     justify-content: space-around;
     align-items: center;
-    margin-left: auto;
-    margin: 0;
+    margin-top: 100px;
+    /*margin: 0;*/
     top: 20px;
     right: 20px;
     bottom: auto;
@@ -46,8 +58,9 @@
 
 @media (max-width: 35em){
     .ContentCol {
-        top: 10px;
+        top: auto;
         right: 5px;
+        bottom: 5px;
         position: absolute;
     }
 }
