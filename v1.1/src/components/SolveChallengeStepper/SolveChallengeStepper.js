@@ -27,6 +27,7 @@ import Puzzled from "./Puzzled/Puzzled";
 import Paper from "@material-ui/core/Paper/Paper";
 import fire from "../../fire";
 import AppBar from "@material-ui/core/AppBar/AppBar";
+import Logo from "../../assets/svg/black_logo.png"
 
 const theme = createMuiTheme({
     completed: {
@@ -268,6 +269,7 @@ class SolveChallengeStepper extends Component {
                     <DialogTitle id="solve-question-dialog-title">
                         <div className={classes.Title}>{this.props.challengeTitle}</div>
                     </DialogTitle>
+                        <img className={classes.Logo} src={Logo} alt='MindEater'/>
                     </AppBar>
                     <DialogContent style={{marginTop:100}}>
                         <DialogContentText id="solve-question-dialog-description">

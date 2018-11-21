@@ -62,7 +62,7 @@ class SolveChallengeSummary extends Component {
                 <DialogContent className={classes.Content}>
                     <Table>
                         <TableHead>
-                            <TableRow>
+                            <TableRow style={{padding:0}}>
                                 <TableCell className={classes.CellStyle}>Question<Question style={{color:"blue"}}/></TableCell>
                                 <TableCell className={classes.CellStyle}>Correct Answer<CorrectAnswer style={{color:"green"}}/></TableCell>
                                 <TableCell className={classes.CellStyle}>Your Answer<Submission style={{color:"black"}}/></TableCell>
