@@ -14,6 +14,10 @@ import classes from "./SolveChallengeSummary.module.css";
 import withMobileDialog from "@material-ui/core/es/withMobileDialog/withMobileDialog";
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 import green from "@material-ui/core/es/colors/green";
+import Question from "@material-ui/icons/ContactSupportOutlined"
+import CorrectAnswer from "@material-ui/icons/DoneOutlineSharp"
+import Submission from "@material-ui/icons/TouchAppOutlined"
+import Score from "@material-ui/icons/GradeOutlined"
 
 const theme = createMuiTheme({
     palette: {
@@ -59,10 +63,10 @@ class SolveChallengeSummary extends Component {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Question</TableCell>
-                                <TableCell>Correct Answer</TableCell>
-                                <TableCell>Your Answer</TableCell>
-                                <TableCell numeric>Score</TableCell>
+                                <TableCell className={classes.CellStyle}>Question<Question style={{color:"blue"}}/></TableCell>
+                                <TableCell className={classes.CellStyle}>Correct Answer<CorrectAnswer style={{color:"green"}}/></TableCell>
+                                <TableCell className={classes.CellStyle}>Your Answer<Submission style={{color:"black"}}/></TableCell>
+                                <TableCell numeric className={classes.CellStyle}>Score<Score style={{color:"red"}}/></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -71,9 +75,9 @@ class SolveChallengeSummary extends Component {
                                         <TableCell component="th" scope="row">
                                             {question.question}
                                         </TableCell>
-                                        <TableCell>{question.correctOption}</TableCell>
-                                        <TableCell>{question.selectedAnswer}</TableCell>
-                                        <TableCell numeric>{question.score}</TableCell>
+                                        <TableCell className={classes.CellStyle}>{question.correctOption}</TableCell>
+                                        <TableCell className={classes.CellStyle}>{question.selectedAnswer}</TableCell>
+                                        <TableCell numeric className={classes.CellStyle}>{question.score}</TableCell>
                                     </TableRow>
                                 ))}
                         </TableBody>
