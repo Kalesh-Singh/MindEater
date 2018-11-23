@@ -42,7 +42,7 @@ class CompletedChallenges extends Component {
     };
 
     setListener = (user) => {
-        fire.database().ref('/users/' + user.uid + '/completedChallenges')
+        fire.database().ref('/users/' + user.uid + '/challenges')
             .on('child_added', snapshot => {
                 this.setState(state => {
                     return {completedChallenges: state.completedChallenges + 1}
@@ -54,7 +54,7 @@ class CompletedChallenges extends Component {
         if (prevState.username !== this.state.username) {
             const user = fire.auth().currentUser;
             if (user) {
-                fire.database().ref('/users/' + user.uid + '/completedChallenges')
+                fire.database().ref('/users/' + user.uid + '/challenges')
                     .once('value')
                     .then(snapshot => {
                         this.setState({completedChallenges: snapshot.numChildren()});
