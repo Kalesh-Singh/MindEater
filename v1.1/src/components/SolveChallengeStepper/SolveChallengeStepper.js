@@ -371,9 +371,6 @@ class SolveChallengeStepper extends Component {
                                                             </Button>
                                                         </div>
                                                     </div>
-                                                        <div className={classes.Brand}>
-                                                            <span className={classes.BrandTxtStyle}><Brand/>MindEater</span>
-                                                        </div>
                                                     <div className={classes.ContentCol}>
                                                         {feedback}
                                                     </div>
@@ -384,6 +381,9 @@ class SolveChallengeStepper extends Component {
                                 })}
                             </Stepper>
                         </MuiThemeProvider>
+                        <div className={classes.Brand}>
+                            <span className={classes.BrandTxtStyle}><Brand/>MindEater</span>
+                        </div>
                     </DialogContent>
                 </Dialog>
                 <SolveChallengeSummary
