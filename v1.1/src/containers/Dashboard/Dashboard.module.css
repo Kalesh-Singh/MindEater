@@ -2,8 +2,27 @@
 
 body {
     background: rgba(75, 151, 242, 0.06) !important;
-    height: 170vh;
+    /*height: 170vh;*/
     font-family: 'Muli', sans-serif;
+}
+
+.UserName {
+    margin-top: 100px;
+    margin-left: 20px;
+    font-size: 40px;
+    color: white;
+}
+
+.UserNameStyle {
+    background: #2096F3;
+    border-radius: 10px;
+    border: solid black;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
+}
+
+.PageStyle {
+    height: 150vh;
 }
 
 .root{
@@ -15,7 +34,7 @@ body {
 .RowR {
     display: flex;
     flex-flow: row;
-    margin-top: 100px;
+    margin-top: 50px;
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -25,4 +44,29 @@ body {
 .ColumnR {
     flex-flow: column;
 }
+
+@media (max-width: 670px) {
+    .UserName {
+        font-size: 40px;
+        text-align: center;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 520px) {
+    .UserName {
+        font-size: 37px;
+        text-align: center;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 515px) {
+    .UserName {
+        font-size: 30px;
+        text-align: center;
+        margin-left: 0;
+    }
+}
+
 

@@ -2,7 +2,10 @@
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
+}
 
+.PageStyle {
+    height: 150vh;
 }
 
 .header{

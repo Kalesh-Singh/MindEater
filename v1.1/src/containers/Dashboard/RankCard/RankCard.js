@@ -149,7 +149,7 @@ class RankCard extends Component {
                         </CardContent>
                     <Divider className={classes.Divider}/>
                     <CardActions>
-                        <h4>{this.state.rankFeed}</h4>
+                        <h2>{this.state.rankFeed}</h2>
                     </CardActions>
                 </Card>
             </div>

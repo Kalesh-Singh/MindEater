@@ -34,6 +34,7 @@ import BlueLogo from "../../assets/svg/blue_logo.png"
 import OrangeLogo from "../../assets/svg/orange_logo.png"
 import RedLogo from "../../assets/svg/red_logo.png"
 import YellowLogo from "../../assets/svg/yellow_logo.png"
+import Brand from "@material-ui/icons/Adb"
 
 
 const theme = createMuiTheme({
@@ -69,7 +70,7 @@ class SolveChallengeStepper extends Component {
         icon: 'THINKING'
     };
 
-    static getRandomLogo(){
+    static getRandomLogo() {
         let colorValues = [BlackLogo, GreenLogo, BlueLogo, OrangeLogo, RedLogo, YellowLogo, LightBlueLogo];
         return colorValues[Math.floor(Math.random() * colorValues.length)];
     }
@@ -262,11 +263,17 @@ class SolveChallengeStepper extends Component {
                 break;
             case "THINKING":
                 feedback = <Paper className={classes.ContentCol} elevation={15}
-                                  style={{background: "#2096F3", marginRight: "auto"}}><ThinkingIcon/><Puzzled/></Paper>;
+                                  style={{
+                                      background: "#2096F3",
+                                      marginRight: "auto"
+                                  }}><ThinkingIcon/><Puzzled/></Paper>;
                 break;
             default:
                 feedback = <Paper className={classes.ContentCol} elevation={15}
-                                  style={{background: "#2096F3", marginRight: "auto"}}><ThinkingIcon/><Puzzled/></Paper>;
+                                  style={{
+                                      background: "#2096F3",
+                                      marginRight: "auto"
+                                  }}><ThinkingIcon/><Puzzled/></Paper>;
         }
 
         return (
@@ -278,12 +285,12 @@ class SolveChallengeStepper extends Component {
                     TransitionComponent={Transition}
                 >
                     <AppBar>
-                    <DialogTitle id="solve-question-dialog-title">
-                        <div className={classes.Title}>{this.props.challengeTitle}</div>
-                    </DialogTitle>
+                        <DialogTitle id="solve-question-dialog-title">
+                            <div className={classes.Title}>{this.props.challengeTitle}</div>
+                        </DialogTitle>
                         <img className={classes.Logo} src={SolveChallengeStepper.getRandomLogo()} alt='MindEater'/>
                     </AppBar>
-                    <DialogContent style={{marginTop:100}}>
+                    <DialogContent style={{marginTop: 125}}>
                         <DialogContentText id="solve-question-dialog-description">
                             {this.props.challengeDescription}
                         </DialogContentText>
@@ -292,15 +299,15 @@ class SolveChallengeStepper extends Component {
                                 {steps.map((label, index) => {
                                     return (
                                         <Step key={index}
-                                            className={index === this.state.activeStep
-                                                ? classes.stepperActive
-                                                : (index < this.state.activeStep)
-                                                    ?
-                                                    classes.stepperCompleted
-                                                    : classes.stepperDisabled}
+                                              className={index === this.state.activeStep
+                                                  ? classes.stepperActive
+                                                  : (index < this.state.activeStep)
+                                                      ?
+                                                      classes.stepperCompleted
+                                                      : classes.stepperDisabled}
                                         >
                                             <StepLabel
-                                                StepIconProps={{ classes: { root: this.props.icon } }}>
+                                                StepIconProps={{classes: {root: this.props.icon}}}>
                                                 {label}</StepLabel>
                                             <StepContent>
                                                 <div className={classes.ContentRow}>
@@ -309,7 +316,8 @@ class SolveChallengeStepper extends Component {
                                                         {this.state.timesAttempted === 1 && !this.state.finished ?
                                                             <ExpansionPanel>
                                                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                                                    <Typography variant="h7" component="h3" style={{color: '#D50000'}}>Show
+                                                                    <Typography variant="h7" component="h3"
+                                                                                style={{color: '#D50000'}}>Show
                                                                         hint</Typography>
                                                                 </ExpansionPanelSummary>
                                                                 <ExpansionPanelDetails>
@@ -328,7 +336,8 @@ class SolveChallengeStepper extends Component {
                                                         {this.state.finished ?
                                                             <ExpansionPanel>
                                                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                                                    <Typography variant="h7" component="h3" style={{color: '#469c4a'}}>See
+                                                                    <Typography variant="h7" component="h3"
+                                                                                style={{color: '#469c4a'}}>See
                                                                         Explanation</Typography>
                                                                 </ExpansionPanelSummary>
                                                                 <ExpansionPanelDetails>
@@ -361,6 +370,9 @@ class SolveChallengeStepper extends Component {
                                                             </Button>
                                                         </div>
                                                     </div>
+                                                        <div className={classes.Brand}>
+                                                            <span className={classes.BrandTxtStyle}><Brand/>MindEater</span>
+                                                        </div>
                                                     <div className={classes.ContentCol}>
                                                         {feedback}
                                                     </div>
