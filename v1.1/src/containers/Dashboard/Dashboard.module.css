@@ -16,7 +16,6 @@ body {
 .UserNameStyle {
     background: #2096F3;
     border-radius: 10px;
-    border: solid black;
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
 }
