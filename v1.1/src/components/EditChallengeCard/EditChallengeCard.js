@@ -23,7 +23,8 @@ class EditChallengeCard extends Component {
             title: this.props.challenge.title,
             description: this.props.challenge.description,
             questions: []
-        }
+        },
+        getColor: EditChallengeCard.getRandomColor(),
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -98,7 +99,8 @@ class EditChallengeCard extends Component {
         let colorValues = ["red", "blue", "green", "yellow", "orange", "pink", "violet",
             "brown", "teal", "olive", "lime", "navy", "#2096F3", "#4CAF50", "#d50000"];
         return colorValues[Math.floor(Math.random() * colorValues.length)];
-    }
+    };
+
 
     render() {
         return (
@@ -109,7 +111,7 @@ class EditChallengeCard extends Component {
                         width: '100%', height: '100%', display: 'flex',
                         flexFlow: 'column', justifyContent: 'space-between'
                     }}>
-                    <CardHeader style={{background: EditChallengeCard.getRandomColor()}}/>
+                    <CardHeader style={{background:this.state.getColor}}/>
                     <Tooltip TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} placement={"bottom"} title={"Edit"} enterDelay={50} leaveDelay={200}>
                     <CardActionArea onClick={this.handleClickOpen}>
                         <CardContent>

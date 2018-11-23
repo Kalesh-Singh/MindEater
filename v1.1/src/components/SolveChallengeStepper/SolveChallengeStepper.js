@@ -67,7 +67,8 @@ class SolveChallengeStepper extends Component {
         timesAttempted: 0,
         finished: false,
         questions: [],
-        icon: 'THINKING'
+        icon: 'THINKING',
+        Logo: SolveChallengeStepper.getRandomLogo(),
     };
 
     static getRandomLogo() {
@@ -288,7 +289,7 @@ class SolveChallengeStepper extends Component {
                         <DialogTitle id="solve-question-dialog-title">
                             <div className={classes.Title}>{this.props.challengeTitle}</div>
                         </DialogTitle>
-                        <img className={classes.Logo} src={SolveChallengeStepper.getRandomLogo()} alt='MindEater'/>
+                        <img className={classes.Logo} src={this.state.Logo} alt='MindEater'/>
                     </AppBar>
                     <DialogContent style={{marginTop: 125}}>
                         <DialogContentText id="solve-question-dialog-description">
@@ -370,9 +371,6 @@ class SolveChallengeStepper extends Component {
                                                             </Button>
                                                         </div>
                                                     </div>
-                                                        <div className={classes.Brand}>
-                                                            <span className={classes.BrandTxtStyle}><Brand/>MindEater</span>
-                                                        </div>
                                                     <div className={classes.ContentCol}>
                                                         {feedback}
                                                     </div>
@@ -383,6 +381,9 @@ class SolveChallengeStepper extends Component {
                                 })}
                             </Stepper>
                         </MuiThemeProvider>
+                        <div className={classes.Brand}>
+                            <span className={classes.BrandTxtStyle}><Brand/>MindEater</span>
+                        </div>
                     </DialogContent>
                 </Dialog>
                 <SolveChallengeSummary

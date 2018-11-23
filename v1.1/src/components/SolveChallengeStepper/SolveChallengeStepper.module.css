@@ -12,7 +12,6 @@
 /* Mind Eater Logo */
 .Logo {
     width:50px;
-    /*display: block;*/
     margin: -65px 10px 5px auto;
 }
 
@@ -61,7 +60,7 @@
     font-size: 30px;
     color: white;
     font-weight: 500;
-    background: rgba(4, 106, 156, 0.8);
+    background: rgba(4, 106, 156, 0.65);
 }
 
 .BrandTxtStyle {
