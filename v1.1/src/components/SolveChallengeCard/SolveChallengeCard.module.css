@@ -19,13 +19,13 @@
     margin-bottom: -20px;
 }
 
+.Hov:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
+}
+
 @media (min-width: 600px) {
     .root {
         min-width: 300px;
         max-width: 300px;
     }
-}
-
-.Hov:hover {
-    box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
 }

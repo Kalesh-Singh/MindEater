@@ -3,6 +3,9 @@ import {Button} from "@material-ui/core";
 import FacebookIcon from "../../../../assets/svg/FacebookIcon/FacebookIcon";
 import firebase from "firebase/app";
 import fire from "../../../../fire";
+import classes from "./Facebook.module.css"
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import Zoom from "@material-ui/core/Zoom/Zoom";
 
 class Facebook extends Component {
 
@@ -28,12 +31,16 @@ class Facebook extends Component {
 
     render() {
         return (
-            <Button
-                variant='fab'
-                onClick={this.signInWithFacebook}
-            >
-                <FacebookIcon/>
-            </Button>
+            <Tooltip TransitionComponent={Zoom} TransitionProps={{timeout: 600}} placement={"top"}
+                     title={"Sign in with Facebook"} enterDelay={50} leaveDelay={200}>
+                <Button
+                    variant='fab'
+                    onClick={this.signInWithFacebook}
+                    className={classes.FacebookButton}
+                >
+                    <FacebookIcon/>
+                </Button>
+            </Tooltip>
         );
     }
 }

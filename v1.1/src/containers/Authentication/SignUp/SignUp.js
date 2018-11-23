@@ -13,6 +13,7 @@ import Lock from '@material-ui/icons/LockOutlined';
 import OpenLock from '@material-ui/icons/LockOpenOutlined';
 import Email from '@material-ui/icons/EmailOutlined';
 import Face from '@material-ui/icons/AccountCircleOutlined';
+import Divider from "@material-ui/core/Divider/Divider";
 
 class SignUp extends Component {
     state = {
@@ -261,7 +262,7 @@ class SignUp extends Component {
                         endAdornment: (
                             <InputAdornment variant="outlined" position="end">
                                 <IconButton
-                                    style={{background: "#eeeeee", color: "grey"}}
+                                    style={{background: "white", color: "grey"}}
                                     aria-label="Toggle password visibility"
                                     onClick={this.handleClickShowPassword}
                                 >
@@ -299,6 +300,7 @@ class SignUp extends Component {
                 >
                     Sign Up
                 </Button>
+                <Divider className={classes.DividerStyle}/>
             </form>
         );
     }

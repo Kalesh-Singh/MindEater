@@ -5,6 +5,9 @@ import firebase from 'firebase/app';
 import fire from '../../../../fire';
 
 import GoogleIcon from "../../../../assets/svg/GoogleIcon/GoogleIcon";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import Zoom from "@material-ui/core/Zoom/Zoom";
+import classes from "./Google.module.css"
 
 class Google extends Component {
     signInWithGoogle = () => {
@@ -29,12 +32,16 @@ class Google extends Component {
 
     render() {
         return (
-            <Button
-                variant='fab'
-                onClick={this.signInWithGoogle}
-            >
-                <GoogleIcon/>
-            </Button>
+            <Tooltip TransitionComponent={Zoom} TransitionProps={{timeout: 600}} placement={"top"}
+                     title={"Sign in with Google"} enterDelay={50} leaveDelay={200}>
+                <Button
+                    variant='fab'
+                    onClick={this.signInWithGoogle}
+                    className={classes.GoogleButton}
+                >
+                    <GoogleIcon/>
+                </Button>
+            </Tooltip>
         );
     }
 }

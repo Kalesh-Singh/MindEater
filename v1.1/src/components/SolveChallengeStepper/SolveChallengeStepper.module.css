@@ -44,13 +44,28 @@
     justify-content: space-around;
     align-items: center;
     margin-top: 100px;
-    /*margin: 0;*/
-    top: 20px;
+    top: auto;
     right: 20px;
     bottom: auto;
     left: auto;
     position: fixed;
+}
 
+.Brand {
+    margin: 0;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    font-size: 30px;
+    color: white;
+    font-weight: 500;
+    background: rgba(4, 106, 156, 0.8);
+}
+
+.BrandTxtStyle {
+    margin-left: 15px;
 }
 
 .Submit:hover {
@@ -63,12 +78,21 @@
     color:#FFF;
 }
 
+@media (max-width: 40em){
+    .ContentCol {
+        top: 5%;
+        right: 20px;
+        bottom: auto;
+        left: auto;
+        position: absolute;
+    }
+}
 /*Mobile phones*/
 @media (max-width: 35em){
     .ContentCol {
         top: auto;
         right: 5px;
-        bottom: 5px;
+        bottom: 25px;
         position: absolute;
     }
 }

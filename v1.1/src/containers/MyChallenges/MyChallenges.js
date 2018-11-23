@@ -83,6 +83,7 @@ class MyChallenges extends Component {
         ));
 
         return (
+            <div className={classes.PageStyle}>
             <div style={{marginTop: '100px'}}>
                 <div className={classes.header}>
                     <h1>My Challenges</h1>
@@ -96,6 +97,7 @@ class MyChallenges extends Component {
                 >
                     {myChallenges}
                 </List>
+            </div>
             </div>
         );
     }
