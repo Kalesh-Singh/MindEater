@@ -164,7 +164,7 @@ class SignIn extends Component {
                         endAdornment: (
                             <InputAdornment variant="outlined" position="end">
                                 <IconButton
-                                    style={{background:"#eeeeee", color:"grey"}}
+                                    style={{background:"white", color:"grey"}}
                                     aria-label="Toggle password visibility"
                                     onClick={this.handleClickShowPassword}
                                 >
@@ -180,7 +180,6 @@ class SignIn extends Component {
                     disabled={!validForm}
                 >Sign In
                 </Button>
-                <div className={classes.Hr}>
                     <div className={classes.FootLnk}>
                         <div>
                             <a onClick={this.handleClickOpen}>Forgot Password?</a>
@@ -190,7 +189,6 @@ class SignIn extends Component {
                             />
                         </div>
                     </div>
-                </div>
             </form>
         );
     }

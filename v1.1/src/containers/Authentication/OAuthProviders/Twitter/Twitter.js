@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import {Button} from "@material-ui/core";
 import firebase from 'firebase/app';
 import fire from '../../../../fire';
+import classes from "./Twitter.module.css"
 
 import TwitterIcon from "../../../../assets/svg/TwitterIcon/TwitterIcon";
+import Zoom from "@material-ui/core/Zoom/Zoom";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 
 class Twitter extends Component {
 
@@ -29,12 +32,16 @@ class Twitter extends Component {
 
     render() {
         return (
-            <Button
-                variant='fab'
-                onClick={this.signInWithTwitter}
-            >
-                <TwitterIcon/>
-            </Button>
+            <Tooltip TransitionComponent={Zoom} TransitionProps={{timeout: 600}} placement={"top"}
+                     title={"Sign in with Twitter"} enterDelay={50} leaveDelay={200}>
+                <Button
+                    variant='fab'
+                    onClick={this.signInWithTwitter}
+                    className={classes.TwitterButton}
+                >
+                    <TwitterIcon/>
+                </Button>
+            </Tooltip>
         );
     }
 }

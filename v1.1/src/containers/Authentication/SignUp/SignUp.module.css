@@ -29,6 +29,11 @@
     color: #5983da;
 }
 
+.DividerStyle {
+    margin-top: 20px !important;
+    background: #717171 !important;
+}
+
 .Cancel:hover {
     background-color: #d50000 !important;
     color:#FFFFFF;

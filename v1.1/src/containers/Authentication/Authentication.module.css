@@ -1,7 +1,7 @@
 .Authentication {
     width: 100vw;
     flex-direction: column;
-    background: #eeeeee;
+    background: white;
     box-shadow: 0 15px 25px 0 rgba(0, 0, 0, .44), 0 27px 60px 0 rgba(0, 0, 0, .49);
     border-radius: 15px;
 }
@@ -9,7 +9,14 @@
 .Background {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/svg/Login_Background.png) center;
     background-size:cover;
+}
 
+/* Change the color of autofill to match background [Applies globally */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset;
 }
 
 .SignBttn:hover {
@@ -143,7 +150,7 @@
 }
 .letter:nth-child(4):before {
     content: "0728341695";
-    margin-top: 0px;
+    margin-top: 0;
     animation-name: letter4;
     animation-duration: 2.08s;
     animation-delay: 0.62s;
@@ -151,7 +158,7 @@
 }
 @keyframes letter4 {
     from {
-        margin-top: 0px;
+        margin-top: 0;
     }
     to {
         margin-top: 24px;

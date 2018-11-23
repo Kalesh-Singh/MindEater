@@ -150,6 +150,7 @@ class ForgotPassword extends Component {
                             fullWidth
                             variant="outlined"
                             placeholder="Email"
+                            className={classes.ChangeInput}
                             error={this.state.email.error.length > 0}
                             helperText={this.state.email.error}
                             value={this.state.email.value}
