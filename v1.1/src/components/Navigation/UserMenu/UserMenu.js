@@ -11,6 +11,8 @@ import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import AccountIcon from '@material-ui/icons/AccountCircleOutlined';
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import Avatar from "@material-ui/core/Avatar/Avatar";
+import Zoom from "@material-ui/core/Zoom/Zoom";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 
 class UserMenu extends Component {
     state = {
@@ -51,6 +53,7 @@ class UserMenu extends Component {
     render() {
         return (
             <>
+                <Tooltip TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} placement={"left"} title={"Profile"} enterDelay={50} leaveDelay={150}>
                 <IconButton
                     style={{position: 'absolute', right: '16px'}}
                     color="inherit"
@@ -66,6 +69,7 @@ class UserMenu extends Component {
                         ? <Avatar src={fire.auth().currentUser.photoURL}/>
                         : <AccountIcon/>}
                 </IconButton>
+                </Tooltip>
                 <Popper open={this.state.open} anchorEl={this.anchorEl} transition disablePortal>
                     {({TransitionProps, placement}) => (
                         <Grow
