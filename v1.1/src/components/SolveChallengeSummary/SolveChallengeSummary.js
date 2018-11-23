@@ -29,7 +29,10 @@ const theme = createMuiTheme({
                 color: 'white',
             },
         },
-    }
+    },
+    typography: {
+        useNextVariants: true,
+    },
 });
 
 class SolveChallengeSummary extends Component {

@@ -18,11 +18,25 @@ class CreatedChallengesCard extends Component {
 
     componentDidMount() {
         fire.auth().onAuthStateChanged(this.updateUsername);
+        const user = fire.auth().currentUser;
+        if (user) {
+            this.updateUsername(user);
+        }
     }
 
     updateUsername = (user) => {
         if (user) {
-            this.setState({username: user.displayName});
+            fire.database().ref('/users/' + user.uid + '/username')
+                .once('value')
+                .then(snapshot => {
+                    console.log("USER Snapshot", snapshot);
+                    if (snapshot.val()) {
+                        console.log("USER Snapshot Val", snapshot.val());
+                        this.setState({username: snapshot.val()});
+                    }
+                }).catch(error => {
+                alert(error.message)
+            });
             this.setListener(user);
         }
     };
@@ -43,7 +57,7 @@ class CreatedChallengesCard extends Component {
                 fire.database().ref('/users/' + user.uid + '/challenges')
                     .once('value')
                     .then(snapshot => {
-                        this.setState({username: user.displayName, createdChallenges: snapshot.numChildren()});
+                        this.setState({createdChallenges: snapshot.numChildren()});
                     })
                     .catch(error => {
                         alert(error.message)
@@ -63,12 +77,12 @@ class CreatedChallengesCard extends Component {
                                 <Completed className={classes.CompletedIcon}/>
                             </div>
                         </div>
-                        <CardContent style={{marginTop:25}}>
+                        <CardContent style={{marginTop: 25}}>
                             <Typography gutterBottom variant={"h4"} component={"h2"}>
                                 Created Challenges
                             </Typography>
                             <Typography component={'p'}>
-                                {(fire.auth().currentUser) ? fire.auth().currentUser.displayName : "Guest"}'s contributions:
+                                {this.state.username}'s contributions:
                             </Typography>
                         </CardContent>
                         <Divider className={classes.Divider}/>

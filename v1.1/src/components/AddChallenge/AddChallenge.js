@@ -19,7 +19,10 @@ const theme = createMuiTheme({
                 color: 'white',
             },
         },
-    }
+    },
+    typography: {
+        useNextVariants: true,
+    },
 });
 
 class AddChallenge extends Component {

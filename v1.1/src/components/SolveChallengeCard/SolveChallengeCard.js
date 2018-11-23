@@ -91,7 +91,7 @@ class SolveChallengeCard extends Component {
                 >
                     <CardActionArea onClick={this.handleClickOpen}>
                         <figure className={classes.Figure}>
-                            <img src={this.props.challenge.imgURL}/>
+                            <img src={this.props.challenge.imgURL} alt={"Challenge"}/>
                         </figure>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">

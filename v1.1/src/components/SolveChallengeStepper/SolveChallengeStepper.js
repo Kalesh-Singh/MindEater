@@ -43,7 +43,10 @@ const theme = createMuiTheme({
     },
     icon: {
         color: "green !important"
-    }
+    },
+    typography: {
+        useNextVariants: true,
+    },
 });
 
 function Transition(props) {

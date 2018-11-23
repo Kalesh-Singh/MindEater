@@ -79,7 +79,7 @@ class RankCard extends Component {
             return ({rankIcon: Beginner, rankTitle: "Beginner", rankDescription: "Still a long way to the top!", rankFeed: "Welcome to MindEater", rankColor:{background:"#BC6428"}});
         }
         if (points >= 462) {
-            return ({rankIcon: GrandMaster, rankTitle: "Grandmaster", rankDescription: "Earned 462+ points!", rankFeed:"\ud83c\udf96 Rumor has it the creators of this site are the only Grandmasters...welcome to the big leagues \ud83c\udf96", rankColor:{background:"#FFCB5B"}});
+            return ({rankIcon: GrandMaster, rankTitle: "Grandmaster", rankDescription: "Earned 462+ points!", rankFeed:"\ud83c\udf96 Rumor has it the creators of this site are the only Grandmasters...welcome to the big leagues champ \ud83c\udf96", rankColor:{background:"#FFCB5B"}});
         } else if (points >= 420) {
             return ({rankIcon: Elite, rankTitle: "Elite", rankDescription: "Earned 420+ points!", rankFeed:"\uD83E\uDD2F 420 Points!?...oh that's right, YOU'RE A GENIUS \uD83E\uDD2F", rankColor:{background:"#E2E5E7"}});
         } else if (points >= 380) {
@@ -101,7 +101,7 @@ class RankCard extends Component {
         } else if (points >= 132) {
             return ({rankIcon: HighlyDistinguished, rankTitle: "Highly Distinguished", rankDescription: "Earned 132+ points!", rankFeed:"\uD83E\uDDD9\u200D\u2640\uFE0F Yer a Wizard Harry! \uD83E\uDDD9\u200D\u2642\uFE0F", rankColor:{background:"#EE2C39"}});
         } else if (points >= 110) {
-            return ({rankIcon: Distinguished, rankTitle: "Distinguished", rankDescription: "Earned 110+ points!", rankFeed:" \ud83d\ude0e\ THREE DIGITS!!! \ud83d\ude0e\ ", rankColor:{background:"#EE2C39"}});
+            return ({rankIcon: Distinguished, rankTitle: "Distinguished", rankDescription: "Earned 110+ points!", rankFeed:" \ud83d\ude0e THREE DIGITS!!! \ud83d\ude0e ", rankColor:{background:"#EE2C39"}});
         } else if (points >= 90) {
             return ({rankIcon: Veteran, rankTitle: "Veteran", rankDescription: "Earned 90+ points!", rankFeed:" \uD83D\uDC74 Veteran! \uD83D\uDC75", rankColor: {background:"#3689C9"}});
         } else if (points >= 72) {
@@ -149,7 +149,9 @@ class RankCard extends Component {
                         </CardContent>
                     <Divider className={classes.Divider}/>
                     <CardActions>
-                        <h2>{this.state.rankFeed}</h2>
+                        <Typography gutterBottom variant={"h6"}>
+                        {this.state.rankFeed}
+                        </Typography>
                     </CardActions>
                 </Card>
             </div>
