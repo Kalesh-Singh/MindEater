@@ -6,7 +6,6 @@ import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
 import Grid from "@material-ui/core/Grid/Grid";
 import OAuthProviders from "./OAuthProviders/OAuthProviders";
-import Blogo from "../../assets/svg/black_logo.png";
 import Tabs from "@material-ui/core/Tabs/Tabs";
 import Tab from "@material-ui/core/Tab/Tab";
 import AddAccount from "@material-ui/icons/PersonAddTwoTone";
@@ -14,6 +13,13 @@ import Account from "@material-ui/icons/AccountCircleTwoTone";
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 import lightBlue from "@material-ui/core/es/colors/lightBlue";
 import EmailVerificationDialog from "./EmailVerificationDialog/EmailVerificationDialog";
+import BlackLogo from "../../assets/svg/black_logo.png";
+import GreenLogo from "../../assets/svg/green_logo.png";
+import BlueLogo from "../../assets/svg/blue_logo.png";
+import OrangeLogo from "../../assets/svg/orange_logo.png";
+import RedLogo from "../../assets/svg/red_logo.png";
+import YellowLogo from "../../assets/svg/yellow_logo.png";
+import LightBlueLogo from "../../assets/svg/light_blue_logo.png";
 
 const theme = createMuiTheme({
     palette: {
@@ -25,7 +31,8 @@ class Authentication extends Component {
 
     state = {
         value: 'sign-in',
-        open: false
+        open: false,
+        Logo: Authentication.getRandomLogo(),
     };
 
     handleClose = () => {
@@ -47,6 +54,11 @@ class Authentication extends Component {
             }
         }
     };
+
+    static getRandomLogo() {
+        let colorValues = [BlackLogo, GreenLogo, BlueLogo, OrangeLogo, RedLogo, YellowLogo, LightBlueLogo];
+        return colorValues[Math.floor(Math.random() * colorValues.length)];
+    }
 
     handleToggle = value => {
         this.setState({value: value})
@@ -72,7 +84,7 @@ class Authentication extends Component {
                         <div className={classes.Authentication}>
                             <div className={classes.Padd}>
                                 <div className={classes.Header}>
-                                    <img className={classes.Logo} src={Blogo} alt='Mind Eater Logo'/>
+                                    <img className={classes.Logo} src={this.state.Logo} alt='Mind Eater Logo'/>
                                     <div>
                                         <span className={classes.letter}>M</span>
                                         <span className={classes.letter}>i</span>

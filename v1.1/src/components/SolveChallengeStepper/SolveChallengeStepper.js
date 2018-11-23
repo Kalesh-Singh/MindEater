@@ -67,7 +67,8 @@ class SolveChallengeStepper extends Component {
         timesAttempted: 0,
         finished: false,
         questions: [],
-        icon: 'THINKING'
+        icon: 'THINKING',
+        Logo: SolveChallengeStepper.getRandomLogo(),
     };
 
     static getRandomLogo() {
@@ -288,7 +289,7 @@ class SolveChallengeStepper extends Component {
                         <DialogTitle id="solve-question-dialog-title">
                             <div className={classes.Title}>{this.props.challengeTitle}</div>
                         </DialogTitle>
-                        <img className={classes.Logo} src={SolveChallengeStepper.getRandomLogo()} alt='MindEater'/>
+                        <img className={classes.Logo} src={this.state.Logo} alt='MindEater'/>
                     </AppBar>
                     <DialogContent style={{marginTop: 125}}>
                         <DialogContentText id="solve-question-dialog-description">
