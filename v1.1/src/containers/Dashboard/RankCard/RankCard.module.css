@@ -1,12 +1,17 @@
 .CardStyle {
     margin-top: 20px;
     box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
+    max-width: 370px;
 }
 
 
 .RankSvg {
     height: 70%;
     width:70%;
+}
+
+.Description {
+    font-size: 12px;
 }
 
 .ImgWrapper {

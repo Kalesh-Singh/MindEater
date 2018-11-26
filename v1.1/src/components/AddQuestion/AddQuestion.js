@@ -16,7 +16,10 @@ const theme = createMuiTheme({
                 color: 'white',
             },
         },
-    }
+    },
+    typography: {
+        useNextVariants: true,
+    },
 });
 
 class AddQuestion extends Component {

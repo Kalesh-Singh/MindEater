@@ -14,6 +14,9 @@ const theme = createMuiTheme({
         primary: lightBlue,
         secondary: green,
     },
+    typography: {
+        useNextVariants: true,
+    },
 });
 
 class SolveChallenges extends Component {

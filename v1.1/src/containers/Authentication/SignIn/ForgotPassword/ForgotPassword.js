@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import HelpIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import classes from "./ForgotPassword.module.css";
@@ -20,6 +19,9 @@ import Icon from "@material-ui/icons/InfoOutlined"
 const theme = createMuiTheme({
     palette: {
         primary: lightBlue,
+    },
+    typography: {
+        useNextVariants: true,
     },
 });
 

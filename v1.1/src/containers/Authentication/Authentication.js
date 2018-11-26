@@ -25,6 +25,9 @@ const theme = createMuiTheme({
     palette: {
         primary: lightBlue,
     },
+    typography: {
+        useNextVariants: true,
+    },
 });
 
 class Authentication extends Component {
