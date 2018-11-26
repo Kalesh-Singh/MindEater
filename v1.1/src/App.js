@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation/Navigation";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import MyChallenges from "./containers/MyChallenges/MyChallenges";
 import SolveChallenges from "./containers/SolveChallenges/SolveChallenges";
+import UserProfile from "./containers/UserProfile/UserProfile";
 
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
                 <Route path='/dashboard' component={Dashboard} exact/>
                 <Route path='/my-challenges' component={MyChallenges} exact/>
                 <Route path='/solve-challenges' component={SolveChallenges} exact/>
+                <Route path='/profile' component={UserProfile} exact/>
             </div>
         );
     }
