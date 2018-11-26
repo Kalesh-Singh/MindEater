@@ -38,17 +38,17 @@ class NavigationBarTabs extends Component {
                     />
 
                     <Tab
-                        label='Create Challenge'
+                        label='Solve Challenges'
                         value={2}
                         component={Link}
-                        to='/create-challenge'
+                        to='/solve-challenges'
                     />
 
                     <Tab
-                        label='Solve Challenges'
+                        label='My Account'
                         value={3}
                         component={Link}
-                        to='/solve-challenges'
+                        to='/profile'
                     />
                 </Tabs>
         );

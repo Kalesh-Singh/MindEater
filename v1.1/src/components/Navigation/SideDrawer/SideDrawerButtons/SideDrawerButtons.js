@@ -6,7 +6,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import SolveChallengesIcon from '@material-ui/icons/ExtensionTwoTone';
-import CreateChallengeIcon from '@material-ui/icons/NoteAddTwoTone';
+import AccountIcon from '@material-ui/icons/AccountCircleOutlined';
 import DashboardIcon from '@material-ui/icons/DashboardTwoTone';
 import MyChallengesIcon from '@material-ui/icons/LibraryBooksTwoTone';
 import Divider from "@material-ui/core/Divider/Divider";
@@ -50,18 +50,6 @@ function SideDrawerButtons(props, routeName) {
                 </NavLink>
                 <NavLink
                     activeClassName={classes.active}
-                    to='/create-challenge'
-                    onClick={props.toggleDrawer}
-                >
-                    <ListItem button className={classes.Bttn}>
-                        <ListItemIcon>
-                            <CreateChallengeIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary='Create Challenge'/>
-                    </ListItem>
-                </NavLink>
-                <NavLink
-                    activeClassName={classes.active}
                     to='/solve-challenges'
                     onClick={props.toggleDrawer}
                 >
@@ -70,6 +58,18 @@ function SideDrawerButtons(props, routeName) {
                             <SolveChallengesIcon/>
                         </ListItemIcon>
                         <ListItemText primary='Solve Challenges'/>
+                    </ListItem>
+                </NavLink>
+                <NavLink
+                    activeClassName={classes.active}
+                    to='/profile'
+                    onClick={props.toggleDrawer}
+                >
+                    <ListItem button className={classes.Bttn}>
+                        <ListItemIcon>
+                            <AccountIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary='My Account'/>
                     </ListItem>
                 </NavLink>
             </List>
