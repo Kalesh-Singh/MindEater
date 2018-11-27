@@ -9,8 +9,6 @@ class UserProfile extends Component {
 
     state = {
         imgSrc: null,
-        imgExt: null,
-        imgFileName: null,
         imgFile: null
     };
 
@@ -35,15 +33,9 @@ class UserProfile extends Component {
 
     handleFile = input => {
         if (input.target.files && input.target.files[0]) {
-            console.log("ENTERED IF");
             const imgSrc = URL.createObjectURL(input.target.files[0]);
-            const imgFileName = input.target.files[0].name;
-            const imgExt = imgFileName.split('.')[1];
-            console.log("IMG EXTENSION", imgExt);
             this.setState({
                 imgSrc: imgSrc,
-                imgExt: imgExt,
-                imgFileName: imgFileName
             });
 
             const reader = new FileReader();
@@ -62,13 +54,13 @@ class UserProfile extends Component {
         if (!user) {
             return;
         }
-        const picRef = fire.storage().ref(/users/ + user.uid + '/img.' + this.state.imgExt);
+        const picRef = fire.storage().ref(/users/ + user.uid + '/img.' + 'webp');
         picRef.put(this.state.imgFile)
             .then(() => {
                 return picRef.getDownloadURL();
             })
             .then(url => {
-                user.updateProfile({photoURL: url})
+                return user.updateProfile({photoURL: url})
             })
             .then(() => {
                 console.log("Updated user profile pic")
@@ -81,24 +73,25 @@ class UserProfile extends Component {
     render() {
 
         const imgSrc = this.state.imgSrc;
-        return (
 
+        return (
             <div style={{marginTop: "100px"}}>
-                <h3>User Profile Page</h3>
-                <p>User Details goes here.</p>
-                <p>Update profile pic</p>
-                <p>Update username</p>
-                <p>Change password if you are an email / password user</p>
+                <h2>User Profile Page</h2>
                 <form>
-                    <Typography gutterBottom variant={"h5"} component={"h2"}>
+                    <Typography variant={"h5"} component={"h5"}>
                         Profile Pic
                     </Typography>
                     <img src={imgSrc} height="250px" width="250px"/>
                     <div>
                         <Button
                             containerElement='label'
-                            label='My Label'>
-                            <input type="file" onChange={this.handleFile}/>
+                            label='select-img-file'>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                capture="camera"
+                                onChange={this.handleFile}
+                            />
                         </Button>
                         <Button
                             onClick={this.updateProfilePic}
@@ -107,11 +100,10 @@ class UserProfile extends Component {
                         </Button>
                     </div>
 
+                    {/* TODO */}
 
-                    {/*TODO:
-                        1. Allow username update.
-                        2. If sign in method is email password, allow password update.
-                    */}
+                    <p>Update username</p>
+                    <p>Change password if you are an email / password user</p>
 
                 </form>
             </div>
