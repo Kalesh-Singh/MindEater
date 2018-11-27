@@ -83,14 +83,23 @@ class UserProfile extends Component {
                     </Typography>
                     <img src={imgSrc} height="250px" width="250px"/>
                     <div>
-                        <Button
-                            containerElement='label'
-                            label='select-img-file'>
-                            <input
-                                type="file"
-                                onChange={this.handleFile}
-                            />
-                        </Button>
+                        <input
+                            onChange={this.handleFile}
+                            style={{ display: 'none' }}
+                            id="edit-pic-button"
+                            multiple
+                            type="file"
+                        />
+                        <label htmlFor="edit-pic-button">
+                            <Button
+                                variant="raised"
+                                component="span"
+                                className={"TODO"}
+                            >
+                                Edit
+                            </Button>
+                        </label>
+
                         <Button
                             onClick={this.updateProfilePic}
                         >
