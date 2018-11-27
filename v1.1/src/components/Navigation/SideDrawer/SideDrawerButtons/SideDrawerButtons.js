@@ -46,7 +46,9 @@ class SideDrawerButtons extends Component {
                         onClick={this.props.toggleDrawer}
                         activeClassName={classes.active}
                     >
-                        <ListItem button className={classes.Bttn}>
+                        <ListItem button className={classes.Bttn}
+                        selected={this.state.selectedIndex === 0}
+                        onClick={event => this.handleListItemClick(event, 0)}>
                             <ListItemIcon>
                                 <DashboardIcon/>
                             </ListItemIcon>
@@ -58,7 +60,9 @@ class SideDrawerButtons extends Component {
                         to='/my-challenges'
                         onClick={this.props.toggleDrawer}
                     >
-                        <ListItem button className={classes.Bttn}>
+                        <ListItem button className={classes.Bttn}
+                                  selected={this.state.selectedIndex === 1}
+                                  onClick={event => this.handleListItemClick(event, 1)}>
                             <ListItemIcon>
                                 <MyChallengesIcon/>
                             </ListItemIcon>
@@ -70,7 +74,9 @@ class SideDrawerButtons extends Component {
                         to='/solve-challenges'
                         onClick={this.props.toggleDrawer}
                     >
-                        <ListItem button className={classes.Bttn}>
+                        <ListItem button className={classes.Bttn}
+                                  selected={this.state.selectedIndex === 2}
+                                  onClick={event => this.handleListItemClick(event, 2)}>
                             <ListItemIcon>
                                 <SolveChallengesIcon/>
                             </ListItemIcon>
@@ -82,7 +88,9 @@ class SideDrawerButtons extends Component {
                         to='/profile'
                         onClick={this.props.toggleDrawer}
                     >
-                        <ListItem button className={classes.Bttn}>
+                        <ListItem button className={classes.Bttn}
+                                  selected={this.state.selectedIndex === 3}
+                                  onClick={event => this.handleListItemClick(event, 3)}>
                             <ListItemIcon>
                                 <AccountIcon/>
                             </ListItemIcon>
