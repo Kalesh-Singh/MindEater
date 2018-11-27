@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
-import classes from "../Authentication/SignUp/SignUp.module.css";
 import Button from "@material-ui/core/Button/Button";
 import Typography from "@material-ui/core/Typography/Typography";
-import Face from "@material-ui/core/SvgIcon/SvgIcon";
-import TextField from "@material-ui/core/TextField/TextField";
-import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import ProfilePlaceholder from "../../assets/svg/users.svg";
 import fire from "../../fire";
 import {arrayBufferToBlob} from 'blob-util';
@@ -50,9 +46,7 @@ class UserProfile extends Component {
                 imgFileName: imgFileName
             });
 
-
             const reader = new FileReader();
-
             reader.onloadend = e => {
                 const arrayBuffer = e.target.result;
                 const blob = arrayBufferToBlob(arrayBuffer, 'image/webp');
