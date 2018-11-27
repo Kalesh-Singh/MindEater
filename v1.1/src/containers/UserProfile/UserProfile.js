@@ -4,6 +4,10 @@ import Typography from "@material-ui/core/Typography/Typography";
 import ProfilePlaceholder from "../../assets/svg/users.svg";
 import fire from "../../fire";
 import {arrayBufferToBlob} from 'blob-util';
+import classes from "./UserProfile.module.css";
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+
 
 class UserProfile extends Component {
 
@@ -75,17 +79,22 @@ class UserProfile extends Component {
         const imgSrc = this.state.imgSrc;
 
         return (
-            <div style={{marginTop: "100px"}}>
-                <h2>User Profile Page</h2>
+            <div style={{marginTop: '100px'}}>
+                <div className={classes.header}>
+                    <h1>User Profile Page</h1>
+                    <p>Update your profile</p>
+                </div>
                 <form>
-                    <Typography variant={"h5"} component={"h5"}>
+                    <Typography variant={"h5"} component={"h5"} className={classes.Title}>
                         Profile Pic
                     </Typography>
-                    <img src={imgSrc} height="250px" width="250px"/>
-                    <div>
+                    <div style={{textAlign: "center"}}>
+                        <img src={imgSrc} className={classes.ProfileImage}/>
+                    </div>
+                    <div style={{textAlign: "center"}}>
                         <input
                             onChange={this.handleFile}
-                            style={{ display: 'none' }}
+                            style={{display: 'none'}}
                             id="edit-pic-button"
                             multiple
                             type="file"
@@ -94,16 +103,17 @@ class UserProfile extends Component {
                             <Button
                                 variant="raised"
                                 component="span"
-                                className={"TODO"}
+                                className={classes.ButtonStyle}
                             >
-                                Edit
+                                Change Picture <PhotoCamera style={{marginLeft: 10}}/>
                             </Button>
                         </label>
 
                         <Button
                             onClick={this.updateProfilePic}
+                            variant={"raised"}
                         >
-                            Upload
+                            Upload <CloudUploadIcon style={{marginLeft: 10}}/>
                         </Button>
                     </div>
 

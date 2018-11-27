@@ -1,0 +1,28 @@
+.header {
+    text-align: center;
+    background: #2096F3;
+    align-items: center;
+    border: solid black;
+    border-radius: 10px;
+    color: white;
+}
+
+.Title {
+    text-align: center;
+    margin-top: 25px !important;
+}
+
+.ProfileImage {
+    height: 250px;
+    width: 250px;
+    border-radius: 125px;
+    text-align: center !important;
+}
+
+.input {
+    display: none;
+}
+
+.ButtonStyle {
+    margin: 10px !important;
+}
