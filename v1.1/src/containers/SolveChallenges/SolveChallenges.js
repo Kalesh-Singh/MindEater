@@ -8,6 +8,7 @@ import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 import green from "@material-ui/core/es/colors/green";
 import lightBlue from "@material-ui/core/es/colors/lightBlue";
+import Divider from "@material-ui/core/Divider/Divider";
 
 const theme = createMuiTheme({
     palette: {
@@ -119,6 +120,7 @@ class SolveChallenges extends Component {
                         <h1>Let the games Begin!</h1>
                         <p>Start Solving Challenges</p>
                     </div>
+                    <Divider className={classes.DividerLine}/>
                     {this.state.loading ?
                         <div className={classes.LoadingBar}>
                             <LinearProgress variant="query" color={"primary"}/>
