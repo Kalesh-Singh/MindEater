@@ -88,7 +88,6 @@ class UserProfile extends Component {
                             label='select-img-file'>
                             <input
                                 type="file"
-                                accept="image/*"
                                 onChange={this.handleFile}
                             />
                         </Button>
