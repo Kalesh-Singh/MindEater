@@ -1,8 +1,8 @@
-.header{
+.header {
     text-align: center;
     background: #2096F3;
     align-items: center;
-    border:solid black;
+    border: solid black;
     border-radius: 10px;
     color: white;
 }
@@ -21,4 +21,8 @@
 
 .input {
     display: none;
+}
+
+.ButtonStyle {
+    margin: 10px !important;
 }

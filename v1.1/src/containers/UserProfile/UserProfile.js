@@ -103,7 +103,7 @@ class UserProfile extends Component {
                             <Button
                                 variant="raised"
                                 component="span"
-                                className={"TODO"}
+                                className={classes.ButtonStyle}
                             >
                                 Change Picture <PhotoCamera style={{marginLeft: 10}}/>
                             </Button>
