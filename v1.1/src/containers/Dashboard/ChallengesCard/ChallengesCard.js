@@ -7,9 +7,12 @@ import classes from "./ChallengesCard.module.css";
 import Divider from "@material-ui/core/Divider/Divider";
 import Play from "@material-ui/icons/ExtensionSharp"
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
+import {withRouter} from 'react-router-dom';
 
 class ChallengesCard extends Component {
     render() {
+        console.log("CHALLENGES PROPS !!!!!!!!!", this.props);
+
         return (
             <>
             <Card className={classes.CardStyle}>
@@ -33,7 +36,12 @@ class ChallengesCard extends Component {
                 <Divider className={classes.Divider}/>
                 <CardActions>
                     <div className={classes.flex}>
-                        <c className={classes.bttn}>Start</c>
+                        <c
+                            className={classes.bttn}
+                            onClick={() => {this.props.history.push('/solve-challenges');}}
+                        >
+                            Start
+                        </c>
                     </div>
                 </CardActions>
             </Card>
@@ -42,4 +50,4 @@ class ChallengesCard extends Component {
     }
 }
 
-export default ChallengesCard;
+export default withRouter(ChallengesCard);
