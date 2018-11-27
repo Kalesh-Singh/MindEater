@@ -7,30 +7,15 @@ import TextField from "@material-ui/core/TextField/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 import ProfilePlaceholder from "../../assets/svg/users.svg";
 import fire from "../../fire";
+import {arrayBufferToBlob} from 'blob-util';
 
 class UserProfile extends Component {
 
     state = {
-        imgSrc: ProfilePlaceholder,
-        username: {
-            value: '',
-            error: '',
-            focused: false,
-
-        },
-        password: {
-            value: '',
-            error: '',
-            focused: false,
-            valid: false
-        },
-        repeatPassword: {
-            value: '',
-            error: '',
-            focused: false,
-            valid: false
-        },
-        showPassword: false
+        imgSrc: null,
+        imgExt: null,
+        imgFileName: null,
+        imgFile: null
     };
 
     componentDidMount() {
@@ -53,21 +38,50 @@ class UserProfile extends Component {
     };
 
     handleFile = input => {
-        if (input.files && input.files[0]) {
+        if (input.target.files && input.target.files[0]) {
+            console.log("ENTERED IF");
+            const imgSrc = URL.createObjectURL(input.target.files[0]);
+            const imgFileName = input.target.files[0].name;
+            const imgExt = imgFileName.split('.')[1];
+            console.log("IMG EXTENSION", imgExt);
+            this.setState({
+                imgSrc: imgSrc,
+                imgExt: imgExt,
+                imgFileName: imgFileName
+            });
+
+
             const reader = new FileReader();
 
-            reader.onload = event => {
-                this.setState({img_path: event.target.result})
+            reader.onloadend = e => {
+                const arrayBuffer = e.target.result;
+                const blob = arrayBufferToBlob(arrayBuffer, 'image/webp');
+                this.setState({imgFile: blob})
             };
 
-            reader.readAsDataURL(input.files[0]);
+            reader.readAsArrayBuffer(input.target.files[0]);
         }
     };
 
-    handleFileChange = event => {
-        this.setState({
-            imgSrc: URL.createObjectURL(event.target.files[0])
-        })
+    updateProfilePic = () => {
+        const user = fire.auth().currentUser;
+        if (!user) {
+            return;
+        }
+        const picRef = fire.storage().ref(/users/ + user.uid + '/img.' + this.state.imgExt);
+        picRef.put(this.state.imgFile)
+            .then(() => {
+                return picRef.getDownloadURL();
+            })
+            .then(url => {
+                user.updateProfile({photoURL: url})
+            })
+            .then(() => {
+                console.log("Updated user profile pic")
+            })
+            .catch(error => {
+                alert(error.message);
+            })
     };
 
     render() {
@@ -93,34 +107,19 @@ class UserProfile extends Component {
                         <Button
                             containerElement='label'
                             label='My Label'>
-                            <input type="file" onChange={this.handleFileChange}/>
+                            <input type="file" onChange={this.handleFile}/>
                         </Button>
-                        <Button>
+                        <Button
+                            onClick={this.updateProfilePic}
+                        >
                             Upload
                         </Button>
                     </div>
 
-                    {/* onChange and onFocus */}
-                    <TextField
-                        name='username'
-                        label='Username'
-                        placeholder='Username'
-                        margin='normal'
-                        variant='outlined'
-                        error={this.state.username.error.length > 0}
-                        helperText={this.state.username.error}
-                        value={this.state.username.value}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment variant="outlined" position="start">
-                                    <Face/>
-                                </InputAdornment>
-                            )
-                        }}
-                    />
 
-                    {/*TODO: If sign in method is email password
-                        1. Allow password update.
+                    {/*TODO:
+                        1. Allow username update.
+                        2. If sign in method is email password, allow password update.
                     */}
 
                 </form>
