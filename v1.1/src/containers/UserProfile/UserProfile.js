@@ -95,10 +95,7 @@ class UserProfile extends Component {
                 <p>Update profile pic</p>
                 <p>Update username</p>
                 <p>Change password if you are an email / password user</p>
-                <form
-                    className={classes.SignUp}
-                    onSubmit={this.signUp}
-                >
+                <form>
                     <Typography gutterBottom variant={"h5"} component={"h2"}>
                         Profile Pic
                     </Typography>
