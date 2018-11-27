@@ -6,7 +6,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import SolveChallengesIcon from '@material-ui/icons/ExtensionTwoTone';
-import CreateChallengeIcon from '@material-ui/icons/NoteAddTwoTone';
+import AccountIcon from '@material-ui/icons/AccountCircleOutlined';
 import DashboardIcon from '@material-ui/icons/DashboardTwoTone';
 import MyChallengesIcon from '@material-ui/icons/LibraryBooksTwoTone';
 import Divider from "@material-ui/core/Divider/Divider";
@@ -39,67 +39,56 @@ class SideDrawerButtons extends Component {
                     style={{display: 'block', width: '100%'}}
                 >
                     <img className={classes.Logo} src={Blogo} alt='Mind Eater Logo'/>
-                    <h2 className={classes.Header}>MindEater</h2>
-                    <Divider className={classes.Divider}/>
-                    <MuiThemeProvider theme={theme}>
-                        <NavLink
-                            to='/dashboard'
-                            onClick={this.props.toggleDrawer}
-                            activeClassName={classes.active}
-                        >
-                            <ListItem button className={classes.Bttn}
-                                      selected={this.state.selectedIndex === 0}
-                                      onClick={event => this.handleListItemClick(event, 0)}
-                            >
-                                <ListItemIcon>
-                                    <DashboardIcon/>
-                                </ListItemIcon>
-                                <ListItemText primary='Dashboard'/>
-                            </ListItem>
-                        </NavLink>
-                        <NavLink
-                            activeClassName={classes.active}
-                            to='/my-challenges'
-                            onClick={this.props.toggleDrawer}
-                        >
-                            <ListItem button className={classes.Bttn}
-                                      selected={this.state.selectedIndex === 1}
-                                      onClick={event => this.handleListItemClick(event, 1)}>
-                                <ListItemIcon>
-                                    <MyChallengesIcon/>
-                                </ListItemIcon>
-                                <ListItemText primary='My Challenges'/>
-                            </ListItem>
-                        </NavLink>
-                        <NavLink
-                            activeClassName={classes.active}
-                            to='/create-challenge'
-                            onClick={this.props.toggleDrawer}
-                        >
-                            <ListItem button className={classes.Bttn}
-                                      selected={this.state.selectedIndex === 2}
-                                      onClick={event => this.handleListItemClick(event, 2)}>
-                                <ListItemIcon>
-                                    <CreateChallengeIcon/>
-                                </ListItemIcon>
-                                <ListItemText primary='Create Challenge'/>
-                            </ListItem>
-                        </NavLink>
-                        <NavLink
-                            activeClassName={classes.active}
-                            to='/solve-challenges'
-                            onClick={this.props.toggleDrawer}
-                        >
-                            <ListItem button className={classes.Bttn}
-                                      selected={this.state.selectedIndex === 3}
-                                      onClick={event => this.handleListItemClick(event, 3)}>
-                                <ListItemIcon>
-                                    <SolveChallengesIcon/>
-                                </ListItemIcon>
-                                <ListItemText primary='Solve Challenges'/>
-                            </ListItem>
-                        </NavLink>
-                    </MuiThemeProvider>
+                    <h3 className={classes.Header}>MindEater</h3>
+                    <Divider style={{margin:"15px"}}/>
+                    <NavLink
+                        to='/dashboard'
+                        onClick={this.props.toggleDrawer}
+                        activeClassName={classes.active}
+                    >
+                        <ListItem button className={classes.Bttn}>
+                            <ListItemIcon>
+                                <DashboardIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary='Dashboard'/>
+                        </ListItem>
+                    </NavLink>
+                    <NavLink
+                        activeClassName={classes.active}
+                        to='/my-challenges'
+                        onClick={this.props.toggleDrawer}
+                    >
+                        <ListItem button className={classes.Bttn}>
+                            <ListItemIcon>
+                                <MyChallengesIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary='My Challenges'/>
+                        </ListItem>
+                    </NavLink>
+                    <NavLink
+                        activeClassName={classes.active}
+                        to='/solve-challenges'
+                        onClick={this.props.toggleDrawer}
+                    >
+                        <ListItem button className={classes.Bttn}>
+                            <ListItemIcon>
+                                <SolveChallengesIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary='Solve Challenges'/>
+                        </ListItem>
+                    </NavLink>
+                    <NavLink
+                        activeClassName={classes.active}
+                        to='/profile'
+                        onClick={this.props.toggleDrawer}
+                    >
+                        <ListItem button className={classes.Bttn}>
+                            <ListItemIcon>
+                                <AccountIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary='My Account'/>
+                        </ListItem>
+                    </NavLink>
                 </List>
             </div>
         );
