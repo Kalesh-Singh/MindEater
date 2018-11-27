@@ -6,9 +6,7 @@ import fire from "../../fire";
 import {arrayBufferToBlob} from 'blob-util';
 import classes from "./UserProfile.module.css";
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-
 
 
 class UserProfile extends Component {
@@ -93,23 +91,29 @@ class UserProfile extends Component {
                     <div style={{textAlign: "center"}}>
                         <img src={imgSrc} className={classes.ProfileImage}/>
                     </div>
+                    <div style={{textAlign: "center"}}>
+                        <input
+                            onChange={this.handleFile}
+                            style={{display: 'none'}}
+                            id="edit-pic-button"
+                            multiple
+                            type="file"
+                        />
+                        <label htmlFor="edit-pic-button">
+                            <Button
+                                variant="raised"
+                                component="span"
+                                className={"TODO"}
+                            >
+                                Change Picture <PhotoCamera style={{marginLeft: 10}}/>
+                            </Button>
+                        </label>
 
-                    <div style={{textAlign:"center"}}>
-                        <IconButton
-                            containerElement='label'
-                            label='select-img-file'>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                capture="camera"
-                                onChange={this.handleFile}
-                            />
-                            <PhotoCamera/>
-                        </IconButton>
                         <Button
                             onClick={this.updateProfilePic}
+                            variant={"raised"}
                         >
-                            Upload <CloudUploadIcon style={{marginLeft:10}}/>
+                            Upload <CloudUploadIcon style={{marginLeft: 10}}/>
                         </Button>
                     </div>
 
