@@ -89,7 +89,6 @@ class UserProfile extends Component {
                             <input
                                 type="file"
                                 accept="image/*"
-                                capture="camera"
                                 onChange={this.handleFile}
                             />
                         </Button>
