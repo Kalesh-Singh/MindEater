@@ -25,4 +25,16 @@
 
 .ButtonStyle {
     margin: 10px !important;
+    background: #2096F3 !important;
+    color: white !important;
+}
+
+.ButtonStyle:hover {
+    background: #4CAF50 !important;
+    color: white !important;
+}
+
+.SubTitles {
+    margin-left: 10px;
+
 }

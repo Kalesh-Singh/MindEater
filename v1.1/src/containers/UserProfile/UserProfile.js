@@ -7,6 +7,14 @@ import {arrayBufferToBlob} from 'blob-util';
 import classes from "./UserProfile.module.css";
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import Fade from "@material-ui/core/Fade/Fade";
+import Toolbar from "@material-ui/core/Toolbar/Toolbar";
+import TextField from "@material-ui/core/TextField/TextField";
+import Password from "@material-ui/icons/Https"
+import User from "@material-ui/icons/PermIdentity"
+import Grid from "@material-ui/core/Grid/Grid";
+import EditIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
 
 class UserProfile extends Component {
@@ -85,8 +93,8 @@ class UserProfile extends Component {
                     <p>Update your profile</p>
                 </div>
                 <form>
-                    <Typography variant={"h5"} component={"h5"} className={classes.Title}>
-                        Profile Pic
+                    <Typography variant={"h4"} component={"h5"} className={classes.Title}>
+                        Profile Picture
                     </Typography>
                     <div style={{textAlign: "center"}}>
                         <img src={imgSrc} className={classes.ProfileImage}/>
@@ -100,28 +108,61 @@ class UserProfile extends Component {
                             type="file"
                         />
                         <label htmlFor="edit-pic-button">
-                            <Button
-                                variant="raised"
-                                component="span"
-                                className={classes.ButtonStyle}
-                            >
-                                Change Picture <PhotoCamera style={{marginLeft: 10}}/>
-                            </Button>
+                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
+                                     placement={"bottom"}
+                                     title={"Change your profile picture"}>
+                                <Button
+                                    variant="raised"
+                                    component="span"
+                                    className={classes.ButtonStyle}
+                                >
+                                    Change Picture <PhotoCamera style={{marginLeft: 10}}/>
+                                </Button>
+                            </Tooltip>
                         </label>
 
-                        <Button
-                            onClick={this.updateProfilePic}
-                            variant={"raised"}
-                        >
-                            Upload <CloudUploadIcon style={{marginLeft: 10}}/>
-                        </Button>
+                        <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
+                                 placement={"bottom"}
+                                 title={"Upload picture"}>
+                            <Button
+                                onClick={this.updateProfilePic}
+                                variant={"raised"}
+                                className={classes.ButtonStyle}
+                            >
+                                Upload <CloudUploadIcon style={{marginLeft: 10}}/>
+                            </Button>
+                        </Tooltip>
                     </div>
-
-                    {/* TODO */}
-
-                    <p>Update username</p>
-                    <p>Change password if you are an email / password user</p>
-
+                    <div className={classes.SubTitles}>
+                        <h2>Update username:</h2>
+                        <Grid container={true} spacing={8} alignItems="center">
+                            <Grid item>
+                                <User/>
+                            </Grid>
+                            <Grid item xs={9}>
+                                <TextField
+                                    label="New username"
+                                    multiline
+                                    rowsMax="4"
+                                    variant={"outlined"}
+                                    margin={"normal"}
+                                    // style={{marginBottom: "15px"}}
+                                />
+                            </Grid>
+                        </Grid>
+                    </div>
+                    <div className={classes.SubTitles}>
+                        <h2>Change password:</h2>
+                        <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
+                                 placement={"bottom"}
+                                 title={""}>
+                            <Button
+                                variant={"raised"}
+                                className={classes.ButtonStyle}>
+                                <Password style={{verticalAlign: "center", marginRight: "5px", height: 20}}/> change
+                            </Button>
+                        </Tooltip>
+                    </div>
                 </form>
             </div>
         );
