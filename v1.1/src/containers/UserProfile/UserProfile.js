@@ -9,19 +9,26 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Fade from "@material-ui/core/Fade/Fade";
-import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import TextField from "@material-ui/core/TextField/TextField";
-import Password from "@material-ui/icons/Https"
+import Password from "@material-ui/icons/HttpsOutlined"
 import User from "@material-ui/icons/PermIdentity"
 import Grid from "@material-ui/core/Grid/Grid";
-import EditIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import Dialog from "@material-ui/core/Dialog/Dialog";
+import AppBar from "@material-ui/core/AppBar/AppBar";
+import Toolbar from "@material-ui/core/Toolbar/Toolbar";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import CloseIcon from "@material-ui/icons/CloseOutlined"
+import SaveIcon from "@material-ui/icons/SaveOutlined";
+import OldPassword from "@material-ui/icons/EnhancedEncryptionOutlined"
+import CheckPassword from "@material-ui/icons/LockOpenOutlined"
 
 
 class UserProfile extends Component {
 
     state = {
         imgSrc: null,
-        imgFile: null
+        imgFile: null,
+        state: false,
     };
 
     componentDidMount() {
@@ -82,6 +89,14 @@ class UserProfile extends Component {
             })
     };
 
+    handleClickOpen = () => {
+        this.setState({open: true});
+    };
+
+    handleClose = () => {
+        this.setState({open: false});
+    };
+
     render() {
 
         const imgSrc = this.state.imgSrc;
@@ -137,16 +152,15 @@ class UserProfile extends Component {
                         <h2>Update username:</h2>
                         <Grid container={true} spacing={8} alignItems="center">
                             <Grid item>
-                                <User/>
+                                <User style={{width: 40, height: 40}}/>
                             </Grid>
-                            <Grid item xs={9}>
+                            <Grid item xs={10}>
                                 <TextField
                                     label="New username"
                                     multiline
                                     rowsMax="4"
                                     variant={"outlined"}
                                     margin={"normal"}
-                                    // style={{marginBottom: "15px"}}
                                 />
                             </Grid>
                         </Grid>
@@ -154,14 +168,89 @@ class UserProfile extends Component {
                     <div className={classes.SubTitles}>
                         <h2>Change password:</h2>
                         <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
-                                 placement={"bottom"}
-                                 title={""}>
+                                 placement={"right"}
+                                 title={"change password"}>
                             <Button
                                 variant={"raised"}
-                                className={classes.ButtonStyle}>
+                                className={classes.PasswordButton}
+                                onClick={this.handleClickOpen}>
                                 <Password style={{verticalAlign: "center", marginRight: "5px", height: 20}}/> change
                             </Button>
                         </Tooltip>
+
+                        <Dialog
+                            fullScreen
+                            open={this.state.open}
+                            closed={this.handleClose}>
+                            <AppBar className={classes.appBar}>
+                                <Toolbar>
+                                    <IconButton color="inherit" onClick={this.handleClose} aria-label="Close"
+                                                className={classes.butonCancel}>
+                                        <CloseIcon/>
+                                    </IconButton>
+                                    <Typography variant="h6" color="inherit" className={classes.AppbarTitle}>
+                                        Change Password
+                                    </Typography>
+                                    <Button color="inherit" onClick={this.handleClose}
+                                            className={classes.butonSave}>
+                                        <SaveIcon style={{marginRight: "4px"}}/>Save
+                                    </Button>
+                                </Toolbar>
+                            </AppBar>
+                            <div>
+                                <div className={classes.SubTitles}>
+                                    <h2>Enter old password:</h2>
+                                    <Grid container={true} spacing={8} style={{alignItems:"center"}}>
+                                        <Grid item>
+                                            <OldPassword style={{width: 40, height: 40}}/>
+                                        </Grid>
+                                        <Grid item xs={10}>
+                                            <TextField
+                                                label="Old Password"
+                                                multiline
+                                                rowsMax="4"
+                                                variant={"outlined"}
+                                                margin={"normal"}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </div>
+                                <div className={classes.SubTitles}>
+                                    <h2>Enter new password:</h2>
+                                    <Grid container={true} spacing={8} alignItems="center">
+                                        <Grid item>
+                                            <CheckPassword style={{width: 40, height: 40}}/>
+                                        </Grid>
+                                        <Grid item xs={10}>
+                                            <TextField
+                                                label="New Password"
+                                                multiline
+                                                rowsMax="4"
+                                                variant={"outlined"}
+                                                margin={"normal"}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </div>
+                                <div className={classes.SubTitles}>
+                                    <h2>Confirm new password:</h2>
+                                    <Grid container={true} spacing={8} alignItems="center">
+                                        <Grid item>
+                                            <Password style={{width: 40, height: 40}}/>
+                                        </Grid>
+                                        <Grid item xs={10}>
+                                            <TextField
+                                                label="Confirm password"
+                                                multiline
+                                                rowsMax="4"
+                                                variant={"outlined"}
+                                                margin={"normal"}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </div>
+                            </div>
+                        </Dialog>
                     </div>
                 </form>
             </div>

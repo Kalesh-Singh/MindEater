@@ -21,6 +21,7 @@
 
 .input {
     display: none;
+    color: #d50000;
 }
 
 .ButtonStyle {
@@ -29,12 +30,48 @@
     color: white !important;
 }
 
+.PasswordButton {
+    margin: 10px !important;
+    background: #2096F3 !important;
+    color: white !important;
+    margin-left: 30px !important;
+}
+
 .ButtonStyle:hover {
+    background: #4CAF50 !important;
+    color: white !important;
+}
+
+.PasswordButton:hover {
     background: #4CAF50 !important;
     color: white !important;
 }
 
 .SubTitles {
     margin-left: 10px;
+    margin-top: 30px !important;
+}
 
+.appBar {
+    background-color: #2096F3 !important;
+    position: relative !important;
+}
+
+.AppbarTitle {
+    flex: 1 !important;
+    text-align: center;
+}
+
+.butonSave:hover {
+    background-color: #4CAF50 !important;
+    color: #FFF;
+}
+
+.butonCancel:hover {
+    background-color: #d50000 !important;
+    color: #FFFFFF;
+}
+
+.Content {
+    text-align: center !important;
 }
