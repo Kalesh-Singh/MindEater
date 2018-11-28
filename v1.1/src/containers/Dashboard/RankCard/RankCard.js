@@ -75,7 +75,7 @@ class RankCard extends Component {
     };
 
     getStateFromPoints = (points) => {
-        if (!points) {
+        if (!points ) {
             return ({rankIcon: Beginner, rankTitle: "Beginner", rankDescription: "Still a long way to the top!", rankFeed: "Welcome to MindEater", rankColor:{background:"#BC6428"}});
         }
         if (points >= 462) {
