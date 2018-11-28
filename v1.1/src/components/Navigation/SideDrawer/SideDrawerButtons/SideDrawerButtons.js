@@ -6,7 +6,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import SolveChallengesIcon from '@material-ui/icons/ExtensionTwoTone';
-import AccountIcon from '@material-ui/icons/AccountCircleOutlined';
+import AccountIcon from '@material-ui/icons/AccountCircleTwoTone';
 import DashboardIcon from '@material-ui/icons/DashboardTwoTone';
 import MyChallengesIcon from '@material-ui/icons/LibraryBooksTwoTone';
 import Divider from "@material-ui/core/Divider/Divider";
