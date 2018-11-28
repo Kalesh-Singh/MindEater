@@ -184,23 +184,33 @@ class UserProfile extends Component {
                             closed={this.handleClose}>
                             <AppBar className={classes.appBar}>
                                 <Toolbar>
-                                    <IconButton color="inherit" onClick={this.handleClose} aria-label="Close"
-                                                className={classes.butonCancel}>
-                                        <CloseIcon/>
-                                    </IconButton>
+                                    <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}}
+                                             disableFocusListener
+                                             placement={"right"}
+                                             title={"Cancel"}>
+                                        <IconButton color="inherit" onClick={this.handleClose} aria-label="Close"
+                                                    className={classes.butonCancel}>
+                                            <CloseIcon/>
+                                        </IconButton>
+                                    </Tooltip>
                                     <Typography variant="h6" color="inherit" className={classes.AppbarTitle}>
                                         Change Password
                                     </Typography>
-                                    <Button color="inherit" onClick={this.handleClose}
-                                            className={classes.butonSave}>
-                                        <SaveIcon style={{marginRight: "4px"}}/>Save
-                                    </Button>
+                                    <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}}
+                                             disableFocusListener
+                                             placement={"bottom"}
+                                             title={"save changes"}>
+                                        <Button color="inherit" onClick={this.handleClose}
+                                                className={classes.butonSave}>
+                                            <SaveIcon style={{marginRight: "4px"}}/>Save
+                                        </Button>
+                                    </Tooltip>
                                 </Toolbar>
                             </AppBar>
                             <div>
                                 <div className={classes.SubTitles}>
                                     <h2>Enter old password:</h2>
-                                    <Grid container={true} spacing={8} style={{alignItems:"center"}}>
+                                    <Grid container={true} spacing={8} style={{alignItems: "center"}}>
                                         <Grid item>
                                             <OldPassword style={{width: 40, height: 40}}/>
                                         </Grid>
