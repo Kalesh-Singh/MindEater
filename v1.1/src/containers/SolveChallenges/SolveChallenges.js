@@ -92,17 +92,6 @@ class SolveChallenges extends Component {
             });
     };
 
-    /*
-     fire.database().ref('/users/' + challenge.owner + '/username')
-                            .once('value')
-                            .then(authorSnapshot => {
-                                challenge.authorName = authorSnapshot.val();
-                                this.setState({challenges: updatedChallenges, loading: false});
-                            })
-                            .catch(error => {alert(error.message)});
-     */
-
-
     componentDidMount() {
         this.setListeners();
         this.setState({loading: true});
@@ -148,10 +137,12 @@ class SolveChallenges extends Component {
 
 
     render() {
+        const searchQuery = this.state.searchQuery.toLowerCase();
         const challenges = this.state.challenges
             .filter(challenge =>
-                challenge.title.toLowerCase().includes(this.state.searchQuery.toLowerCase())
-                || challenge.description.toLowerCase().includes(this.state.searchQuery.toLowerCase()))
+                challenge.title.toLowerCase().includes(searchQuery)
+                || challenge.description.toLowerCase().includes(searchQuery)
+                || challenge.authorName.toLowerCase().includes(searchQuery))
             .map(challenge => (
                 <SolveChallengeCard
                     key={challenge.id}
