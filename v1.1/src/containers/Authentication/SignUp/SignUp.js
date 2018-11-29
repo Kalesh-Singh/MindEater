@@ -87,6 +87,7 @@ class SignUp extends Component {
                 alert(error.message);
             });
     };
+
     handleChange = name => event => {
         const updatedField = {...this.state[name]};
         updatedField.value = event.target.value.trim();
