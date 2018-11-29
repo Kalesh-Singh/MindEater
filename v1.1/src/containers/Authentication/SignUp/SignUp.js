@@ -92,7 +92,15 @@ class SignUp extends Component {
         updatedField.value = event.target.value.trim();
         updatedField.error = this.checkValidity(name, updatedField);
         updatedField.valid = updatedField.error.length === 0;
-        this.setState({[name]: updatedField});
+        if (name === "password") {
+            const updatedRepeatPassword = {...this.state.repeatPassword};
+            updatedRepeatPassword.error = this.checkPasswordsMatch(updatedField.value, updatedRepeatPassword.value);
+            updatedRepeatPassword.valid = updatedRepeatPassword.error.length === 0;
+
+            this.setState({password: updatedField, repeatPassword: updatedRepeatPassword});
+        } else {
+            this.setState({[name]: updatedField});
+        }
     };
 
     handleFocus = name => () => {
@@ -105,6 +113,14 @@ class SignUp extends Component {
             if (name === 'password') {
                 this.handleFocus('repeatPassword')();
             }
+        }
+    };
+
+    checkPasswordsMatch = (password, repeatedPassword) => {
+        if (password !== repeatedPassword) {
+            return "Passwords don't match";
+        } else {
+            return '';      // No error
         }
     };
 
@@ -124,6 +140,7 @@ class SignUp extends Component {
     };
 
     checkPassword = (password) => {
+
         if (password.value.length === 0 && password.focused) {
             return '* Required';
         } else if (password.value.length < 6) {
@@ -142,7 +159,6 @@ class SignUp extends Component {
     };
 
     checkRepeatPassword = (repeatPassword) => {
-        console.log("PONG", this)
         if (repeatPassword.value.length === 0 && repeatPassword.focused) {
             return '* Required';
         } else if (repeatPassword.value !== this.state.password.value) {
