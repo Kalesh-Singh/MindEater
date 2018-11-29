@@ -11,6 +11,8 @@ import lightBlue from "@material-ui/core/es/colors/lightBlue";
 import Divider from "@material-ui/core/Divider/Divider";
 import InputBase from "@material-ui/core/InputBase/InputBase";
 import SearchIcon from '@material-ui/icons/Search';
+import TextField from "@material-ui/core/TextField/TextField";
+
 
 const theme = createMuiTheme({
     palette: {
@@ -133,16 +135,20 @@ class SolveChallenges extends Component {
                         <p>Start Solving Challenges</p>
                     </div>
                     <Divider className={classes.DividerLine}/>
-                    <div className={classes.Search}>
-                        <div>
-                            <SearchIcon/>
+                    <div className={classes.SearchBar}>
+                        <div className={classes.Search}>
+                            <div>
+                                <SearchIcon style={{marginRight: "5px"}}/>
+                            </div>
+                            <InputBase
+                                placeholder="Search Challenges..."
+                                onChange={this.handleSearch}
+                                value={this.state.searchQuery}
+                            style={{fontWeight:"bold"}}>
+                            </InputBase>
                         </div>
-                        <InputBase
-                            placeholder="Search…"
-                            onChange={this.handleSearch}
-                            value={this.state.searchQuery}
-                        />
                     </div>
+
                     {this.state.loading ?
                         <div className={classes.LoadingBar}>
                             <LinearProgress variant="query" color={"primary"}/>

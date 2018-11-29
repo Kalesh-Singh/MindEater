@@ -21,6 +21,10 @@ import CloseIcon from "@material-ui/icons/CloseOutlined"
 import SaveIcon from "@material-ui/icons/SaveOutlined";
 import OldPassword from "@material-ui/icons/EnhancedEncryptionOutlined"
 import CheckPassword from "@material-ui/icons/LockOpenOutlined"
+import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Face from "@material-ui/core/SvgIcon/SvgIcon";
 
 
 class UserProfile extends Component {
@@ -29,6 +33,7 @@ class UserProfile extends Component {
         imgSrc: null,
         imgFile: null,
         state: false,
+        showPassword: false,
     };
 
     componentDidMount() {
@@ -97,6 +102,10 @@ class UserProfile extends Component {
         this.setState({open: false});
     };
 
+    handleClickShowPassword = () => {
+        this.setState(state => ({showPassword: !state.showPassword}));
+    };
+
     render() {
 
         const imgSrc = this.state.imgSrc;
@@ -148,120 +157,152 @@ class UserProfile extends Component {
                             </Button>
                         </Tooltip>
                     </div>
-                    <div className={classes.SubTitles}>
-                        <h2>Update username:</h2>
-                        <Grid container={true} spacing={8} alignItems="center">
-                            <Grid item>
-                                <User style={{width: 40, height: 40}}/>
-                            </Grid>
-                            <Grid item xs={10}>
-                                <TextField
-                                    label="New username"
-                                    multiline
-                                    rowsMax="4"
-                                    variant={"outlined"}
-                                    margin={"normal"}
-                                />
-                            </Grid>
-                        </Grid>
-                    </div>
-                    <div className={classes.SubTitles}>
-                        <h2>Change password:</h2>
-                        <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
-                                 placement={"right"}
-                                 title={"change password"}>
-                            <Button
-                                variant={"raised"}
-                                className={classes.PasswordButton}
-                                onClick={this.handleClickOpen}>
-                                <Password style={{verticalAlign: "center", marginRight: "5px", height: 20}}/> change
-                            </Button>
-                        </Tooltip>
 
-                        <Dialog
-                            fullScreen
-                            open={this.state.open}
-                            closed={this.handleClose}>
-                            <AppBar className={classes.appBar}>
-                                <Toolbar>
-                                    <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}}
-                                             disableFocusListener
-                                             placement={"right"}
-                                             title={"Cancel"}>
-                                        <IconButton color="inherit" onClick={this.handleClose} aria-label="Close"
-                                                    className={classes.butonCancel}>
-                                            <CloseIcon/>
-                                        </IconButton>
-                                    </Tooltip>
-                                    <Typography variant="h6" color="inherit" className={classes.AppbarTitle}>
-                                        Change Password
-                                    </Typography>
-                                    <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}}
-                                             disableFocusListener
-                                             placement={"bottom"}
-                                             title={"save changes"}>
-                                        <Button color="inherit" onClick={this.handleClose}
-                                                className={classes.butonSave}>
-                                            <SaveIcon style={{marginRight: "4px"}}/>Save
-                                        </Button>
-                                    </Tooltip>
-                                </Toolbar>
-                            </AppBar>
-                            <div>
-                                <div className={classes.SubTitles}>
-                                    <h2>Enter old password:</h2>
-                                    <Grid container={true} spacing={8} style={{alignItems: "center"}}>
-                                        <Grid item>
-                                            <OldPassword style={{width: 40, height: 40}}/>
-                                        </Grid>
-                                        <Grid item xs={10}>
-                                            <TextField
-                                                label="Old Password"
-                                                multiline
-                                                rowsMax="4"
-                                                variant={"outlined"}
-                                                margin={"normal"}
-                                            />
-                                        </Grid>
-                                    </Grid>
-                                </div>
-                                <div className={classes.SubTitles}>
-                                    <h2>Enter new password:</h2>
-                                    <Grid container={true} spacing={8} alignItems="center">
-                                        <Grid item>
-                                            <CheckPassword style={{width: 40, height: 40}}/>
-                                        </Grid>
-                                        <Grid item xs={10}>
-                                            <TextField
-                                                label="New Password"
-                                                multiline
-                                                rowsMax="4"
-                                                variant={"outlined"}
-                                                margin={"normal"}
-                                            />
-                                        </Grid>
-                                    </Grid>
-                                </div>
-                                <div className={classes.SubTitles}>
-                                    <h2>Confirm new password:</h2>
-                                    <Grid container={true} spacing={8} alignItems="center">
-                                        <Grid item>
-                                            <Password style={{width: 40, height: 40}}/>
-                                        </Grid>
-                                        <Grid item xs={10}>
-                                            <TextField
-                                                label="Confirm password"
-                                                multiline
-                                                rowsMax="4"
-                                                variant={"outlined"}
-                                                margin={"normal"}
-                                            />
-                                        </Grid>
-                                    </Grid>
-                                </div>
-                            </div>
-                        </Dialog>
+                    <div style={{textAlign:"center"}}>
+                        <div className={classes.SubTitles}>
+                            <h2>Update username:</h2>
+                            <TextField
+                                label="Username"
+                                helperText={"Input new username"}
+                                rowsMax="4"
+                                variant={"outlined"}
+                                margin={"normal"}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment variant="outlined" position="start">
+                                            <User/>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
+                                     placement={"bottom"}
+                                     title={"save changes"}>
+                                <Button
+                                    variant={"raised"}
+                                    className={classes.SaveNewUserName}>
+                                    <SaveIcon style={{verticalAlign: "center", marginRight: "5px", height: 20}}/> Apply
+                                </Button>
+                            </Tooltip>
+                        </div>
+                        <div className={classes.SubTitles}>
+                            <h2>Change password:</h2>
+                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
+                                     placement={"right"}
+                                     title={"change password"}>
+                                <Button
+                                    variant={"raised"}
+                                    className={classes.PasswordButton}
+                                    onClick={this.handleClickOpen}>
+                                    <Password style={{verticalAlign: "center", marginRight: "5px", height: 20}}/> change
+                                </Button>
+                            </Tooltip>
+                        </div>
                     </div>
+
+
+                    {/*NEW PAGE*/}
+                    <Dialog
+                        fullScreen
+                        open={this.state.open}
+                        closed={this.handleClose}>
+                        <AppBar className={classes.appBar}>
+                            <Toolbar>
+                                <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}}
+                                         disableFocusListener
+                                         placement={"right"}
+                                         title={"Cancel"}>
+                                    <IconButton color="inherit" onClick={this.handleClose} aria-label="Close"
+                                                className={classes.butonCancel}>
+                                        <CloseIcon/>
+                                    </IconButton>
+                                </Tooltip>
+                                <Typography variant="h6" color="inherit" className={classes.AppbarTitle}>
+                                    Change Password
+                                </Typography>
+                                <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}}
+                                         disableFocusListener
+                                         placement={"bottom"}
+                                         title={"save changes"}>
+                                    <Button color="inherit" onClick={this.handleClose}
+                                            className={classes.butonSave}>
+                                        <SaveIcon style={{marginRight: "4px"}}/>Save
+                                    </Button>
+                                </Tooltip>
+                            </Toolbar>
+                        </AppBar>
+                        <div>
+                            <div className={classes.SubTitles}>
+                                <h2>Enter old password:</h2>
+                                <Grid container={true} spacing={8} style={{alignItems: "center"}}>
+                                    <Grid item>
+                                        <OldPassword style={{width: 40, height: 40}}/>
+                                    </Grid>
+                                    <Grid item xs={10}>
+                                        <TextField
+                                            label="Current Password"
+                                            rowsMax="4"
+                                            helperText={"Enter your current password"}
+                                            variant={"outlined"}
+                                            type={this.state.showPassword ? 'text' : 'password'}
+                                            margin={"normal"}
+                                            InputProps={{
+                                                endAdornment: (
+                                                    <InputAdornment variant="outlined" position="end">
+                                                        <IconButton
+                                                            style={{background: "white", color: "grey"}}
+                                                            aria-label="Toggle password visibility"
+                                                            onClick={this.handleClickShowPassword}
+                                                        >
+                                                            {this.state.showPassword ?
+                                                                <Visibility style={{color: "black"}}/> :
+                                                                <VisibilityOff style={{color: "black"}}/>}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                ),
+                                            }}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </div>
+                            <div className={classes.SubTitles}>
+                                <h2>Enter new password:</h2>
+                                <Grid container={true} spacing={8} alignItems="center">
+                                    <Grid item>
+                                        <CheckPassword style={{width: 40, height: 40}}/>
+                                    </Grid>
+                                    <Grid item xs={10}>
+                                        <TextField
+                                            label="New Password"
+                                            helperText={"Enter new password"}
+                                            type={this.state.showPassword ? 'text' : 'password'}
+                                            rowsMax="4"
+                                            variant={"outlined"}
+                                            margin={"normal"}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </div>
+                            <div className={classes.SubTitles}>
+                                <h2>Confirm new password:</h2>
+                                <Grid container={true} spacing={8} alignItems="center">
+                                    <Grid item>
+                                        <Password style={{width: 40, height: 40}}/>
+                                    </Grid>
+                                    <Grid item xs={10}>
+                                        <TextField
+                                            label="Confirm password"
+                                            helperText={"Re-enter new password"}
+                                            type={this.state.showPassword ? 'text' : 'password'}
+                                            rowsMax="4"
+                                            variant={"outlined"}
+                                            margin={"normal"}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </div>
+                        </div>
+                    </Dialog>
                 </form>
             </div>
         );

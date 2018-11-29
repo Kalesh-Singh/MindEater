@@ -45,7 +45,7 @@ class NavigationBarTabs extends Component {
                     />
 
                     <Tab
-                        label='My Account'
+                        label='Profile'
                         value={3}
                         component={Link}
                         to='/profile'

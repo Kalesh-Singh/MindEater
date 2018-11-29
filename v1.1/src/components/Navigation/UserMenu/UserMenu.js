@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import fire from '../../../fire';
 
+import classes from "./UserMenu.module.css"
 import Popper from "@material-ui/core/Popper/Popper";
 import Grow from "@material-ui/core/Grow/Grow";
 import Paper from "@material-ui/core/Paper/Paper";
@@ -13,6 +14,8 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import ProfileIcon from "@material-ui/icons/FaceTwoTone"
+import LogOut from "@material-ui/icons/PowerSettingsNewTwoTone"
 
 class UserMenu extends Component {
     state = {
@@ -85,8 +88,8 @@ class UserMenu extends Component {
                             <Paper>
                                 <ClickAwayListener onClickAway={this.handleClose}>
                                     <MenuList>
-                                        <MenuItem onClick={this.handleProfile}>Profile</MenuItem>
-                                        <MenuItem onClick={this.signOut}>Sign Out</MenuItem>
+                                        <MenuItem onClick={this.handleProfile}><ProfileIcon className={classes.IconStyleProfile}/>Profile</MenuItem>
+                                        <MenuItem onClick={this.signOut}><LogOut className={classes.IconStyleLogout}/>Sign Out</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                             </Paper>
