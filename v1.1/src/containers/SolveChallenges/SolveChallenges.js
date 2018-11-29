@@ -44,9 +44,17 @@ class SolveChallenges extends Component {
                     .once('value')
                     .then(imgSnapshot => {
                         challenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
-                        updatedChallenges.push(challenge);
-                        updatedChallenges.sort((a, b) => (a.timesCompleted - b.timesCompleted));
-                        this.setState({challenges: updatedChallenges, loading: false});
+                        fire.database().ref('/users/' + challenge.owner + '/username')
+                            .once('value')
+                            .then(authorSnapshot => {
+                                challenge.authorName = authorSnapshot.val();
+                                updatedChallenges.push(challenge);
+                                updatedChallenges.sort((a, b) => (a.timesCompleted - b.timesCompleted));
+                                this.setState({challenges: updatedChallenges, loading: false});
+                            })
+                            .catch(error => {
+                                alert(error.message)
+                            });
                     });
             });
         fire.database().ref('/challenges/')
@@ -71,13 +79,20 @@ class SolveChallenges extends Component {
                     .once('value')
                     .then(imgSnapshot => {
                         updatedChallenge.imgURL = (imgSnapshot.val()) ? imgSnapshot.val().imgURL : null;
-                        updatedChallenges[oldChallengeIndex] = updatedChallenge;
-                        updatedChallenges.sort((a, b) => (a.timesCompleted - b.timesCompleted));
-                        this.setState({challenges: updatedChallenges, loading: false});
+                        fire.database().ref('/users/' + updatedChallenge.owner + '/username')
+                            .once('value')
+                            .then(authorSnapshot => {
+                                updatedChallenge.authorName = authorSnapshot.val();
+                                updatedChallenges[oldChallengeIndex] = updatedChallenge;
+                                updatedChallenges.sort((a, b) => (a.timesCompleted - b.timesCompleted));
+                                this.setState({challenges: updatedChallenges, loading: false});
+                            })
+                            .catch(error => {
+                                alert(error.message)
+                            });
                     });
             });
     };
-
 
     componentDidMount() {
         this.setListeners();
@@ -93,18 +108,26 @@ class SolveChallenges extends Component {
                     .then(imagesSnapshot => {
                         const imagesObject = imagesSnapshot.val();
 
-                        for (let challengeId in challengesObject) {
-                            const challenge = challengesObject[challengeId];
-                            challenge.id = challengeId;
-                            if (imagesObject) {
-                                challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
-                            }
-                            if (!challenge.isPartial) {    // TODO: Check if owner is not this user
-                                updatedChallenges.push(challenge);
-                            }
-                        }
-                        updatedChallenges.sort((a, b) => (a.timesCompleted - b.timesCompleted));
-                        this.setState({challenges: updatedChallenges, loading: false});
+                        fire.database().ref('/users/')
+                            .once('value')
+                            .then(usersSnapshot => {
+                                const userObjects = usersSnapshot.val();
+
+                                for (let challengeId in challengesObject) {
+                                    const challenge = challengesObject[challengeId];
+                                    challenge.id = challengeId;
+                                    if (imagesObject) {
+                                        challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
+                                        const challengeOwner = challenge.owner;
+                                        challenge.authorName = userObjects[challengeOwner].username;
+                                    }
+                                    if (!challenge.isPartial) {    // TODO: Check if owner is not this user
+                                        updatedChallenges.push(challenge);
+                                    }
+                                }
+                                updatedChallenges.sort((a, b) => (a.timesCompleted - b.timesCompleted));
+                                this.setState({challenges: updatedChallenges, loading: false});
+                        }).catch(error => {alert(error.message)});
                     });
             });
     }
@@ -116,10 +139,12 @@ class SolveChallenges extends Component {
 
 
     render() {
+        const searchQuery = this.state.searchQuery.toLowerCase();
         const challenges = this.state.challenges
             .filter(challenge =>
-                challenge.title.toLowerCase().includes(this.state.searchQuery.toLowerCase())
-                || challenge.description.toLowerCase().includes(this.state.searchQuery.toLowerCase()))
+                challenge.title.toLowerCase().includes(searchQuery)
+                || challenge.description.toLowerCase().includes(searchQuery)
+                || challenge.authorName.toLowerCase().includes(searchQuery))
             .map(challenge => (
                 <SolveChallengeCard
                     key={challenge.id}
