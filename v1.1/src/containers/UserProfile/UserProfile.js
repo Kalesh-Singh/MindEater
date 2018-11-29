@@ -22,6 +22,7 @@ import SaveIcon from "@material-ui/icons/SaveOutlined";
 import OldPassword from "@material-ui/icons/EnhancedEncryptionOutlined"
 import CheckPassword from "@material-ui/icons/LockOpenOutlined"
 import withMobileDialog from "@material-ui/core/es/withMobileDialog/withMobileDialog";
+import firebase from 'firebase/app';
 
 
 class UserProfile extends Component {
@@ -208,20 +209,6 @@ class UserProfile extends Component {
                         updatedOldPassword.error = 'Please change the password from your associated ' + providerName + ' account';
                         updatedOldPassword.valid = false;
                         this.setState({oldPassword: updatedOldPassword});
-                    } else if (provider === "password") {
-                        user.reauthenticateWithCredential(
-                            fire.auth.EmailAuthProvider.credential(user.email, oldPassword.value)
-                                .then(() => {
-                                    updatedOldPassword.error = '';
-                                    updatedOldPassword.valid = true;
-                                    this.setState({oldPassword: updatedOldPassword});
-                                })
-                                .catch(error => {
-                                    updatedOldPassword.error = error.message;
-                                    updatedOldPassword.valid = false;
-                                    this.setState({oldPassword: updatedOldPassword});
-                                })
-                        );
                     }
                 }
             });
@@ -242,6 +229,25 @@ class UserProfile extends Component {
 
     checkFormValidity = () => {
         return this.state.oldPassword.valid && this.state.password.valid && this.state.repeatPassword.valid;
+    };
+
+    updatePassword = () => {
+        const user = fire.auth().currentUser;
+
+        const credential = firebase.auth.EmailAuthProvider.credential(user.email, this.state.oldPassword.value);
+
+        user.reauthenticateAndRetrieveDataWithCredential(credential)
+            .then(() => {
+                return user.updatePassword(this.state.password.value)
+            })
+            .then(() => {
+                console.log("Password updated successfully");
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+
+        this.handleClose();
     };
 
     render() {
@@ -352,7 +358,7 @@ class UserProfile extends Component {
                                              placement={"bottom"}
                                              title={"save changes"}>
                                         <Button color="inherit"
-                                                onClick={this.handleClose}
+                                                onClick={this.updatePassword}
                                                 className={classes.butonSave}
                                                 disabled={!formValid}
                                         >
