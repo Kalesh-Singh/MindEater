@@ -100,6 +100,9 @@ class SolveChallengeCard extends Component {
                             <Typography component="p">
                                 {this.props.challenge.description}
                             </Typography>
+                            <Typography component="p">
+                                {"Author: " + this.props.challenge.authorName}
+                            </Typography>
                         </CardContent>
                     </CardActionArea>
                     <Divider/>
