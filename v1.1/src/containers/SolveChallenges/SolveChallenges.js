@@ -9,6 +9,8 @@ import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 import green from "@material-ui/core/es/colors/green";
 import lightBlue from "@material-ui/core/es/colors/lightBlue";
 import Divider from "@material-ui/core/Divider/Divider";
+import InputBase from "@material-ui/core/InputBase/InputBase";
+import SearchIcon from '@material-ui/icons/Search';
 
 const theme = createMuiTheme({
     palette: {
@@ -24,7 +26,8 @@ class SolveChallenges extends Component {
 
     state = {
         loading: false,
-        challenges: []
+        challenges: [],
+        searchQuery: ''
     };
 
     setListeners = () => {
@@ -104,14 +107,23 @@ class SolveChallenges extends Component {
             });
     }
 
+    handleSearch = event => {
+        const updatedSearchQuery = event.target.value;
+        this.setState({searchQuery: updatedSearchQuery});
+    };
+
 
     render() {
-        const challenges = this.state.challenges.map(challenge => (
-            <SolveChallengeCard
-                key={challenge.id}
-                challenge={challenge}
-            />
-        ));
+        const challenges = this.state.challenges
+            .filter(challenge =>
+                challenge.title.toLowerCase().includes(this.state.searchQuery.toLowerCase())
+                || challenge.description.toLowerCase().includes(this.state.searchQuery.toLowerCase()))
+            .map(challenge => (
+                <SolveChallengeCard
+                    key={challenge.id}
+                    challenge={challenge}
+                />
+            ));
 
         return (
             <div style={{marginTop: "100px"}}>
@@ -121,6 +133,16 @@ class SolveChallenges extends Component {
                         <p>Start Solving Challenges</p>
                     </div>
                     <Divider className={classes.DividerLine}/>
+                    <div className={classes.Search}>
+                        <div>
+                            <SearchIcon/>
+                        </div>
+                        <InputBase
+                            placeholder="Search…"
+                            onChange={this.handleSearch}
+                            value={this.state.searchQuery}
+                        />
+                    </div>
                     {this.state.loading ?
                         <div className={classes.LoadingBar}>
                             <LinearProgress variant="query" color={"primary"}/>
