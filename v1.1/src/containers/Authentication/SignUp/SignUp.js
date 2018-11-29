@@ -87,6 +87,7 @@ class SignUp extends Component {
                 alert(error.message);
             });
     };
+
     handleChange = name => event => {
         const updatedField = {...this.state[name]};
         updatedField.value = event.target.value.trim();
@@ -142,7 +143,6 @@ class SignUp extends Component {
     };
 
     checkRepeatPassword = (repeatPassword) => {
-        console.log("PONG", this)
         if (repeatPassword.value.length === 0 && repeatPassword.focused) {
             return '* Required';
         } else if (repeatPassword.value !== this.state.password.value) {
