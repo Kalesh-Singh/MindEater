@@ -21,9 +21,31 @@
     margin-top: 30px !important;
 }
 
+.SearchBar {
+    margin-left: 25% !important;
+    margin-top: 20px;
+}
+
 .Search {
     display: flex;
-    width: 100%;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
+    border: solid black;
+    border-radius: 15px;
+    height: 40px;
+    width: 75%;
+    background-color: white;
+}
+
+.Search:hover {
+    background-color: rgba(64, 164, 200, 0.25);
+}
+
+.SearchIcon {
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

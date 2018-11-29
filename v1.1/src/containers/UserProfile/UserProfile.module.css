@@ -15,7 +15,7 @@
 .ProfileImage {
     height: 250px;
     width: 250px;
-    border-radius: 125px;
+    border-radius: 130px;
     text-align: center !important;
 }
 
@@ -74,4 +74,17 @@
 
 .Content {
     text-align: center !important;
+}
+
+.SaveNewUserName {
+    margin: 10px !important;
+    background: #2096F3 !important;
+    color: white !important;
+    margin-left: 15px !important;
+    margin-top: 25px !important;
+}
+
+.SaveNewUserName:hover {
+    background-color: #4CAF50 !important;
+    color: #FFF;
 }
