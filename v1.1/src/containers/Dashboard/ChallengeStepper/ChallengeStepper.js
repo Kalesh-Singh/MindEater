@@ -11,6 +11,7 @@ import SwipeableViews from 'react-swipeable-views';
 import {autoPlay} from 'react-swipeable-views-utils';
 import fire from "../../../fire";
 import SolveChallengeStepper from "../../../components/SolveChallengeStepper/SolveChallengeStepper";
+import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -19,6 +20,7 @@ const styles = theme => ({
         maxWidth: 400,
         flexGrow: 1,
         marginTop: 20,
+        boxShadow:"rgba(0, 0, 0, 0.2) 5px 10px 15px"
     },
     header: {
         display: 'flex',
@@ -37,7 +39,7 @@ const styles = theme => ({
     },
 });
 
-class SwipeableTextMobileStepper extends React.Component {
+class ChallengeStepper extends React.Component {
     state = {
         activeStep: 0,
         challenges: [],
@@ -167,6 +169,7 @@ class SwipeableTextMobileStepper extends React.Component {
                                 ? popularChallenges[activeStep].title : "Challenge"}
                         </Typography>
                     </Paper>
+                    <CardActionArea>
                     <AutoPlaySwipeableViews
                         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                         index={activeStep}
@@ -187,6 +190,7 @@ class SwipeableTextMobileStepper extends React.Component {
                         ))}
 
                     </AutoPlaySwipeableViews>
+                    </CardActionArea>
                     <MobileStepper
                         steps={maxSteps}
                         position="static"
@@ -220,9 +224,9 @@ class SwipeableTextMobileStepper extends React.Component {
     }
 }
 
-SwipeableTextMobileStepper.propTypes = {
+ChallengeStepper.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, {withTheme: true})(SwipeableTextMobileStepper);
+export default withStyles(styles, {withTheme: true})(ChallengeStepper);

@@ -20,5 +20,6 @@
     margin-left: 10px;
     margin-right: 50px;
     float: left;
+    border-radius: 100px;
     box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
 }

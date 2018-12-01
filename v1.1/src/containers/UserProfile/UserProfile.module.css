@@ -52,16 +52,6 @@
     margin-top: 30px !important;
 }
 
-.appBar {
-    background-color: #2096F3 !important;
-    position: relative !important;
-}
-
-.AppbarTitle {
-    flex: 1 !important;
-    text-align: center;
-}
-
 .butonSave:hover {
     background-color: #4CAF50 !important;
     color: #FFF;
