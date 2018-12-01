@@ -38,7 +38,7 @@
 }
 
 .Search:hover {
-    background-color: rgba(64, 164, 200, 0.25);
+    background-color: rgba(64, 164, 200, 0.01);
 }
 
 .SearchIcon {

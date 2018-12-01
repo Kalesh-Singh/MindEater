@@ -94,13 +94,13 @@ class SolveChallengeCard extends Component {
                             <img src={this.props.challenge.imgURL} alt={"Challenge"}/>
                         </figure>
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
+                            <Typography gutterBottom variant="h5" component="h2" style={{fontWeight:"bold"}}>
                                 {this.props.challenge.title}
                             </Typography>
-                            <Typography component="p">
+                            <Typography component="p" style={{fontWeight:"bolder"}}>
                                 {this.props.challenge.description}
                             </Typography>
-                            <Typography component="p">
+                            <Typography variant={"h10"} component="p" style={{fontWeight:"lighter"}}>
                                 {"Author: " + this.props.challenge.authorName}
                             </Typography>
                         </CardContent>
