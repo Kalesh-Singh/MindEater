@@ -115,16 +115,17 @@ class SwipeableTextMobileStepper extends React.Component {
     componentDidMount() {
         this.setState({loading: true});
 
-        this.getChallenges();
+        if (this.state.challenges.length === 0) {
+            this.getChallenges();
+        }
 
-        // TODO: this.setListeners();
-        if (this.state.challenges.length > 0) {
+        if (this.state.challenges.length > 0 && !this.state.open) {
             this.getQuestions(this.state.challenges[this.state.activeStep].id);
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.activeStep !== this.state.activeStep) {
+        if (prevState.activeStep !== this.state.activeStep && !prevProps.open) {
             this.getQuestions(this.state.challenges[this.state.activeStep].id);
         }
     }
@@ -142,7 +143,9 @@ class SwipeableTextMobileStepper extends React.Component {
     };
 
     handleStepChange = activeStep => {
-        this.setState({activeStep});
+        if (!this.state.open) {
+            this.setState({activeStep});
+        }
     };
 
     render() {
@@ -159,10 +162,13 @@ class SwipeableTextMobileStepper extends React.Component {
                            style={{display: "flex", flexFlow: "column"}}>
                         <Typography style={{display: "flex"}}>Popular Challenges</Typography>
                         <Typography
-                            style={{display: "flex"}}>{popularChallenges[activeStep] ? popularChallenges[activeStep].title : "Challenge"}</Typography>
+                            style={{display: "flex"}}>{
+                            popularChallenges[activeStep]
+                                ? popularChallenges[activeStep].title : "Challenge"}
+                        </Typography>
                     </Paper>
-                    axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                     <AutoPlaySwipeableViews
+                        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                         index={activeStep}
                         onChangeIndex={this.handleStepChange}
                         enableMouseEvents
@@ -200,7 +206,7 @@ class SwipeableTextMobileStepper extends React.Component {
                         }
                     />
                 </div>
-                {this.state.open && this.state.challenges.length > 0 ?
+                {this.state.challenges.length > 0 ?
                     <SolveChallengeStepper
                         open={this.state.open}
                         closed={this.handleClose}
