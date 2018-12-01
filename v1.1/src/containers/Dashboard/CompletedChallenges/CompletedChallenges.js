@@ -73,7 +73,7 @@ class CompletedChallenges extends Component {
                     <CardHeader style={{background: "#4CAF50"}}/>
                     <div style={{marginTop: 20}}>
                         <div className={classes.Box}>
-                            <Check style={{width: 60, height: 60, color: "white"}}/>
+                            <Check style={{width: 70, height: 70, color: "white"}}/>
                         </div>
                     </div>
                     <CardContent>

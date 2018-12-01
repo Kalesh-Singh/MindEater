@@ -9,32 +9,34 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
+import red from "@material-ui/core/es/colors/red";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
     {
-        label: 'Challenge Name',
+        label: 'Challenge Name1',
         imgPath:
             'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
     },
     {
-        label: 'Challenge Name',
+        label: 'Challenge Name2',
         imgPath:
             'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
     },
     {
-        label: 'Challenge Name',
+        label: 'Challenge Name3',
         imgPath:
             'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80',
     },
     {
-        label: 'Challenge Name',
+        label: 'Challenge Name4',
         imgPath:
             'https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60',
     },
     {
-        label: 'Challenge Name',
+        label: 'Challenge Name5',
         imgPath:
             'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
     },
@@ -45,6 +47,7 @@ const styles = theme => ({
         maxWidth: 400,
         flexGrow: 1,
         marginTop: 20,
+        boxShadow: "0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2)"
     },
     header: {
         display: 'flex',
@@ -62,7 +65,7 @@ const styles = theme => ({
     },
 });
 
-class SwipeableTextMobileStepper extends React.Component {
+class ChallengeStepper extends React.Component {
     state = {
         activeStep: 0,
     };
@@ -90,9 +93,10 @@ class SwipeableTextMobileStepper extends React.Component {
 
         return (
             <div className={classes.root}>
-                <Paper square elevation={0} className={classes.header}>
+                <Paper square elevation={3} className={classes.header}>
                     <Typography>{tutorialSteps[activeStep].label}</Typography>
                 </Paper>
+                <CardActionArea>
                 <AutoPlaySwipeableViews
                     axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                     index={activeStep}
@@ -107,9 +111,11 @@ class SwipeableTextMobileStepper extends React.Component {
                         </div>
                     ))}
                 </AutoPlaySwipeableViews>
+                </CardActionArea>
                 <MobileStepper
                     steps={maxSteps}
                     position="static"
+                    variant={"dots"}
                     activeStep={activeStep}
                     className={classes.mobileStepper}
                     nextButton={
@@ -130,9 +136,9 @@ class SwipeableTextMobileStepper extends React.Component {
     }
 }
 
-SwipeableTextMobileStepper.propTypes = {
+ChallengeStepper.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(SwipeableTextMobileStepper);
+export default withStyles(styles, { withTheme: true })(ChallengeStepper);

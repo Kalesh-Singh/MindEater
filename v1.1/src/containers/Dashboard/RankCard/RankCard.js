@@ -79,7 +79,7 @@ class RankCard extends Component {
             return ({rankIcon: Beginner, rankTitle: "Beginner", rankDescription: "Still a long way to the top!", rankFeed: "Welcome to MindEater", rankColor:{background:"#BC6428"}});
         }
         if (points >= 462) {
-            return ({rankIcon: GrandMaster, rankTitle: "Grandmaster", rankDescription: "Earned 462+ points!", rankFeed:"\ud83c\udf96 Rumor has it the creators of this site are the only Grandmasters...welcome to the big leagues champ \ud83c\udf96", rankColor:{background:"#FFCB5B"}});
+            return ({rankIcon: GrandMaster, rankTitle: "Grandmaster", rankDescription: "Earned 462+ points!", rankFeed:"\ud83c\udf96 Rumor has it the creators of this site are the only Grandmasters...welcome to the big leagues \ud83c\udf96", rankColor:{background:"#FFCB5B"}});
         } else if (points >= 420) {
             return ({rankIcon: Elite, rankTitle: "Elite", rankDescription: "Earned 420+ points!", rankFeed:"\uD83E\uDD2F 420 Points!?...oh that's right, YOU'RE A GENIUS \uD83E\uDD2F", rankColor:{background:"#E2E5E7"}});
         } else if (points >= 380) {
