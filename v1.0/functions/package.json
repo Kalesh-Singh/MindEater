@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "firebase-admin": "~6.0.0",
-    "firebase-functions": "^2.0.3"
+    "firebase-functions": "^2.0.3",
+    "react-swipeable-views": "^0.13.0"
   },
   "private": true
 }

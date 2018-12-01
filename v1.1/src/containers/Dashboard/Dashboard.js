@@ -6,6 +6,7 @@ import CompletedChallenges from "./CompletedChallenges/CompletedChallenges";
 import RankCard from "./RankCard/RankCard";
 import CreatedChallengesCard from "./CreatedChallengesCard/CreatedChallengesCard";
 import fire from "../../fire";
+import ChallengeStepper from "./ChallengeStepper/ChallengeStepper";
 
 
 class Dashboard extends Component {
@@ -57,6 +58,7 @@ class Dashboard extends Component {
                 <div className={classes.RowR}>
                     <PointCard className={classes.root}/>
                     <RankCard className={classes.root}/>
+                    <ChallengeStepper className={classes.root}/>
                     <CreatedChallengesCard className={classes.root}/>
                     <ChallengesCard className={classes.root}/>
                     <CompletedChallenges className={classes.root}/>

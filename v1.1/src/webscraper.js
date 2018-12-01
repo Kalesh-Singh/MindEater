@@ -39,7 +39,7 @@ const saveChallengeImageURL = (challengeId, challengeTitle) => {
     const searchTerm = challengeTitle.split(' ').join('+');
     const imgUrl = 'https://www.shutterstock.com/search?search_source=base_landing_page&language=en&searchterm='
         + searchTerm + '&image_type=all';
-    const url = "https://allorigins.me/get?url="
+    const url = "https://api.allorigins.ml/get?url="
         + encodeURIComponent(imgUrl)
         + "&callback=?";
     return $.getJSON(url, response => {
