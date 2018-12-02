@@ -23,7 +23,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const styles = theme => ({
     root: {
-        maxWidth: 400,
+        maxWidth: 370,
         flexGrow: 1,
         marginTop: 20,
         boxShadow:"rgba(0, 0, 0, 0.2) 5px 10px 15px",

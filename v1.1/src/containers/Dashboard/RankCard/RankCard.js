@@ -143,7 +143,7 @@ class RankCard extends Component {
                             <Typography style={{fontWeight:"bold"}} gutterBottom variant={"h4"} component={"h1"}>
                                Rank: {this.state.rankTitle}
                             </Typography>
-                            <Typography style={{fontSize:18}} component={'p'}>
+                            <Typography style={{fontSize:17}} component={'p'}>
                                 {this.state.rankDescription}
                             </Typography>
                         </CardContent>
