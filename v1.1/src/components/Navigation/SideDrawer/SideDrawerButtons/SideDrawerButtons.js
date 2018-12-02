@@ -94,7 +94,7 @@ class SideDrawerButtons extends Component {
                             <ListItemIcon>
                                 <AccountIcon/>
                             </ListItemIcon>
-                            <ListItemText primary='My Account'/>
+                            <ListItemText primary='Account'/>
                         </ListItem>
                     </NavLink>
                 </List>
