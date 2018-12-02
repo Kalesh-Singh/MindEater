@@ -155,7 +155,7 @@ class ChallengeStepper extends React.Component {
         const {activeStep} = this.state;
         const maxSteps = 5;
 
-        const popularChallenges = this.state.challenges.slice(0, 6);
+        const popularChallenges = this.state.challenges.slice(0, 5);
 
         return (
             <>
@@ -192,7 +192,7 @@ class ChallengeStepper extends React.Component {
                     </AutoPlaySwipeableViews>
                     </CardActionArea>
                     <MobileStepper
-                        steps={maxSteps + 1}
+                        steps={maxSteps}
                         position="static"
                         activeStep={activeStep}
                         className={classes.mobileStepper}
