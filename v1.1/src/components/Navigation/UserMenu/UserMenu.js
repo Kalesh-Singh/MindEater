@@ -88,8 +88,8 @@ class UserMenu extends Component {
                             <Paper>
                                 <ClickAwayListener onClickAway={this.handleClose}>
                                     <MenuList>
-                                        <MenuItem onClick={this.handleProfile}><ProfileIcon className={classes.IconStyleProfile}/>Profile</MenuItem>
-                                        <MenuItem onClick={this.signOut}><LogOut className={classes.IconStyleLogout}/>Sign Out</MenuItem>
+                                        <MenuItem className={classes.IconStyleProfile} onClick={this.handleProfile}><ProfileIcon className={classes.Icon}/>Profile</MenuItem>
+                                        <MenuItem className={classes.IconStyleLogout} onClick={this.signOut}><LogOut className={classes.Icon}/>Sign Out</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                             </Paper>
