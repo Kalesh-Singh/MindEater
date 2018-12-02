@@ -1,6 +1,8 @@
 import fire from "./fire";
 import $ from "jquery";
 import cheerio from "cheerio";
+import DefaultChallengImg from 'assets/svg/default-challenge-image.jpg';
+
 const getBlob = (url) => {
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
@@ -32,6 +34,23 @@ const imgURLForChallenge = (oldURL, challengeId) => {
             alert(error.message);
         })
 };
+
+const putDefaultImg = (challengeId) => {
+    const picRef = fire.storage().ref(/challenges/ + challengeId + '/img.webp');
+    picRef.put(DefaultChallengImg)
+        .then(() => {
+            return picRef.getDownloadURL();
+        })
+        .then(url => {
+            const updates = {};
+            updates['/challengeImages/' + challengeId + '/imgURL'] = url;
+            return fire.database().ref().update(updates);
+        })
+        .catch(error => {
+            alert(error.message);
+        })
+
+};
 const saveChallengeImageURL = (challengeId, challengeTitle) => {
     // Returns a Promise when we we have finished updating
     // the challenge imgURL in the the Firebase RTDB.
@@ -50,7 +69,7 @@ const saveChallengeImageURL = (challengeId, challengeTitle) => {
                 const challengeImgUrl = images[0].children[1].attribs.src;
                 return imgURLForChallenge(challengeImgUrl, challengeId);
             } else {
-                // TODO: Set the state to the default challenge image.
+                return putDefaultImg(challengeId);
             }
         }
     );
