@@ -140,10 +140,10 @@ class RankCard extends Component {
                         <CardMedia
                             title={"Rank"}/>
                         <CardContent>
-                            <Typography gutterBottom variant={"h4"} component={"h1"}>
+                            <Typography style={{fontWeight:"bold"}} gutterBottom variant={"h4"} component={"h1"}>
                                Rank: {this.state.rankTitle}
                             </Typography>
-                            <Typography component={'p'}>
+                            <Typography style={{fontSize:18}} component={'p'}>
                                 {this.state.rankDescription}
                             </Typography>
                         </CardContent>

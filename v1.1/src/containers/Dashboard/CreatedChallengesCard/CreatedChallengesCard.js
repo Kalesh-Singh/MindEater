@@ -78,10 +78,10 @@ class CreatedChallengesCard extends Component {
                             </div>
                         </div>
                         <CardContent style={{marginTop: 25}}>
-                            <Typography gutterBottom variant={"h4"} component={"h2"}>
+                            <Typography style={{fontWeight:"bold"}} gutterBottom variant={"h4"} component={"h2"}>
                                 Created Challenges
                             </Typography>
-                            <Typography component={'p'}>
+                            <Typography style={{fontSize:18}} component={'p'}>
                                 {this.state.username}'s contributions:
                             </Typography>
                         </CardContent>

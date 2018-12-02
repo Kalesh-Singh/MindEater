@@ -23,11 +23,11 @@ class ChallengesCard extends Component {
                     </div>
                     <div>
                     <CardContent style={{textAlign:"center"}}>
-                        <Typography gutterBottom variant={"h4"} component={"h2"}>
+                        <Typography style={{fontWeight:"bold"}} gutterBottom variant={"h4"} component={"h2"}>
                             Challenges
                         </Typography>
-                        <Typography component={'p'}>
-                            Begin solving other users challenges.
+                        <Typography style={{fontSize:18}} component={'p'}>
+                            Begin solving other users challenges
                         </Typography>
                     </CardContent>
                     </div>

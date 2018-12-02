@@ -55,7 +55,7 @@ class PointCard extends Component {
                         </div>
                     </div>
                         <CardContent>
-                            <Typography gutterBottom variant={"h4"} component={"h1"}>
+                            <Typography style={{fontWeight:"bold"}} gutterBottom variant={"h4"} component={"h1"}>
                                 Points: {this.state.points}
                             </Typography>
                         </CardContent>

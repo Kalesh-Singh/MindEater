@@ -77,10 +77,10 @@ class CompletedChallenges extends Component {
                         </div>
                     </div>
                     <CardContent>
-                        <Typography gutterBottom variant={"h4"} component={"h2"}>
+                        <Typography style={{fontWeight:"bold"}} gutterBottom variant={"h4"} component={"h2"}>
                             Completed Challenges
                         </Typography>
-                        <Typography component={'p'}>
+                        <Typography style={{fontSize:18}} component={'p'}>
                             {this.state.username}'s progress:
                         </Typography>
                     </CardContent>
