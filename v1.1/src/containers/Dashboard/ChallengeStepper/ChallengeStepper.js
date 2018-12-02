@@ -23,7 +23,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const styles = theme => ({
     root: {
-        maxWidth: 400,
+        maxWidth: 370,
         flexGrow: 1,
         marginTop: 20,
         boxShadow:"rgba(0, 0, 0, 0.2) 5px 10px 15px",
@@ -43,9 +43,8 @@ const styles = theme => ({
         width: '100%',
         marginBottom: '-20px'
     },
-    progress: {
-        color: "red"
-    }
+    dotActive: {
+    },
 });
 
 class ChallengeStepper extends React.Component {
@@ -223,7 +222,7 @@ class ChallengeStepper extends React.Component {
                         variant={"dots"}
                         position="static"
                         activeStep={activeStep}
-                        className={classes.mobileStepper}
+                        className={classes.dotActive}
                         nextButton={
                             <Button className={css.Next} size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1 || maxSteps === 0}>
                                 Next

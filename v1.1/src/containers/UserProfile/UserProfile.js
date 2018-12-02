@@ -175,6 +175,8 @@ class UserProfile extends Component {
 
         const imgSrc = this.state.imgSrc;
 
+        const NotDisabled = classes.SaveNewUserName;
+
         return (
             <div style={{marginTop: '100px'}}>
                 <div className={classes.header}>
@@ -216,8 +218,8 @@ class UserProfile extends Component {
                             <Button
                                 onClick={this.updateProfilePic}
                                 variant={"raised"}
-                                className={classes.ButtonStyle}
                                 disabled={this.state.imgFile === null}
+                                className={classes.ButtonStyle}
                             >
                                 Upload <CloudUploadIcon style={{marginLeft: 10}}/>
                             </Button>
@@ -244,8 +246,7 @@ class UserProfile extends Component {
                                     ),
                                 }}
                             />
-                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
-                                     placement={"bottom"}
+                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"bottom"}
                                      title={"save changes"}>
                                 <Button
                                     variant={"raised"}
@@ -259,8 +260,7 @@ class UserProfile extends Component {
                             </Tooltip>
                         </div>
                         <div className={classes.SubTitles}>
-                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
-                                     placement={"right"}
+                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"right"}
                                      title={"change password"}>
                                 <Button
                                     variant={"raised"}
