@@ -16,7 +16,8 @@ import css from "./ChallengeStepper.module.css"
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Zoom from "@material-ui/core/Zoom/Zoom";
-import Card from "@material-ui/core/Card/Card";
+import DefaultChallengeImg from '../../../assets/svg/default-challenge.png';
+
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -106,7 +107,7 @@ class ChallengeStepper extends React.Component {
                                     const challenge = challengesObject[challengeId];
                                     challenge.id = challengeId;
                                     if (imagesObject) {
-                                        challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
+                                        challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : DefaultChallengeImg;
                                         const challengeOwner = challenge.owner;
                                         challenge.authorName = userObjects[challengeOwner].username;
                                     }
@@ -189,9 +190,12 @@ class ChallengeStepper extends React.Component {
                             popularChallenges[activeStep]
                                 ? popularChallenges[activeStep].title : "Challenge"}
                         </Typography>
+                        <Typography style={{display: "flex", fontSize:12, marginTop:25, fontWeight:"light"}}>
+                            Author
+                        </Typography>
                     </Paper>
                     <Tooltip TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} placement={"top-start"} title={"Solve Challenge"} enterDelay={50} leaveDelay={200}>
-                    <CardActionArea style={{marginTop:25}}>
+                    <CardActionArea style={{marginTop:30}}>
                     <AutoPlaySwipeableViews
                         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                         index={activeStep}

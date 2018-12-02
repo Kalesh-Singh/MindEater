@@ -1,7 +1,7 @@
 import fire from "./fire";
 import $ from "jquery";
 import cheerio from "cheerio";
-import DefaultChallengImg from './assets/svg/default-challenge-image.jpg';
+import DefaultChallengeImg from './assets/svg/default-challenge.png';
 
 const getBlob = (url) => {
     return new Promise((resolve, reject) => {
@@ -37,7 +37,7 @@ const imgURLForChallenge = (oldURL, challengeId) => {
 
 const putDefaultImg = (challengeId) => {
     const picRef = fire.storage().ref(/challenges/ + challengeId + '/img.webp');
-    picRef.put(DefaultChallengImg)
+    picRef.put(DefaultChallengeImg)
         .then(() => {
             return picRef.getDownloadURL();
         })

@@ -14,6 +14,7 @@ import Fade from "@material-ui/core/Fade/Fade";
 import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import Divider from "@material-ui/core/Divider/Divider";
+import DefaultChallengeImg from '../../assets/svg/default-challenge.png';
 
 class SolveChallengeCard extends Component {
 
@@ -91,7 +92,7 @@ class SolveChallengeCard extends Component {
                 >
                     <CardActionArea onClick={this.handleClickOpen}>
                         <figure className={classes.Figure}>
-                            <img src={this.props.challenge.imgURL} alt={"Challenge"}/>
+                            <img src={this.props.challenge.imgURL || DefaultChallengeImg} alt={"Challenge"}/>
                         </figure>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2" style={{fontWeight:"bold"}}>
