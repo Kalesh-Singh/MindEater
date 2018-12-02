@@ -84,30 +84,22 @@ class UserProfile extends Component {
     };
 
     handleUsernameChange = event => {
-        console.log("USERNAME UPdated");
         const updatedUsername = {...this.state.username};
         updatedUsername.value = event.target.value;
         updatedUsername.error = this.checkUserName(updatedUsername);
         updatedUsername.valid = updatedUsername.error.length === 0;
-        console.log(updatedUsername);
         this.setState({username: updatedUsername, usernameChanged: true})
     };
 
     checkUserName = (username) => {
-        console.log("CHECK USERNAME")
-        console.log("USERNAME", username.value);
         const pattern = /^[a-zA-Z0-9-_]+$/; // Alphanumeric dashes and underscores.
         if (username.value.length === 0) {
-            console.log("REQUIRED")
             return '* Required';
         } else if (username.value.length > 15) {
-            console.log("TOO LONG");
             return 'Cannot be longer than 15 characters';
         } else if (!pattern.test(username.value)) {
-            console.log("INVALID CHARS")
             return 'Only characters A-Z, a-z, -, and _ allowed';
         } else {
-            console.log("NO ERROR");
             return '';      // No error
         }
     };
@@ -138,9 +130,7 @@ class UserProfile extends Component {
             fire.database().ref('/users/' + user.uid + '/username')
                 .once('value')
                 .then(snapshot => {
-                    console.log("USER Snapshot", snapshot);
                     if (snapshot.val()) {
-                        console.log("USER Snapshot Val", snapshot.val());
                         const updatedUsername = {...this.state.username};
                         updatedUsername.value = snapshot.val();
                         this.setState({username: updatedUsername});
@@ -183,7 +173,7 @@ class UserProfile extends Component {
     render() {
 
         const imgSrc = this.state.imgSrc;
-        console.log("STATE", this.state);
+
         return (
             <div style={{marginTop: '100px'}}>
                 <div className={classes.header}>
