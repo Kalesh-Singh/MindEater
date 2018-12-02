@@ -189,10 +189,10 @@ class ChallengeStepper extends React.Component {
                             popularChallenges[activeStep]
                                 ? popularChallenges[activeStep].title : "Challenge"}
                         </Typography>
-                        <Typography style={{display: "flex", fontSize:12, marginTop:25, fontWeight:"light"}}>
-                            {this.state.challenges.length > 0
+                        <Typography style={{display: "flex", fontSize:12, marginTop:25, fontWeight:"light", fontStyle:"italic"}}>
+                            Author: {this.state.challenges.length > 0
                                 ? this.state.challenges[this.state.activeStep].authorName
-                                : "Author"
+                                : "User"
                             }
 
                         </Typography>

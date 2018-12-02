@@ -318,10 +318,10 @@ class SolveChallengeStepper extends Component {
                                                     {/* TODO: Style with flex box */}
                                                     <div>
                                                         {this.state.timesAttempted === 1 && !this.state.finished ?
-                                                            <ExpansionPanel>
+                                                            <ExpansionPanel className={classes.Explanation}>
                                                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                                                    <Typography variant="h7" component="h3"
-                                                                                style={{color: '#D50000'}}>Show
+                                                                    <Typography variant="h8" component="h3"
+                                                                                style={{color: '#D50000', fontSize:15}}>Show
                                                                         hint</Typography>
                                                                 </ExpansionPanelSummary>
                                                                 <ExpansionPanelDetails>
@@ -338,10 +338,10 @@ class SolveChallengeStepper extends Component {
                                                             disabled={this.state.finished}
                                                         />
                                                         {this.state.finished ?
-                                                            <ExpansionPanel>
+                                                            <ExpansionPanel className={classes.Explanation}>
                                                                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                                                    <Typography variant="h7" component="h3"
-                                                                                style={{color: '#469c4a'}}>See
+                                                                    <Typography variant="h8" component="h3"
+                                                                                style={{color: '#469c4a', fontSize:15}}>See
                                                                         Explanation</Typography>
                                                                 </ExpansionPanelSummary>
                                                                 <ExpansionPanelDetails>

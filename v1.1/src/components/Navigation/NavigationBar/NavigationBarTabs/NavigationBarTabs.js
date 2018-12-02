@@ -4,11 +4,47 @@ import Tabs from "@material-ui/core/Tabs/Tabs";
 import Tab from "@material-ui/core/Tab/Tab";
 
 import classes from './NavigationBarTabs.module.css';
+import fire from "../../../../fire";
 
 
 class NavigationBarTabs extends Component {
     state = {
         value: 0,
+        username: "Guest",
+    };
+
+    componentDidMount() {
+        fire.auth().onAuthStateChanged(this.updateUsername);
+        const user = fire.auth().currentUser;
+        if (user) {
+            this.updateUsername(user);
+        }
+    }
+
+    updateUsername = (user) => {
+        if (user) {
+            fire.database().ref('/users/' + user.uid + '/username')
+                .once('value')
+                .then(snapshot => {
+                    console.log("USER Snapshot", snapshot);
+                    if (snapshot.val()) {
+                        console.log("USER Snapshot Val", snapshot.val());
+                        this.setState({username: snapshot.val()});
+                    }
+                }).catch(error => {
+                alert(error.message)
+            });
+            this.setListener(user);
+        }
+    };
+
+    setListener = (user) => {
+        fire.database().ref('/users/' + user.uid)
+            .on('child_added', snapshot => {
+                this.setState(state => {
+                    return {username: state.username}
+                })
+            });
     };
 
     handleChange = (event, value) => {
@@ -45,7 +81,7 @@ class NavigationBarTabs extends Component {
                     />
 
                     <Tab
-                        label='Profile'
+                        label={this.state.username}
                         value={3}
                         component={Link}
                         to='/profile'

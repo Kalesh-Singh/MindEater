@@ -1,5 +1,4 @@
 .CardStyle {
-    margin-top: 20px;
     width:370px;
     box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
 }
@@ -10,6 +9,7 @@ c {
     color: #2096F3;
     text-decoration: none;
     transition: 0.3s all ease;
+    margin-bottom: 20px;
 }
 
 c:hover {

@@ -90,7 +90,7 @@ class SolveChallengeCard extends Component {
                         flexFlow: 'column', justifyContent: 'space-between'
                     }}
                 >
-                    <CardActionArea onClick={this.handleClickOpen}>
+                    <CardActionArea onClick={this.handleClickOpen} style={{paddingBottom:-10}}>
                         <figure className={classes.Figure}>
                             <img src={this.props.challenge.imgURL || DefaultChallengeImg} alt={"Challenge"}/>
                         </figure>
@@ -101,12 +101,12 @@ class SolveChallengeCard extends Component {
                             <Typography component="p" style={{fontWeight:"bolder"}}>
                                 {this.props.challenge.description}
                             </Typography>
-                            <Typography variant={"h10"} component="p" style={{fontWeight:"lighter"}}>
+                            <Typography style={{fontWeight:"lighter", fontStyle:"italic"}}>
                                 {"Author: " + this.props.challenge.authorName}
                             </Typography>
                         </CardContent>
+                        <Divider/>
                     </CardActionArea>
-                    <Divider/>
                     <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} disableFocusListener disableTouchListener placement={"left"} title={"Like Challenge"}>
                         <FormControlLabel
                             control={
