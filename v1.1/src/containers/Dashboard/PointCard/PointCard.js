@@ -45,6 +45,10 @@ class PointCard extends Component {
             .on('child_changed', snapshot => {
                 this.getPoints(user);
             });
+        fire.database().ref('/users/' + user.uid)
+            .on('child_added', snapshot => {
+               this.getPoints(user);
+            });
     };
 
     render() {

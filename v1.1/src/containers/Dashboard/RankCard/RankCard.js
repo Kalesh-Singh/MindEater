@@ -8,7 +8,7 @@ import classes from "../RankCard/RankCard.module.css";
 import CardActions from "@material-ui/core/CardActions/CardActions";
 import Card from "@material-ui/core/Card/Card";
 import fire from "../../../fire";
-// ----------------- Rank Icon Imports ------------------
+// ----------------- Rank Icon Imports --------------------
 import Beginner from "../../../assets/svg/Rank Icons/Beginner.svg";
 import Inexperienced from "../../../assets/svg/Rank Icons/Inexperienced.svg";
 import Rookie from "../../../assets/svg/Rank Icons/Rookie.svg";
@@ -52,25 +52,34 @@ class RankCard extends Component {
             this.updateRank(user);
         }
     }
+
+    getRank = (user) => {
+        fire.database().ref('/users/' + user.uid + '/points')
+            .once('value')
+            .then(snapshot => {
+                if (snapshot.val()) {
+                    this.setState(this.getStateFromPoints(snapshot.val()));
+                }
+            })
+            .catch(error => {
+                alert(error.message)
+            });
+    };
+
     updateRank = (user) => {
         if (user) {
-            fire.database().ref('/users/' + user.uid + '/points')
-                .once('value')
-                .then(snapshot => {
-                    if (snapshot.val()) {
-                        this.setState(this.getStateFromPoints(snapshot.val()));
-                    }
-                })
-                .catch(error => {
-                    alert(error.message)
-                });
+            this.getRank(user);
             this.setListener(user);
         }
     };
     setListener = (user) => {
-        fire.database().ref('/users/' + user.uid + '/points')
+        fire.database().ref('/users/' + user.uid)
             .on('child_changed', snapshot => {
-                this.setState(this.getStateFromPoints(snapshot.val()))
+                this.getRank(user);
+            });
+        fire.database().ref('/users/' + user.uid)
+            .on('child_added', snapshot => {
+                this.getRank(user);
             });
     };
 
