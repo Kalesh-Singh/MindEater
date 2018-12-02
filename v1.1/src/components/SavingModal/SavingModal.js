@@ -39,7 +39,7 @@ function SavingModal(props) {
                     variant="h6"
                     color="inherit"
                 >
-                    Saving Challenge
+                    Saving
                 </Typography>
             </div>
         </Modal>
