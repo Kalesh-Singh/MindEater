@@ -7,6 +7,7 @@ import RankCard from "./RankCard/RankCard";
 import CreatedChallengesCard from "./CreatedChallengesCard/CreatedChallengesCard";
 import fire from "../../fire";
 import ChallengeStepper from "./ChallengeStepper/ChallengeStepper";
+import BlackLogo from "../../assets/svg/black_logo.png"
 
 
 class Dashboard extends Component {
@@ -52,8 +53,10 @@ class Dashboard extends Component {
 
         return (
             <div className={classes.PageStyle}>
+
                 <div className={classes.UserName}>
                     <span className={classes.UserNameStyle}>{this.state.username}'s Dashboard</span>
+                    {/*<img className={classes.Logo} src={BlackLogo} alt='MindEater'/>*/}
                 </div>
                 <div className={classes.RowR}>
                     <ChallengesCard className={classes.root}/>
