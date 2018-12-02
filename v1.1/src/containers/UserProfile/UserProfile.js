@@ -43,9 +43,9 @@ class UserProfile extends Component {
     };
 
     componentDidMount() {
-        fire.auth().onAuthStateChanged(() => {
-            this.getProfilePic();
-            this.getUsername();
+        fire.auth().onAuthStateChanged((user) => {
+            this.getProfilePic(user);
+            this.getUsername(user);
         });
         const user = fire.auth().currentUser;
         if (user) {
@@ -56,7 +56,7 @@ class UserProfile extends Component {
 
     getProfilePic = (user) => {
         if (user) {
-            const imgSrc = fire.auth().currentUser.photoURL;
+            const imgSrc = user.photoURL;
             if (imgSrc) {
                 this.setState({imgSrc: imgSrc});
             } else {
@@ -119,7 +119,8 @@ class UserProfile extends Component {
             })
             .then(() => {
                 this.setState({imgFile: null});     // Reset image file to null
-                console.log("Updated user profile pic")
+                console.log("Updated user profile pic");
+                window.location.reload();
             })
             .catch(error => {
                 alert(error.message);
