@@ -63,7 +63,8 @@ class ChallengeStepper extends React.Component {
                 console.log('Question child added!');
                 fire.database().ref('/questions/' + questionId.val()).once('value')
                     .then(snapshot => {
-                        const updatedQuestions = [...this.state.questions];
+                        const updatedQuestions = [...this.state.questions]
+                            .filter(question => (question.challenge === challengeId));
                         const question = snapshot.val();
                         question.id = questionId.val();
                         question.key = questionId.key;
