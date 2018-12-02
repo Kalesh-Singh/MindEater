@@ -16,15 +16,31 @@ import Zoom from "@material-ui/core/Zoom/Zoom";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import ProfileIcon from "@material-ui/icons/FaceTwoTone"
 import LogOut from "@material-ui/icons/PowerSettingsNewTwoTone"
+import ProfilePlaceholder from "../../../assets/svg/users.svg";
 
 class UserMenu extends Component {
     state = {
         open: false,
+        imgSrc: null,
     };
 
     componentDidMount() {
-        fire.auth().onAuthStateChanged(this.signOutObserver);
+        fire.auth().onAuthStateChanged(user => {
+            this.signOutObserver(user);
+            this.getProfilePic(user);
+        });
     }
+
+    getProfilePic = (user) => {
+        if (user) {
+            const imgSrc = user.photoURL;
+            if (imgSrc) {
+                this.setState({imgSrc: imgSrc});
+            } else {
+                this.setState({imgSrc: ProfilePlaceholder});
+            }
+        }
+    };
 
     // Triggers when the auth state changes to handle sign-ins.
     signOutObserver = (user) => {
@@ -73,8 +89,8 @@ class UserMenu extends Component {
                     aria-haspopup="true"
                     onClick={this.handleToggle}
                 >
-                    {fire.auth().currentUser && fire.auth().currentUser.photoURL
-                        ? <Avatar src={fire.auth().currentUser.photoURL}/>
+                    {this.state.imgSrc
+                        ? <Avatar src={this.state.imgSrc}/>
                         : <AccountIcon/>}
                 </IconButton>
                 </Tooltip>
