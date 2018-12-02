@@ -13,6 +13,10 @@ import fire from "../../../fire";
 import SolveChallengeStepper from "../../../components/SolveChallengeStepper/SolveChallengeStepper";
 import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
 import css from "./ChallengeStepper.module.css"
+import CardHeader from "@material-ui/core/CardHeader/CardHeader";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import Zoom from "@material-ui/core/Zoom/Zoom";
+import Card from "@material-ui/core/Card/Card";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -21,14 +25,14 @@ const styles = theme => ({
         maxWidth: 400,
         flexGrow: 1,
         marginTop: 20,
-        boxShadow:"rgba(0, 0, 0, 0.2) 5px 10px 15px"
+        boxShadow:"rgba(0, 0, 0, 0.2) 5px 10px 15px",
+        background: "white",
     },
     header: {
         display: 'flex',
         alignItems: 'center',
         height: 50,
         paddingLeft: theme.spacing.unit * 4,
-        backgroundColor: theme.palette.background.default,
     },
     img: {
         height: 255,
@@ -38,6 +42,9 @@ const styles = theme => ({
         width: '100%',
         marginBottom: '-20px'
     },
+    progress: {
+        color: "red"
+    }
 });
 
 class ChallengeStepper extends React.Component {
@@ -45,7 +52,13 @@ class ChallengeStepper extends React.Component {
         activeStep: -1,
         challenges: [],
         questions: [],
-        open: false
+        open: false,
+    };
+
+    handleArrowRef = node => {
+        this.setState({
+            arrowRef: node,
+        });
     };
 
     handleClickOpen = () => {
@@ -173,16 +186,18 @@ class ChallengeStepper extends React.Component {
         return (
             <>
                 <div className={classes.root}>
+                    <CardHeader style={{background: "#ffea00"}}/>
                     <Paper square elevation={0} className={classes.header}
                            style={{display: "flex", flexFlow: "column"}}>
                         <Typography style={{display: "flex", fontSize:30, marginBottom:20, fontWeight:"bold"}}>Popular Challenges</Typography>
                         <Typography
-                            style={{display: "flex", marginBottom:15}}>{
+                            style={{display: "flex", marginTop:20, fontSize:18}}>{
                             popularChallenges[activeStep]
                                 ? popularChallenges[activeStep].title : "Challenge"}
                         </Typography>
                     </Paper>
-                    <CardActionArea>
+                    <Tooltip TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} placement={"top-start"} title={"Solve Challenge"} enterDelay={50} leaveDelay={200}>
+                    <CardActionArea style={{marginTop:25}}>
                     <AutoPlaySwipeableViews
                         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                         index={activeStep}
@@ -204,19 +219,21 @@ class ChallengeStepper extends React.Component {
 
                     </AutoPlaySwipeableViews>
                     </CardActionArea>
+                    </Tooltip>
                     <MobileStepper
-                        steps={6}
+                        steps={maxSteps}
+                        variant={"dots"}
                         position="static"
                         activeStep={activeStep}
                         className={classes.mobileStepper}
                         nextButton={
-                            <Button className={css.Button} size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1 || maxSteps === 0}>
+                            <Button className={css.Next} size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1 || maxSteps === 0}>
                                 Next
                                 {theme.direction === 'rtl' ? <KeyboardArrowLeft/> : <KeyboardArrowRight/>}
                             </Button>
                         }
                         backButton={
-                            <Button className={css.Button} size="small" onClick={this.handleBack} disabled={activeStep === 0 || maxSteps === 0}>
+                            <Button className={css.Back} size="small" onClick={this.handleBack} disabled={activeStep === 0 || maxSteps === 0}>
                                 {theme.direction === 'rtl' ? <KeyboardArrowRight/> : <KeyboardArrowLeft/>}
                                 Back
                             </Button>

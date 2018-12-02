@@ -1,4 +1,9 @@
-.Button:hover {
+.Next:hover {
     background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+.Back:hover {
+    background-color: #d50000 !important;
     color: white !important;
 }
