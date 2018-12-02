@@ -18,27 +18,32 @@ class PointCard extends Component {
     componentDidMount() {
         fire.auth().onAuthStateChanged(this.updatePoints);
     }
+
+    getPoints = (user) => {
+        fire.database().ref('/users/' + user.uid + '/points')
+            .once('value')
+            .then(snapshot => {
+                if (snapshot.val()) {
+                    this.setState({points: snapshot.val()});
+                }
+            })
+            .catch(error => {
+                alert(error.message)
+            });
+    };
+
     updatePoints = (user) => {
         if (user) {
-            fire.database().ref('/users/' + user.uid + '/points')
-                .once('value')
-                .then(snapshot => {
-                    if (snapshot.val()) {
-                        this.setState({points: snapshot.val()});
-                    }
-                })
-                .catch(error => {
-                    alert(error.message)
-                });
-
+            this.getPoints(user);
             this.setState({username: user.displayName});
             this.setListener(user);
         }
     };
+
     setListener = (user) => {
-        fire.database().ref('/users/' + user.uid + '/points')
+        fire.database().ref('/users/' + user.uid)
             .on('child_changed', snapshot => {
-                this.setState({points: snapshot.val()})
+                this.getPoints(user);
             });
     };
 
