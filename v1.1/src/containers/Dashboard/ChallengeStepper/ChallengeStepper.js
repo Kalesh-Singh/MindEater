@@ -192,7 +192,7 @@ class ChallengeStepper extends React.Component {
                     </AutoPlaySwipeableViews>
                     </CardActionArea>
                     <MobileStepper
-                        steps={maxSteps}
+                        steps={maxSteps + 1}
                         position="static"
                         activeStep={activeStep}
                         className={classes.mobileStepper}
