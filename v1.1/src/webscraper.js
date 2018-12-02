@@ -1,7 +1,7 @@
 import fire from "./fire";
 import $ from "jquery";
 import cheerio from "cheerio";
-import DefaultChallengImg from 'assets/svg/default-challenge-image.jpg';
+import DefaultChallengImg from './assets/svg/default-challenge-image.jpg';
 
 const getBlob = (url) => {
     return new Promise((resolve, reject) => {

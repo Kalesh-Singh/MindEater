@@ -55,12 +55,6 @@ class ChallengeStepper extends React.Component {
         open: false,
     };
 
-    handleArrowRef = node => {
-        this.setState({
-            arrowRef: node,
-        });
-    };
-
     handleClickOpen = () => {
         this.setState({open: true});
     };
