@@ -42,7 +42,7 @@ const theme = createMuiTheme({
         display: "inline-block"
     },
     icon: {
-        color: "green !important"
+        color: "green !important",
     },
     typography: {
         useNextVariants: true,

@@ -98,7 +98,7 @@ class SolveChallengeCard extends Component {
                             <Typography gutterBottom variant="h5" component="h2" style={{fontWeight:"bold"}}>
                                 {this.props.challenge.title}
                             </Typography>
-                            <Typography component="p" style={{fontWeight:"bolder"}}>
+                            <Typography component="p" style={{fontWeight:500}}>
                                 {this.props.challenge.description}
                             </Typography>
                             <Typography style={{fontWeight:"lighter", fontStyle:"italic"}}>
