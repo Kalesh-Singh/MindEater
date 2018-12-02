@@ -30,7 +30,7 @@ class UserProfile extends Component {
         imgSrc: null,
         imgFile: null,
         open: false,
-        usernameChanged: false
+        usernameChanged: false,
 
     };
 
@@ -177,6 +177,8 @@ class UserProfile extends Component {
         const imgSrc = this.state.imgSrc;
 
         const NotDisabled = classes.SaveNewUserName;
+
+        const { loading, success } = this.state;
 
         return (
             <div style={{marginTop: '100px'}}>
