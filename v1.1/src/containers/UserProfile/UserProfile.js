@@ -16,7 +16,6 @@ import SaveIcon from "@material-ui/icons/SaveOutlined";
 import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 
 import withMobileDialog from "@material-ui/core/es/withMobileDialog/withMobileDialog";
-import firebase from 'firebase/app';
 import ChangePasswordDialog from "./ChangePasswordDialog/ChangePasswordDialog";
 
 
@@ -26,7 +25,16 @@ class UserProfile extends Component {
         username: "Guest",
         imgSrc: null,
         imgFile: null,
-        state: false,
+        open: false,
+
+    };
+
+    handleClickOpen = () => {
+        this.setState({open: true});
+    };
+
+    handleClose = () => {
+        this.setState({open: false});
     };
 
     componentDidMount() {
@@ -210,7 +218,10 @@ class UserProfile extends Component {
                             </Tooltip>
                         </div>
                     </div>
-                    <ChangePasswordDialog/>
+                    <ChangePasswordDialog
+                        open={this.state.open}
+                        closed={this.handleClose}
+                    />
                 </form>
             </div>
         );
