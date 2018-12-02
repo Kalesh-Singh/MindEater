@@ -41,27 +41,31 @@ class CompletedChallenges extends Component {
         }
     };
 
+
     setListener = (user) => {
         fire.database().ref('/users/' + user.uid + '/completedChallenges')
             .on('child_added', snapshot => {
-                this.setState(state => {
-                    return {completedChallenges: state.completedChallenges + 1}
-                })
+                this.getCompletedChallenges(user);
             });
     };
+
+    getCompletedChallenges = (user) => {
+        fire.database().ref('/users/' + user.uid + '/completedChallenges')
+            .once('value')
+            .then(snapshot => {
+                this.setState({completedChallenges: snapshot.numChildren()});
+            })
+            .catch(error => {
+                alert(error.message)
+            });
+    };
+
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevState.username !== this.state.username) {
             const user = fire.auth().currentUser;
             if (user) {
-                fire.database().ref('/users/' + user.uid + '/completedChallenges')
-                    .once('value')
-                    .then(snapshot => {
-                        this.setState({completedChallenges: snapshot.numChildren()});
-                    })
-                    .catch(error => {
-                        alert(error.message)
-                    });
+                this.getCompletedChallenges(user);
             }
         }
     }
