@@ -30,7 +30,7 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.default,
     },
     img: {
-        height: 300,
+        height: 255,
         display: 'block',
         maxWidth: 400,
         overflow: 'hidden',
@@ -127,7 +127,7 @@ class ChallengeStepper extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.activeStep !== this.state.activeStep && !prevProps.open) {
+        if (prevState.activeStep !== this.state.activeStep && !prevProps.open && this.state.challenges.length > 0) {
             this.getQuestions(this.state.challenges[this.state.activeStep].id);
         }
     }
@@ -153,9 +153,12 @@ class ChallengeStepper extends React.Component {
     render() {
         const {classes, theme} = this.props;
         const {activeStep} = this.state;
-        const maxSteps = 5;
+        let maxSteps = 5;
+        if (this.state.challenges.length < maxSteps) {
+            maxSteps = this.state.challenges.length;
+        }
 
-        const popularChallenges = this.state.challenges.slice(0, 5);
+        const popularChallenges = this.state.challenges.slice(0, maxSteps);
 
         return (
             <>
@@ -197,13 +200,13 @@ class ChallengeStepper extends React.Component {
                         activeStep={activeStep}
                         className={classes.mobileStepper}
                         nextButton={
-                            <Button size="small" onClick={this.handleNext} disabled={activeStep === 6 - 1}>
+                            <Button size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1 || maxSteps === 0}>
                                 Next
                                 {theme.direction === 'rtl' ? <KeyboardArrowLeft/> : <KeyboardArrowRight/>}
                             </Button>
                         }
                         backButton={
-                            <Button size="small" onClick={this.handleBack} disabled={activeStep === 0}>
+                            <Button size="small" onClick={this.handleBack} disabled={activeStep === 0 || maxSteps === 0}>
                                 {theme.direction === 'rtl' ? <KeyboardArrowRight/> : <KeyboardArrowLeft/>}
                                 Back
                             </Button>
