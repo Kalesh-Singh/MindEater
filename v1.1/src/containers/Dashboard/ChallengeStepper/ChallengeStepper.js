@@ -12,6 +12,7 @@ import {autoPlay} from 'react-swipeable-views-utils';
 import fire from "../../../fire";
 import SolveChallengeStepper from "../../../components/SolveChallengeStepper/SolveChallengeStepper";
 import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
+import DefaultChallengeImg from '../../../assets/svg/default-challenge.png';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -98,7 +99,7 @@ class ChallengeStepper extends React.Component {
                                     const challenge = challengesObject[challengeId];
                                     challenge.id = challengeId;
                                     if (imagesObject) {
-                                        challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
+                                        challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : DefaultChallengeImg;
                                         const challengeOwner = challenge.owner;
                                         challenge.authorName = userObjects[challengeOwner].username;
                                     }
