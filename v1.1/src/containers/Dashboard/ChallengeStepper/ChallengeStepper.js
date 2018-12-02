@@ -41,7 +41,7 @@ const styles = theme => ({
 
 class ChallengeStepper extends React.Component {
     state = {
-        activeStep: 0,
+        activeStep: -1,
         challenges: [],
         questions: [],
         open: false
@@ -62,7 +62,7 @@ class ChallengeStepper extends React.Component {
                 console.log('Question child added!');
                 fire.database().ref('/questions/' + questionId.val()).once('value')
                     .then(snapshot => {
-                        const updatedQuestions = [];
+                        const updatedQuestions = [...this.state.questions];
                         const question = snapshot.val();
                         question.id = questionId.val();
                         question.key = questionId.key;
@@ -116,7 +116,7 @@ class ChallengeStepper extends React.Component {
 
 
     componentDidMount() {
-        this.setState({loading: true});
+        this.setState({loading: true, activeStep: 0});
 
         if (this.state.challenges.length === 0) {
             this.getChallenges();
@@ -133,7 +133,7 @@ class ChallengeStepper extends React.Component {
                 this.getQuestions(this.state.challenges[this.state.activeStep].id);
             }
         }
-        if (this.state.challenges.length === 1 && this.state.questions.length === 0) {
+        if (this.state.challenges.length !== prevState.challenges.length && this.state.questions.length === 0) {
             if (this.state.activeStep < this.state.challenges.length && this.state.activeStep >= 0) {
                 this.getQuestions(this.state.challenges[this.state.activeStep].id);
             }
