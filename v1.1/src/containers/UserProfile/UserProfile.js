@@ -22,10 +22,15 @@ import ChangePasswordDialog from "./ChangePasswordDialog/ChangePasswordDialog";
 class UserProfile extends Component {
 
     state = {
-        username: "Guest",
+        username: {
+            value: 'Guest',
+            error: '',
+            valid: false
+        },
         imgSrc: null,
         imgFile: null,
         open: false,
+        usernameChanged: false
 
     };
 
@@ -38,11 +43,14 @@ class UserProfile extends Component {
     };
 
     componentDidMount() {
-        fire.auth().onAuthStateChanged(this.getProfilePic);
+        fire.auth().onAuthStateChanged(() => {
+            this.getProfilePic();
+            this.getUsername();
+        });
         const user = fire.auth().currentUser;
         if (user) {
             this.getProfilePic(user);
-            this.updateUsername(user);
+            this.getUsername(user);
         }
     }
 
@@ -75,6 +83,27 @@ class UserProfile extends Component {
         }
     };
 
+    handleUsernameChange = event => {
+        const updatedUsername = {...this.state.username};
+        updatedUsername.value = event.target.value;
+        updatedUsername.error = this.checkUserName(updatedUsername);
+        updatedUsername.valid = updatedUsername.error.length === 0;
+        this.setState({username: updatedUsername, usernameChanged: true})
+    };
+
+    checkUserName = (username) => {
+        const pattern = /^[a-zA-Z0-9-_]+$/; // Alphanumeric dashes and underscores.
+        if (username.value.length === 0) {
+            return '* Required';
+        } else if (username.value.length > 15) {
+            return 'Cannot be longer than 15 characters';
+        } else if (!pattern.test(username.value)) {
+            return 'Only characters A-Z, a-z, -, and _ allowed';
+        } else {
+            return '';      // No error
+        }
+    };
+
     updateProfilePic = () => {
         const user = fire.auth().currentUser;
         if (!user) {
@@ -89,6 +118,7 @@ class UserProfile extends Component {
                 return user.updateProfile({photoURL: url})
             })
             .then(() => {
+                this.setState({imgFile: null});     // Reset image file to null
                 console.log("Updated user profile pic")
             })
             .catch(error => {
@@ -96,20 +126,39 @@ class UserProfile extends Component {
             })
     };
 
-    updateUsername = (user) => {
+    getUsername = (user) => {
         if (user) {
             fire.database().ref('/users/' + user.uid + '/username')
                 .once('value')
                 .then(snapshot => {
-                    console.log("USER Snapshot", snapshot);
                     if (snapshot.val()) {
-                        console.log("USER Snapshot Val", snapshot.val());
-                        this.setState({username: snapshot.val()});
+                        const updatedUsername = {...this.state.username};
+                        updatedUsername.value = snapshot.val();
+                        this.setState({username: updatedUsername});
                     }
                 }).catch(error => {
                 alert(error.message)
             });
             this.setListener(user);
+        }
+    };
+
+    updateUsername = () => {
+        const user = fire.auth().currentUser;
+        if (user) {
+            user.updateProfile({
+                displayName: this.state.username.value,
+            })
+                .then(() => {
+                    return fire.database().ref('/users/' + user.uid)
+                        .update({username: this.state.username.value})
+                })
+                .then(() => {
+                    console.log("Updated username");
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
         }
     };
 
@@ -126,14 +175,10 @@ class UserProfile extends Component {
 
         const imgSrc = this.state.imgSrc;
 
-        const {fullScreen} = this.props;
-
-        // const formValid = this.checkFormValidity();
-
         return (
             <div style={{marginTop: '100px'}}>
                 <div className={classes.header}>
-                    <h1>{this.state.username}'s Profile Page</h1>
+                    <h1>{this.state.username.value}'s Profile Page</h1>
                     <p>Update your profile</p>
                 </div>
                 <form>
@@ -172,21 +217,25 @@ class UserProfile extends Component {
                                 onClick={this.updateProfilePic}
                                 variant={"raised"}
                                 className={classes.ButtonStyle}
+                                disabled={this.state.imgFile === null}
                             >
                                 Upload <CloudUploadIcon style={{marginLeft: 10}}/>
                             </Button>
                         </Tooltip>
                     </div>
 
-                    <div style={{textAlign:"center"}}>
+                    <div style={{textAlign: "center"}}>
                         <div className={classes.SubTitles}>
                             <h2>Update username:</h2>
                             <TextField
                                 label="Username"
-                                helperText={"Input new username"}
                                 rowsMax="4"
                                 variant={"outlined"}
                                 margin={"normal"}
+                                onChange={this.handleUsernameChange}
+                                error={this.state.username.error.length > 0}
+                                helperText={this.state.username.error}
+                                value={this.state.username.value}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment variant="outlined" position="start">
@@ -200,8 +249,12 @@ class UserProfile extends Component {
                                      title={"save changes"}>
                                 <Button
                                     variant={"raised"}
-                                    className={classes.SaveNewUserName}>
-                                    <SaveIcon style={{verticalAlign: "center", marginRight: "5px", height: 20}}/> Apply
+                                    className={classes.SaveNewUserName}
+                                    disabled={!this.state.usernameChanged || !this.state.username.valid}
+                                    onClick={this.updateUsername}
+                                >
+                                    <SaveIcon style={{verticalAlign: "center", marginRight: "5px", height: 20}}/>
+                                    Apply
                                 </Button>
                             </Tooltip>
                         </div>
@@ -213,7 +266,8 @@ class UserProfile extends Component {
                                     variant={"raised"}
                                     className={classes.PasswordButton}
                                     onClick={this.handleClickOpen}>
-                                    <Password style={{verticalAlign: "center", marginRight: "5px", height: 20}}/>Change Password
+                                    <Password style={{verticalAlign: "center", marginRight: "5px", height: 20}}/>Change
+                                    Password
                                 </Button>
                             </Tooltip>
                         </div>
