@@ -190,7 +190,11 @@ class ChallengeStepper extends React.Component {
                                 ? popularChallenges[activeStep].title : "Challenge"}
                         </Typography>
                         <Typography style={{display: "flex", fontSize:12, marginTop:25, fontWeight:"light"}}>
-                            Author
+                            {this.state.challenges.length > 0
+                                ? this.state.challenges[this.state.activeStep].authorName
+                                : "Author"
+                            }
+
                         </Typography>
                     </Paper>
                     <Tooltip TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} placement={"top-start"} title={"Solve Challenge"} enterDelay={50} leaveDelay={200}>
