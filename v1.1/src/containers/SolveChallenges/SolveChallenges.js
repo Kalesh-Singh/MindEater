@@ -112,21 +112,34 @@ class SolveChallenges extends Component {
                             .then(usersSnapshot => {
                                 const userObjects = usersSnapshot.val();
 
+                                // ------ Comment out for ease of testing------
+                                const currentUser = fire.auth().currentUser;
+                                const completedChallenges = userObjects[currentUser.uid].completedChallenges;
+                                const completedChallengesId = [];
+                                for (let ch in completedChallenges) {
+                                    completedChallengesId.push(ch);
+                                }
+                                // ---------------------------------
+
                                 for (let challengeId in challengesObject) {
-                                    const challenge = challengesObject[challengeId];
-                                    challenge.id = challengeId;
-                                    if (imagesObject) {
-                                        challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
-                                        const challengeOwner = challenge.owner;
-                                        challenge.authorName = userObjects[challengeOwner].username;
-                                    }
-                                    if (!challenge.isPartial) {    // TODO: Check if owner is not this user
-                                        updatedChallenges.push(challenge);
-                                    }
+                                    if (!completedChallengesId.includes(challengeId)) {   // <------ Comment out for ease of testing------
+                                        const challenge = challengesObject[challengeId];
+                                        challenge.id = challengeId;
+                                        if (imagesObject) {
+                                            challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : null;
+                                            const challengeOwner = challenge.owner;
+                                            challenge.authorName = userObjects[challengeOwner].username;
+                                        }
+                                        if (!challenge.isPartial) {    // TODO: Check if owner is not this user
+                                            updatedChallenges.push(challenge);
+                                        }
+                                    }   // <------ Comment out for ease of testing------
                                 }
                                 updatedChallenges.sort((a, b) => (a.timesCompleted - b.timesCompleted));
                                 this.setState({challenges: updatedChallenges, loading: false});
-                        }).catch(error => {alert(error.message)});
+                            }).catch(error => {
+                            alert(error.message)
+                        });
                     });
             });
     }
@@ -168,7 +181,7 @@ class SolveChallenges extends Component {
                                 placeholder="Search Challenges..."
                                 onChange={this.handleSearch}
                                 value={this.state.searchQuery}
-                            style={{fontWeight:"bold"}}>
+                                style={{fontWeight: "bold"}}>
                             </InputBase>
                         </div>
                     </div>

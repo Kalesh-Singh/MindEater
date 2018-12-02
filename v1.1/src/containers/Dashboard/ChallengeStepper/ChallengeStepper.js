@@ -102,17 +102,28 @@ class ChallengeStepper extends React.Component {
                             .then(usersSnapshot => {
                                 const userObjects = usersSnapshot.val();
 
+                                // ------ Comment out for ease of testing------
+                                const currentUser = fire.auth().currentUser;
+                                const completedChallenges = userObjects[currentUser.uid].completedChallenges;
+                                const completedChallengesId = [];
+                                for (let ch in completedChallenges) {
+                                    completedChallengesId.push(ch);
+                                }
+                                // ---------------------------------
+
                                 for (let challengeId in challengesObject) {
-                                    const challenge = challengesObject[challengeId];
-                                    challenge.id = challengeId;
-                                    if (imagesObject) {
-                                        challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : DefaultChallengeImg;
-                                        const challengeOwner = challenge.owner;
-                                        challenge.authorName = userObjects[challengeOwner].username;
-                                    }
-                                    if (!challenge.isPartial) {    // TODO: Check if owner is not this user
-                                        updatedChallenges.push(challenge);
-                                    }
+                                    if (!completedChallengesId.includes(challengeId)) {   // <------ Comment out for ease of testing------
+                                        const challenge = challengesObject[challengeId];
+                                        challenge.id = challengeId;
+                                        if (imagesObject) {
+                                            challenge.imgURL = (imagesObject[challengeId]) ? imagesObject[challengeId].imgURL : DefaultChallengeImg;
+                                            const challengeOwner = challenge.owner;
+                                            challenge.authorName = userObjects[challengeOwner].username;
+                                        }
+                                        if (!challenge.isPartial) {    // TODO: Check if owner is not this user
+                                            updatedChallenges.push(challenge);
+                                        }
+                                    }   // <------ Comment out for ease of testing------
                                 }
                                 updatedChallenges.sort((a, b) => (a.timesCompleted - b.timesCompleted));
                                 this.setState({challenges: updatedChallenges, loading: false});
