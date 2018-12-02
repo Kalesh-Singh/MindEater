@@ -118,6 +118,7 @@ class UserProfile extends Component {
                 return user.updateProfile({photoURL: url})
             })
             .then(() => {
+                this.setState({imgFile: null});     // Reset image file to null
                 console.log("Updated user profile pic")
             })
             .catch(error => {
@@ -216,6 +217,7 @@ class UserProfile extends Component {
                                 onClick={this.updateProfilePic}
                                 variant={"raised"}
                                 className={classes.ButtonStyle}
+                                disabled={this.state.imgFile === null}
                             >
                                 Upload <CloudUploadIcon style={{marginLeft: 10}}/>
                             </Button>
