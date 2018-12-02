@@ -17,8 +17,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const styles = theme => ({
     root: {
-        maxWidth: 350,
-        maxHeight: 600,
+        maxWidth: 400,
         flexGrow: 1,
         marginTop: 20,
         boxShadow:"rgba(0, 0, 0, 0.2) 5px 10px 15px"
@@ -31,7 +30,7 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.default,
     },
     img: {
-        height: 255,
+        height: 300,
         display: 'block',
         maxWidth: 400,
         overflow: 'hidden',
@@ -198,7 +197,7 @@ class ChallengeStepper extends React.Component {
                         activeStep={activeStep}
                         className={classes.mobileStepper}
                         nextButton={
-                            <Button size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1}>
+                            <Button size="small" onClick={this.handleNext} disabled={activeStep === 6 - 1}>
                                 Next
                                 {theme.direction === 'rtl' ? <KeyboardArrowLeft/> : <KeyboardArrowRight/>}
                             </Button>
