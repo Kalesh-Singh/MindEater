@@ -17,7 +17,8 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const styles = theme => ({
     root: {
-        maxWidth: 400,
+        maxWidth: 350,
+        maxHeight: 600,
         flexGrow: 1,
         marginTop: 20,
         boxShadow:"rgba(0, 0, 0, 0.2) 5px 10px 15px"
@@ -192,7 +193,7 @@ class ChallengeStepper extends React.Component {
                     </AutoPlaySwipeableViews>
                     </CardActionArea>
                     <MobileStepper
-                        steps={maxSteps}
+                        steps={6}
                         position="static"
                         activeStep={activeStep}
                         className={classes.mobileStepper}
