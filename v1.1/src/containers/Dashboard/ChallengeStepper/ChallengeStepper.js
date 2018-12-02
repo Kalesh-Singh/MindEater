@@ -43,8 +43,6 @@ const styles = theme => ({
         width: '100%',
         marginBottom: '-20px'
     },
-    dotActive: {
-    },
 });
 
 class ChallengeStepper extends React.Component {
@@ -226,7 +224,7 @@ class ChallengeStepper extends React.Component {
                         variant={"dots"}
                         position="static"
                         activeStep={activeStep}
-                        className={classes.dotActive}
+                        className={classes.MuiMobileStepper}
                         nextButton={
                             <Button className={css.Next} size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1 || maxSteps === 0}>
                                 Next

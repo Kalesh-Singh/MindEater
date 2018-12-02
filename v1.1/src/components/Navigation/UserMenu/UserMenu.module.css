@@ -1,13 +1,9 @@
-.IconStyleProfile {
+.Icon {
     margin-right: 5px;
 }
 
 .IconStyleProfile:hover {
     color: #4CAF50;
-}
-
-.IconStyleLogout {
-    margin-right: 5px;
 }
 
 .IconStyleLogout:hover {
