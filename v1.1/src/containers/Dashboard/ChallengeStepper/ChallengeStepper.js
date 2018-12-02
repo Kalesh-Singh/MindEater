@@ -56,6 +56,7 @@ class ChallengeStepper extends React.Component {
     };
 
     getQuestions = (challengeId) => {
+        console.log("GET QUESTIONS called");
         fire.database().ref('/challenges/' + challengeId + '/questions')
             .on('child_added', questionId => {
                 console.log('Question child added!');
@@ -121,14 +122,21 @@ class ChallengeStepper extends React.Component {
             this.getChallenges();
         }
 
-        if (this.state.challenges.length > 0 && !this.state.open) {
+        if (this.state.challenges.length > 0) {
             this.getQuestions(this.state.challenges[this.state.activeStep].id);
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.activeStep !== this.state.activeStep && !prevProps.open && this.state.challenges.length > 0) {
-            this.getQuestions(this.state.challenges[this.state.activeStep].id);
+        if (prevState.activeStep !== this.state.activeStep && !prevProps.open) {
+            if (this.state.activeStep < this.state.challenges.length && this.state.activeStep >= 0) {
+                this.getQuestions(this.state.challenges[this.state.activeStep].id);
+            }
+        }
+        if (this.state.challenges.length === 1 && this.state.questions.length === 0) {
+            if (this.state.activeStep < this.state.challenges.length && this.state.activeStep >= 0) {
+                this.getQuestions(this.state.challenges[this.state.activeStep].id);
+            }
         }
     }
 
