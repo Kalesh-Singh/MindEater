@@ -17,6 +17,7 @@ import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 
 import withMobileDialog from "@material-ui/core/es/withMobileDialog/withMobileDialog";
 import ChangePasswordDialog from "./ChangePasswordDialog/ChangePasswordDialog";
+import SavingModal from "../../components/SavingModal/SavingModal";
 
 
 class UserProfile extends Component {
@@ -30,7 +31,8 @@ class UserProfile extends Component {
         imgSrc: null,
         imgFile: null,
         open: false,
-        usernameChanged: false
+        usernameChanged: false,
+        saving: false
 
     };
 
@@ -105,6 +107,7 @@ class UserProfile extends Component {
     };
 
     updateProfilePic = () => {
+        this.setState({saving: true});
         const user = fire.auth().currentUser;
         if (!user) {
             return;
@@ -278,6 +281,7 @@ class UserProfile extends Component {
                         closed={this.handleClose}
                     />
                 </form>
+                <SavingModal open={this.state.saving}/>
             </div>
         );
     }
