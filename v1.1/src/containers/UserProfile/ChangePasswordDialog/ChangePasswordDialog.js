@@ -6,7 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Fade from "@material-ui/core/Fade/Fade";
 import IconButton from "@material-ui/core/IconButton/IconButton";
-import CloseIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import CloseIcon from "@material-ui/icons/CloseOutlined";
 import Typography from "@material-ui/core/Typography/Typography";
 import Button from "@material-ui/core/Button/Button";
 import Grid from "@material-ui/core/Grid/Grid";
@@ -23,8 +23,11 @@ import firebase from "firebase";
 
 class ChangePasswordDialog extends Component {
 
+    // Expected props
+    // 1. open      (bool)
+    // 2. closed    (func)
+
     state = {
-        state: false,
         showPassword: false,
         oldPassword: {
             value: '',
@@ -46,18 +49,9 @@ class ChangePasswordDialog extends Component {
         }
     };
 
-    handleClickOpen = () => {
-        this.setState({open: true});
-    };
-
-    handleClose = () => {
-        this.setState({open: false});
-    };
-
-
     handleClickShowPassword = () => {
         this.setState(state => ({showPassword: !state.showPassword}));
-    }
+    };
 
     handleChange = name => event => {
         const updatedField = {...this.state[name]};
@@ -189,7 +183,7 @@ class ChangePasswordDialog extends Component {
                 alert(error.message);
             });
 
-        this.handleClose();
+        this.props.closed();
     };
 
     render() {
@@ -200,15 +194,15 @@ class ChangePasswordDialog extends Component {
                 <form>
                     <Dialog
                         fullScreen
-                        open={this.state.open}
-                        closed={this.handleClose}>
+                        open={this.props.open}
+                        closed={this.props.closed}>
                         <AppBar className={classes.appBar}>
                             <Toolbar>
                                 <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}}
                                          disableFocusListener
                                          placement={"right"}
                                          title={"Cancel"}>
-                                    <IconButton color="inherit" onClick={this.handleClose} aria-label="Close"
+                                    <IconButton color="inherit" onClick={this.props.closed} aria-label="Close"
                                                 className={classes.butonCancel}>
                                         <CloseIcon/>
                                     </IconButton>
