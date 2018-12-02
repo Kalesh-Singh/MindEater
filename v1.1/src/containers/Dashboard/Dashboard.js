@@ -56,12 +56,12 @@ class Dashboard extends Component {
                     <span className={classes.UserNameStyle}>{this.state.username}'s Dashboard</span>
                 </div>
                 <div className={classes.RowR}>
-                    <PointCard className={classes.root}/>
-                    <RankCard className={classes.root}/>
-                    <ChallengeStepper className={classes.root}/>
-                    <CreatedChallengesCard className={classes.root}/>
                     <ChallengesCard className={classes.root}/>
+                    <ChallengeStepper className={classes.root}/>
+                    <RankCard className={classes.root}/>
+                    <PointCard className={classes.root}/>
                     <CompletedChallenges className={classes.root}/>
+                    <CreatedChallengesCard className={classes.root}/>
                 </div>
             </div>
         );

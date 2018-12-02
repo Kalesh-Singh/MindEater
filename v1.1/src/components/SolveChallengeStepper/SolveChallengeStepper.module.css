@@ -78,6 +78,14 @@
     color:#FFF;
 }
 
+.Explanation {
+    max-width: 200px;
+}
+
+.Question {
+    max-width: 50px;
+}
+
 @media (max-width: 40em){
     .ContentCol {
         top: 5%;
