@@ -198,8 +198,7 @@ class ChangePasswordDialog extends Component {
                         closed={this.props.closed}>
                         <AppBar className={classes.appBar}>
                             <Toolbar>
-                                <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}}
-                                         disableFocusListener
+                                <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} TransitionProps={{timeout: 300}}
                                          placement={"right"}
                                          title={"Cancel"}>
                                     <IconButton color="inherit" onClick={this.props.closed} aria-label="Close"
@@ -210,8 +209,7 @@ class ChangePasswordDialog extends Component {
                                 <Typography variant="h6" color="inherit" className={classes.AppbarTitle}>
                                     Change Password
                                 </Typography>
-                                <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}}
-                                         disableFocusListener
+                                <Tooltip classes={{tooltip: classes.ToolS}} TransitionComponent={Fade} TransitionProps={{timeout: 300}}
                                          placement={"bottom"}
                                          title={"save changes"}>
                                     <Button

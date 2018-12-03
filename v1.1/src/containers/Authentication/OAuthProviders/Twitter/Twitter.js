@@ -32,7 +32,7 @@ class Twitter extends Component {
 
     render() {
         return (
-            <Tooltip TransitionComponent={Zoom} TransitionProps={{timeout: 600}} placement={"top"}
+            <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Zoom} TransitionProps={{timeout: 600}} placement={"top"}
                      title={"Sign in with Twitter"} enterDelay={50} leaveDelay={200}>
                 <Button
                     variant='fab'

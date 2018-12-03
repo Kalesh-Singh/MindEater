@@ -1,3 +1,10 @@
 .TwitterButton:hover {
     background: white !important;
 }
+
+.Tool {
+    background-color: #4AA0EB !important;
+    color: white !important;
+    font-size: 12px !important;
+    margin-bottom: -5px !important;
+}
