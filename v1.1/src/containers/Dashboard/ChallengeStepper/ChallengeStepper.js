@@ -17,6 +17,7 @@ import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import DefaultChallengeImg from '../../../assets/svg/default-challenge.png';
+import classes from "../../../components/SolveChallengeCard/SolveChallengeCard.module.css";
 
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -223,7 +224,7 @@ class ChallengeStepper extends React.Component {
 
                         </Typography>
                     </Paper>
-                    <Tooltip TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} placement={"top-start"} title={"Solve Challenge"} enterDelay={50} leaveDelay={200}>
+                    <Tooltip classes={{tooltip: css.Tool}} TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} placement={"left"} title={"Solve Challenge"} enterDelay={20} leaveDelay={200}>
                     <CardActionArea style={{marginTop:30}}>
                     <AutoPlaySwipeableViews
                         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -252,7 +253,7 @@ class ChallengeStepper extends React.Component {
                         variant={"dots"}
                         position="static"
                         activeStep={activeStep}
-                        className={classes.MuiMobileStepper}
+                        classes={{dotActive: css.Stepper}}
                         nextButton={
                             <Button className={css.Next} size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1 || maxSteps === 0}>
                                 Next

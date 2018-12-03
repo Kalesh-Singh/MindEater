@@ -384,8 +384,8 @@ class ChallengeDialog extends Component {
                             <Typography variant="h6" color="inherit" style={{flex: '1', textAlign: "center"}}>
                                 New Challenge
                             </Typography>
-                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
-                                     title={SaveProgress}>
+                            <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} TransitionProps={{timeout: 300}}
+                                     title={SaveProgress} enterDelay={25} leaveDelay={200}>
                                 <Button
                                     className={classes.bouton}
                                     color="inherit"
@@ -403,7 +403,6 @@ class ChallengeDialog extends Component {
                             label="Title"
                             multiline
                             rowsMax="4"
-                            //margin="normal"
                             fullWidth
                             error={this.state.title.error.length > 0}
                             helperText={this.state.title.error}
@@ -441,9 +440,8 @@ class ChallengeDialog extends Component {
 
                         <div>
                             <MuiThemeProvider theme={theme}>
-                                <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}}
-                                         disableFocusListener
-                                         placement={"right"} title={NeedHelp}>
+                                <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} TransitionProps={{timeout: 600}}
+                                         placement={"right"} title={NeedHelp} enterDelay={25} leaveDelay={200}>
                                     <Button
                                         color={"primary"}
                                         variant={"raised"}

@@ -7,6 +7,12 @@
     background-color: #d50000 !important;
     color: white !important;
 }
-.MuiMobileStepper-dotActive-712 {
-    color: #2096F3 !important;
+.Stepper {
+    background-color: #2096F3 !important;
+}
+
+.Tool {
+    background-color: #2087de !important;
+    color: white !important;
+    font-size: 13px !important;
 }

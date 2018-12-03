@@ -77,7 +77,7 @@ class UserMenu extends Component {
     render() {
         return (
             <>
-                <Tooltip TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} placement={"left"} title={"Profile"} enterDelay={50} leaveDelay={150}>
+                <Tooltip classes={{tooltip:classes.Tool}} TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} placement={"left"} title={"Profile"} enterDelay={25} leaveDelay={150}>
                 <IconButton
                     style={{position: 'absolute', right: '16px'}}
                     color="inherit"

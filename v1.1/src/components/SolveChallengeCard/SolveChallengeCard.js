@@ -15,6 +15,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabe
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import Divider from "@material-ui/core/Divider/Divider";
 import DefaultChallengeImg from '../../assets/svg/default-challenge.png';
+import Zoom from "@material-ui/core/Zoom/Zoom";
 
 class SolveChallengeCard extends Component {
 
@@ -90,6 +91,7 @@ class SolveChallengeCard extends Component {
                         flexFlow: 'column', justifyContent: 'space-between'
                     }}
                 >
+                    <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} placement={"left"} title={"Solve Challenge"} enterDelay={50} leaveDelay={200}>
                     <CardActionArea onClick={this.handleClickOpen} style={{paddingBottom:-10}}>
                         <figure className={classes.Figure}>
                             <img src={this.props.challenge.imgURL || DefaultChallengeImg} alt={"Challenge"}/>
@@ -107,13 +109,6 @@ class SolveChallengeCard extends Component {
                         </CardContent>
                         <Divider/>
                     </CardActionArea>
-                    <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} disableFocusListener disableTouchListener placement={"left"} title={"Like Challenge"}>
-                        <FormControlLabel
-                            control={
-                                <Checkbox icon={<FavoriteBorder/>} checkedIcon={<Favorite style={{color:"#d50000"}}/>} value="checkedH" style={{marginLeft:'15px'}}/>
-                            }
-                            style={{marginLeft:'auto'}}
-                        />
                     </Tooltip>
                 </Card>
                 <SolveChallengeStepper

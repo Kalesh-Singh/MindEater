@@ -45,7 +45,7 @@ class AddChallenge extends Component {
         return (
             <>
                 <MuiThemeProvider theme={theme}>
-                    <Tooltip TransitionComponent={Fade} disableFocusListener title={"Create Challenge"}>
+                    <Tooltip classes={{tooltip: classes.Tool}} placement={"left"} TransitionComponent={Fade} title={"Create Challenge"} enterDelay={25} leaveDelay={200}>
                 <Button onClick={this.handleClickOpen}
                         color="primary"
                         variant="fab"

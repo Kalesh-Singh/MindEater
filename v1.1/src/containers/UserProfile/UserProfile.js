@@ -181,6 +181,8 @@ class UserProfile extends Component {
 
         const NotDisabled = classes.SaveNewUserName;
 
+        const { loading, success } = this.state;
+
         return (
             <div style={{marginTop: '100px'}}>
                 <div className={classes.header}>
@@ -203,9 +205,8 @@ class UserProfile extends Component {
                             type="file"
                         />
                         <label htmlFor="edit-pic-button">
-                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
-                                     placement={"bottom"}
-                                     title={"Change your profile picture"}>
+                            <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"bottom"}
+                                     title={"Change profile picture"} enterDelay={25}>
                                 <Button
                                     variant="raised"
                                     component="span"
@@ -216,9 +217,8 @@ class UserProfile extends Component {
                             </Tooltip>
                         </label>
 
-                        <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
-                                 placement={"bottom"}
-                                 title={"Upload picture"}>
+                        <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"bottom"}
+                                 title={"Upload picture"} enterDelay={25}>
                             <Button
                                 onClick={this.updateProfilePic}
                                 variant={"raised"}
@@ -250,8 +250,8 @@ class UserProfile extends Component {
                                     ),
                                 }}
                             />
-                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"bottom"}
-                                     title={"save changes"}>
+                            <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"bottom"}
+                                     title={"save changes"} enterDelay={25}>
                                 <Button
                                     variant={"raised"}
                                     className={classes.SaveNewUserName}
@@ -264,7 +264,7 @@ class UserProfile extends Component {
                             </Tooltip>
                         </div>
                         <div className={classes.SubTitles}>
-                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"right"}
+                            <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"right"}
                                      title={"change password"}>
                                 <Button
                                     variant={"raised"}

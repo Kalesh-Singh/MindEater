@@ -9,6 +9,14 @@
     text-decoration: underline;
 }
 
+.Footer {
+    background-color: #2096F3 !important;
+    color: #FFFFFF !important;
+    margin-top: 607px !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
+
 .Header {
     width: 100%;
     text-align: center;
@@ -31,6 +39,12 @@
 }
 
 .Bttn:hover {
-    background-color: rgba(76, 175, 80, 0.51) !important;
+    background-color: rgba(32, 150, 243, 0.36) !important;
     color: white !important;
+}
+/*Pixel 2*/
+@media (max-height: 736px) {
+    .Footer {
+        margin-top: 405px !important;
+    }
 }
