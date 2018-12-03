@@ -1,3 +1,10 @@
 .FacebookButton:hover {
     background: white !important;
 }
+
+.Tool {
+    background-color: #4267B2 !important;
+    color: white !important;
+    font-size: 12px !important;
+    margin-bottom: -5px !important;
+}

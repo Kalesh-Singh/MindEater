@@ -1,3 +1,10 @@
 .GoogleButton:hover {
     background: white !important;
 }
+
+.Tool {
+    background-color: #EA4334 !important;
+    color: white !important;
+    font-size: 12px !important;
+    margin-bottom: -5px !important;
+}
