@@ -5,6 +5,7 @@ import green from "@material-ui/core/es/colors/green";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Fade from "@material-ui/core/Fade/Fade";
 import Add from "@material-ui/icons/Add"
+import classes from "./AddQuestion.module.css";
 
 const theme = createMuiTheme({
     palette: {
@@ -38,12 +39,12 @@ class AddQuestion extends Component {
 
     render() {
 
-        const AddQ = "Add a new question";
+        const AddQ = "Add new question";
 
         return (
             <>
                 <MuiThemeProvider theme={theme}>
-                    <Tooltip TransitionComponent={Fade} disableFocusListener disableTouchListener title={AddQ}>
+                    <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} title={AddQ} enterDelay={50} leaveDelay={200}>
                         <Button onClick={this.handleClickOpen}
                                 color="primary"
                                 variant="fab"

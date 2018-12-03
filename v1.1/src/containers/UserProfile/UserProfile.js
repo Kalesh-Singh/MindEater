@@ -17,6 +17,7 @@ import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 
 import withMobileDialog from "@material-ui/core/es/withMobileDialog/withMobileDialog";
 import ChangePasswordDialog from "./ChangePasswordDialog/ChangePasswordDialog";
+import SavingModal from "../../components/SavingModal/SavingModal";
 
 
 class UserProfile extends Component {
@@ -31,6 +32,7 @@ class UserProfile extends Component {
         imgFile: null,
         open: false,
         usernameChanged: false,
+        saving: false
 
     };
 
@@ -105,6 +107,7 @@ class UserProfile extends Component {
     };
 
     updateProfilePic = () => {
+        this.setState({saving: true});
         const user = fire.auth().currentUser;
         if (!user) {
             return;
@@ -202,9 +205,8 @@ class UserProfile extends Component {
                             type="file"
                         />
                         <label htmlFor="edit-pic-button">
-                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
-                                     placement={"bottom"}
-                                     title={"Change your profile picture"}>
+                            <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"bottom"}
+                                     title={"Change profile picture"} enterDelay={25}>
                                 <Button
                                     variant="raised"
                                     component="span"
@@ -215,9 +217,8 @@ class UserProfile extends Component {
                             </Tooltip>
                         </label>
 
-                        <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} disableFocusListener
-                                 placement={"bottom"}
-                                 title={"Upload picture"}>
+                        <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"bottom"}
+                                 title={"Upload picture"} enterDelay={25}>
                             <Button
                                 onClick={this.updateProfilePic}
                                 variant={"raised"}
@@ -249,8 +250,8 @@ class UserProfile extends Component {
                                     ),
                                 }}
                             />
-                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"bottom"}
-                                     title={"save changes"}>
+                            <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"bottom"}
+                                     title={"save changes"} enterDelay={25}>
                                 <Button
                                     variant={"raised"}
                                     className={classes.SaveNewUserName}
@@ -263,7 +264,7 @@ class UserProfile extends Component {
                             </Tooltip>
                         </div>
                         <div className={classes.SubTitles}>
-                            <Tooltip TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"right"}
+                            <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} TransitionProps={{timeout: 300}} placement={"right"}
                                      title={"change password"}>
                                 <Button
                                     variant={"raised"}
@@ -280,6 +281,7 @@ class UserProfile extends Component {
                         closed={this.handleClose}
                     />
                 </form>
+                <SavingModal open={this.state.saving}/>
             </div>
         );
     }

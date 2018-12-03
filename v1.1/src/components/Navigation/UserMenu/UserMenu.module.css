@@ -9,3 +9,9 @@
 .IconStyleLogout:hover {
     color: #d50000;
 }
+
+.Tool {
+    background-color: white !important;
+    color: black !important;
+    font-size: 12px !important;
+}

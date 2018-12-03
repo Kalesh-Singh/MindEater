@@ -12,3 +12,9 @@
 .Hov:hover {
     box-shadow: rgba(0, 0, 0, 0.2) 5px 10px 15px !important;
 }
+
+.Tool {
+    background-color: #4CAF50 !important;
+    color: white !important;
+    font-size: 15px !important;
+}

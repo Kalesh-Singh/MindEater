@@ -112,7 +112,7 @@ class EditChallengeCard extends Component {
                         flexFlow: 'column', justifyContent: 'space-between'
                     }}>
                     <CardHeader style={{background:this.state.getColor}}/>
-                    <Tooltip TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} placement={"bottom"} title={"Edit"} enterDelay={50} leaveDelay={200}>
+                    <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Zoom} TransitionProps={{ timeout: 600 }} placement={"bottom"} title={"Edit"} enterDelay={25} leaveDelay={200}>
                     <CardActionArea onClick={this.handleClickOpen}>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">

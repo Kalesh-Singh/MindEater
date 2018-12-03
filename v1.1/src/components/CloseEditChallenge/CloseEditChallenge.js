@@ -8,7 +8,7 @@ import ChangesNotSaved from "./ChangesNotSaved/ChangesNotSaved";
 
 import classes from "./CloseEditChallenge.module.css";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
-import Zoom from "@material-ui/core/Zoom/Zoom";
+import Fade from "@material-ui/core/Fade/Fade";
 class CloseEditChallenge extends Component {
 
     // Expected props:
@@ -68,7 +68,7 @@ class CloseEditChallenge extends Component {
 
         return (
             <>
-                <Tooltip TransitionComponent={Zoom} TransitionProps={{timeout: 600 }} placement={"bottom"} title={"Exit"} enterDelay={50} leaveDelay={150}>
+                <Tooltip classes={{tooltip: classes.Tool}} TransitionComponent={Fade} TransitionProps={{timeout: 600 }} placement={"bottom"} title={"Exit"} enterDelay={25} leaveDelay={200}>
                 <IconButton
                     color={"inherit"}
                     onClick={openCloseDialog}

@@ -15,6 +15,7 @@ import classes from "./SideDrawerButtons.module.css";
 import Blogo from "../../../../assets/svg/black_logo.png";
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 import red from "@material-ui/core/es/colors/red";
+import BrandIcon from "@material-ui/icons/AdbTwoTone"
 
 const theme = createMuiTheme({
     active: {
@@ -98,7 +99,12 @@ class SideDrawerButtons extends Component {
                         </ListItem>
                     </NavLink>
                 </List>
+                <div className={classes.Footer}>
+                    Team Alloy <BrandIcon style={{verticalAlign:"bottom", float:"right"}}/>
+
+                </div>
             </div>
+
         );
     }
 }
