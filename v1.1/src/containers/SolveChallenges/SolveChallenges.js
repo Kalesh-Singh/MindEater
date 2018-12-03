@@ -31,6 +31,17 @@ class SolveChallenges extends Component {
         searchQuery: ''
     };
 
+    setCompletedListeners = (user) => {
+        fire.database().ref('/users/' + user.uid)
+            .on('child_changed', snapshot => {
+                this.getChallenges();
+            });
+        fire.database().ref('/users/' + user.uid)
+            .on('child_added', snapshot => {
+                this.getChallenges();
+            });
+    };
+
     setListeners = () => {
         fire.database().ref('/challenges/')
             .on('child_added', snapshot => {
@@ -93,9 +104,7 @@ class SolveChallenges extends Component {
             });
     };
 
-    componentDidMount() {
-        this.setListeners();
-        this.setState({loading: true});
+    getChallenges = () => {
         fire.database().ref('/challenges/')
             .once('value')
             .then(snapshot => {
@@ -142,6 +151,17 @@ class SolveChallenges extends Component {
                         });
                     });
             });
+    };
+
+    componentDidMount() {
+        this.setListeners();
+        this.setState({loading: true});
+        this.getChallenges();
+        fire.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setCompletedListeners(user);
+            }
+        });
     }
 
     handleSearch = event => {
