@@ -31,8 +31,7 @@ class SolveChallenges extends Component {
         searchQuery: ''
     };
 
-    setCompletedListeners = () => {
-        const user = fire.auth().currentUser;
+    setCompletedListeners = (user) => {
         fire.database().ref('/users/' + user.uid)
             .on('child_changed', snapshot => {
                 this.getChallenges();
@@ -158,7 +157,11 @@ class SolveChallenges extends Component {
         this.setListeners();
         this.setState({loading: true});
         this.getChallenges();
-        this.setCompletedListeners();
+        fire.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setCompletedListeners(user);
+            }
+        });
     }
 
     handleSearch = event => {

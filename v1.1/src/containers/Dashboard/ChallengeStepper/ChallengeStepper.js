@@ -132,6 +132,17 @@ class ChallengeStepper extends React.Component {
             });
     };
 
+    setCompletedListeners = (user) => {
+        fire.database().ref('/users/' + user.uid)
+            .on('child_changed', snapshot => {
+                this.getChallenges();
+            });
+        fire.database().ref('/users/' + user.uid)
+            .on('child_added', snapshot => {
+                this.getChallenges();
+            });
+    };
+
 
     componentDidMount() {
         this.setState({loading: true, activeStep: 0});
@@ -143,6 +154,12 @@ class ChallengeStepper extends React.Component {
         if (this.state.challenges.length > 0) {
             this.getQuestions(this.state.challenges[this.state.activeStep].id);
         }
+
+        fire.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setCompletedListeners(user);
+            }
+        });
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
